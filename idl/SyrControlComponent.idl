@@ -1,0 +1,39 @@
+//  Copyright (C) 2003  CEA/DEN, EDF R&D
+//
+//
+//
+//  File   : SyrControlComponent.idl
+//  Author : Jean Rahuel
+//  $Header: 
+
+#ifndef _SYRCONTROLCOMPONENT_IDL
+#define _SYRCONTROLCOMPONENT_IDL
+
+#include "SALOME_Component.idl"
+
+module SuperVisionTest {
+
+  interface SyrControlComponent : Engines::Component {
+
+    void L_OneEven( in long ValOne , in long ValEven ,
+                    out long Finished , out long Incr ,
+                    out long Even , out long Odd ) ;
+
+    void C_NotOneIsEven( out long ValOne , out long ValEven ) ;
+
+    void LOOPN( in long InLoop , in long NN , in long KK ,
+                in long min , in long max ,
+                out long OutLoop , out long N , out long K ) ;
+
+    void WHILENOTONE( in long N , out long OutLoop ) ;
+
+    void IFNOTEVEN( in long N , out long Odd , out long Even ) ;
+
+    void LOOPi( in long InLoop , in long ii , out long OutLoop , out long i ) ;
+
+    void WHILEEVEN( in long N , out long OutLoop ) ;
+
+  };
+
+};
+#endif
