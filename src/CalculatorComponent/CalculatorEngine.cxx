@@ -278,7 +278,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   MESSAGE("CalculatorEngine::Add Creation of the CORBA field");
 
-  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(support1,fieldloc) ;
+  // Corrected by APV - November 23, 2004
+  // FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(support1,fieldloc) ;
+  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
 
   POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i> * myFieldTie = new POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i>(NewField) ;
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = myFieldTie->_this() ;
@@ -368,7 +370,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   MESSAGE("CalculatorEngine::Mul Creation of the CORBA field");
 
-  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(support,fieldloc) ;
+  // Corrected by APV - November 23, 2004
+  // FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(support,fieldloc) ;
+  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
 
   POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i> * myFieldTie = new POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i>(NewField) ;
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = myFieldTie->_this() ;
@@ -459,7 +463,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   MESSAGE("CalculatorEngine::Constant Creation of the CORBA field");
 
-  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(FirstSupport,fieldloc) ;
+  // Corrected by APV - November 23, 2004
+  // FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(FirstSupport,fieldloc) ;
+  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
 
   POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i> * myFieldTie = new POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i>(NewField) ;
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = myFieldTie->_this() ;

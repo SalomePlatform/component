@@ -1,3 +1,5 @@
+//  SuperVisionTest DataStreamComponent : example of component
+//
 //  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 //  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
 // 
@@ -19,17 +21,17 @@
 //
 //
 //
-//  File   : FactorialComponent.idl
-//  Author : 
-//  $Header$
+//  File   : DataStreamComponent_CheckOfUndefined.cxx
+//  Module : SuperVisionTest
 
-#include "SALOME_Component.idl"
+using namespace std;
+#include <iostream>
+#include <fstream>
+#include <unistd.h>
 
-module SuperVisionTest {
+#include "DataStreamComponent_Impl.hxx"
 
-  interface FactorialComponent : Engines::Component {
-    long eval(in long n);
-    long sigma( in long n ) ;
-  };
+int main(int argc, char **argv) {
+  return 0;
+}
 
-};
