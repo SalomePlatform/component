@@ -1,3 +1,5 @@
+#  SuperVisionTest AddComponent : example of component that adds two numbers
+#
 #  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 #  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
 # 
@@ -20,18 +22,39 @@
 #
 #
 #  File   : Makefile.in
-#  Author : Patrick GOLDBRONN (CEA)
+#  Author : , CEA
 #  Module : SuperVisionTest
-#  $Header: 
+#  $Header$
 
 top_srcdir=@top_srcdir@
-top_builddir=..
+top_builddir=../..
 srcdir=@srcdir@
-VPATH=.:@srcdir@
+VPATH=.:@srcdir@:@top_srcdir@/idl
 
 
 @COMMENCE@
 
-SUBDIRS = AddComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck
+EXPORT_HEADERS =  \
+	TypesCheck_Impl.hxx
 
-@MODULE@
+# Libraries targets
+LIB = libTypesCheckEngine.la
+LIB_SRC = \
+	TypesCheck_Impl.cxx 
+
+LIB_SERVER_IDL = TypesCheck.idl \
+		 AddComponent.idl
+
+# Executables targets
+BIN = TypesCheck_CheckOfUndefined
+BIN_SRC = 
+BIN_SERVER_IDL =
+
+CPPFLAGS+= $(PYTHON_INCLUDES) -I${KERNEL_ROOT_DIR}/include/salome
+CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome
+LDFLAGS+= -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSalomeLoggerServer -L${KERNEL_ROOT_DIR}/lib/salome
+
+LDFLAGSFORBIN+= -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSalomeLoggerServer -L${KERNEL_ROOT_DIR}/lib/salome
+
+@CONCLUDE@
+

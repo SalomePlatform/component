@@ -17,7 +17,8 @@ IDL_FILES = \
 	DivComponent.idl \
         SubComponent.idl \
 	FactorialComponent.idl \
-	SyrComponent.idl
+	SyrComponent.idl \
+	TypesCheck.idl
 
 PY_CLIENT_IDL = $(IDL_FILES)
 
