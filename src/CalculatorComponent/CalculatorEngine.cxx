@@ -38,6 +38,7 @@ using namespace std;
 #include "MEDMEM_Unit.hxx"
 
 using namespace MEDMEM;
+using namespace MED_EN;
 
 //================================================================================
 // static PrintFieldValues - shows field contents
