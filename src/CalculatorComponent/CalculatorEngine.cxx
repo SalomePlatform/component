@@ -31,6 +31,7 @@
 
 #include "CalculatorEngine.hxx"
 #include "MEDMEM_Support_i.hxx"
+#include "SUPPORTClient.hxx"
 
 #include "MEDMEM_define.hxx"
 #include "MEDMEM_STRING.hxx"
@@ -100,8 +101,11 @@ CalculatorEngine::~CalculatorEngine()
 {
 }
 
+static omni_mutex aPutToStudyMutex;
 SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::PutToStudy(SALOME_MED::FIELDDOUBLE_ptr theField1,
 							 long int theStudyId) {
+  omni_mutex_lock aLock(aPutToStudyMutex);
+
   CORBA::Object_var anObj = _NS->Resolve("/myStudyManager");
   SALOMEDS::StudyManager_var aManager  = SALOMEDS::StudyManager::_narrow(anObj);
 //   SALOMEDS::ListOfOpenStudies_var aList = aManager->GetOpenStudies();
@@ -149,9 +153,12 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::PutToStudy(SALOME_MED::FIELDDOUBLE
 //
 //=======================================================================================
 
+static omni_mutex anAddMutex;
 SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,
 						  SALOME_MED::FIELDDOUBLE_ptr SecondField)
 {
+  omni_mutex_lock aLock(anAddMutex);
+
   ostringstream tmp;
   bool          same_support = true;
   
@@ -284,14 +291,12 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   MESSAGE("CalculatorEngine::Add Creation of the CORBA field");
 
-  // Corrected by APV - November 23, 2004
-  // FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(support1,fieldloc) ;
+  SUPPORT *support1Clt=new SUPPORTClient(support1);
+  fieldloc->setSupport(support1Clt);
   FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
+  SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
 
-  POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i> * myFieldTie = new POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i>(NewField) ;
-  SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = myFieldTie->_this() ;
-
-  sleep(4);
+  //sleep(4);
 
   END_OF("CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)");
 
@@ -305,11 +310,13 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 //  Multiplication of a FieldNodeDouble by a double value (based on Med library)
 //===============================================================================
 
+static omni_mutex aMulMutex;
 SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,
 						  CORBA::Double x1)
 {
-  beginService("CalculatorEngine::Mul");
+  omni_mutex_lock aLock(aMulMutex);
 
+  beginService("CalculatorEngine::Mul");
   BEGIN_OF("CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)");
 
   SCRUTE(OldField);
@@ -376,14 +383,12 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   MESSAGE("CalculatorEngine::Mul Creation of the CORBA field");
 
-  // Corrected by APV - November 23, 2004
-  // FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(support,fieldloc) ;
+  SUPPORT *supportClt=new SUPPORTClient(support);
+  fieldloc->setSupport(supportClt);
   FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
+  SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
 
-  POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i> * myFieldTie = new POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i>(NewField) ;
-  SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = myFieldTie->_this() ;
-
-  sleep(4);
+  //sleep(4);
 
   END_OF("CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)");
 
@@ -396,12 +401,13 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 //  Build a constant field of double based on first field support (Med library)
 //================================================================================
 
+static omni_mutex aConstantMutex;
 SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,
 						       CORBA::Double x1)
 {
+  omni_mutex_lock aLock(aConstantMutex);
 
   beginService("CalculatorEngine::Const");
-
   BEGIN_OF("CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)");
 
   // Name and description of field
@@ -439,8 +445,6 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
     len_value = FirstSupport -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
   // Values of new field
-  SALOME_MED::double_array * old_value = FirstField -> getValue(SALOME_MED::MED_FULL_INTERLACE);
-
   int totalLength = nb_comp*len_value;
   double * new_value = new double[totalLength];
 
@@ -469,14 +473,13 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   MESSAGE("CalculatorEngine::Constant Creation of the CORBA field");
 
-  // Corrected by APV - November 23, 2004
-  // FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(FirstSupport,fieldloc) ;
+  SUPPORT *supportClt=new SUPPORTClient(FirstSupport);
+  fieldloc->setSupport(supportClt);
   FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
 
-  POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i> * myFieldTie = new POA_SALOME_MED::FIELDDOUBLE_tie<FIELDDOUBLE_i>(NewField) ;
-  SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = myFieldTie->_this() ;
+  SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
   
-  sleep(4);
+  //sleep(4);
 
   endService("CalculatorEngine::Const");
   
@@ -490,8 +493,11 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 //  write a field in a MED file
 //================================================================================
 
+static omni_mutex aWriteMEDfileMutex;
 void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const char *filename)
 {
+  omni_mutex_lock aLock(aWriteMEDfileMutex);
+
   beginService("CalculatorEngine::writeMEDfile");
   MESSAGE("fichier d'impression du champ resultat:"<<filename);
 
@@ -696,4 +702,5 @@ extern "C"
     return myCalculator->getId() ;
   }
 }
+
 
