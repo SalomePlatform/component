@@ -34,6 +34,8 @@ module SuperVisionTest {
 
   interface AddComponent : Engines::Component {
     Adder Addition() ;
+    boolean AdditionObjRef1( out Adder anAdder ) ;
+    void AdditionObjRef2( out boolean FuncValue , out Adder anAdder ) ;
     double Add( in double x , in double y , out double z ) ;
     long Sigma( in long n ) ;
     double LastResult() ;
