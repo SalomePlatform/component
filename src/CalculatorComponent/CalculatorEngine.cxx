@@ -24,12 +24,12 @@
 //  Module : CalculatorComponent
 //  $Header$
 
-using namespace std;
 #include <unistd.h>
-#include "utilities.h"
-#include "CalculatorEngine.hxx"
+
 #include <iostream>
 #include <sstream>
+
+#include "CalculatorEngine.hxx"
 #include "MEDMEM_Support_i.hxx"
 
 #include "MEDMEM_define.hxx"
@@ -37,8 +37,12 @@ using namespace std;
 #include "MEDMEM_Exception.hxx"
 #include "MEDMEM_Unit.hxx"
 
+#include "med.hxx"
+
+#include "utilities.h"
+
 using namespace MEDMEM;
-using namespace MED_EN;
+using namespace std;
 
 //================================================================================
 // static PrintFieldValues - shows field contents
@@ -46,7 +50,7 @@ using namespace MED_EN;
 
 static void PrintFieldValues (FIELD<double> * field, int until_index) 
 {
-  const double * values = field -> getValue(MED_FULL_INTERLACE);
+  const double * values = field -> getValue(MED_EN::MED_FULL_INTERLACE);
   int nb_comp     = field -> getNumberOfComponents();
   MESSAGE( "Field                    : " << field -> getName() );
   MESSAGE( "    Description          : " << field -> getDescription() );
@@ -262,7 +266,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   
   FIELD<double> * fieldloc =  new FIELD<double>();
   fieldloc -> allocValue(nb_comp1,len_value1);
-  fieldloc  -> setValue(MED_FULL_INTERLACE,new_value);
+  fieldloc  -> setValue(MED_EN::MED_FULL_INTERLACE,new_value);
   fieldloc  -> setValueType(MED_EN::MED_REEL64);
   fieldloc  -> setName("-new_Add-");
   fieldloc  -> setDescription( FirstField -> getDescription() );
@@ -360,7 +364,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   FIELD<double> * fieldloc =  new FIELD<double>();
   fieldloc -> allocValue(nb_comp,len_value);
-  fieldloc  -> setValue(MED_FULL_INTERLACE,new_value);
+  fieldloc  -> setValue(MED_EN::MED_FULL_INTERLACE,new_value);
   fieldloc  -> setValueType(MED_EN::MED_REEL64);
   fieldloc  -> setName("-new_Mul-");
   fieldloc  -> setDescription(field_description);
@@ -450,7 +454,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   FIELD<double> * fieldloc =  new FIELD<double>();
   fieldloc -> allocValue(nb_comp,len_value);
-  fieldloc  -> setValue(MED_FULL_INTERLACE,new_value);
+  fieldloc  -> setValue(MED_EN::MED_FULL_INTERLACE,new_value);
   fieldloc  -> setValueType(MED_EN::MED_REEL64);
   fieldloc  -> setName("-new_Const_Field-");
   fieldloc  -> setDescription(field_description);
@@ -511,7 +515,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   
   MESSAGE("fichier :"<<filename);
 
-  MED_FR::med_idt _medIdt=MED_FR::MEDouvrir(const_cast <char *> (filename) ,(MED_FR::med_mode_acces) MED_LECTURE_ECRITURE);
+  med_2_1::med_idt _medIdt = med_2_1::MEDouvrir(const_cast <char *> (filename) , med_2_1::MED_ECRI);
   SCRUTE(_medIdt);
 
   if (_medIdt<0) return;
@@ -536,18 +540,18 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   char * compName,  * compUnit  ;
   bool Find = false ;
 
-  int n = MED_FR::MEDnChamp(_medIdt,0);
+  int n = med_2_1::MEDnChamp(_medIdt,0);
   int nbComp ;
 
-  MED_FR::med_type_champ type ;
+  med_2_1::med_type_champ type ;
 
   for (int i = 1;  i <= n;  i++) 
     {
-      nbComp = MED_FR::MEDnChamp(_medIdt,i);
+      nbComp = med_2_1::MEDnChamp(_medIdt,i);
       compName = new char[MED_TAILLE_PNOM*nbComp+1];
       compUnit = new char[MED_TAILLE_PNOM*nbComp+1];
 
-      err = MED_FR::MEDchampInfo(_medIdt,i,champName,&type,compName,compUnit,nbComp);
+      err = med_2_1::MEDchampInfo(_medIdt,i,champName,&type,compName,compUnit,nbComp);
       if (err == 0)
 	if (strcmp(champName, field->getName())==0) { // Found !
 	  Find = true ;
@@ -581,13 +585,13 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
 
     MESSAGE(LOC << "|" << dataGroupName << "|" );
 
-    med_idt gid =  H5Gopen(_medIdt, dataGroupName.c_str() );
+    med_2_1::med_idt gid =  H5Gopen(_medIdt, dataGroupName.c_str() );
     
     if ( gid < 0 ) {
       // create field :
-      err=MED_FR::MEDchampCr(_medIdt, 
+      err=med_2_1::MEDchampCr(_medIdt, 
 			     const_cast <char*> (field->getName()),
-			     MED_FR::MED_FLOAT64,
+			     med_2_1::MED_REEL64,
 			     const_cast <char*> ( component_name.c_str() ),
 			     const_cast <char*> ( component_unit.c_str() ),
 			     component_count);
@@ -636,18 +640,18 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
       for (int k = 0; k < NumberOfElements; k++) 
 	locvalue[k] = (*value) [k];
 
-      err=MED_FR::MEDchampEcr(_medIdt, 
+      err=med_2_1::MEDchampEcr(_medIdt, 
 			      const_cast <char*> (myMesh->getName()) , 
 			      const_cast <char*> (field->getName()),
 			      (unsigned char*)locvalue, 
-			      MED_FR::MED_FULL_INTERLACE,
+			      med_2_1::MED_FULL_INTERLACE,
 			      NumberOfElements,
-			      MED_NOGAUSS,
-			      MED_ALL,
-			      MED_NOPFL,
-			      MED_FR::MED_NO_PFLMOD,
-			      (MED_FR::med_entite_maillage)convertIdlEntToMedEnt(mySupport->getEntity()),
-			      (MED_FR::med_geometrie_element)(convertIdlEltToMedElt((*Types)[i])),
+			      NumberOfGaussPoint,
+			      MED_ALL, 
+			      MED_NOPFL, 
+			      med_2_1::MED_REMP,  
+			      (med_2_1::med_entite_maillage)convertIdlEntToMedEnt(mySupport->getEntity()),
+			      (med_2_1::med_geometrie_element)(convertIdlEltToMedElt((*Types)[i])),
 			      field->getIterationNumber(),
 			      "        ",
 			      field->getTime(),
@@ -666,7 +670,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   SCRUTE( err );
   if (err < 0 ) return ;
   
-  MED_FR::MEDfermer(_medIdt) ;
+  med_2_1::MEDfermer(_medIdt) ;
   
   endService("CalculatorEngine::writeMEDfile");
   return ;
