@@ -37,6 +37,7 @@ using namespace std;
 #include "MEDMEM_Exception.hxx"
 #include "MEDMEM_Unit.hxx"
 
+using namespace MEDMEM;
 
 //================================================================================
 // static PrintFieldValues - shows field contents
