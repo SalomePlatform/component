@@ -1,0 +1,58 @@
+#  SuperVisionTest TestFunctions : example of component that adds two numbers
+#
+#  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
+#  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
+# 
+#  This library is free software; you can redistribute it and/or 
+#  modify it under the terms of the GNU Lesser General Public 
+#  License as published by the Free Software Foundation; either 
+#  version 2.1 of the License. 
+# 
+#  This library is distributed in the hope that it will be useful, 
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of 
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+#  Lesser General Public License for more details. 
+# 
+#  You should have received a copy of the GNU Lesser General Public 
+#  License along with this library; if not, write to the Free Software 
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA 
+# 
+#  See http://www.opencascade.org/SALOME/ or email : webmaster.salome@opencascade.org 
+#
+#
+#
+#  File   : Makefile.in
+#  Author : , CEA
+#  Module : SuperVisionTest
+#  $Header$
+
+top_srcdir=@top_srcdir@
+top_builddir=../..
+srcdir=@srcdir@
+VPATH=.:@srcdir@:@top_srcdir@/idl
+
+
+@COMMENCE@
+
+EXPORT_HEADERS = 
+
+# Libraries targets
+LIB = libDynInvoke.la
+LIB_SRC = DynInvoke.cxx
+
+LIB_CLIENT_IDL = SALOME_Component.idl 
+
+# Executables targets
+BIN = TestFunctions
+BIN_SRC = 
+BIN_CLIENT_IDL = SALOME_Component.idl \
+                 AddComponent.idl
+
+CPPFLAGS+= $(PYTHON_INCLUDES)  -I${KERNEL_ROOT_DIR}/include/salome
+CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome
+LDFLAGS+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeNS -lOpUtil 
+
+LDFLAGSFORBIN+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeLifeCycleCORBA -lSalomeNS -lOpUtil 
+
+@CONCLUDE@
+

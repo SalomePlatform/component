@@ -1,4 +1,4 @@
-//  SuperVisionTest SubComponent : example of component that sunstracts one number from another
+//  SuperVisionTest UndefinedSymbolComponent : example of component that devides two numbers
 //
 //  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 //  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
@@ -21,7 +21,7 @@
 //
 //
 //
-//  File   : SubComponentEngine.cxx
+//  File   : UndefinedSymbolComponentEngine.cxx
 //  Author : MARC TAJCHMAN, CEA
 //  Module : SuperVisionTest
 
@@ -33,60 +33,57 @@ using namespace std;
 #include <string>
 
 //#include "utilities.h"
-#include "SubComponent.hxx"
+#include "UndefinedSymbolComponent.hxx"
 
-SubComponentEngine::SubComponentEngine( CORBA::ORB_ptr orb,
+UndefinedSymbolComponentEngine::UndefinedSymbolComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
 				    PortableServer::ObjectId * contId, 
 				    const char *instanceName,
                                     const char *interfaceName) :
   Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true)
 {
-//  MESSAGE("SubComponentEngine::SubComponentEngine activate object instanceName("
+//  MESSAGE("UndefinedSymbolComponentEngine::UndefinedSymbolComponentEngine activate object instanceName("
 //          << instanceName << ") interfaceName(" << interfaceName << ")" )
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
-  _nexec = 0 ;
 }
 
-SubComponentEngine::SubComponentEngine()
+UndefinedSymbolComponentEngine::UndefinedSymbolComponentEngine() :
+  Engines_Component_i()
 {
 }
 
-SubComponentEngine::~SubComponentEngine()
+UndefinedSymbolComponentEngine::~UndefinedSymbolComponentEngine()
 {
 }
 
-void SubComponentEngine::Sub( double x , double y , double & z ) {
-  beginService( " SubComponentEngine::Sub" );
-  z = x - y ;
-  int S;
-  
-  sendMessage(NOTIF_STEP, "Sub is Computing");
-//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  S = 5 ;
+extern "C" { long CallUndefined() ; } ;
+
+long UndefinedSymbolComponentEngine::UndefinedSymbol() {
+  beginService( " UndefinedSymbolComponentEngine::UndefinedSymbol" );
+  int S = 10 ;
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
-  MESSAGE( "SubComponentEngine::Sub( " <<  x << " , " << y << " , " << z
-       << " ) after " << S << " seconds" )
-  endService( " SubComponentEngine::Sub"  );
+  long value = CallUndefined() ;
+  endService( " UndefinedSymbolComponentEngine::UndefinedSymbol"  );
+  return value ;
 }
 
 extern "C"
 {
-  PortableServer::ObjectId * SubComponentEngine_factory
+  PortableServer::ObjectId * UndefinedSymbolComponentEngine_factory
      (CORBA::ORB_ptr orb,
       PortableServer::POA_ptr poa, 
       PortableServer::ObjectId * contId,
       const char *instanceName,
       const char *interfaceName)
   {
-    MESSAGE("SubComponentEngine_factory SubComponentEngine ("
+    MESSAGE("UndefinedSymbolComponentEngine_factory UndefinedSymbolComponentEngine ("
             << instanceName << "," << interfaceName << ")");
-    SubComponentEngine * mySubComponent 
-      = new SubComponentEngine(orb, poa, contId, instanceName, interfaceName);
-    return mySubComponent->getId() ;
+    UndefinedSymbolComponentEngine * myUndefinedSymbolComponent 
+      = new UndefinedSymbolComponentEngine(orb, poa, contId, instanceName, interfaceName);
+    return myUndefinedSymbolComponent->getId() ;
   }
 }
 

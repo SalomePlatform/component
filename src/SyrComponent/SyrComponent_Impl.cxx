@@ -63,8 +63,11 @@ long SyrComponent_Impl::C_ISEVEN( const long anInteger ) {
   bool RetVal ;
   beginService( " SyrComponent_Impl::C_ISEVEN" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_ISEVEN is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   RetVal = ( anInteger & 1 ) == 0 ;
   endService( " SyrComponent_Impl::C_ISEVEN"  );
   return RetVal ;
@@ -74,8 +77,11 @@ long SyrComponent_Impl::C_ISONE( const long anOddInteger ) {
   bool RetVal ;
   beginService( " SyrComponent_Impl::C_ISONE" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_ISONE is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   RetVal = ( anOddInteger == 1 ) ;
   endService( " SyrComponent_Impl::C_ISONE"  );
   return RetVal ;
@@ -84,8 +90,11 @@ long SyrComponent_Impl::C_ISONE( const long anOddInteger ) {
 long SyrComponent_Impl::C_M3( const long anOddInteger ) {
   beginService( " SyrComponent_Impl::C_M3" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_M3 is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   endService( " SyrComponent_Impl::C_M3"  );
   if ( C_ISEVEN( anOddInteger ) )
     return 0 ;
@@ -95,8 +104,11 @@ long SyrComponent_Impl::C_M3( const long anOddInteger ) {
 long SyrComponent_Impl::C_M3P1( const long anOddInteger ) {
   beginService( " SyrComponent_Impl::C_M3P1" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_M3P1 is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   endService( " SyrComponent_Impl::C_M3P1"  );
   if ( C_ISEVEN( anOddInteger ) )
     return 0 ;
@@ -106,8 +118,11 @@ long SyrComponent_Impl::C_M3P1( const long anOddInteger ) {
 long SyrComponent_Impl::C_DIV2( const long anEvenInteger ) {
   beginService( " SyrComponent_Impl::C_DIV2" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_DIV2 is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   endService( " SyrComponent_Impl::C_DIV2"  );
   if ( !C_ISEVEN( anEvenInteger ) )
     return 0 ;
@@ -117,8 +132,11 @@ long SyrComponent_Impl::C_DIV2( const long anEvenInteger ) {
 long SyrComponent_Impl::C_INCR( const long aCount ) {
   beginService( " SyrComponent_Impl::C_INCR" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_INCR is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   endService( " SyrComponent_Impl::C_INCR"  );
   return ( aCount + 1 ) ;
 }
@@ -126,8 +144,11 @@ long SyrComponent_Impl::C_INCR( const long aCount ) {
 long SyrComponent_Impl::C_MIN( const long aMinVal , const long anInteger ) {
   beginService( " SyrComponent_Impl::C_MIN" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_MIN is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   int min = aMinVal ;
   if ( anInteger < min || aMinVal == 0 ) {
     min = anInteger ;
@@ -144,8 +165,11 @@ long SyrComponent_Impl::C_MIN( const long aMinVal , const long anInteger ) {
 long SyrComponent_Impl::C_MAX( const long aMaxVal , const long anInteger ) {
   beginService( " SyrComponent_Impl::C_MAX" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_MAX is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   int max = aMaxVal ;
   if ( anInteger > max ) {
     max = anInteger ;
@@ -162,8 +186,11 @@ long SyrComponent_Impl::C_MAX( const long aMaxVal , const long anInteger ) {
 SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_LISTOFSYR() {
   beginService( " SyrComponent_Impl::C_LISTOFSYR" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_LISTOFSYR is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   ListOfSyr_Impl * aNewListOfSyr = new ListOfSyr_Impl( _orb , _poa, _contId,
                         instanceName() , interfaceName() ,
                         graphName() , nodeName() ) ;
@@ -183,8 +210,11 @@ SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_AVERAGE(
                        double & anAverage ) {
   beginService( " SyrComponent_Impl::C_AVERAGE" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_AVERAGE is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   SuperVisionTest::SeqOfSyr * aSeqOfSyr = aListOfSyr->GetSeqOfSyr() ;
   int len = aSeqOfSyr->length() ;
   aSeqOfSyr->length( len + 1 ) ;
@@ -207,8 +237,11 @@ SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_AVERAGE(
 SuperVisionTest::Syr_ptr SyrComponent_Impl::Init( const long anOddInteger ) {
   beginService( "SyrComponent_Impl::Init" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl creates Syr_Impl");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   Syr_Impl * mySyr ;
   mySyr = new Syr_Impl( _orb , _poa, _contId,
                         instanceName() , interfaceName() ,
@@ -309,8 +342,11 @@ Syr_Impl::~Syr_Impl() {
 long Syr_Impl::Initial() {
   beginService( " Syr_Impl::Initial" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Initial is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   endService( " Syr_Impl::Initial"  );
   return _InitialInteger ;
 }
@@ -318,8 +354,11 @@ long Syr_Impl::Initial() {
 long Syr_Impl::Current() {
   beginService( " Syr_Impl::Current" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Current is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   endService( " Syr_Impl::Current"  );
   return _CurrentInteger ;
 }
@@ -328,8 +367,11 @@ long Syr_Impl::IsEven() {
   bool RetVal ;
   beginService( " Syr_Impl::IsEven" );
   sendMessage(NOTIF_STEP, "Syr_Impl::IsEven is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   RetVal = ( _CurrentInteger & 1 ) == 0 ;
   MESSAGE( " Syr_Impl::IsEven " << _CurrentInteger << " " << RetVal );
   endService( " Syr_Impl::IsEven"  );
@@ -340,8 +382,11 @@ long Syr_Impl::IsOne() {
   bool RetVal ;
   beginService( " Syr_Impl::IsOne" );
   sendMessage(NOTIF_STEP, "Syr_Impl::IsOne is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   RetVal = ( _CurrentInteger == 1 ) ;
   MESSAGE( " Syr_Impl::IsOne " << _CurrentInteger << " " << RetVal );
   endService( " Syr_Impl::IsOne"  );
@@ -351,8 +396,11 @@ long Syr_Impl::IsOne() {
 long Syr_Impl::Count() {
   beginService( " Syr_Impl::Count" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Count is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   MESSAGE( " Syr_Impl::Count " << _Count );
   endService( " Syr_Impl::Count"  );
   return _Count ;
@@ -361,8 +409,11 @@ long Syr_Impl::Count() {
 void Syr_Impl::M3p1() {
   beginService( " Syr_Impl::M3p1" );
   sendMessage(NOTIF_STEP, "Syr_Impl::M3p1 is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   if ( IsEven() )
     _CurrentInteger = 0 ;
   else
@@ -374,8 +425,11 @@ void Syr_Impl::M3p1() {
 void Syr_Impl::Div2() {
   beginService( " Syr_Impl::Div2" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Div2 is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   if ( !IsEven() )
     _CurrentInteger = 0 ;
   else
@@ -387,8 +441,11 @@ void Syr_Impl::Div2() {
 void Syr_Impl::Incr() {
   beginService( " Syr_Impl::Incr" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Incr is Computing");
-  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 3 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   _Count = _Count + 1 ;
   MESSAGE( " Syr_Impl::Incr " << _Count );
   endService( " Syr_Impl::Incr"  );
