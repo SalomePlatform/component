@@ -63,8 +63,11 @@ void DivComponentEngine::Div( double x , double y , double & z ) {
   int S;
   
   sendMessage(NOTIF_STEP, "Div is Computing");
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   sendMessage(NOTIF_TRACE, "Div is Much More Difficult Operation");
   MESSAGE("DivComponentEngine::Div( " <<  x << " , " << y << " , " << z
        << " ) after " << S << " seconds" )

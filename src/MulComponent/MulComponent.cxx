@@ -63,8 +63,11 @@ void MulComponentEngine::Mul( double x , double y , double & z ) {
   int S;
   
   sendMessage(NOTIF_STEP, "Mul is Computing");
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   MESSAGE( "MulComponentEngine::Mul( " <<  x << " , " << y << " , " << z
        << " ) after " << S << " seconds" )
   endService( " MulComponentEngine::Mul"  );
