@@ -9,7 +9,6 @@
 print "============== import SuperVisionTest ======================="
 
 import SuperVisionTest
-import DataStreamComponent
 
 # this function is required
 

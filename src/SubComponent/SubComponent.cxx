@@ -64,7 +64,7 @@ void SubComponentEngine::Sub( double x , double y , double & z ) {
   
   sendMessage(NOTIF_STEP, "Sub is Computing");
   S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(1);
+  sleep(S);
   MESSAGE( "SubComponentEngine::Sub( " <<  x << " , " << y << " , " << z
        << " ) after " << S << " seconds" )
   endService( " SubComponentEngine::Sub"  );

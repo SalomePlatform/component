@@ -29,7 +29,6 @@ module SuperVisionTest {
 
   interface FactorialComponent : Engines::Component {
     long eval(in long n);
-    long sigma(in long n);
   };
 
 };
