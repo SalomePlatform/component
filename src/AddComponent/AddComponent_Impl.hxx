@@ -49,6 +49,10 @@ public:
 
   virtual SuperVisionTest::Adder_ptr Addition() ;
 
+  virtual bool AdditionObjRef1( SuperVisionTest::Adder_out ) ;
+
+  virtual void AdditionObjRef2( bool & FuncValue , SuperVisionTest::Adder_out ) ;
+
   virtual double Add( double x , double y , double & z ) ;
 
   virtual long Sigma( long n ) ;

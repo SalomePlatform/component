@@ -73,14 +73,50 @@ SuperVisionTest::Adder_ptr AddComponent_Impl::Addition() {
   return SuperVisionTest::Adder::_duplicate(iobject) ;
 }
 
+bool AddComponent_Impl::AdditionObjRef1( SuperVisionTest::Adder_out aAdder ) {
+  beginService( "AddComponent_Impl::Addition" );
+  sendMessage(NOTIF_STEP, "AddComponent_Impl creates Adder_Impl");
+  Adder_Impl * myAdder ;
+  myAdder = new Adder_Impl( _orb , _poa, _contId,
+                            instanceName() , interfaceName() ,
+                            graphName() , nodeName() ) ;
+  SuperVisionTest::Adder_var iobject ;
+  PortableServer::ObjectId * id = myAdder->getId() ;
+  CORBA::Object_var obj = _poa->id_to_reference(*id);
+  iobject = SuperVisionTest::Adder::_narrow(obj) ;
+  endService( "AddComponent_Impl::Addition" );
+  aAdder = SuperVisionTest::Adder::_duplicate(iobject) ;
+  return true ;
+}
+
+void AddComponent_Impl::AdditionObjRef2( bool & FuncValue ,
+                                         SuperVisionTest::Adder_out aAdder ) {
+  beginService( "AddComponent_Impl::Addition" );
+  sendMessage(NOTIF_STEP, "AddComponent_Impl creates Adder_Impl");
+  Adder_Impl * myAdder ;
+  myAdder = new Adder_Impl( _orb , _poa, _contId,
+                            instanceName() , interfaceName() ,
+                            graphName() , nodeName() ) ;
+  SuperVisionTest::Adder_var iobject ;
+  PortableServer::ObjectId * id = myAdder->getId() ;
+  CORBA::Object_var obj = _poa->id_to_reference(*id);
+  iobject = SuperVisionTest::Adder::_narrow(obj) ;
+  endService( "AddComponent_Impl::Addition" );
+  aAdder = SuperVisionTest::Adder::_duplicate(iobject) ;
+  FuncValue = true ;
+}
+
 double AddComponent_Impl::Add( double x , double y , double & z ) {
   beginService( " AddComponent_Impl::Add" );
   z = x + y ;
   int S;
   
   sendMessage(NOTIF_STEP, "AddComponent_Impl::Add is Computing");
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   MESSAGE( "AddComponent_Impl::Add( " <<  x << " , " << y << " , " << z
        << " ) returns " << (x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -106,8 +142,11 @@ double AddComponent_Impl::LastResult() {
   beginService( " AddComponent_Impl::LastResult" );
   sendMessage(NOTIF_STEP, "AddComponent_Impl::LastResult is Computing");
   int S;
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   endService( " AddComponent_Impl::LastResult"  );
   return LastAddition ;
 }
@@ -164,8 +203,11 @@ double Adder_Impl::Add( double x , double y , double & z ) {
   int S;
   
   sendMessage(NOTIF_STEP, "Adder_Impl::Add is Computing");
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   MESSAGE( "Adder_Impl::Add( " <<  x << " , " << y << " , " << z
        << " ) returns " << -(x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -181,8 +223,11 @@ double Adder_Impl::AddAndCompare( const double x , const double y ,
   int S;
   
   sendMessage(NOTIF_STEP, "Adder_Impl::AddAndCompare is Computing");
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   MESSAGE( "Adder_Impl::AddAndCompare( " <<  x << " , " << y << " , " << z
        << " ) returns " << -(x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -206,8 +251,11 @@ void Adder_Impl::SetLastResult( double z ) {
   beginService( " Adder_Impl::SetLastResult" );
   sendMessage(NOTIF_STEP, "Adder_Impl::SetLastResult is Computing");
   int S;
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   LastAddition = z ;
   endService( " Adder_Impl::SetLastResult"  );
   return ;
@@ -217,8 +265,11 @@ void Adder_Impl::LastResult( double & z ) {
   beginService( " Adder_Impl::LastResult" );
   sendMessage(NOTIF_STEP, "Adder_Impl::LastResult is Computing");
   int S;
-  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
   z = LastAddition ;
   endService( " Adder_Impl::LastResult"  );
   return ;
