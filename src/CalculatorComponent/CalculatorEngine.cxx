@@ -509,7 +509,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   
   MESSAGE("fichier :"<<filename);
 
-  MED_FR::med_idt _medIdt=MED_FR::MEDouvrir(const_cast <char *> (filename) ,(MED_FR::med_mode_acces) MED_ECRI);
+  MED_FR::med_idt _medIdt=MED_FR::MEDouvrir(const_cast <char *> (filename) ,(MED_FR::med_mode_acces) MED_LECTURE_ECRITURE);
   SCRUTE(_medIdt);
 
   if (_medIdt<0) return;
@@ -585,7 +585,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
       // create field :
       err=MED_FR::MEDchampCr(_medIdt, 
 			     const_cast <char*> (field->getName()),
-			     MED_FR::MED_REEL64,
+			     MED_FR::MED_FLOAT64,
 			     const_cast <char*> ( component_name.c_str() ),
 			     const_cast <char*> ( component_unit.c_str() ),
 			     component_count);
@@ -640,10 +640,10 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
 			      (unsigned char*)locvalue, 
 			      MED_FR::MED_FULL_INTERLACE,
 			      NumberOfElements,
-			      NumberOfGaussPoint,
-			      MED_ALL, 
-			      MED_NOPFL, 
-			      MED_FR::MED_REMP,  
+			      MED_NOGAUSS,
+			      MED_ALL,
+			      MED_NOPFL,
+			      MED_FR::MED_NO_PFLMOD,
 			      (MED_FR::med_entite_maillage)convertIdlEntToMedEnt(mySupport->getEntity()),
 			      (MED_FR::med_geometrie_element)(convertIdlEltToMedElt((*Types)[i])),
 			      field->getIterationNumber(),
