@@ -36,10 +36,10 @@ include/salome/SALOMEconfig.h: salome_adm/unix/SALOMEconfig.ref
 # test if SALOMEconfig.h has changed (contents)
 salome_adm/unix/SALOMEconfig.ref: salome_adm/unix/SALOMEconfig.h
 	@if ! [ -a $@ ]; then \
-	  cp -p $< $@;        \
+	  cp -p -f $< $@;        \
 	fi;		      \
 	if ! cmp $< $@; then  \
-	  cp -p $< $@;        \
+	  cp -p -f $< $@;        \
 	fi;		      \
 
 include/salome/sstream: salome_adm/unix/sstream
@@ -63,7 +63,7 @@ install-include: $(include_list)
 	$(INSTALL) -d  $(includedir)
 	@for f in X $(include_list); do				\
 	   if test $$f != X; then				\
-	     ($(INSTALL_DATA) $$f $(includedir)/. || exit 1);	\
+	     ($(INSTALL_DATA) -p $$f $(includedir)/. || exit 1);	\
 	   fi;							\
 	done
 
