@@ -20,6 +20,8 @@ IDL_FILES = \
   SyrControlComponent.idl \
   TypesCheck.idl \
   DataStreamComponent.idl \
+  SIGNALSComponent.idl \
+  UndefinedSymbolComponent.idl \
   Calculator.idl
 
 PY_CLIENT_IDL = $(IDL_FILES)
