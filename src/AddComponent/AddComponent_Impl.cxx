@@ -80,7 +80,7 @@ double AddComponent_Impl::Add( double x , double y , double & z ) {
   
   sendMessage(NOTIF_STEP, "AddComponent_Impl::Add is Computing");
   S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+  sleep(1);
   MESSAGE( "AddComponent_Impl::Add( " <<  x << " , " << y << " , " << z
        << " ) returns " << (x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -107,7 +107,7 @@ double AddComponent_Impl::LastResult() {
   sendMessage(NOTIF_STEP, "AddComponent_Impl::LastResult is Computing");
   int S;
   S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+  sleep(1);
   endService( " AddComponent_Impl::LastResult"  );
   return LastAddition ;
 }
@@ -165,7 +165,7 @@ double Adder_Impl::Add( double x , double y , double & z ) {
   
   sendMessage(NOTIF_STEP, "Adder_Impl::Add is Computing");
   S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+  sleep(1);
   MESSAGE( "Adder_Impl::Add( " <<  x << " , " << y << " , " << z
        << " ) returns " << -(x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -182,7 +182,7 @@ double Adder_Impl::AddAndCompare( const double x , const double y ,
   
   sendMessage(NOTIF_STEP, "Adder_Impl::AddAndCompare is Computing");
   S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+  sleep(1);
   MESSAGE( "Adder_Impl::AddAndCompare( " <<  x << " , " << y << " , " << z
        << " ) returns " << -(x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -207,7 +207,7 @@ void Adder_Impl::SetLastResult( double z ) {
   sendMessage(NOTIF_STEP, "Adder_Impl::SetLastResult is Computing");
   int S;
   S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+  sleep(1);
   LastAddition = z ;
   endService( " Adder_Impl::SetLastResult"  );
   return ;
@@ -218,7 +218,7 @@ void Adder_Impl::LastResult( double & z ) {
   sendMessage(NOTIF_STEP, "Adder_Impl::LastResult is Computing");
   int S;
   S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  sleep(S);
+  sleep(1);
   z = LastAddition ;
   endService( " Adder_Impl::LastResult"  );
   return ;
