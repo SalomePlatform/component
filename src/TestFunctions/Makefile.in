@@ -43,7 +43,12 @@ LIB_SRC = DynInvoke.cxx
 LIB_CLIENT_IDL = SALOME_Component.idl 
 
 # Executables targets
-BIN = TestFunctions
+BIN = TestFunctions \
+	TestFunctionsMemory \
+	TestFunctionsMemory1 \
+	TestFunctionsMemory2 \
+	TestFunctionsMemory3 \
+	TestFunctionsMemory4
 BIN_SRC = 
 BIN_CLIENT_IDL = SALOME_Component.idl \
                  AddComponent.idl
