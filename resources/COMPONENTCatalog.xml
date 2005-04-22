@@ -45,7 +45,63 @@
 				</component-service>
 				<component-service>
 					<!-- service-identification -->
+					<service-name>AdditionObjRef</service-name>
+					<service-author>MTJ</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>boolean</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Test</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+							<outParameter-name>Adder</outParameter-name>
+							<outParameter-comment>Adder object</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
 					<service-name>Add</service-name>
+					<service-author>MTJ</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>x</inParameter-name>
+							<inParameter-comment>First number</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Substract result</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment>Addition result</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>AddWithoutSleep</service-name>
 					<service-author>MTJ</service-author>
 					<service-version>1.0</service-version>
 					<service-comment>Floating add</service-comment>
@@ -1982,6 +2038,99 @@
                                 <outParameter-dependency>I</outParameter-dependency>
                             </outParameter>
                         </DataStream-list>
+                    </component-service>
+                </component-service-list>
+            </component-interface-list>
+        </component>
+        <component>
+            <component-name>SIGNALSComponent</component-name>
+            <component-username>SIGNALSComponent</component-username>
+            <component-type>OTHER</component-type>
+            <component-author>jr</component-author>
+            <component-version>1</component-version>
+            <component-comment>unknown</component-comment>
+            <component-multistudy>1</component-multistudy>
+            <component-icone></component-icone>
+            <constraint></constraint>
+            <component-interface-list>
+                <component-interface-name>SIGNALSComponent</component-interface-name>
+                <component-interface-comment>unknown</component-interface-comment>
+                <component-service-list>
+                    <component-service>
+                        <service-name>SIGSEGVfunc</service-name>
+                        <service-author>jr</service-author>
+                        <service-version>1</service-version>
+                        <service-comment>unknown</service-comment>
+                        <service-by-default>0</service-by-default>
+                        <inParameter-list></inParameter-list>
+                        <outParameter-list>
+                            <outParameter>
+                                <outParameter-name>return</outParameter-name>
+                                <outParameter-type>long</outParameter-type>
+                                <outParameter-comment>unknown</outParameter-comment>
+                            </outParameter>
+                        </outParameter-list>
+                        <DataStream-list></DataStream-list>
+                    </component-service>
+                    <component-service>
+                        <service-name>SIGFPEfunc</service-name>
+                        <service-author>jr</service-author>
+                        <service-version>1</service-version>
+                        <service-comment>unknown</service-comment>
+                        <service-by-default>0</service-by-default>
+                        <inParameter-list>
+                            <inParameter>
+                                <inParameter-name>a</inParameter-name>
+                                <inParameter-type>long</inParameter-type>
+                                <inParameter-comment>unknown</inParameter-comment>
+                            </inParameter>
+                            <inParameter>
+                                <inParameter-name>b</inParameter-name>
+                                <inParameter-type>long</inParameter-type>
+                                <inParameter-comment>unknown</inParameter-comment>
+                            </inParameter>
+                        </inParameter-list>
+                        <outParameter-list>
+                            <outParameter>
+                                <outParameter-name>return</outParameter-name>
+                                <outParameter-type>long</outParameter-type>
+                                <outParameter-comment>unknown</outParameter-comment>
+                            </outParameter>
+                        </outParameter-list>
+                        <DataStream-list></DataStream-list>
+                    </component-service>
+                </component-service-list>
+            </component-interface-list>
+        </component>
+        <component>
+            <component-name>UndefinedSymbolComponent</component-name>
+            <component-username>UndefinedSymbolComponent</component-username>
+            <component-type>OTHER</component-type>
+            <component-author>jr</component-author>
+            <component-version>1</component-version>
+            <component-comment>unknown</component-comment>
+            <component-multistudy>1</component-multistudy>
+            <component-icone></component-icone>
+            <constraint></constraint>
+            <component-interface-list>
+                <component-interface-name>UndefinedSymbolComponent</component-interface-name>
+                <component-interface-comment>unknown</component-interface-comment>
+                <component-service-list>
+                    <component-service>
+                        <service-name>UndefinedSymbol</service-name>
+                        <service-author>jr</service-author>
+                        <service-version>1</service-version>
+                        <service-comment>unknown</service-comment>
+                        <service-by-default>0</service-by-default>
+                        <inParameter-list></inParameter-list>
+                        <outParameter-list>
+                            <outParameter>
+                                <outParameter-name>return</outParameter-name>
+                                <outParameter-type>long</outParameter-type>
+                                <outParameter-comment>unknown</outParameter-comment>
+                            </outParameter>
+                        </outParameter-list>
+                        <DataStream-list></DataStream-list>
                     </component-service>
                 </component-service-list>
             </component-interface-list>

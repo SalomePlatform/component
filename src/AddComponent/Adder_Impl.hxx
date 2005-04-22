@@ -37,31 +37,35 @@
 
 class Adder_Impl :  public POA_SuperVisionTest::Adder ,
                     public Engines_Component_i {
-public:
-  Adder_Impl() ;
-  Adder_Impl( CORBA::ORB_ptr orb ,
-	      PortableServer::POA_ptr poa ,
-	      PortableServer::ObjectId * contId , 
-	      const char *instanceName ,
-              const char *interfaceName , 
-              const char * graphName ,
-              const char * nodeName );
+  public:
+    Adder_Impl() ;
+    Adder_Impl( CORBA::ORB_ptr orb ,
+	        PortableServer::POA_ptr poa ,
+	        PortableServer::ObjectId * contId , 
+	        const char *instanceName ,
+                const char *interfaceName , 
+                const char * graphName ,
+                const char * nodeName );
 
-  virtual ~Adder_Impl();
+    virtual ~Adder_Impl();
 
-  virtual double Add( double x , double y , double & z ) ;
+    virtual void destroy() ;
 
-  virtual double AddAndCompare( const double x , const double y ,
-                                const SuperVisionTest::Adder_ptr anOtherAdder ,
-                                double & z ) ;
+    virtual double Add( double x , double y , double & z ) ;
 
-  virtual void SetLastResult( double z ) ;
+    virtual double AddWithoutSleep( double x , double y , double & z ) ;
 
-  virtual void LastResult( double & z ) ;
+    virtual double AddAndCompare( const double x , const double y ,
+                                  const SuperVisionTest::Adder_ptr anOtherAdder ,
+                                  double & z ) ;
 
-private:
+    virtual void SetLastResult( double z ) ;
 
-  double LastAddition ;
+    virtual void LastResult( double & z ) ;
+
+  private:
+
+    double LastAddition ;
 
 };
 

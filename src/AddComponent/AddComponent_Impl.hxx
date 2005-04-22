@@ -54,6 +54,7 @@ public:
   virtual void AdditionObjRef2( bool & FuncValue , SuperVisionTest::Adder_out ) ;
 
   virtual double Add( double x , double y , double & z ) ;
+  virtual double AddWithoutSleep( double x , double y , double & z ) ;
 
   virtual long Sigma( long n ) ;
 
@@ -62,6 +63,7 @@ public:
 private:
 
   double LastAddition ;
+  long CallCount ;
 
 };
 

@@ -49,6 +49,7 @@ AddComponent_Impl::AddComponent_Impl( CORBA::ORB_ptr orb,
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
   LastAddition = 0 ;
+  CallCount = 0 ;
 }
 
 AddComponent_Impl::AddComponent_Impl() {
@@ -121,6 +122,23 @@ double AddComponent_Impl::Add( double x , double y , double & z ) {
        << " ) returns " << (x - y) << " after " << S << " seconds" )
   LastAddition = z ;
   endService( " AddComponent_Impl::Add"  );
+  return (x - y) ;
+}
+
+double AddComponent_Impl::AddWithoutSleep( double x , double y , double & z ) {
+  beginService( " AddComponent_Impl::AddWithoutSleep" );
+  z = x + y ;
+  LastAddition = z ;
+  if ( !strcmp( graphName() , "GraphGOTOAddMemory" ) ) {
+    CallCount += 1 ;
+    if ( CallCount == 10000 ) {
+      MESSAGE( " AddComponent_Impl::AddWithoutSleep pthread_exit CallCount " << CallCount );
+      endService( " AddComponent_Impl::AddWithoutSleep pthread_exit" );
+      pthread_exit( (void * ) NULL ) ;
+    }
+  }
+  MESSAGE( " AddComponent_Impl::AddWithoutSleep CallCount " << CallCount );
+  endService( " AddComponent_Impl::AddWithoutSleep" );
   return (x - y) ;
 }
 
@@ -197,6 +215,13 @@ Adder_Impl::~Adder_Impl() {
   endService( "Adder_Impl::~Adder_Impl" );
 }
 
+void Adder_Impl::destroy() {
+  _poa->deactivate_object(*_id) ;
+  CORBA::release(_poa) ;
+  delete(_id) ;
+  _thisObj->_remove_ref();
+}
+
 double Adder_Impl::Add( double x , double y , double & z ) {
   beginService( " Adder_Impl::Add" );
   z = x + y ;
@@ -212,6 +237,13 @@ double Adder_Impl::Add( double x , double y , double & z ) {
        << " ) returns " << -(x - y) << " after " << S << " seconds" )
   LastAddition = z ;
   endService( " Adder_Impl::Add"  );
+  return -(x - y) ;
+}
+
+double Adder_Impl::AddWithoutSleep( double x , double y , double & z ) {
+  beginService( " Adder_Impl::AddWithoutSleep" );
+  z = x + y ;
+  endService( " Adder_Impl::AddWithoutSleep"  );
   return -(x - y) ;
 }
 
