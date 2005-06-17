@@ -40,7 +40,7 @@ LIB = libCalculatorEngine.la
 LIB_SRC = CalculatorEngine.cxx
 #LIB_SERVER_IDL = Calculator.idl SALOME_Exception.idl SALOME_Component.idl SALOMEDS.idl SALOMEDS_Attributes.idl MED.idl 
 LIB_SERVER_IDL = Calculator.idl  
-LIB_CLIENT_IDL = SALOME_Exception.idl SALOME_Component.idl SALOMEDS.idl SALOMEDS_Attributes.idl MED.idl 
+LIB_CLIENT_IDL = SALOME_Exception.idl SALOME_Component.idl SALOMEDS.idl SALOME_GenericObj.idl SALOMEDS_Attributes.idl MED.idl 
 # Executables targets
 BIN = 
 BIN_SRC = 
