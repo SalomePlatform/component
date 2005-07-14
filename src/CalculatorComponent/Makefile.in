@@ -49,7 +49,7 @@ BIN_SERVER_IDL =
 
 EXPORT_HEADERS =
 
-CPPFLAGS+= $(PYTHON_INCLUDES) $(HDF5_INCLUDES) $(MED2_INCLUDES) -I${KERNEL_ROOT_DIR}/include/salome -I${MED_ROOT_DIR}/include/salome
+CPPFLAGS+= $(PYTHON_INCLUDES) $(HDF5_INCLUDES) -I${KERNEL_ROOT_DIR}/include/salome -I${MED_ROOT_DIR}/include/salome
 CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome -I${MED_ROOT_DIR}/include/salome
 LDFLAGS+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -L${MED_ROOT_DIR}/lib/salome -lMEDEngine -lMEDClientcmodule
 
