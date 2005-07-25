@@ -45,6 +45,10 @@
 using namespace MEDMEM;
 using namespace std;
 
+#ifndef MED_TAILLE_PNOM
+#define MED_TAILLE_PNOM MED_TAILLE_PNOM21
+#endif
+
 //================================================================================
 // static PrintFieldValues - shows field contents
 //================================================================================
