@@ -60,6 +60,13 @@ public:
 
   virtual double LastResult() ;
 
+  virtual bool AdditionObjRefs( const SuperVisionTest::AddComponent_ptr AddComponent1 ,
+                                const SuperVisionTest::AddComponent_ptr Adder2 ,
+                                const SuperVisionTest::AddComponent_ptr Adder3 ,
+                                SuperVisionTest::AddComponent_out RetAddComponent1 ,
+                                SuperVisionTest::AddComponent_out RetAdder2 ,
+                                SuperVisionTest::AddComponent_out RetAdder3 ) ;
+
 private:
 
   double LastAddition ;

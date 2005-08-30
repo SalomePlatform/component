@@ -32,7 +32,11 @@ using namespace std;
 #include <sstream>
 #include <string>
 
-//#include "utilities.h"
+#include "utilities.h"
+#include "Utils_ORB_INIT.hxx"
+#include "Utils_SINGLETON.hxx"
+#include "SALOME_NamingService.hxx"
+#include "SALOME_LifeCycleCORBA.hxx"
 
 #include "AddComponent_Impl.hxx"
 #include "Adder_Impl.hxx"
@@ -71,7 +75,8 @@ SuperVisionTest::Adder_ptr AddComponent_Impl::Addition() {
   CORBA::Object_var obj = _poa->id_to_reference(*id);
   iobject = SuperVisionTest::Adder::_narrow(obj) ;
   endService( "AddComponent_Impl::Addition" );
-  return SuperVisionTest::Adder::_duplicate(iobject) ;
+  return iobject._retn() ;
+//  return SuperVisionTest::Adder::_duplicate(iobject) ;
 }
 
 bool AddComponent_Impl::AdditionObjRef1( SuperVisionTest::Adder_out aAdder ) {
@@ -168,6 +173,41 @@ double AddComponent_Impl::LastResult() {
   endService( " AddComponent_Impl::LastResult"  );
   return LastAddition ;
 }
+
+bool AddComponent_Impl::AdditionObjRefs( const SuperVisionTest::AddComponent_ptr AddComponent1 ,
+                                         const SuperVisionTest::AddComponent_ptr Adder2 ,
+                                         const SuperVisionTest::AddComponent_ptr Adder3 ,
+                                         SuperVisionTest::AddComponent_out RetAddComponent1 ,
+                                         SuperVisionTest::AddComponent_out RetAdder2 ,
+                                         SuperVisionTest::AddComponent_out RetAdder3 ) {
+  bool RetVal = true ;
+  beginService( "AddComponent_Impl::AdditionObjRefs" );
+  cout << "beginService AddComponent_Impl::AdditionObjRefs" << endl ;
+  ORB_INIT &init = *SINGLETON_<ORB_INIT>::Instance() ;
+  ASSERT(SINGLETON_<ORB_INIT>::IsAlreadyExisting());
+  CORBA::ORB_var orb = init(0 , 0 ) ;
+  char * IOR = orb->object_to_string( AddComponent1 );
+  cout << "AddComponent_Impl::AdditionObjRefs AddComponent1 " << AddComponent1 << " IOR "
+       << IOR << " nil " << CORBA::is_nil( AddComponent1 ) << endl ;
+  RetAddComponent1 = SuperVisionTest::AddComponent::_duplicate( AddComponent1 ) ;
+  IOR = orb->object_to_string( Adder2 );
+  cout << "AddComponent_Impl::AdditionObjRefs Adder2 " << Adder2 << " IOR " << IOR << " nil "
+       << CORBA::is_nil( Adder2 ) << endl ;
+  RetAdder2 = SuperVisionTest::AddComponent::_duplicate( Adder2 ) ;
+  IOR = orb->object_to_string( Adder3 );
+  cout << "AddComponent_Impl::AdditionObjRefs Adder3 " << Adder3 << " IOR " << IOR << " nil "
+       << CORBA::is_nil( Adder3 ) << endl ;
+  RetAdder3 = SuperVisionTest::AddComponent::_duplicate( Adder3 ) ;
+  if ( CORBA::is_nil( AddComponent1 ) || CORBA::is_nil( Adder2 ) ||
+       CORBA::is_nil( Adder3 ) || CORBA::is_nil( RetAddComponent1 ) ||
+       CORBA::is_nil( RetAdder2 ) || CORBA::is_nil( RetAdder3 ) ) {
+    RetVal = false ;
+  }
+  cout << "endService AddComponent_Impl::AdditionObjRefs" << endl ;
+  endService( "AddComponent_Impl::AdditionObjRefs" );
+  return RetVal ;
+}
+
 
 extern "C"
 {
@@ -307,4 +347,23 @@ void Adder_Impl::LastResult( double & z ) {
   return ;
 }
 
+Engines::Component_ptr Adder_Impl::LccAddComponent( const char * aContainer ,
+                                                    const char * aComponentName ) {
+  beginService( "Adder_Impl::LccAddComponent" );
+  Engines::Component_ptr objComponent ;
+  objComponent = Engines::Component::_nil() ;
+
+  ORB_INIT &init = *SINGLETON_<ORB_INIT>::Instance() ;
+  ASSERT(SINGLETON_<ORB_INIT>::IsAlreadyExisting());
+  CORBA::ORB_var orb = init(0 , 0 ) ;
+  SALOME_NamingService *_NS ;
+  _NS = new SALOME_NamingService();
+  _NS->init_orb( CORBA::ORB::_duplicate(orb) ) ;
+	  
+  SALOME_LifeCycleCORBA LCC( _NS ) ;
+  objComponent = LCC.FindOrLoad_Component( aContainer ,
+					   aComponentName );
+  endService( "Adder_Impl::LccAddComponent"  );
+  return objComponent ;
+}
 

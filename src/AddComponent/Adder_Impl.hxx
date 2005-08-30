@@ -63,6 +63,9 @@ class Adder_Impl :  public POA_SuperVisionTest::Adder ,
 
     virtual void LastResult( double & z ) ;
 
+    virtual Engines::Component_ptr LccAddComponent( const char * aContainer ,
+                                                    const char * aComponentName ) ;
+
   private:
 
     double LastAddition ;

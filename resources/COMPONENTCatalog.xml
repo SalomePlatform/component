@@ -154,6 +154,53 @@
 						</outParameter>
 					</outParameter-list>
 				</component-service>
+				<component-service>
+					<service-name>AdditionObjRefs</service-name>
+                        		<service-author>jr</service-author>
+                        		<service-version>1</service-version>
+                        		<service-comment>unknown</service-comment>
+                        		<service-by-default>0</service-by-default>
+                        		<inParameter-list>
+                            			<inParameter>
+                                			<inParameter-name>AddComponent1</inParameter-name>
+                                			<inParameter-type>AddComponent</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                            			<inParameter>
+                                			<inParameter-name>Adder2</inParameter-name>
+                                			<inParameter-type>AddComponent</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                            			<inParameter>
+                                			<inParameter-name>Adder3</inParameter-name>
+                                			<inParameter-type>AddComponent</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                        		</inParameter-list>
+                        		<outParameter-list>
+                            			<outParameter>
+                                			<outParameter-name>return</outParameter-name>
+                                			<outParameter-type>boolean</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                            			<outParameter>
+                                			<outParameter-name>RetAddComponent1</outParameter-name>
+                                			<outParameter-type>AddComponent</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                            			<outParameter>
+                                			<outParameter-name>RetAdder2</outParameter-name>
+                                			<outParameter-type>AddComponent</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                            			<outParameter>
+                                			<outParameter-name>RetAdder3</outParameter-name>
+                                			<outParameter-type>AddComponent</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                        		</outParameter-list>
+                        		<DataStream-list></DataStream-list>
+                    		</component-service>
 			</component-service-list>
 			<component-interface-name>Adder</component-interface-name>
 			<component-interface-comment> + ... </component-interface-comment>
@@ -290,6 +337,39 @@
 						</outParameter>
 					</outParameter-list>
 				</component-service>
+				<component-service>
+				<service-name>LccAddComponent</service-name>
+				<service-author>jr</service-author>
+				<service-version>1</service-version>
+				<service-comment>unknown</service-comment>
+				<service-by-default>0</service-by-default>
+				<type-of-node>0</type-of-node>
+				<inParameter-list>
+					<inParameter>
+						<inParameter-name>Adder</inParameter-name>
+						<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+						<inParameter-comment>Adder Object</inParameter-comment>
+                            		</inParameter>
+                            		<inParameter>
+                                		<inParameter-name>aContainer</inParameter-name>
+                                		<inParameter-type>string</inParameter-type>
+                                		<inParameter-comment>unknown</inParameter-comment>
+                            		</inParameter>
+                            		<inParameter>
+                                		<inParameter-name>aComponentName</inParameter-name>
+                                		<inParameter-type>string</inParameter-type>
+                                		<inParameter-comment>unknown</inParameter-comment>
+                            		</inParameter>
+                        	</inParameter-list>
+                        	<outParameter-list>
+                            		<outParameter>
+                                		<outParameter-name>return</outParameter-name>
+                                		<outParameter-type>AddComponent</outParameter-type>
+                                		<outParameter-comment>unknown</outParameter-comment>
+                            		</outParameter>
+                        	</outParameter-list>
+                        	<DataStream-list></DataStream-list>
+                    		</component-service>
 			</component-service-list>
 		</component-interface-list>
 	</component>
