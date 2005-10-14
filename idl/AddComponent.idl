@@ -37,6 +37,13 @@ module SuperVisionTest {
     double Add( in double x , in double y , out double z ) ;
     long Sigma( in long n ) ;
     double LastResult() ;
+
+    boolean AdditionObjRefs( in AddComponent AddComponent1 ,
+                             in AddComponent Adder2 ,
+                             in AddComponent Adder3 ,
+                             out AddComponent RetAddComponent1 ,
+                             out AddComponent RetAdder2 ,
+                             out AddComponent RetAdder3 ) ;
   };
 
   interface Adder : Engines::Component {
@@ -45,6 +52,8 @@ module SuperVisionTest {
                           out double z ) ;
     void SetLastResult( in double z ) ;
     void LastResult( out double z ) ;
+    Engines::Component LccAddComponent( in string aContainer ,
+                                        in string aComponentName ) ;
   };
 
 } ;
