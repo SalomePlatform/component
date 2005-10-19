@@ -40,7 +40,7 @@ EXPORT_HEADERS =
 LIB = libDynInvoke.la
 LIB_SRC = DynInvoke.cxx
 
-LIB_CLIENT_IDL = SALOME_Component.idl 
+LIB_CLIENT_IDL = SALOME_Component.idl SALOME_Exception.idl
 
 # Executables targets
 BIN = TestFunctions \
