@@ -12,6 +12,7 @@ VPATH=.:${KERNEL_ROOT_DIR}/idl/salome
 
 IDL_FILES = \
   AddComponent.idl \
+  AdditionComponent.idl \
   DivComponent.idl \
   FactorialComponent.idl \
   MulComponent.idl \
