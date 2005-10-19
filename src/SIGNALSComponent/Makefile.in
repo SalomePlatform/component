@@ -35,19 +35,19 @@ VPATH=.:@srcdir@:@top_srcdir@/idl
 @COMMENCE@
 
 EXPORT_HEADERS =  \
-	SIGNALSComponent.hxx 
+	SIGNALSComponent_Impl.hxx 
 
 # Libraries targets
 LIB = libSIGNALSComponentEngine.la 
 LIB_SRC = \
-	SIGNALSComponent.cxx 
+	SIGNALSComponent_Impl.cxx 
 
 LIB_SERVER_IDL = SALOME_Component.idl \
                  SIGNALSComponent.idl
 
 # Executables targets
-BIN = 
-BIN_SRC = 
+BIN = SIGNALSComponent_CheckOfUndefined
+BIN_SRC = HandleServerSideSignals.cxx
 BIN_SERVER_IDL =
 
 CPPFLAGS+= $(PYTHON_INCLUDES) -I${KERNEL_ROOT_DIR}/include/salome
