@@ -44,6 +44,8 @@ module SuperVisionTest {
     long C_M3P1( in long anOddInteger ) ;
     long C_DIV2( in long anEvenInteger ) ;
     long C_INCR( in long aCount ) ;
+    void CPP_SETLONG( in long aLong ) ;
+    long CPP_ADDTOLONG( in long anIncr ) ;
     long C_MIN( in long aMinVal , in long anInteger ) ;
     long C_MAX( in long aMaxVal , in long anInteger ) ;
     ListOfSyr C_LISTOFSYR() ;
