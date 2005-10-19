@@ -27,47 +27,6 @@
 			<component-service-list>
 				<component-service>
 					<!-- service-identification -->
-					<service-name>Addition</service-name>
-					<service-author>MTJ</service-author>
-					<service-version>1.0</service-version>
-					<service-comment>Floating add</service-comment>
-					<service-by-default>1</service-by-default>
-					<!-- service-connexion -->
-					<inParameter-list>
-					</inParameter-list>
-                       	 		<outParameter-list>
-						<outParameter>
-							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
-							<outParameter-name>Adder</outParameter-name>
-							<outParameter-comment>Adder object</outParameter-comment>
-						</outParameter>
-					</outParameter-list>
-				</component-service>
-				<component-service>
-					<!-- service-identification -->
-					<service-name>AdditionObjRef</service-name>
-					<service-author>MTJ</service-author>
-					<service-version>1.0</service-version>
-					<service-comment>Floating add</service-comment>
-					<service-by-default>1</service-by-default>
-					<!-- service-connexion -->
-					<inParameter-list>
-					</inParameter-list>
-                       	 		<outParameter-list>
-						<outParameter>
-							<outParameter-type>boolean</outParameter-type>
-							<outParameter-name>FuncValue</outParameter-name>
-							<outParameter-comment>Test</outParameter-comment>
-						</outParameter>
-						<outParameter>
-							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
-							<outParameter-name>Adder</outParameter-name>
-							<outParameter-comment>Adder object</outParameter-comment>
-						</outParameter>
-					</outParameter-list>
-				</component-service>
-				<component-service>
-					<!-- service-identification -->
 					<service-name>Add</service-name>
 					<service-author>MTJ</service-author>
 					<service-version>1.0</service-version>
@@ -133,6 +92,81 @@
 					</outParameter-list>
 				</component-service>
 				<component-service>
+					<!-- service-identification -->
+					<service-name>Setx</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>x</inParameter-name>
+							<inParameter-comment>First number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>Sety</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>Addxy</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>0</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+					<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment></outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>AddyTox</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>0</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+					<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment></outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
 					<service-name>Sigma</service-name>
 					<service-author>JR</service-author>
 					<service-version>1.0</service-version>
@@ -155,8 +189,72 @@
 					</outParameter-list>
 				</component-service>
 				<component-service>
+					<!-- service-identification -->
+					<service-name>Addition</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+							<outParameter-name>Adder</outParameter-name>
+							<outParameter-comment>Adder object</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>AdditionObjRef1</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>boolean</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Test</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+							<outParameter-name>Adder</outParameter-name>
+							<outParameter-comment>Adder object</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>AdditionObjRef2</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>boolean</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Test</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+							<outParameter-name>Adder</outParameter-name>
+							<outParameter-comment>Adder object</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
 					<service-name>AdditionObjRefs</service-name>
-                        		<service-author>jr</service-author>
+                        		<service-author>JR</service-author>
                         		<service-version>1</service-version>
                         		<service-comment>unknown</service-comment>
                         		<service-by-default>0</service-by-default>
@@ -209,7 +307,7 @@
 				<component-service>
 					<!-- service-identification -->
 					<service-name>Add</service-name>
-					<service-author>MTJ</service-author>
+					<service-author>JR</service-author>
 					<service-version>1.0</service-version>
 					<service-comment>Floating add</service-comment>
 					<service-by-default>1</service-by-default>
@@ -248,7 +346,7 @@
 				<component-service>
 					<!-- service-identification -->
 					<service-name>AddAndCompare</service-name>
-					<service-author>MTJ</service-author>
+					<service-author>JR</service-author>
 					<service-version>1.0</service-version>
 					<service-comment>Floating add</service-comment>
 					<service-by-default>1</service-by-default>
@@ -292,7 +390,7 @@
 				<component-service>
 					<!-- service-identification -->
 					<service-name>SetLastResult</service-name>
-					<service-author>MTJ</service-author>
+					<service-author>JR</service-author>
 					<service-version>1.0</service-version>
 					<service-comment>set the last result field</service-comment>
 					<service-by-default>1</service-by-default>
@@ -316,7 +414,7 @@
 				<component-service>
 					<!-- service-identification -->
 					<service-name>LastResult</service-name>
-					<service-author>MTJ</service-author>
+					<service-author>JR</service-author>
 					<service-version>1.0</service-version>
 					<service-comment>get the last result field</service-comment>
 					<service-by-default>1</service-by-default>
@@ -338,8 +436,470 @@
 					</outParameter-list>
 				</component-service>
 				<component-service>
+					<service-name>LccAddComponent</service-name>
+					<service-author>JR</service-author>
+					<service-version>1</service-version>
+					<service-comment>unknown</service-comment>
+					<service-by-default>0</service-by-default>
+					<type-of-node>0</type-of-node>
+					<inParameter-list>
+						<inParameter>
+							<inParameter-name>Adder</inParameter-name>
+							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+							<inParameter-comment>Adder Object</inParameter-comment>
+                            			</inParameter>
+                            			<inParameter>
+                                			<inParameter-name>aContainer</inParameter-name>
+                                			<inParameter-type>string</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                            			<inParameter>
+                                			<inParameter-name>aComponentName</inParameter-name>
+                                			<inParameter-type>string</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                        		</inParameter-list>
+                        		<outParameter-list>
+                            			<outParameter>
+                                			<outParameter-name>return</outParameter-name>
+                                			<outParameter-type>AddComponent</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                        		</outParameter-list>
+                        		<DataStream-list></DataStream-list>
+                    		</component-service>
+			</component-service-list>
+		</component-interface-list>
+	</component>
+
+	<component>
+		<!-- Component identification -->
+		<component-name>AdditionComponent</component-name>
+		<component-username>AdditionComponent</component-username>
+		<component-type>SuperVisionTest</component-type>
+		<component-author>JR</component-author>
+		<component-version>3.0.0</component-version>
+		<component-comment>SuperVision test: Addition</component-comment>
+		<component-multistudy>0</component-multistudy>
+
+		<component-interface-list>
+			<component-interface-name>AddInterface</component-interface-name>
+			<component-interface-comment> + ... </component-interface-comment>
+
+			<component-service-list>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>Add</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>x</inParameter-name>
+							<inParameter-comment>First number</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Substract result</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment>Addition result</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>AddWithoutSleep</service-name>
+					<service-author>Jr</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>x</inParameter-name>
+							<inParameter-comment>First number</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Substract result</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment>Addition result</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>Setx</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>x</inParameter-name>
+							<inParameter-comment>First number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>Sety</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>Addxy</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>0</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+					<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment></outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>AddyTox</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment></service-comment>
+					<service-by-default>0</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+					<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment></outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>Sigma</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Sigma</service-comment>
+					<service-by-default>0</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>long</inParameter-type>
+							<inParameter-name>n</inParameter-name>
+							<inParameter-comment></inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+					<outParameter-list>
+						<outParameter>
+							<outParameter-type>long</outParameter-type>
+							<outParameter-name>f</outParameter-name>
+							<outParameter-comment>result n(n+1)/2</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>Addition</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>AdditionComponent::Adder</outParameter-type>
+							<outParameter-name>Adder</outParameter-name>
+							<outParameter-comment>Adder object</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>AdditionObjRef1</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>boolean</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Test</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>AdditionComponent::Adder</outParameter-type>
+							<outParameter-name>Adder</outParameter-name>
+							<outParameter-comment>Adder object</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>AdditionObjRef2</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+					<!-- service-connexion -->
+					<inParameter-list>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>boolean</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Test</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>AdditionComponent::Adder</outParameter-type>
+							<outParameter-name>Adder</outParameter-name>
+							<outParameter-comment>Adder object</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>AdditionObjRefs</service-name>
+                        		<service-author>JR</service-author>
+                        		<service-version>1</service-version>
+                        		<service-comment>unknown</service-comment>
+                        		<service-by-default>0</service-by-default>
+                        		<inParameter-list>
+                            			<inParameter>
+                                			<inParameter-name>AddComponent1</inParameter-name>
+                                			<inParameter-type>AddInterface</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                            			<inParameter>
+                                			<inParameter-name>Adder2</inParameter-name>
+                                			<inParameter-type>AddInterface</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                            			<inParameter>
+                                			<inParameter-name>Adder3</inParameter-name>
+                                			<inParameter-type>AddInterface</inParameter-type>
+                                			<inParameter-comment>unknown</inParameter-comment>
+                            			</inParameter>
+                        		</inParameter-list>
+                        		<outParameter-list>
+                            			<outParameter>
+                                			<outParameter-name>return</outParameter-name>
+                                			<outParameter-type>boolean</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                            			<outParameter>
+                                			<outParameter-name>RetAddComponent1</outParameter-name>
+                                			<outParameter-type>AddInterface</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                            			<outParameter>
+                                			<outParameter-name>RetAdder2</outParameter-name>
+                                			<outParameter-type>AddInterface</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                            			<outParameter>
+                                			<outParameter-name>RetAdder3</outParameter-name>
+                                			<outParameter-type>AddInterface</outParameter-type>
+                                			<outParameter-comment>unknown</outParameter-comment>
+                            			</outParameter>
+                        		</outParameter-list>
+                        		<DataStream-list></DataStream-list>
+                    		</component-service>
+			</component-service-list>
+			<component-interface-name>Adder</component-interface-name>
+			<component-interface-comment> + ... </component-interface-comment>
+
+			<component-service-list>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>Add</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+          		                <type-of-node>0</type-of-node>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>AddComponent::Adder</inParameter-type>
+							<inParameter-name>Adder</inParameter-name>
+							<inParameter-comment>Adder Object</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>x</inParameter-name>
+							<inParameter-comment>First number</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Substract result</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment>Addition result</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>AddAndCompare</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>Floating add</service-comment>
+					<service-by-default>1</service-by-default>
+          		                <type-of-node>0</type-of-node>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>AddComponent::Adder</inParameter-type>
+							<inParameter-name>Adder</inParameter-name>
+							<inParameter-comment>Adder Object</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>x</inParameter-name>
+							<inParameter-comment>First number</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>y</inParameter-name>
+							<inParameter-comment>Second number</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>AddComponent::Adder</inParameter-type>
+							<inParameter-name>anOtherAdder</inParameter-name>
+							<inParameter-comment>Adder Object</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>FuncValue</outParameter-name>
+							<outParameter-comment>Substract result</outParameter-comment>
+						</outParameter>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment>Addition result</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>SetLastResult</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>set the last result field</service-comment>
+					<service-by-default>1</service-by-default>
+          		                <type-of-node>0</type-of-node>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>AddComponent::Adder</inParameter-type>
+							<inParameter-name>Adder</inParameter-name>
+							<inParameter-comment>Adder Object</inParameter-comment>
+						</inParameter>
+						<inParameter>
+							<inParameter-type>double</inParameter-type>
+							<inParameter-name>z</inParameter-name>
+							<inParameter-comment>number</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<!-- service-identification -->
+					<service-name>LastResult</service-name>
+					<service-author>JR</service-author>
+					<service-version>1.0</service-version>
+					<service-comment>get the last result field</service-comment>
+					<service-by-default>1</service-by-default>
+          		                <type-of-node>0</type-of-node>
+					<!-- service-connexion -->
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>AddComponent::Adder</inParameter-type>
+							<inParameter-name>Adder</inParameter-name>
+							<inParameter-comment>Adder Object</inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+                       	 		<outParameter-list>
+						<outParameter>
+							<outParameter-type>double</outParameter-type>
+							<outParameter-name>z</outParameter-name>
+							<outParameter-comment>number</outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
 				<service-name>LccAddComponent</service-name>
-				<service-author>jr</service-author>
+				<service-author>JR</service-author>
 				<service-version>1</service-version>
 				<service-comment>unknown</service-comment>
 				<service-by-default>0</service-by-default>
@@ -347,7 +907,7 @@
 				<inParameter-list>
 					<inParameter>
 						<inParameter-name>Adder</inParameter-name>
-						<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+						<inParameter-type>AddComponent::Adder</inParameter-type>
 						<inParameter-comment>Adder Object</inParameter-comment>
                             		</inParameter>
                             		<inParameter>
@@ -364,7 +924,7 @@
                         	<outParameter-list>
                             		<outParameter>
                                 		<outParameter-name>return</outParameter-name>
-                                		<outParameter-type>AddComponent</outParameter-type>
+                                		<outParameter-type>AddInterface</outParameter-type>
                                 		<outParameter-comment>unknown</outParameter-comment>
                             		</outParameter>
                         	</outParameter-list>
@@ -644,6 +1204,43 @@
 						<inParameter>
 							<inParameter-type>long</inParameter-type>
 							<inParameter-name>aCount</inParameter-name>
+							<inParameter-comment></inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+					<outParameter-list>
+						<outParameter>
+							<outParameter-type>long</outParameter-type>
+							<outParameter-name>aNewCount</outParameter-name>
+							<outParameter-comment></outParameter-comment>
+						</outParameter>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>CPP_SETLONG</service-name>
+					<service-author></service-author>
+					<service-version></service-version>
+					<service-comment></service-comment>
+					<service-by-default>0</service-by-default>
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>long</inParameter-type>
+							<inParameter-name>aCount</inParameter-name>
+							<inParameter-comment></inParameter-comment>
+						</inParameter>
+					</inParameter-list>
+					<outParameter-list>
+					</outParameter-list>
+				</component-service>
+				<component-service>
+					<service-name>CPP_ADDTOLONG</service-name>
+					<service-author></service-author>
+					<service-version></service-version>
+					<service-comment></service-comment>
+					<service-by-default>0</service-by-default>
+					<inParameter-list>
+						<inParameter>
+							<inParameter-type>long</inParameter-type>
+							<inParameter-name>anIncr</inParameter-name>
 							<inParameter-comment></inParameter-comment>
 						</inParameter>
 					</inParameter-list>
