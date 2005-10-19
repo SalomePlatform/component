@@ -26,12 +26,12 @@
 
 %module libSIGNALSComponent_Swig
 %{
-#include "SIGNALSComponent.hxx"
+#include "SIGNALSComponent_Impl.hxx"
 %}
 
-class SIGNALSComponentEngine {
+class SIGNALSComponent_Impl {
 public:
-  SIGNALSComponentEngine(){};
+  SIGNALSComponent_Impl(){};
   long SIGSEGVfunc() ;
   long SIGFPEfunc( long a , long b ) ;
 };
