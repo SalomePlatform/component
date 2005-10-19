@@ -41,7 +41,8 @@ EXPORT_HEADERS =  \
 # Libraries targets
 LIB = libAddComponentEngine.la
 LIB_SRC = \
-	AddComponent_Impl.cxx 
+	AddComponent_Impl.cxx  \
+	Adder_Impl.cxx 
 
 LIB_SERVER_IDL = SALOME_ContainerManager.idl \
                  SALOME_Component.idl \
@@ -49,12 +50,12 @@ LIB_SERVER_IDL = SALOME_ContainerManager.idl \
 
 # Executables targets
 BIN = AddComponent_CheckOfUndefined
-BIN_SRC = 
+BIN_SRC = HandleServerSideSignals.cxx
 BIN_SERVER_IDL =
 
 CPPFLAGS+= $(PYTHON_INCLUDES)  -I${KERNEL_ROOT_DIR}/include/salome
 CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome
-LDFLAGS+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA 
+LDFLAGS+= -g -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA 
 
 LDFLAGSFORBIN+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
 
