@@ -33,13 +33,18 @@ module SuperVisionTest {
   interface Adder ;
 
   interface AddComponent : Engines::Component {
+    double Add( in double x , in double y , out double z ) ;
+    double AddWithoutSleep( in double x , in double y , out double z ) ;
+    void Setx( in double x ) ;
+    void Sety( in double y ) ;
+    double Addxy() ;
+    double AddyTox( in double y ) ;
+    long Sigma( in long n ) ;
+    double LastResult() ;
+
     Adder Addition() ;
     boolean AdditionObjRef1( out Adder anAdder ) ;
     void AdditionObjRef2( out boolean FuncValue , out Adder anAdder ) ;
-    double Add( in double x , in double y , out double z ) ;
-    double AddWithoutSleep( in double x , in double y , out double z ) ;
-    long Sigma( in long n ) ;
-    double LastResult() ;
     boolean AdditionObjRefs( in AddComponent AddComponent1 ,
                              in AddComponent Adder2 ,
                              in AddComponent Adder3 ,
