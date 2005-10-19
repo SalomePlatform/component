@@ -60,6 +60,10 @@ public:
 
   virtual long C_INCR( const long aCount ) ;
 
+  virtual void CPP_SETLONG( const long aLong ) ;
+
+  virtual long CPP_ADDTOLONG( const long anIncr ) ;
+
   virtual long C_MIN( const long aMinVal , const long anInteger ) ;
 
   virtual long C_MAX( const long aMaxVal , const long anInteger ) ;
@@ -76,6 +80,7 @@ public:
 
 private:
 
+  long _Count ;
 };
 
 class ListOfSyr_Impl :  public POA_SuperVisionTest::ListOfSyr ,

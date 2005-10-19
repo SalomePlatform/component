@@ -141,6 +141,31 @@ long SyrComponent_Impl::C_INCR( const long aCount ) {
   return ( aCount + 1 ) ;
 }
 
+void SyrComponent_Impl::CPP_SETLONG( const long aCount ) {
+  beginService( " SyrComponent_Impl::CPP_SETLONG" );
+  sendMessage(NOTIF_STEP, "SyrComponent_Impl::CPP_SETLONG is Computing");
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 1 ;
+  while ( S ) {
+    S = sleep(S);
+  }
+  _Count = aCount ;
+  endService( " SyrComponent_Impl::CPP_SETLONG"  );
+  return ;
+}
+
+long SyrComponent_Impl::CPP_ADDTOLONG( const long anIncr ) {
+  beginService( " SyrComponent_Impl::CPP_ADDTOLONG" );
+  sendMessage(NOTIF_STEP, "SyrComponent_Impl::CPP_ADDTOLONG is Computing");
+//  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
+  int S = 1 ;
+  while ( S ) {
+    S = sleep(S);
+  }
+  endService( " SyrComponent_Impl::CPP_ADDTOLONG"  );
+  return ( _Count + anIncr ) ;
+}
+
 long SyrComponent_Impl::C_MIN( const long aMinVal , const long anInteger ) {
   beginService( " SyrComponent_Impl::C_MIN" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_MIN is Computing");
