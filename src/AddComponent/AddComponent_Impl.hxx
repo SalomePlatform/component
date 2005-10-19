@@ -47,18 +47,23 @@ public:
 
   virtual ~AddComponent_Impl();
 
+  virtual double Add( double x , double y , double & z ) ;
+  virtual double AddWithoutSleep( double x , double y , double & z ) ;
+
+  virtual void Setx( double x ) ;
+  virtual void Sety( double y ) ;
+  virtual double Addxy() ;
+  virtual double AddyTox( double y ) ;
+
+  virtual long Sigma( long n ) ;
+
+  virtual double LastResult() ;
+
   virtual SuperVisionTest::Adder_ptr Addition() ;
 
   virtual bool AdditionObjRef1( SuperVisionTest::Adder_out ) ;
 
   virtual void AdditionObjRef2( bool & FuncValue , SuperVisionTest::Adder_out ) ;
-
-  virtual double Add( double x , double y , double & z ) ;
-  virtual double AddWithoutSleep( double x , double y , double & z ) ;
-
-  virtual long Sigma( long n ) ;
-
-  virtual double LastResult() ;
 
   virtual bool AdditionObjRefs( const SuperVisionTest::AddComponent_ptr AddComponent1 ,
                                 const SuperVisionTest::AddComponent_ptr Adder2 ,
@@ -69,8 +74,9 @@ public:
 
 private:
 
+  double xx ;
+  double yy ;
   double LastAddition ;
-  long CallCount ;
 
 };
 

@@ -53,7 +53,6 @@ AddComponent_Impl::AddComponent_Impl( CORBA::ORB_ptr orb,
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
   LastAddition = 0 ;
-  CallCount = 0 ;
 }
 
 AddComponent_Impl::AddComponent_Impl() {
@@ -61,6 +60,89 @@ AddComponent_Impl::AddComponent_Impl() {
 }
 
 AddComponent_Impl::~AddComponent_Impl() {
+}
+
+double AddComponent_Impl::Add( double x , double y , double & z ) {
+  beginService( " AddComponent_Impl::Add" );
+  z = x + y ;
+  int S;
+  
+  sendMessage(NOTIF_STEP, "AddComponent_Impl::Add is Computing");
+//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  S = 5 ;
+  while ( S ) {
+    S = sleep(S);
+  }
+  MESSAGE( "AddComponent_Impl::Add( " <<  x << " , " << y << " , " << z
+       << " ) returns " << (x - y) << " after " << S << " seconds" )
+  LastAddition = z ;
+  endService( " AddComponent_Impl::Add"  );
+  return (x - y) ;
+}
+
+double AddComponent_Impl::AddWithoutSleep( double x , double y , double & z ) {
+  beginService( " AddComponent_Impl::AddWithoutSleep" );
+  z = x + y ;
+  LastAddition = z ;
+  endService( " AddComponent_Impl::AddWithoutSleep" );
+  return (x - y) ;
+}
+
+long AddComponent_Impl::Sigma( long n ) {
+  long sigma = 0 ;
+  int i , j ;
+  beginService( " AddComponent_Impl::Sigma" );
+  for ( j = 0 ; j < 1000000 ; j++ ) {
+    sigma = 0 ;
+    for ( i = 1 ; i <= n ; i++ ) {
+      sigma = sigma + i ;
+    }
+  }
+  endService( " AddComponent_Impl::Sigma"  );
+  return sigma ;
+}
+
+void AddComponent_Impl::Setx( double x ) {
+  int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  while ( S ) {
+    S = sleep(S);
+  }
+  xx = x ;
+}
+
+void AddComponent_Impl::Sety( double y ) {
+  int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  while ( S ) {
+    S = sleep(S);
+  }
+  yy = y ;
+}
+
+double AddComponent_Impl::Addxy() {
+  int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  while ( S ) {
+    S = sleep(S);
+  }
+  double zz = xx + yy ;
+  LastAddition = zz ;
+  return zz;
+}
+
+double AddComponent_Impl::AddyTox( double y ) {
+  int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+  while ( S ) {
+    S = sleep(S);
+  }
+  double zz = xx + y ;
+  LastAddition = zz ;
+  return zz;
+}
+
+double AddComponent_Impl::LastResult() {
+  beginService( " AddComponent_Impl::LastResult" );
+  sendMessage(NOTIF_STEP, "AddComponent_Impl::LastResult is Computing");
+  endService( " AddComponent_Impl::LastResult"  );
+  return LastAddition ;
 }
 
 SuperVisionTest::Adder_ptr AddComponent_Impl::Addition() {
@@ -110,68 +192,6 @@ void AddComponent_Impl::AdditionObjRef2( bool & FuncValue ,
   endService( "AddComponent_Impl::Addition" );
   aAdder = SuperVisionTest::Adder::_duplicate(iobject) ;
   FuncValue = true ;
-}
-
-double AddComponent_Impl::Add( double x , double y , double & z ) {
-  beginService( " AddComponent_Impl::Add" );
-  z = x + y ;
-  int S;
-  
-  sendMessage(NOTIF_STEP, "AddComponent_Impl::Add is Computing");
-//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  S = 5 ;
-  while ( S ) {
-    S = sleep(S);
-  }
-  MESSAGE( "AddComponent_Impl::Add( " <<  x << " , " << y << " , " << z
-       << " ) returns " << (x - y) << " after " << S << " seconds" )
-  LastAddition = z ;
-  endService( " AddComponent_Impl::Add"  );
-  return (x - y) ;
-}
-
-double AddComponent_Impl::AddWithoutSleep( double x , double y , double & z ) {
-  beginService( " AddComponent_Impl::AddWithoutSleep" );
-  z = x + y ;
-  LastAddition = z ;
-  if ( !strcmp( graphName() , "GraphGOTOAddMemory" ) ) {
-    CallCount += 1 ;
-    if ( CallCount == 10000 ) {
-      MESSAGE( " AddComponent_Impl::AddWithoutSleep pthread_exit CallCount " << CallCount );
-      endService( " AddComponent_Impl::AddWithoutSleep pthread_exit" );
-      pthread_exit( (void * ) NULL ) ;
-    }
-  }
-  MESSAGE( " AddComponent_Impl::AddWithoutSleep CallCount " << CallCount );
-  endService( " AddComponent_Impl::AddWithoutSleep" );
-  return (x - y) ;
-}
-
-long AddComponent_Impl::Sigma( long n ) {
-  long sigma = 0 ;
-  int i , j ;
-  beginService( " AddComponent_Impl::Sigma" );
-  for ( j = 0 ; j < 1000000 ; j++ ) {
-    sigma = 0 ;
-    for ( i = 1 ; i <= n ; i++ ) {
-      sigma = sigma + i ;
-    }
-  }
-  endService( " AddComponent_Impl::Sigma"  );
-  return sigma ;
-}
-
-double AddComponent_Impl::LastResult() {
-  beginService( " AddComponent_Impl::LastResult" );
-  sendMessage(NOTIF_STEP, "AddComponent_Impl::LastResult is Computing");
-  int S;
-//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  S = 5 ;
-  while ( S ) {
-    S = sleep(S);
-  }
-  endService( " AddComponent_Impl::LastResult"  );
-  return LastAddition ;
 }
 
 bool AddComponent_Impl::AdditionObjRefs( const SuperVisionTest::AddComponent_ptr AddComponent1 ,
@@ -224,146 +244,5 @@ extern "C"
       = new AddComponent_Impl(orb, poa, contId, instanceName, interfaceName);
     return myAddComponent->getId() ;
   }
-}
-
-Adder_Impl::Adder_Impl( CORBA::ORB_ptr orb ,
-			PortableServer::POA_ptr poa ,
-	       	        PortableServer::ObjectId * contId , 
-			const char * instanceName ,
-                        const char * interfaceName , 
-			const char * graphName ,
-                        const char * nodeName ) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
-  Names( graphName , nodeName ) ;
-  MESSAGE("Adder_Impl::Adder_Impl activate object instanceName("
-          << instanceName << ") interfaceName(" << interfaceName << ") --> "
-          << hex << (void *) this << dec )
-  beginService( "Adder_Impl::Adder_Impl" );
-  _thisObj = this ;
-  _id = _poa->activate_object(_thisObj);
-  LastAddition = 0 ;
-  sendMessage(NOTIF_STEP, "Adder_Impl is Created");
-  endService( "Adder_Impl::Adder_Impl" );
-}
-
-Adder_Impl::Adder_Impl() {
-  LastAddition = 0 ;
-}
-
-Adder_Impl::~Adder_Impl() {
-  beginService( "Adder_Impl::~Adder_Impl" );
-  endService( "Adder_Impl::~Adder_Impl" );
-}
-
-void Adder_Impl::destroy() {
-  _poa->deactivate_object(*_id) ;
-  CORBA::release(_poa) ;
-  delete(_id) ;
-  _thisObj->_remove_ref();
-}
-
-double Adder_Impl::Add( double x , double y , double & z ) {
-  beginService( " Adder_Impl::Add" );
-  z = x + y ;
-  int S;
-  
-  sendMessage(NOTIF_STEP, "Adder_Impl::Add is Computing");
-//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  S = 5 ;
-  while ( S ) {
-    S = sleep(S);
-  }
-  MESSAGE( "Adder_Impl::Add( " <<  x << " , " << y << " , " << z
-       << " ) returns " << -(x - y) << " after " << S << " seconds" )
-  LastAddition = z ;
-  endService( " Adder_Impl::Add"  );
-  return -(x - y) ;
-}
-
-double Adder_Impl::AddWithoutSleep( double x , double y , double & z ) {
-  beginService( " Adder_Impl::AddWithoutSleep" );
-  z = x + y ;
-  endService( " Adder_Impl::AddWithoutSleep"  );
-  return -(x - y) ;
-}
-
-double Adder_Impl::AddAndCompare( const double x , const double y ,
-                                  const SuperVisionTest::Adder_ptr anOtherAdder ,
-                                  double & z ) {
-  beginService( " Adder_Impl::AddAndCompare" );
-  z = x + y ;
-  int S;
-  
-  sendMessage(NOTIF_STEP, "Adder_Impl::AddAndCompare is Computing");
-//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  S = 5 ;
-  while ( S ) {
-    S = sleep(S);
-  }
-  MESSAGE( "Adder_Impl::AddAndCompare( " <<  x << " , " << y << " , " << z
-       << " ) returns " << -(x - y) << " after " << S << " seconds" )
-  LastAddition = z ;
-  double ValFunc ;
-  sendMessage(NOTIF_TRACE, "Adder_Impl::AddAndCompare will call anOtherAdder->LastValue()");
-  double RetVal ;
-  anOtherAdder->LastResult( RetVal ) ;
-  if ( RetVal > 0 ) {
-    ValFunc = (x - y) ;
-  }
-  else {
-    ValFunc = -(x - y) ;
-  }
-  sendMessage(NOTIF_TRACE, "Adder_Impl::AddAndCompare has called anOtherAdder->LastValue()");
-  sendMessage(NOTIF_STEP, "Adder_Impl::AddAndCompare is Finished");
-  endService( " Adder_Impl::AddAndCompare"  );
-  return ValFunc ;
-}
-
-void Adder_Impl::SetLastResult( double z ) {
-  beginService( " Adder_Impl::SetLastResult" );
-  sendMessage(NOTIF_STEP, "Adder_Impl::SetLastResult is Computing");
-  int S;
-//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  S = 5 ;
-  while ( S ) {
-    S = sleep(S);
-  }
-  LastAddition = z ;
-  endService( " Adder_Impl::SetLastResult"  );
-  return ;
-}
-
-void Adder_Impl::LastResult( double & z ) {
-  beginService( " Adder_Impl::LastResult" );
-  sendMessage(NOTIF_STEP, "Adder_Impl::LastResult is Computing");
-  int S;
-//  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
-  S = 5 ;
-  while ( S ) {
-    S = sleep(S);
-  }
-  z = LastAddition ;
-  endService( " Adder_Impl::LastResult"  );
-  return ;
-}
-
-Engines::Component_ptr Adder_Impl::LccAddComponent( const char * aContainer ,
-                                                    const char * aComponentName ) {
-  beginService( "Adder_Impl::LccAddComponent" );
-  Engines::Component_ptr objComponent ;
-  objComponent = Engines::Component::_nil() ;
-
-  ORB_INIT &init = *SINGLETON_<ORB_INIT>::Instance() ;
-  ASSERT(SINGLETON_<ORB_INIT>::IsAlreadyExisting());
-  CORBA::ORB_var orb = init(0 , 0 ) ;
-  SALOME_NamingService *_NS ;
-  _NS = new SALOME_NamingService();
-  _NS->init_orb( CORBA::ORB::_duplicate(orb) ) ;
-	  
-  SALOME_LifeCycleCORBA LCC( _NS ) ;
-  objComponent = LCC.FindOrLoad_Component( aContainer ,
-					   aComponentName );
-  endService( "Adder_Impl::LccAddComponent"  );
-  return objComponent ;
 }
 
