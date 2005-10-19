@@ -32,6 +32,8 @@ VPATH=.:@srcdir@
 
 @COMMENCE@
 
-SUBDIRS = AddComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck DataStreamComponent SIGNALSComponent UndefinedSymbolComponent SIGNALSComponent_Swig TestFunctions CalculatorComponent
+SUBDIRS = AddComponent AdditionComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck DataStreamComponent SIGNALSComponent UndefinedSymbolComponent SIGNALSComponent_Swig TestFunctions CalculatorComponent
+
+#SUBDIRS = AddComponent AdditionComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck DataStreamComponent SIGNALSComponent UndefinedSymbolComponent SIGNALSComponent_Swig TestFunctions
 
 @MODULE@
