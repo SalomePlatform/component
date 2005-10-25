@@ -153,7 +153,7 @@ int main(int argc, char* argv[])
 #endif
 
   END_OF(argv[0]);
-  delete myThreadTrace;
+  //  delete myThreadTrace;
   return 0 ;
 }
 
