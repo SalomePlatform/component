@@ -51,7 +51,7 @@ LIB_SERVER_IDL = SALOME_ContainerManager.idl \
 # Executables targets
 BIN = AdditionComponent_CheckOfUndefined
 BIN_SRC = 
-BIN_SERVER_IDL =
+BIN_SERVER_IDL = SALOME_Exception.idl
 
 CPPFLAGS+= $(PYTHON_INCLUDES)  -I${KERNEL_ROOT_DIR}/include/salome
 CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome
