@@ -478,7 +478,7 @@
 		<component-username>AdditionComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>JR</component-author>
-		<component-version>3.0.0</component-version>
+		<component-version>3.1.0a</component-version>
 		<component-comment>SuperVision test: Addition</component-comment>
 		<component-multistudy>0</component-multistudy>
 
