@@ -19,6 +19,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test: Addition</component-comment>
 		<component-multistudy>0</component-multistudy>
+		<component-impltype>1</component-impltype>
 
 		<component-interface-list>
 			<component-interface-name>AddComponent</component-interface-name>
@@ -481,6 +482,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test: Addition</component-comment>
 		<component-multistudy>0</component-multistudy>
+		<component-impltype>1</component-impltype>
 
 		<component-interface-list>
 			<component-interface-name>AddInterface</component-interface-name>
@@ -943,6 +945,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test: Subtraction</component-comment>
 		<component-multistudy>0</component-multistudy>
+		<component-impltype>1</component-impltype>
 
 		<component-interface-list>
 			<component-interface-name>SubComponent</component-interface-name>
@@ -990,6 +993,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test: Multiplication</component-comment>
 		<component-multistudy>0</component-multistudy>
+		<component-impltype>1</component-impltype>
 
 		<component-interface-list>
 			<component-interface-name>MulComponent</component-interface-name>
@@ -1037,6 +1041,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test: Division</component-comment>
 		<component-multistudy>0</component-multistudy>
+		<component-impltype>1</component-impltype>
 
 		<component-interface-list>
 			<component-interface-name>DivComponent</component-interface-name>
@@ -1083,6 +1088,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test</component-comment>
 		<component-multistudy>1</component-multistudy>
+		<component-impltype>1</component-impltype>
 		<component-icone></component-icone>
 		<constraint></constraint>
 		<component-interface-list>
@@ -1527,6 +1533,8 @@
 		<component-comment>SuperVision test: Factorial</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-icone></component-icone>
+		<component-impltype>0</component-impltype>
+
 		<component-interface-list>
 			<component-interface-name>FactorialComponent</component-interface-name>
 			<component-interface-comment>No comment</component-interface-comment>
@@ -1589,6 +1597,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test</component-comment>
 		<component-multistudy>1</component-multistudy>
+		<component-impltype>0</component-impltype>
 		<component-icone></component-icone>
 		<constraint></constraint>
 		<component-interface-list>
@@ -1818,6 +1827,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test</component-comment>
 		<component-multistudy>1</component-multistudy>
+		<component-impltype>1</component-impltype>
 		<component-icone></component-icone>
 		<constraint></constraint>
 		<component-interface-list>
@@ -2097,6 +2107,7 @@
 		<component-version>3.1.0</component-version>
 		<component-comment>SuperVision test: Arithmetic operations with MED_Field</component-comment>
 		<component-multistudy>0</component-multistudy>
+		<component-impltype>1</component-impltype>
 		<constraint>hostname = localhost</constraint>
 
 		<component-interface-list>
@@ -2727,6 +2738,7 @@
             <component-version>3.1.0</component-version>
             <component-comment>unknown</component-comment>
             <component-multistudy>1</component-multistudy>
+	    <component-impltype>1</component-impltype>
             <component-icone></component-icone>
             <constraint></constraint>
             <component-interface-list>
@@ -2787,6 +2799,7 @@
             <component-version>3.1.0</component-version>
             <component-comment>unknown</component-comment>
             <component-multistudy>1</component-multistudy>
+	    <component-impltype>1</component-impltype>
             <component-icone></component-icone>
             <constraint></constraint>
             <component-interface-list>
