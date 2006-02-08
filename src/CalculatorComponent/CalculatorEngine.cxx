@@ -55,7 +55,7 @@ using namespace std;
 
 static void PrintFieldValues (FIELD<double> * field, int until_index) 
 {
-  const double * values = field -> getValue(MED_EN::MED_FULL_INTERLACE);
+  const double * values = field -> getValue();
   int nb_comp     = field -> getNumberOfComponents();
   MESSAGE( "Field                    : " << field -> getName() );
   MESSAGE( "    Description          : " << field -> getDescription() );
@@ -275,10 +275,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   
   MESSAGE("CalculatorEngine::Add Creation of the local field "<< totalLength);
   
-  FIELD<double> * fieldloc =  new FIELD<double>();
+  FIELD<double> * fieldloc =  new FIELD<double,MEDMEM::FullInterlace>();
   fieldloc -> allocValue(nb_comp1,len_value1);
-  fieldloc  -> setValue(MED_EN::MED_FULL_INTERLACE,new_value);
-  fieldloc  -> setValueType(MED_EN::MED_REEL64);
+  fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Add-");
   fieldloc  -> setDescription( FirstField -> getDescription() );
   fieldloc -> setComponentsNames(component_name);
@@ -373,10 +372,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   MESSAGE("CalculatorEngine::Mul Creation of the local field "<< totalLength);
 
-  FIELD<double> * fieldloc =  new FIELD<double>();
+  FIELD<double> * fieldloc =  new FIELD<double,MEDMEM::FullInterlace>();
   fieldloc -> allocValue(nb_comp,len_value);
-  fieldloc  -> setValue(MED_EN::MED_FULL_INTERLACE,new_value);
-  fieldloc  -> setValueType(MED_EN::MED_REEL64);
+  fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Mul-");
   fieldloc  -> setDescription(field_description);
   fieldloc -> setComponentsNames(component_name);
@@ -460,10 +458,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   MESSAGE("CalculatorEngine::Constant Creation of the local field "<< totalLength);
 
-  FIELD<double> * fieldloc =  new FIELD<double>();
+  FIELD<double> * fieldloc =  new FIELD<double,MEDMEM::FullInterlace>();
   fieldloc -> allocValue(nb_comp,len_value);
-  fieldloc  -> setValue(MED_EN::MED_FULL_INTERLACE,new_value);
-  fieldloc  -> setValueType(MED_EN::MED_REEL64);
+  fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Const_Field-");
   fieldloc  -> setDescription(field_description);
   fieldloc -> setComponentsNames(component_name);
