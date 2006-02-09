@@ -35,7 +35,7 @@
 #include CORBA_CLIENT_HEADER(MED)
 #include "MEDMEM_Med_i.hxx"
 #include "MEDMEM_Field.hxx"
-#include "MEDMEM_FieldDouble_i.hxx"
+#include "MEDMEM_FieldTemplate_i.hxx"
 
 #include "SALOME_NamingService.hxx"
 

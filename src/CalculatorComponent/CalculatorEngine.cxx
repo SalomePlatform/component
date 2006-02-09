@@ -49,11 +49,14 @@ using namespace std;
 #define MED_TAILLE_PNOM MED_TAILLE_PNOM21
 #endif
 
+typedef FIELD<double,MEDMEM::FullInterlace> TFieldDouble;
+typedef FIELDTEMPLATE_I<double,MEDMEM::FullInterlace> TFieldDouble_i;
+
 //================================================================================
 // static PrintFieldValues - shows field contents
 //================================================================================
 
-static void PrintFieldValues (FIELD<double> * field, int until_index) 
+static void PrintFieldValues (TFieldDouble * field, int until_index) 
 {
   const double * values = field -> getValue();
   int nb_comp     = field -> getNumberOfComponents();
@@ -275,7 +278,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   
   MESSAGE("CalculatorEngine::Add Creation of the local field "<< totalLength);
   
-  FIELD<double> * fieldloc =  new FIELD<double,MEDMEM::FullInterlace>();
+  TFieldDouble * fieldloc =  new TFieldDouble();
   fieldloc -> allocValue(nb_comp1,len_value1);
   fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Add-");
@@ -296,7 +299,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   SUPPORT *support1Clt=new SUPPORTClient(support1);
   fieldloc->setSupport(support1Clt);
-  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
+  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc) ;
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
 
   //sleep(4);
@@ -372,7 +375,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   MESSAGE("CalculatorEngine::Mul Creation of the local field "<< totalLength);
 
-  FIELD<double> * fieldloc =  new FIELD<double,MEDMEM::FullInterlace>();
+  TFieldDouble * fieldloc =  new TFieldDouble();
   fieldloc -> allocValue(nb_comp,len_value);
   fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Mul-");
@@ -387,7 +390,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   SUPPORT *supportClt=new SUPPORTClient(support);
   fieldloc->setSupport(supportClt);
-  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
+  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc) ;
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
 
   //sleep(4);
@@ -458,7 +461,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   MESSAGE("CalculatorEngine::Constant Creation of the local field "<< totalLength);
 
-  FIELD<double> * fieldloc =  new FIELD<double,MEDMEM::FullInterlace>();
+  TFieldDouble * fieldloc =  new TFieldDouble();
   fieldloc -> allocValue(nb_comp,len_value);
   fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Const_Field-");
@@ -476,7 +479,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   SUPPORT *supportClt=new SUPPORTClient(FirstSupport);
   fieldloc->setSupport(supportClt);
-  FIELDDOUBLE_i * NewField = new FIELDDOUBLE_i(fieldloc) ;
+  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc) ;
 
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
   
