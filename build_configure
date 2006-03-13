@@ -27,6 +27,22 @@ fi
 #    exit
 #fi
 ########################################################################
+# Test if the GUI_ROOT_DIR is set correctly
+
+if test ! -d "${GUI_ROOT_DIR}"; then
+    echo "failed : GUI_ROOT_DIR variable is not correct !"
+    exit
+fi
+
+########################################################################
+# Test if the MED_ROOT_DIR is set correctly
+
+if test ! -d "${MED_ROOT_DIR}"; then
+    echo "failed : MED_ROOT_DIR variable is not correct !"
+    exit
+fi
+
+########################################################################
 # find_in - utility function
 #
 # usage :  
@@ -55,6 +71,7 @@ find_in()
 
   case $1 in
     */CVS) return ;;
+    */adm_local/*) return ;;
     *) ;;
   esac
 
@@ -147,9 +164,8 @@ find_in . configure.in_tmp2
 
 # _CS_gbo_100204 Mise à jour du filtre pour prise en compte des
 # restrictions imposées par les versions récente de autoconf.
-    sed -e '/^	\.\/salome_adm/d' \
+    sed -e '/^...salome_adm/d' \
 	-e '/configure.in/d'      \
-	-e '/^	\.\/adm_local/d'  \
 	-e 's/.in / /' configure.in_tmp2 >> configure.in_tmp1
 
 echo  "])" >> configure.in_tmp1
@@ -212,7 +228,9 @@ else
 	echo -n "Creating 'configure' script ...  "
 fi
 
-aclocal --acdir=adm_local/unix/config_files -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files
+aclocal -I adm_local/unix/config_files -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files \
+                                       -I ${GUI_ROOT_DIR}/adm_local/unix/config_files \
+                                       -I ${MED_ROOT_DIR}/adm_local/unix/config_files
 if autoconf
 then
 	echo "done"

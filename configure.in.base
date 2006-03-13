@@ -227,6 +227,13 @@ CHECK_HDF5
 
 #echo
 echo ---------------------------------------------
+echo testing MED
+echo ---------------------------------------------
+echo
+
+CHECK_MED
+
+echo ---------------------------------------------
 echo testing MED2
 echo ---------------------------------------------
 echo
@@ -248,6 +255,26 @@ echo ---------------------------------------------
 echo
 
 CHECK_HTML_GENERATORS
+
+echo
+echo ---------------------------------------------
+echo Testing GUI
+echo ---------------------------------------------
+echo
+
+CHECK_SALOME_GUI
+
+echo
+echo ---------------------------------------------
+echo Testing full GUI
+echo ---------------------------------------------
+echo
+
+CHECK_CORBA_IN_GUI
+if test "x${CORBA_IN_GUI}" != "xyes"; then
+  echo "failed : For configure COMPONENT module necessary full GUI !"
+  exit
+fi
 
 echo
 echo ---------------------------------------------
