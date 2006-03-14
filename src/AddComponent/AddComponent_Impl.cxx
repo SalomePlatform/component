@@ -25,7 +25,6 @@
 //  Author : Jean Rahuel, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -40,6 +39,8 @@ using namespace std;
 
 #include "AddComponent_Impl.hxx"
 #include "Adder_Impl.hxx"
+
+using namespace std;
 
 AddComponent_Impl::AddComponent_Impl( CORBA::ORB_ptr orb,
 				      PortableServer::POA_ptr poa,
@@ -62,7 +63,7 @@ AddComponent_Impl::AddComponent_Impl() {
 AddComponent_Impl::~AddComponent_Impl() {
 }
 
-double AddComponent_Impl::Add( double x , double y , double & z ) {
+CORBA::Double AddComponent_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) {
   beginService( " AddComponent_Impl::Add" );
   z = x + y ;
   int S;
@@ -80,7 +81,7 @@ double AddComponent_Impl::Add( double x , double y , double & z ) {
   return (x - y) ;
 }
 
-double AddComponent_Impl::AddWithoutSleep( double x , double y , double & z ) {
+CORBA::Double AddComponent_Impl::AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) {
   beginService( " AddComponent_Impl::AddWithoutSleep" );
   z = x + y ;
   LastAddition = z ;
@@ -88,7 +89,7 @@ double AddComponent_Impl::AddWithoutSleep( double x , double y , double & z ) {
   return (x - y) ;
 }
 
-long AddComponent_Impl::Sigma( long n ) {
+CORBA::Long AddComponent_Impl::Sigma( CORBA::Long n ) {
   long sigma = 0 ;
   int i , j ;
   beginService( " AddComponent_Impl::Sigma" );
@@ -102,7 +103,7 @@ long AddComponent_Impl::Sigma( long n ) {
   return sigma ;
 }
 
-void AddComponent_Impl::Setx( double x ) {
+void AddComponent_Impl::Setx( CORBA::Double x ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -110,7 +111,7 @@ void AddComponent_Impl::Setx( double x ) {
   xx = x ;
 }
 
-void AddComponent_Impl::Sety( double y ) {
+void AddComponent_Impl::Sety( CORBA::Double y ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -118,7 +119,7 @@ void AddComponent_Impl::Sety( double y ) {
   yy = y ;
 }
 
-double AddComponent_Impl::Addxy() {
+CORBA::Double AddComponent_Impl::Addxy() {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -128,7 +129,7 @@ double AddComponent_Impl::Addxy() {
   return zz;
 }
 
-double AddComponent_Impl::AddyTox( double y ) {
+CORBA::Double AddComponent_Impl::AddyTox( CORBA::Double y ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -138,7 +139,7 @@ double AddComponent_Impl::AddyTox( double y ) {
   return zz;
 }
 
-double AddComponent_Impl::LastResult() {
+CORBA::Double AddComponent_Impl::LastResult() {
   beginService( " AddComponent_Impl::LastResult" );
   sendMessage(NOTIF_STEP, "AddComponent_Impl::LastResult is Computing");
   endService( " AddComponent_Impl::LastResult"  );
@@ -161,7 +162,7 @@ SuperVisionTest::Adder_ptr AddComponent_Impl::Addition() {
 //  return SuperVisionTest::Adder::_duplicate(iobject) ;
 }
 
-bool AddComponent_Impl::AdditionObjRef1( SuperVisionTest::Adder_out aAdder ) {
+CORBA::Boolean AddComponent_Impl::AdditionObjRef1( SuperVisionTest::Adder_out aAdder ) {
   beginService( "AddComponent_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AddComponent_Impl creates Adder_Impl");
   Adder_Impl * myAdder ;
@@ -177,7 +178,7 @@ bool AddComponent_Impl::AdditionObjRef1( SuperVisionTest::Adder_out aAdder ) {
   return true ;
 }
 
-void AddComponent_Impl::AdditionObjRef2( bool & FuncValue ,
+void AddComponent_Impl::AdditionObjRef2( CORBA::Boolean & FuncValue ,
                                          SuperVisionTest::Adder_out aAdder ) {
   beginService( "AddComponent_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AddComponent_Impl creates Adder_Impl");
@@ -194,12 +195,12 @@ void AddComponent_Impl::AdditionObjRef2( bool & FuncValue ,
   FuncValue = true ;
 }
 
-bool AddComponent_Impl::AdditionObjRefs( const SuperVisionTest::AddComponent_ptr AddComponent1 ,
-                                         const SuperVisionTest::AddComponent_ptr Adder2 ,
-                                         const SuperVisionTest::AddComponent_ptr Adder3 ,
-                                         SuperVisionTest::AddComponent_out RetAddComponent1 ,
-                                         SuperVisionTest::AddComponent_out RetAdder2 ,
-                                         SuperVisionTest::AddComponent_out RetAdder3 ) {
+CORBA::Boolean AddComponent_Impl::AdditionObjRefs( SuperVisionTest::AddComponent_ptr AddComponent1 ,
+                                                   SuperVisionTest::AddComponent_ptr Adder2 ,
+                                                   SuperVisionTest::AddComponent_ptr Adder3 ,
+                                                   SuperVisionTest::AddComponent_out RetAddComponent1 ,
+                                                   SuperVisionTest::AddComponent_out RetAdder2 ,
+                                                   SuperVisionTest::AddComponent_out RetAdder3 ) {
   bool RetVal = true ;
   beginService( "AddComponent_Impl::AdditionObjRefs" );
   cout << "beginService AddComponent_Impl::AdditionObjRefs" << endl ;

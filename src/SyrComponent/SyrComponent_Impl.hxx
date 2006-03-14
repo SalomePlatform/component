@@ -48,35 +48,35 @@ public:
 
   virtual ~SyrComponent_Impl();
 
-  virtual long C_ISEVEN( const long anInteger ) ;
+  virtual CORBA::Long C_ISEVEN( CORBA::Long anInteger ) ;
 
-  virtual long C_ISONE( const long anOddInteger ) ;
+  virtual CORBA::Long C_ISONE( CORBA::Long anOddInteger ) ;
 
-  virtual long C_M3( const long anOddInteger ) ;
+  virtual CORBA::Long C_M3( CORBA::Long anOddInteger ) ;
 
-  virtual long C_M3P1( const long anOddInteger ) ;
+  virtual CORBA::Long C_M3P1( CORBA::Long anOddInteger ) ;
 
-  virtual long C_DIV2( const long anEvenInteger ) ;
+  virtual CORBA::Long C_DIV2( CORBA::Long anEvenInteger ) ;
 
-  virtual long C_INCR( const long aCount ) ;
+  virtual CORBA::Long C_INCR( CORBA::Long aCount ) ;
 
-  virtual void CPP_SETLONG( const long aLong ) ;
+  virtual void CPP_SETLONG( CORBA::Long aLong ) ;
 
-  virtual long CPP_ADDTOLONG( const long anIncr ) ;
+  virtual CORBA::Long CPP_ADDTOLONG( CORBA::Long anIncr ) ;
 
-  virtual long C_MIN( const long aMinVal , const long anInteger ) ;
+  virtual CORBA::Long C_MIN( CORBA::Long aMinVal , CORBA::Long anInteger ) ;
 
-  virtual long C_MAX( const long aMaxVal , const long anInteger ) ;
+  virtual CORBA::Long C_MAX( CORBA::Long aMaxVal , CORBA::Long anInteger ) ;
 
   virtual SuperVisionTest::ListOfSyr_ptr C_LISTOFSYR() ;
 
   virtual SuperVisionTest::ListOfSyr_ptr C_AVERAGE(
-                       const SuperVisionTest::ListOfSyr_ptr aListOfSyr ,
-                       const long anInteger ,
-                       const long aCount ,
-                       double & anAverage ) ;
+                       SuperVisionTest::ListOfSyr_ptr aListOfSyr ,
+                       CORBA::Long anInteger ,
+                       CORBA::Long aCount ,
+                       CORBA::Double & anAverage ) ;
 
-  virtual SuperVisionTest::Syr_ptr Init( const long anOddInteger ) ;
+  virtual SuperVisionTest::Syr_ptr Init( CORBA::Long anOddInteger ) ;
 
 private:
 
@@ -124,19 +124,19 @@ public:
             const char *interfaceName , 
             const char * graphName ,
             const char * nodeName ,
-            const long anOddInteger );
+            const CORBA::Long anOddInteger );
 
   virtual ~Syr_Impl();
 
-  virtual long Initial() ;
+  virtual CORBA::Long Initial() ;
 
-  virtual long Current() ;
+  virtual CORBA::Long Current() ;
 
-  virtual long IsEven() ;
+  virtual CORBA::Long IsEven() ;
 
-  virtual long IsOne() ;
+  virtual CORBA::Long IsOne() ;
 
-  virtual long Count() ;
+  virtual CORBA::Long Count() ;
 
   virtual void M3p1() ;
 

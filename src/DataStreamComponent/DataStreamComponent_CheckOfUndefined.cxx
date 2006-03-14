@@ -24,12 +24,13 @@
 //  File   : DataStreamComponent_CheckOfUndefined.cxx
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
 
 #include "DataStreamComponent_Impl.hxx"
+
+using namespace std;
 
 int main(int argc, char **argv) {
   return 0;

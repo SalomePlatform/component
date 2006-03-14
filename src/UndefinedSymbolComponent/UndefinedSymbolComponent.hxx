@@ -47,7 +47,7 @@ public:
 
   virtual ~UndefinedSymbolComponentEngine();
 
-  long UndefinedSymbol() ;
+  CORBA::Long UndefinedSymbol() ;
 
 private:
 

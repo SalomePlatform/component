@@ -41,7 +41,10 @@ LIB = libSIGNALSComponent_Swigcmodule.la
 SWIG_DEF = libSIGNALSComponent_Swig.i
 EXPORT_PYSCRIPTS = libSIGNALSComponent_Swig.py
 
-LIB_SERVER_IDL = 
+LIB_SERVER_IDL = SALOME_Component.idl \
+              SIGNALSComponent.idl \
+              UndefinedSymbolComponent.idl
+
 
 # Executables targets
 BIN = 
@@ -49,10 +52,9 @@ BIN_SRC =
 BIN_SERVER_IDL =
 
 CPPFLAGS+= $(PYTHON_INCLUDES) -I${KERNEL_ROOT_DIR}/include/salome
-#CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wno-deprecated
-CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome
-LDFLAGS+= -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -L${KERNEL_ROOT_DIR}/lib/salome -lSIGNALSComponentEngine
+LDFLAGS+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSIGNALSComponentEngine
 
+LDFLAGSFORBIN+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
 
 @CONCLUDE@
 

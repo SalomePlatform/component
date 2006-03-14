@@ -47,30 +47,30 @@ public:
 
   virtual ~AdditionInterface_Impl();
 
-  virtual double Add( double x , double y , double & z ) ;
-  virtual double AddWithoutSleep( double x , double y , double & z ) ;
+  virtual CORBA::Double Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
+  virtual CORBA::Double AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
 
-  virtual void Setx( double x ) ;
-  virtual void Sety( double y ) ;
-  virtual double Addxy() ;
-  virtual double AddyTox( double y ) ;
+  virtual void Setx( CORBA::Double x ) ;
+  virtual void Sety( CORBA::Double y ) ;
+  virtual CORBA::Double Addxy() ;
+  virtual CORBA::Double AddyTox( CORBA::Double y ) ;
 
-  virtual long Sigma( long n ) ;
+  virtual CORBA::Long Sigma( CORBA::Long n ) ;
 
-  virtual double LastResult() ;
+  virtual CORBA::Double LastResult() ;
 
   virtual AdditionComponent::Adder_ptr Addition() ;
 
   virtual bool AdditionObjRef1( AdditionComponent::Adder_out ) ;
 
-  virtual void AdditionObjRef2( bool & FuncValue , AdditionComponent::Adder_out ) ;
+  virtual void AdditionObjRef2( CORBA::Boolean & FuncValue , AdditionComponent::Adder_out ) ;
 
-  virtual bool AdditionObjRefs( const AdditionComponent::AdditionInterface_ptr AdditionInterface1 ,
-                                const AdditionComponent::AdditionInterface_ptr Adder2 ,
-                                const AdditionComponent::AdditionInterface_ptr Adder3 ,
-                                AdditionComponent::AdditionInterface_out RetAdditionInterface1 ,
-                                AdditionComponent::AdditionInterface_out RetAdder2 ,
-                                AdditionComponent::AdditionInterface_out RetAdder3 ) ;
+  virtual CORBA::Boolean AdditionObjRefs( AdditionComponent::AdditionInterface_ptr AdditionInterface1 ,
+                                          AdditionComponent::AdditionInterface_ptr Adder2 ,
+                                          AdditionComponent::AdditionInterface_ptr Adder3 ,
+                                          AdditionComponent::AdditionInterface_out RetAdditionInterface1 ,
+                                          AdditionComponent::AdditionInterface_out RetAdder2 ,
+                                          AdditionComponent::AdditionInterface_out RetAdder3 ) ;
 
 private:
 

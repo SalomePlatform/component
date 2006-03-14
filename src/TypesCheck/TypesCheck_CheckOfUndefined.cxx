@@ -24,12 +24,13 @@
 //  File   : TypesCheck_CheckOfUndefined.cxx
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
 
 #include "TypesCheck_Impl.hxx"
+
+using namespace std;
 
 int main(int argc, char **argv) {
   return 0;

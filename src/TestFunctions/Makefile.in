@@ -51,12 +51,13 @@ BIN = TestFunctions \
 	TestFunctionsMemory4
 BIN_SRC = 
 BIN_CLIENT_IDL = SALOME_Component.idl \
+                 SALOME_ContainerManager.idl \
                  AddComponent.idl
 
 CPPFLAGS+= $(PYTHON_INCLUDES)  -I${KERNEL_ROOT_DIR}/include/salome
-CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome
 LDFLAGS+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeNS -lOpUtil 
 
+LIBSFORBIN= $(LIBS)
 LDFLAGSFORBIN+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeLifeCycleCORBA -lSalomeNS -lOpUtil 
 
 @CONCLUDE@

@@ -25,7 +25,6 @@
 //  Author : Jean Rahuel, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -39,6 +38,8 @@ using namespace std;
 #include "SALOME_LifeCycleCORBA.hxx"
 
 #include "Addition_Adder_Impl.hxx"
+
+using namespace std;
 
 Adder_Impl::Adder_Impl( CORBA::ORB_ptr orb ,
 			PortableServer::POA_ptr poa ,
@@ -76,7 +77,7 @@ void Adder_Impl::destroy() {
   _thisObj->_remove_ref();
 }
 
-double Adder_Impl::Add( double x , double y , double & z ) {
+CORBA::Double Adder_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) {
   beginService( " Adder_Impl::Add" );
   z = x + y ;
   int S;
@@ -94,16 +95,16 @@ double Adder_Impl::Add( double x , double y , double & z ) {
   return -(x - y) ;
 }
 
-double Adder_Impl::AddWithoutSleep( double x , double y , double & z ) {
+CORBA::Double Adder_Impl::AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) {
   beginService( " Adder_Impl::AddWithoutSleep" );
   z = x + y ;
   endService( " Adder_Impl::AddWithoutSleep"  );
   return -(x - y) ;
 }
 
-double Adder_Impl::AddAndCompare( const double x , const double y ,
-                                  const AdditionComponent::Adder_ptr anOtherAdder ,
-                                  double & z ) {
+CORBA::Double Adder_Impl::AddAndCompare( CORBA::Double x , CORBA::Double y ,
+                                         AdditionComponent::Adder_ptr anOtherAdder ,
+                                  CORBA::Double & z ) {
   beginService( " Adder_Impl::AddAndCompare" );
   z = x + y ;
   int S;
@@ -133,7 +134,7 @@ double Adder_Impl::AddAndCompare( const double x , const double y ,
   return ValFunc ;
 }
 
-void Adder_Impl::SetLastResult( double z ) {
+void Adder_Impl::SetLastResult( CORBA::Double z ) {
   beginService( " Adder_Impl::SetLastResult" );
   sendMessage(NOTIF_STEP, "Adder_Impl::SetLastResult is Computing");
   int S;
@@ -147,7 +148,7 @@ void Adder_Impl::SetLastResult( double z ) {
   return ;
 }
 
-void Adder_Impl::LastResult( double & z ) {
+void Adder_Impl::LastResult( CORBA::Double & z ) {
   beginService( " Adder_Impl::LastResult" );
   sendMessage(NOTIF_STEP, "Adder_Impl::LastResult is Computing");
   int S;
@@ -161,8 +162,8 @@ void Adder_Impl::LastResult( double & z ) {
   return ;
 }
 
-Engines::Component_ptr Adder_Impl::LccAdditionInterface( const char * aContainer ,
-                                                    const char * aComponentName ) {
+Engines::Component_ptr Adder_Impl::LccAdditionInterface( char * aContainer ,
+                                                         char * aComponentName ) {
   beginService( "Adder_Impl::LccAddComponent" );
   Engines::Component_ptr objComponent ;
   objComponent = Engines::Component::_nil() ;

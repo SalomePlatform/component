@@ -25,7 +25,6 @@
 //  Author : MARC TAJCHMAN, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -34,6 +33,8 @@ using namespace std;
 
 //#include "utilities.h"
 #include "SIGNALSComponent_Impl.hxx"
+
+using namespace std;
 
 SIGNALSComponent_Impl::SIGNALSComponent_Impl( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
@@ -59,7 +60,7 @@ SIGNALSComponent_Impl::~SIGNALSComponent_Impl()
 {
 }
 
-long SIGNALSComponent_Impl::SIGSEGVfunc() {
+CORBA::Long SIGNALSComponent_Impl::SIGSEGVfunc() {
   beginService( " SIGNALSComponent_Impl::SIGSEGVfunc" );
   cout << pthread_self() << "SIGNALSComponent_Impl::SIGSEGVfunc" << endl ;
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
@@ -71,7 +72,7 @@ long SIGNALSComponent_Impl::SIGSEGVfunc() {
   return nullptr ;
 }
 
-long SIGNALSComponent_Impl::SIGFPEfunc( long a , long b ) {
+CORBA::Long SIGNALSComponent_Impl::SIGFPEfunc( CORBA::Long a , CORBA::Long b ) {
   beginService( " SIGNALSComponent_Impl::SIGFPEfunc" );
   cout << pthread_self() << "SIGNALSComponent_Impl::SIGFPEfunc" << endl ;
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));

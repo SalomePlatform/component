@@ -47,30 +47,30 @@ public:
 
   virtual ~AddComponent_Impl();
 
-  virtual double Add( double x , double y , double & z ) ;
-  virtual double AddWithoutSleep( double x , double y , double & z ) ;
+  virtual CORBA::Double Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
+  virtual CORBA::Double AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
 
-  virtual void Setx( double x ) ;
-  virtual void Sety( double y ) ;
-  virtual double Addxy() ;
-  virtual double AddyTox( double y ) ;
+  virtual void Setx( CORBA::Double x ) ;
+  virtual void Sety( CORBA::Double y ) ;
+  virtual CORBA::Double Addxy() ;
+  virtual CORBA::Double AddyTox( CORBA::Double y ) ;
 
-  virtual long Sigma( long n ) ;
+  virtual CORBA::Long Sigma( CORBA::Long n ) ;
 
-  virtual double LastResult() ;
+  virtual CORBA::Double LastResult() ;
 
   virtual SuperVisionTest::Adder_ptr Addition() ;
 
-  virtual bool AdditionObjRef1( SuperVisionTest::Adder_out ) ;
+  virtual CORBA::Boolean AdditionObjRef1( SuperVisionTest::Adder_out ) ;
 
-  virtual void AdditionObjRef2( bool & FuncValue , SuperVisionTest::Adder_out ) ;
+  virtual void AdditionObjRef2( CORBA::Boolean & FuncValue , SuperVisionTest::Adder_out ) ;
 
-  virtual bool AdditionObjRefs( const SuperVisionTest::AddComponent_ptr AddComponent1 ,
-                                const SuperVisionTest::AddComponent_ptr Adder2 ,
-                                const SuperVisionTest::AddComponent_ptr Adder3 ,
-                                SuperVisionTest::AddComponent_out RetAddComponent1 ,
-                                SuperVisionTest::AddComponent_out RetAdder2 ,
-                                SuperVisionTest::AddComponent_out RetAdder3 ) ;
+  virtual CORBA::Boolean AdditionObjRefs( SuperVisionTest::AddComponent_ptr AddComponent1 ,
+                                          SuperVisionTest::AddComponent_ptr Adder2 ,
+                                          SuperVisionTest::AddComponent_ptr Adder3 ,
+                                          SuperVisionTest::AddComponent_out RetAddComponent1 ,
+                                          SuperVisionTest::AddComponent_out RetAdder2 ,
+                                          SuperVisionTest::AddComponent_out RetAdder3 ) ;
 
 private:
 

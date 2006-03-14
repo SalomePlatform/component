@@ -25,7 +25,6 @@
 //  Author : Jean Rahuel, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -40,6 +39,8 @@ using namespace std;
 
 #include "AdditionComponent_Impl.hxx"
 #include "Adder_Impl.hxx"
+
+using namespace std;
 
 AdditionInterface_Impl::AdditionInterface_Impl( CORBA::ORB_ptr orb,
 				      PortableServer::POA_ptr poa,
@@ -62,7 +63,7 @@ AdditionInterface_Impl::AdditionInterface_Impl() {
 AdditionInterface_Impl::~AdditionInterface_Impl() {
 }
 
-double AdditionInterface_Impl::Add( double x , double y , double & z ) {
+CORBA::Double AdditionInterface_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) {
   beginService( " AdditionInterface_Impl::Add" );
   z = x + y ;
   int S;
@@ -80,7 +81,7 @@ double AdditionInterface_Impl::Add( double x , double y , double & z ) {
   return (x - y) ;
 }
 
-double AdditionInterface_Impl::AddWithoutSleep( double x , double y , double & z ) {
+CORBA::Double AdditionInterface_Impl::AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) {
   beginService( " AdditionInterface_Impl::AddWithoutSleep" );
   z = x + y ;
   LastAddition = z ;
@@ -88,7 +89,7 @@ double AdditionInterface_Impl::AddWithoutSleep( double x , double y , double & z
   return (x - y) ;
 }
 
-long AdditionInterface_Impl::Sigma( long n ) {
+CORBA::Long AdditionInterface_Impl::Sigma( CORBA::Long n ) {
   long sigma = 0 ;
   int i , j ;
   beginService( " AdditionInterface_Impl::Sigma" );
@@ -102,7 +103,7 @@ long AdditionInterface_Impl::Sigma( long n ) {
   return sigma ;
 }
 
-void AdditionInterface_Impl::Setx( double x ) {
+void AdditionInterface_Impl::Setx( CORBA::Double x ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -110,7 +111,7 @@ void AdditionInterface_Impl::Setx( double x ) {
   xx = x ;
 }
 
-void AdditionInterface_Impl::Sety( double y ) {
+void AdditionInterface_Impl::Sety( CORBA::Double y ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -118,7 +119,7 @@ void AdditionInterface_Impl::Sety( double y ) {
   yy = y ;
 }
 
-double AdditionInterface_Impl::Addxy() {
+CORBA::Double AdditionInterface_Impl::Addxy() {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -128,7 +129,7 @@ double AdditionInterface_Impl::Addxy() {
   return zz;
 }
 
-double AdditionInterface_Impl::AddyTox( double y ) {
+CORBA::Double AdditionInterface_Impl::AddyTox( CORBA::Double y ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   while ( S ) {
     S = sleep(S);
@@ -138,7 +139,7 @@ double AdditionInterface_Impl::AddyTox( double y ) {
   return zz;
 }
 
-double AdditionInterface_Impl::LastResult() {
+CORBA::Double AdditionInterface_Impl::LastResult() {
   beginService( " AdditionInterface_Impl::LastResult" );
   sendMessage(NOTIF_STEP, "AdditionInterface_Impl::LastResult is Computing");
   endService( " AdditionInterface_Impl::LastResult"  );
@@ -177,8 +178,8 @@ bool AdditionInterface_Impl::AdditionObjRef1( AdditionComponent::Adder_out aAdde
   return true ;
 }
 
-void AdditionInterface_Impl::AdditionObjRef2( bool & FuncValue ,
-                                         AdditionComponent::Adder_out aAdder ) {
+void AdditionInterface_Impl::AdditionObjRef2( CORBA::Boolean & FuncValue ,
+                                              AdditionComponent::Adder_out aAdder ) {
   beginService( "AdditionInterface_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AdditionInterface_Impl creates Adder_Impl");
   Adder_Impl * myAdder ;
@@ -194,12 +195,12 @@ void AdditionInterface_Impl::AdditionObjRef2( bool & FuncValue ,
   FuncValue = true ;
 }
 
-bool AdditionInterface_Impl::AdditionObjRefs( const AdditionComponent::AdditionInterface_ptr AdditionInterface1 ,
-                                         const AdditionComponent::AdditionInterface_ptr Adder2 ,
-                                         const AdditionComponent::AdditionInterface_ptr Adder3 ,
-                                         AdditionComponent::AdditionInterface_out RetAdditionInterface1 ,
-                                         AdditionComponent::AdditionInterface_out RetAdder2 ,
-                                         AdditionComponent::AdditionInterface_out RetAdder3 ) {
+CORBA::Boolean AdditionInterface_Impl::AdditionObjRefs( AdditionComponent::AdditionInterface_ptr AdditionInterface1 ,
+                                                        AdditionComponent::AdditionInterface_ptr Adder2 ,
+                                                        AdditionComponent::AdditionInterface_ptr Adder3 ,
+                                                        AdditionComponent::AdditionInterface_out RetAdditionInterface1 ,
+                                                        AdditionComponent::AdditionInterface_out RetAdder2 ,
+                                                        AdditionComponent::AdditionInterface_out RetAdder3 ) {
   bool RetVal = true ;
   beginService( "AdditionInterface_Impl::AdditionObjRefs" );
   cout << "beginService AdditionInterface_Impl::AdditionObjRefs" << endl ;

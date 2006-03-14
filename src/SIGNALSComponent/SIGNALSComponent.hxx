@@ -47,8 +47,8 @@ public:
 
   virtual ~SIGNALSComponentEngine();
 
-  long SIGSEGVfunc() ;
-  long SIGFPEfunc( long a , long b ) ;
+  CORBA::Long SIGSEGVfunc() ;
+  CORBA::Long SIGFPEfunc( CORBA::Long a , CORBA::Long b ) ;
 
 private:
 

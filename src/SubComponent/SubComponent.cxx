@@ -25,7 +25,6 @@
 //  Author : MARC TAJCHMAN, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -34,6 +33,8 @@ using namespace std;
 
 //#include "utilities.h"
 #include "SubComponent.hxx"
+
+using namespace std;
 
 SubComponentEngine::SubComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,

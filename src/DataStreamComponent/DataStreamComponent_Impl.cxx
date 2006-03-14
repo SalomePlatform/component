@@ -25,7 +25,6 @@
 //  Author : Jean Rahuel
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -33,6 +32,8 @@ using namespace std;
 #include <string>
 
 #include "DataStreamComponent_Impl.hxx"
+
+using namespace std;
 
 DataStreamFactory_Impl::DataStreamFactory_Impl( CORBA::ORB_ptr orb,
 				                PortableServer::POA_ptr poa,
@@ -53,26 +54,26 @@ DataStreamFactory_Impl::DataStreamFactory_Impl() {
 DataStreamFactory_Impl::~DataStreamFactory_Impl() {
 }
 
-void DataStreamFactory_Impl::Setxy( const long x , const long y ) {
+void DataStreamFactory_Impl::Setxy( CORBA::Long x , CORBA::Long y ) {
   _x = x ;
   _y = y ;
 }
 
-void DataStreamFactory_Impl::Getxy( long & x , long & y ) {
+void DataStreamFactory_Impl::Getxy( CORBA::Long & x , CORBA::Long & y ) {
   x = _x ;
   y = _y ;
 }
 
-void DataStreamFactory_Impl::Add( const long x , const long y , long & z ) {
+void DataStreamFactory_Impl::Add( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x+y ;
 }
-void DataStreamFactory_Impl::Sub( const long x , const long y , long & z ) {
+void DataStreamFactory_Impl::Sub( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x-y ;
 }
-void DataStreamFactory_Impl::Mul( const long x , const long y , long & z ) {
+void DataStreamFactory_Impl::Mul( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x*y ;
 }
-void DataStreamFactory_Impl::Div( const long x , const long y , long & z ) {
+void DataStreamFactory_Impl::Div( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x/y ;
 }
 
@@ -135,26 +136,26 @@ DataStream_Impl::~DataStream_Impl() {
   endService( "DataStream_Impl::~DataStream_Impl" );
 }
 
-void DataStream_Impl::StreamSetxy( const long x , const long y ) {
+void DataStream_Impl::StreamSetxy( CORBA::Long x , CORBA::Long y ) {
   _x = x ;
   _y = y ;
 }
 
-void DataStream_Impl::StreamGetxy( long & x , long & y ) {
+void DataStream_Impl::StreamGetxy( CORBA::Long & x , CORBA::Long & y ) {
   x = _x ;
   y = _y ;
 }
 
-void DataStream_Impl::StreamAdd( const long x , const long y , long & z ) {
+void DataStream_Impl::StreamAdd( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x+y ;
 }
-void DataStream_Impl::StreamSub( const long x , const long y , long & z ) {
+void DataStream_Impl::StreamSub( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x-y ;
 }
-void DataStream_Impl::StreamMul( const long x , const long y , long & z ) {
+void DataStream_Impl::StreamMul( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x*y ;
 }
-void DataStream_Impl::StreamDiv( const long x , const long y , long & z ) {
+void DataStream_Impl::StreamDiv( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) {
   z = x/y ;
 }
 

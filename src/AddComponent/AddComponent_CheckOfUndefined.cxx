@@ -1,4 +1,4 @@
-//  SALOME Container : implementation of container and engine for Kernel
+//  SuperVisionTest AddComponent : example of component that adds two numbers
 //
 //  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 //  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
@@ -21,12 +21,13 @@
 //
 //
 //
-//  File   : SALOME_Container.cxx
-//  Author : Paul RASCLE, EDF - MARC TAJCHMAN, CEA
-//  Module : SALOME
+//  File   : AddComponent_CheckOfUndefined.cxx
+//  Author : Jean Rahuel
+//  Module : SuperVisionTest
 //  $Header$
 
 #include <iostream>
+#include <strstream>
 #include <string>
 #include <stdio.h>
 
@@ -49,6 +50,13 @@
 #ifdef HAVE_MPI2
 #include <mpi.h>
 #endif
+
+//CCRT
+#include <sstream>
+#include <time.h>
+#include <sys/time.h>
+#include <sys/stat.h>
+//end-CCRT
 
 #include "Container_init_python.hxx"
 
@@ -106,9 +114,9 @@ int main(int argc, char* argv[])
 
       // add new container to the kill list
 #ifndef WNT
-      char aCommand[40];
-      sprintf(aCommand, "addToKillList.py %d SALOME_Container", getpid());
-      system(aCommand);
+      ostrstream aCommand ;
+      aCommand << "addToKillList.py " << getpid() << " SALOME_Container" << ends ;
+      system(aCommand.str());
 #endif
       
       Engines_Container_i * myContainer 

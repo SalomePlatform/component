@@ -25,7 +25,6 @@
 //  Author : Jean Rahuel, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -36,6 +35,8 @@ using namespace std;
 
 #include "SyrComponent_Impl.hxx"
 #include "Adder_Impl.hxx"
+
+using namespace std;
 
 SyrComponent_Impl::SyrComponent_Impl( CORBA::ORB_ptr orb ,
 				      PortableServer::POA_ptr poa ,
@@ -59,7 +60,7 @@ SyrComponent_Impl::SyrComponent_Impl() {
 SyrComponent_Impl::~SyrComponent_Impl() {
 }
 
-long SyrComponent_Impl::C_ISEVEN( const long anInteger ) {
+CORBA::Long SyrComponent_Impl::C_ISEVEN( CORBA::Long anInteger ) {
   bool RetVal ;
   beginService( " SyrComponent_Impl::C_ISEVEN" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_ISEVEN is Computing");
@@ -73,7 +74,7 @@ long SyrComponent_Impl::C_ISEVEN( const long anInteger ) {
   return RetVal ;
 }
 
-long SyrComponent_Impl::C_ISONE( const long anOddInteger ) {
+CORBA::Long SyrComponent_Impl::C_ISONE( CORBA::Long anOddInteger ) {
   bool RetVal ;
   beginService( " SyrComponent_Impl::C_ISONE" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_ISONE is Computing");
@@ -87,7 +88,7 @@ long SyrComponent_Impl::C_ISONE( const long anOddInteger ) {
   return RetVal ;
 }
 
-long SyrComponent_Impl::C_M3( const long anOddInteger ) {
+CORBA::Long SyrComponent_Impl::C_M3( CORBA::Long anOddInteger ) {
   beginService( " SyrComponent_Impl::C_M3" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_M3 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -101,7 +102,7 @@ long SyrComponent_Impl::C_M3( const long anOddInteger ) {
   return ( 3*anOddInteger ) ;
 }
 
-long SyrComponent_Impl::C_M3P1( const long anOddInteger ) {
+CORBA::Long SyrComponent_Impl::C_M3P1( CORBA::Long anOddInteger ) {
   beginService( " SyrComponent_Impl::C_M3P1" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_M3P1 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -115,7 +116,7 @@ long SyrComponent_Impl::C_M3P1( const long anOddInteger ) {
   return ( 3*anOddInteger + 1 ) ;
 }
 
-long SyrComponent_Impl::C_DIV2( const long anEvenInteger ) {
+CORBA::Long SyrComponent_Impl::C_DIV2( CORBA::Long anEvenInteger ) {
   beginService( " SyrComponent_Impl::C_DIV2" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_DIV2 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -129,7 +130,7 @@ long SyrComponent_Impl::C_DIV2( const long anEvenInteger ) {
   return ( anEvenInteger >> 1 ) ;
 }
 
-long SyrComponent_Impl::C_INCR( const long aCount ) {
+CORBA::Long SyrComponent_Impl::C_INCR( CORBA::Long aCount ) {
   beginService( " SyrComponent_Impl::C_INCR" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_INCR is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -141,7 +142,7 @@ long SyrComponent_Impl::C_INCR( const long aCount ) {
   return ( aCount + 1 ) ;
 }
 
-void SyrComponent_Impl::CPP_SETLONG( const long aCount ) {
+void SyrComponent_Impl::CPP_SETLONG( CORBA::Long aCount ) {
   beginService( " SyrComponent_Impl::CPP_SETLONG" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::CPP_SETLONG is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -154,7 +155,7 @@ void SyrComponent_Impl::CPP_SETLONG( const long aCount ) {
   return ;
 }
 
-long SyrComponent_Impl::CPP_ADDTOLONG( const long anIncr ) {
+CORBA::Long SyrComponent_Impl::CPP_ADDTOLONG( CORBA::Long anIncr ) {
   beginService( " SyrComponent_Impl::CPP_ADDTOLONG" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::CPP_ADDTOLONG is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -166,7 +167,7 @@ long SyrComponent_Impl::CPP_ADDTOLONG( const long anIncr ) {
   return ( _Count + anIncr ) ;
 }
 
-long SyrComponent_Impl::C_MIN( const long aMinVal , const long anInteger ) {
+CORBA::Long SyrComponent_Impl::C_MIN( CORBA::Long aMinVal , CORBA::Long anInteger ) {
   beginService( " SyrComponent_Impl::C_MIN" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_MIN is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -187,7 +188,7 @@ long SyrComponent_Impl::C_MIN( const long aMinVal , const long anInteger ) {
   return min ;
 }
 
-long SyrComponent_Impl::C_MAX( const long aMaxVal , const long anInteger ) {
+CORBA::Long SyrComponent_Impl::C_MAX( CORBA::Long aMaxVal , CORBA::Long anInteger ) {
   beginService( " SyrComponent_Impl::C_MAX" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_MAX is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -229,10 +230,10 @@ SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_LISTOFSYR() {
 }
 
 SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_AVERAGE(
-                       const SuperVisionTest::ListOfSyr_ptr aListOfSyr ,
-                       const long anInteger ,
-                       const long aCount ,
-                       double & anAverage ) {
+                       SuperVisionTest::ListOfSyr_ptr aListOfSyr ,
+                       CORBA::Long anInteger ,
+                       CORBA::Long aCount ,
+                       CORBA::Double & anAverage ) {
   beginService( " SyrComponent_Impl::C_AVERAGE" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_AVERAGE is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -259,7 +260,7 @@ SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_AVERAGE(
   return SuperVisionTest::ListOfSyr::_duplicate( aListOfSyr ) ;
 }
 
-SuperVisionTest::Syr_ptr SyrComponent_Impl::Init( const long anOddInteger ) {
+SuperVisionTest::Syr_ptr SyrComponent_Impl::Init( CORBA::Long anOddInteger ) {
   beginService( "SyrComponent_Impl::Init" );
   sendMessage(NOTIF_STEP, "SyrComponent_Impl creates Syr_Impl");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -340,7 +341,7 @@ Syr_Impl::Syr_Impl( CORBA::ORB_ptr orb ,
                     const char * interfaceName , 
 		    const char * graphName ,
                     const char * nodeName ,
-                    const long anOddInteger ) :
+                    const CORBA::Long anOddInteger ) :
   SyrComponent_Impl(orb, poa, contId, instanceName, interfaceName,false) {
   Names( graphName , nodeName ) ;
   MESSAGE("Syr_Impl::Syr_Impl activate object instanceName("
@@ -364,7 +365,7 @@ Syr_Impl::~Syr_Impl() {
   endService( "Syr_Impl::~Syr_Impl" );
 }
 
-long Syr_Impl::Initial() {
+CORBA::Long Syr_Impl::Initial() {
   beginService( " Syr_Impl::Initial" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Initial is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -376,7 +377,7 @@ long Syr_Impl::Initial() {
   return _InitialInteger ;
 }
 
-long Syr_Impl::Current() {
+CORBA::Long Syr_Impl::Current() {
   beginService( " Syr_Impl::Current" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Current is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
@@ -388,7 +389,7 @@ long Syr_Impl::Current() {
   return _CurrentInteger ;
 }
 
-long Syr_Impl::IsEven() {
+CORBA::Long Syr_Impl::IsEven() {
   bool RetVal ;
   beginService( " Syr_Impl::IsEven" );
   sendMessage(NOTIF_STEP, "Syr_Impl::IsEven is Computing");
@@ -403,7 +404,7 @@ long Syr_Impl::IsEven() {
   return RetVal ;
 }
 
-long Syr_Impl::IsOne() {
+CORBA::Long Syr_Impl::IsOne() {
   bool RetVal ;
   beginService( " Syr_Impl::IsOne" );
   sendMessage(NOTIF_STEP, "Syr_Impl::IsOne is Computing");
@@ -418,7 +419,7 @@ long Syr_Impl::IsOne() {
   return RetVal ;
 }
 
-long Syr_Impl::Count() {
+CORBA::Long Syr_Impl::Count() {
   beginService( " Syr_Impl::Count" );
   sendMessage(NOTIF_STEP, "Syr_Impl::Count is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));

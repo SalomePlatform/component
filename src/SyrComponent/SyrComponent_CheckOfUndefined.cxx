@@ -24,7 +24,6 @@
 //  File   : SyrComponent_CheckOfUndefined.cxx
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <iostream>
@@ -32,6 +31,8 @@ using namespace std;
 #include <strstream>
 #include <string>
 #include <math.h>
+
+using namespace std;
 
 // ------------------------------------------------------------------
 // NextPrime : Compute the first prime number greater or equal than an integer

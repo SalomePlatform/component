@@ -25,7 +25,6 @@
 //  Author : MARC TAJCHMAN, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -34,6 +33,8 @@ using namespace std;
 
 //#include "utilities.h"
 #include "UndefinedSymbolComponent.hxx"
+
+using namespace std;
 
 UndefinedSymbolComponentEngine::UndefinedSymbolComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
@@ -59,7 +60,7 @@ UndefinedSymbolComponentEngine::~UndefinedSymbolComponentEngine()
 
 extern "C" { long CallUndefined() ; } ;
 
-long UndefinedSymbolComponentEngine::UndefinedSymbol() {
+CORBA::Long UndefinedSymbolComponentEngine::UndefinedSymbol() {
   beginService( " UndefinedSymbolComponentEngine::UndefinedSymbol" );
   int S = 10 ;
   while ( S ) {

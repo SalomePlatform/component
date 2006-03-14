@@ -110,7 +110,7 @@ CalculatorEngine::~CalculatorEngine()
 
 static omni_mutex aPutToStudyMutex;
 SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::PutToStudy(SALOME_MED::FIELDDOUBLE_ptr theField1,
-							 long int theStudyId) {
+							 CORBA::Long theStudyId) {
   omni_mutex_lock aLock(aPutToStudyMutex);
 
   CORBA::Object_var anObj = _NS->Resolve("/myStudyManager");

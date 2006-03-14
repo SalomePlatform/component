@@ -52,23 +52,23 @@ class TypesCheck_Impl : public POA_SuperVisionTest::TypesCheck ,
 
     virtual void StringCheck( const char * InString , _CORBA_String_out OutString ) ;
 
-    virtual void BoolCheck( const bool InBool , bool & OutBool ) ;
+    virtual void BoolCheck( CORBA::Boolean InBool , CORBA::Boolean & OutBool ) ;
 
-    virtual void CharCheck( const unsigned char InChar , unsigned char & OutChar ) ;
+    virtual void CharCheck( unsigned char InChar , unsigned char & OutChar ) ;
 
-    virtual void ShortCheck( const short InShort , short & OutShort ) ;
+    virtual void ShortCheck( short InShort , short & OutShort ) ;
 
-    virtual void IntCheck( const int InInt , int & OutInt ) ;
+    virtual void IntCheck( int InInt , int & OutInt ) ;
 
-    virtual void LongCheck( const long InLong , long & OutLong ) ;
+    virtual void LongCheck( CORBA::Long InLong , CORBA::Long & OutLong ) ;
 
-    virtual void FloatCheck( const float InFloat , float & OutFloat ) ;
+    virtual void FloatCheck( float InFloat , float & OutFloat ) ;
 
-    virtual void DoubleCheck( const double InDouble , double & OutDouble ) ;
+    virtual void DoubleCheck( double InDouble , double & OutDouble ) ;
 
-    virtual void ObjRefCheck( const SuperVisionTest::Adder_ptr InObjRef , SuperVisionTest::Adder_out OutObjRef ) ;
+    virtual void ObjRefCheck( SuperVisionTest::Adder_ptr InObjRef , SuperVisionTest::Adder_out OutObjRef ) ;
 
-    virtual void MiscTypes( const char * InString , const bool InBool , const unsigned char InChar , const short InShort , const long InLong , const float InFloat , const double InDouble , SuperVisionTest::Adder_ptr InObjRef , _CORBA_String_out OutString , bool & OutBool , unsigned char & OutChar , short & OutShort , long & OutLong , float & OutFloat , double & OutDouble , SuperVisionTest::Adder_out OutObjRef ) ;
+    virtual void MiscTypes( const char * InString , CORBA::Boolean InBool , unsigned char InChar , short InShort , CORBA::Long InLong , float InFloat , double InDouble , SuperVisionTest::Adder_ptr InObjRef , _CORBA_String_out OutString , CORBA::Boolean & OutBool , unsigned char & OutChar , short & OutShort , CORBA::Long & OutLong , float & OutFloat , double & OutDouble , SuperVisionTest::Adder_out OutObjRef ) ;
 
   private:
 

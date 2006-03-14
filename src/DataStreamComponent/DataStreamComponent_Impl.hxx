@@ -46,14 +46,14 @@ public:
 
   virtual ~DataStreamFactory_Impl();
 
-  virtual void Setxy( const long x , const long y ) ;
+  virtual void Setxy( CORBA::Long x , CORBA::Long y ) ;
 
-  virtual void Getxy( long & x , long & y ) ;
+  virtual void Getxy( CORBA::Long & x , CORBA::Long & y ) ;
 
-  virtual void Add( const long x , const long y , long & z ) ;
-  virtual void Sub( const long x , const long y , long & z ) ;
-  virtual void Mul( const long x , const long y , long & z ) ;
-  virtual void Div( const long x , const long y , long & z ) ;
+  virtual void Add( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
+  virtual void Sub( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
+  virtual void Mul( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
+  virtual void Div( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
 
   virtual DataStreamComponent::DataStream_ptr NewDataStream() ;
 
@@ -87,14 +87,14 @@ public:
 
   virtual ~DataStream_Impl();
 
-  virtual void StreamSetxy( const long x , const long y ) ;
+  virtual void StreamSetxy( CORBA::Long x , CORBA::Long y ) ;
 
-  virtual void StreamGetxy( long & x , long & y ) ;
+  virtual void StreamGetxy( CORBA::Long & x , CORBA::Long & y ) ;
 
-  virtual void StreamAdd( const long x , const long y , long & z ) ;
-  virtual void StreamSub( const long x , const long y , long & z ) ;
-  virtual void StreamMul( const long x , const long y , long & z ) ;
-  virtual void StreamDiv( const long x , const long y , long & z ) ;
+  virtual void StreamAdd( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
+  virtual void StreamSub( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
+  virtual void StreamMul( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
+  virtual void StreamDiv( CORBA::Long x , CORBA::Long y , CORBA::Long & z ) ;
 
 private:
 

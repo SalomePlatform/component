@@ -25,7 +25,6 @@
 //  Author : Jean Rahuel
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -33,6 +32,8 @@ using namespace std;
 #include <string>
 
 #include "TypesCheck_Impl.hxx"
+
+using namespace std;
 
 TypesCheck_Impl::TypesCheck_Impl( CORBA::ORB_ptr orb ,
 				  PortableServer::POA_ptr poa ,
@@ -66,31 +67,31 @@ void TypesCheck_Impl::StringCheck( const char * InString , _CORBA_String_out Out
   endService( "TypesCheck_Impl::StringCheck" );
 }
 
-void TypesCheck_Impl::BoolCheck( const bool InBool , bool & OutBool ) {
+void TypesCheck_Impl::BoolCheck( bool InBool , bool & OutBool ) {
   beginService( "TypesCheck_Impl::BoolCheck" );
   OutBool = InBool ;
   endService( "TypesCheck_Impl::BoolCheck" );
 }
 
-void TypesCheck_Impl::CharCheck( const unsigned char InChar , unsigned char & OutChar ) {
+void TypesCheck_Impl::CharCheck( unsigned char InChar , unsigned char & OutChar ) {
   beginService( "TypesCheck_Impl::CharCheck" );
   OutChar = InChar ;
   endService( "TypesCheck_Impl::CharCheck" );
 }
 
-void TypesCheck_Impl::ShortCheck( const short InShort , short & OutShort ) {
+void TypesCheck_Impl::ShortCheck( short InShort , short & OutShort ) {
   beginService( "TypesCheck_Impl::ShortCheck" );
   OutShort = InShort ;
   endService( "TypesCheck_Impl::ShortCheck" );
 }
 
-void TypesCheck_Impl::IntCheck( const int InInt , int & OutInt ) {
+void TypesCheck_Impl::IntCheck( int InInt , int & OutInt ) {
   beginService( "TypesCheck_Impl::IntCheck" );
   OutInt = InInt ;
   endService( "TypesCheck_Impl::IntCheck" );
 }
 
-void TypesCheck_Impl::LongCheck( const long InLong , long & OutLong ) {
+void TypesCheck_Impl::LongCheck( CORBA::Long InLong , CORBA::Long & OutLong ) {
   beginService( "TypesCheck_Impl::LongCheck" );
   int inInt = InLong ;
   int outInt = OutLong ;
@@ -99,25 +100,25 @@ void TypesCheck_Impl::LongCheck( const long InLong , long & OutLong ) {
   endService( "TypesCheck_Impl::LongCheck" );
 }
 
-void TypesCheck_Impl::FloatCheck( const float InFloat , float & OutFloat ) {
+void TypesCheck_Impl::FloatCheck( float InFloat , float & OutFloat ) {
   beginService( "TypesCheck_Impl::FloatCheck" );
   OutFloat = InFloat ;
   endService( "TypesCheck_Impl::FloatCheck" );
 }
 
-void TypesCheck_Impl::DoubleCheck( const double InDouble , double & OutDouble ) {
+void TypesCheck_Impl::DoubleCheck( double InDouble , double & OutDouble ) {
   beginService( "TypesCheck_Impl::DoubleCheck" );
   OutDouble = InDouble ;
   endService( "TypesCheck_Impl::DoubleCheck" );
 }
 
-void TypesCheck_Impl::ObjRefCheck( const SuperVisionTest::Adder_ptr InObjRef , SuperVisionTest::Adder_out OutObjRef ) {
+void TypesCheck_Impl::ObjRefCheck( SuperVisionTest::Adder_ptr InObjRef , SuperVisionTest::Adder_out OutObjRef ) {
   beginService( "TypesCheck_Impl::ObjRefCheck" );
   OutObjRef = SuperVisionTest::Adder::_duplicate( InObjRef ) ;
   endService( "TypesCheck_Impl::ObjRefCheck" );
 }
 
-void TypesCheck_Impl::MiscTypes( const char * InString , const bool InBool , const unsigned char InChar , const short InShort , const long InLong , const float InFloat , const double InDouble , const SuperVisionTest::Adder_ptr InObjRef , _CORBA_String_out OutString ,bool & OutBool , unsigned char & OutChar , short & OutShort , long & OutLong , float & OutFloat , double & OutDouble , SuperVisionTest::Adder_out OutObjRef ) {
+void TypesCheck_Impl::MiscTypes( const char * InString , bool InBool , unsigned char InChar , short InShort , CORBA::Long InLong , float InFloat , double InDouble , SuperVisionTest::Adder_ptr InObjRef , _CORBA_String_out OutString ,bool & OutBool , unsigned char & OutChar , short & OutShort , CORBA::Long & OutLong , float & OutFloat , double & OutDouble , SuperVisionTest::Adder_out OutObjRef ) {
   beginService( "TypesCheck_Impl::MiscTypes" );
   OutString = CORBA::string_dup( InString ) ;
   OutBool = InBool ;

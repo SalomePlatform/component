@@ -42,7 +42,8 @@ LIB = libTypesCheckEngine.la
 LIB_SRC = \
 	TypesCheck_Impl.cxx 
 
-LIB_SERVER_IDL = TypesCheck.idl \
+LIB_SERVER_IDL = SALOME_Component.idl \
+		 TypesCheck.idl \
 		 AddComponent.idl
 
 # Executables targets
@@ -51,10 +52,10 @@ BIN_SRC =
 BIN_SERVER_IDL =
 
 CPPFLAGS+= $(PYTHON_INCLUDES) -I${KERNEL_ROOT_DIR}/include/salome
-CXXFLAGS= -g -D_DEBUG_ -D__x86__ -D__linux__ $(PYTHON_INCLUDES) -ftemplate-depth-42 -Wall -I${KERNEL_ROOT_DIR}/include/salome
-LDFLAGS+= -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -L${KERNEL_ROOT_DIR}/lib/salome
+LDFLAGS+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
 
-LDFLAGSFORBIN+= -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -L${KERNEL_ROOT_DIR}/lib/salome
+LIBSFORBIN= $(LIBS)
+LDFLAGSFORBIN+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
 
 @CONCLUDE@
 

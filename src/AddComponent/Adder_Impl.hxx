@@ -51,17 +51,17 @@ class Adder_Impl :  public POA_SuperVisionTest::Adder ,
 
     virtual void destroy() ;
 
-    virtual double Add( double x , double y , double & z ) ;
+    virtual CORBA::Double Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
 
-    virtual double AddWithoutSleep( double x , double y , double & z ) ;
+    virtual CORBA::Double AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
 
-    virtual double AddAndCompare( const double x , const double y ,
-                                  const SuperVisionTest::Adder_ptr anOtherAdder ,
-                                  double & z ) ;
+    virtual CORBA::Double AddAndCompare( CORBA::Double x , CORBA::Double y ,
+                                         SuperVisionTest::Adder_ptr anOtherAdder ,
+                                          CORBA::Double & z ) ;
 
-    virtual void SetLastResult( double z ) ;
+    virtual void SetLastResult( CORBA::Double z ) ;
 
-    virtual void LastResult( double & z ) ;
+    virtual void LastResult( CORBA::Double & z ) ;
 
     virtual Engines::Component_ptr LccAddComponent( const char * aContainer ,
                                                     const char * aComponentName ) ;

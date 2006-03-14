@@ -25,7 +25,6 @@
 //  Author : MARC TAJCHMAN, CEA
 //  Module : SuperVisionTest
 
-using namespace std;
 #include <stdio.h>
 #include <unistd.h>
 #include <fstream>
@@ -34,6 +33,8 @@ using namespace std;
 
 //#include "utilities.h"
 #include "SIGNALSComponent.hxx"
+
+using namespace std;
 
 SIGNALSComponentEngine::SIGNALSComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
@@ -59,7 +60,7 @@ SIGNALSComponentEngine::~SIGNALSComponentEngine()
 {
 }
 
-long SIGNALSComponentEngine::SIGSEGVfunc() {
+CORBA::Long SIGNALSComponentEngine::SIGSEGVfunc() {
   beginService( " SIGNALSComponentEngine::SIGSEGVfunc" );
   int S = 10 ;
   while ( S ) {
@@ -70,7 +71,7 @@ long SIGNALSComponentEngine::SIGSEGVfunc() {
   return nullptr ;
 }
 
-long SIGNALSComponentEngine::SIGFPEfunc( long a , long b ) {
+CORBA::Long SIGNALSComponentEngine::SIGFPEfunc( CORBA::Long a , CORBA::Long b ) {
   beginService( " SIGNALSComponentEngine::SIGFPEfunc" );
   int S = 10 ;
   while ( S ) {

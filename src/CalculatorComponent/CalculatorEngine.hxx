@@ -56,7 +56,7 @@ public:
 
 
   SALOME_MED::FIELDDOUBLE_ptr PutToStudy(SALOME_MED::FIELDDOUBLE_ptr theField,
-					 long int theStudyId);
+					 CORBA::Long theStudyId);
 
   SALOME_MED::FIELDDOUBLE_ptr Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,
 				  SALOME_MED::FIELDDOUBLE_ptr SecondField);
