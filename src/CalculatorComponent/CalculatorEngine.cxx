@@ -633,18 +633,20 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   for ( int i = 0; i < NumberOfType; i++ ) 
     {
       int NumberOfElements   = mySupport->getNumberOfElements ( (*Types)[i] ) ;
-      int NumberOfGaussPoint = mySupport->getNumberOfGaussPoint ( (*Types)[i] ) ;
-    
+      //Temporarily commented to avoid compilation errors:int NumberOfGaussPoint = mySupport->getNumberOfGaussPoint ( (*Types)[i] ) ;
+      int NumberOfGaussPoint = 1; //Temporary line instead of the above one
+
       MESSAGE( " " << field->getName() );
       MESSAGE( " " << NumberOfElements );
-      MESSAGE( " " << NumberOfGaussPoint );
+      //!!!tmp commented:MESSAGE( " " << NumberOfGaussPoint );
+      MESSAGE( "Attention! NumberOfGaussPoint is invalid: " << NumberOfGaussPoint ); //tmp line!!!
       MESSAGE( " " << (int) (convertIdlEntToMedEnt(mySupport->getEntity())) );
       MESSAGE( " " << (int)(convertIdlEltToMedElt((*Types)[i])) );
       MESSAGE( " " << field->getIterationNumber() );
       MESSAGE( " " << field->getTime() );
       MESSAGE( " " << field->getOrderNumber() );
       MESSAGE( "MEDchampEcr :" << myMesh->getName() );
-    
+
       SALOME_MED::double_array * value = field->getValue( SALOME_MED::MED_FULL_INTERLACE ) ;
       double *locvalue = new double[NumberOfElements];
       for (int k = 0; k < NumberOfElements; k++) 
