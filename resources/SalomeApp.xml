@@ -1,0 +1,10 @@
+<document>
+  <section name="COMPONENT">
+    <!-- Major module parameters -->
+    <parameter name="name" value="Component"/>
+  </section>
+  <section name="resources">
+    <!-- Module resources -->
+    <parameter name="COMPONENT" value="${COMPONENT_ROOT_DIR}/share/salome/resources"/>
+  </section>
+</document>

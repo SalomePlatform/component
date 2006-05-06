@@ -16,7 +16,7 @@
 		<component-username>AddComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>MTJ</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test: Addition</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -479,7 +479,7 @@
 		<component-username>AdditionComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>JR</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test: Addition</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -942,7 +942,7 @@
 		<component-username>SubComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>MTJ</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test: Subtraction</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -990,7 +990,7 @@
 		<component-username>MulComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>MTJ</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test: Multiplication</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -1038,7 +1038,7 @@
 		<component-username>DivComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>MTJ</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test: Division</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -1085,7 +1085,7 @@
 		<component-username>SyrComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>JR</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test</component-comment>
 		<component-multistudy>1</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -1529,7 +1529,7 @@
 		<component-username>FactorialComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>Malvagi, Tajchman</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test: Factorial</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-icone></component-icone>
@@ -1594,7 +1594,7 @@
 		<component-username>SyrControlComponent</component-username>
 		<component-type>SuperVisionTest</component-type>
 		<component-author>JR</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test</component-comment>
 		<component-multistudy>1</component-multistudy>
 		<component-impltype>0</component-impltype>
@@ -1824,7 +1824,7 @@
 		<component-username>TypesCheck</component-username>
 		<component-type></component-type>
 		<component-author></component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test</component-comment>
 		<component-multistudy>1</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -2104,7 +2104,7 @@
 		<component-username>Calculator</component-username>
 		<component-type>SOLVER</component-type>
 		<component-author>LD</component-author>
-		<component-version>3.2.0a2</component-version>
+		<component-version>3.2.0b1</component-version>
 		<component-comment>SuperVision test: Arithmetic operations with MED_Field</component-comment>
 		<component-multistudy>0</component-multistudy>
 		<component-impltype>1</component-impltype>
@@ -2256,7 +2256,7 @@
             <component-username>DataStreamFactory</component-username>
             <component-type>OTHER</component-type>
             <component-author>jr</component-author>
-            <component-version>3.2.0a2</component-version>
+            <component-version>3.2.0b1</component-version>
             <component-comment>SuperVision test</component-comment>
             <component-multistudy>1</component-multistudy>
             <component-icone></component-icone>
@@ -2735,7 +2735,7 @@
             <component-username>SIGNALSComponent</component-username>
             <component-type>OTHER</component-type>
             <component-author>jr</component-author>
-            <component-version>3.2.0a2</component-version>
+            <component-version>3.2.0b1</component-version>
             <component-comment>unknown</component-comment>
             <component-multistudy>1</component-multistudy>
 	    <component-impltype>1</component-impltype>
@@ -2796,7 +2796,7 @@
             <component-username>UndefinedSymbolComponent</component-username>
             <component-type>OTHER</component-type>
             <component-author>jr</component-author>
-            <component-version>3.2.0a2</component-version>
+            <component-version>3.2.0b1</component-version>
             <component-comment>unknown</component-comment>
             <component-multistudy>1</component-multistudy>
 	    <component-impltype>1</component-impltype>
