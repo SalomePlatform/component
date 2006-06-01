@@ -11,8 +11,8 @@ HAVE_SSTREAM=@HAVE_SSTREAM@
 
 LIBS=@LIBS@
 LIBSFORBIN=@LIBS@
-LDFLAGS=@LDFLAGS@ -L$(top_builddir)/lib/salome
-LDFLAGSFORBIN=@LDFLAGS@ -L$(top_builddir)/lib/salome
+LDFLAGS=@LDFLAGS@ -L$(top_builddir)/lib@LIB_LOCATION_SUFFIX@/salome
+LDFLAGSFORBIN=@LDFLAGS@ -L$(top_builddir)/lib@LIB_LOCATION_SUFFIX@/salome
 # add libstdc++ to link c++ library with libtool !
 LDFLAGS+= @STDLIB@
 LDFLAGSFORBIN+= @STDLIB@
@@ -53,8 +53,8 @@ PYTHON_VERSION = @PYTHON_VERSION@
 # Changes from the SalomePro V1.2c
 #PYTHON_SITE = @PYTHON_SITE@
 #PYTHON_SITE_INSTALL = @PYTHON_SITE_INSTALL@
-PYTHON_SITE = $(prefix)/lib/python$(PYTHON_VERSION)/site-packages
-PYTHON_SITE_INSTALL = $(prefix)/lib/python$(PYTHON_VERSION)/site-packages/salome
+PYTHON_SITE = $(prefix)/lib@LIB_LOCATION_SUFFIX@/python$(PYTHON_VERSION)/site-packages
+PYTHON_SITE_INSTALL = $(prefix)/lib@LIB_LOCATION_SUFFIX@/python$(PYTHON_VERSION)/site-packages/salome
 
 # QT
 
@@ -199,16 +199,26 @@ INSTALL_DATA=@INSTALL_DATA@
 # create a symbolic link (or a copie ?)
 LN_S=@LN_S@
 
+KERNEL_ROOT_DIR=@KERNEL_ROOT_DIR@
+KERNEL_SITE_DIR=@KERNEL_SITE_DIR@
+
+KERNEL_CXXFLAGS=@KERNEL_CXXFLAGS@
+KERNEL_LDFLAGS=@KERNEL_LDFLAGS@
+
+MED_ROOT_DIR=@MED_ROOT_DIR@
+MED_CXXFLAGS=@MED_CXXFLAGS@
+MED_LDFLAGS=@MED_LDFLAGS@
+
 ## Installation points
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 bindir=@bindir@/salome
-libdir=@libdir@/salome
+libdir=@exec_prefix@/lib@LIB_LOCATION_SUFFIX@/salome
 # warning : if user give this path in configure we could have salome/salome :-(
 includedir=@includedir@/salome
 datadir=@datadir@/salome
 idldir=$(prefix)/idl/salome
-sharedpydir=@libdir@/python$(PYTHON_VERSION)/site-packages/salome/shared_modules
+sharedpydir=@exec_prefix@/lib@LIB_LOCATION_SUFFIX@/python$(PYTHON_VERSION)/site-packages/salome/shared_modules
 incmakedir=${prefix}/salome_adm/unix
 
 docdir=$(datadir)/doc
@@ -275,7 +285,7 @@ ACLOCAL_MED =                     check_Med2.m4
 $(top_srcdir)/aclocal.m4: $(ACLOCAL_KERNEL:%=@KERNEL_ROOT_DIR@/salome_adm/unix/config_files/%) \
                           $(ACLOCAL_GUI:%=@GUI_ROOT_DIR@/adm_local/unix/config_files/%) \
 			  $(ACLOCAL_MED:%=@MED_ROOT_DIR@/adm_local/unix/config_files/%)
-	cd $(top_srcdir) ; aclocal - I adm_local/unix/config_files -I @KERNEL_ROOT_DIR@/salome_adm/unix/config_files \
+	cd $(top_srcdir) ; aclocal -I adm_local/unix/config_files -I @KERNEL_ROOT_DIR@/salome_adm/unix/config_files \
 	                                                               -I @GUI_ROOT_DIR@/adm_local/unix/config_files \
 	                                                               -I @MED_ROOT_DIR@/adm_local/unix/config_files
 								       

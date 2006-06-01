@@ -17,7 +17,7 @@
 #  License along with this library; if not, write to the Free Software 
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA 
 # 
-#  See http://www.opencascade.org/SALOME/ or email : webmaster.salome@opencascade.org 
+# See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
 #
 #
@@ -50,8 +50,8 @@ BIN =
 BIN_SRC = 
 BIN_SERVER_IDL =
 
-CPPFLAGS+= $(PYTHON_INCLUDES) -I${KERNEL_ROOT_DIR}/include/salome
-LDFLAGS+= -L${KERNEL_ROOT_DIR}/lib/salome -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification
+CPPFLAGS+= $(PYTHON_INCLUDES) $(KERNEL_CXXFLAGS)
+LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification
 
 @CONCLUDE@
 
