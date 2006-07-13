@@ -32,7 +32,7 @@ VPATH=.:@srcdir@:@top_srcdir@/idl
 
 @COMMENCE@
 
-EXPORT_SHAREDPYSCRIPTS= COMPONENT_shared_modules.py
+#EXPORT_SHAREDPYSCRIPTS= COMPONENT_shared_modules.py
 
 EXPORT_HEADERS =  \
 	SyrComponent_Impl.hxx 
