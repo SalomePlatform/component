@@ -52,9 +52,13 @@ BIN_SRC =
 BIN_SERVER_IDL =
 
 CPPFLAGS+= $(PYTHON_INCLUDES) $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
+LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry \
+          -lSalomeNotification -lSALOMELocalTrace \
+          -lSalomeResourcesManager -lSALOMEBasics -lSalomeIDLKernel
 
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
+LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry \
+                -lSalomeNotification -lSALOMELocalTrace \
+                -lSalomeResourcesManager -lSALOMEBasics -lSalomeIDLKernel
 
 @CONCLUDE@
 

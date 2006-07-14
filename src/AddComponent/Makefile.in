@@ -54,10 +54,14 @@ BIN_SRC = HandleServerSideSignals.cxx
 BIN_SERVER_IDL =
 
 CPPFLAGS+= $(PYTHON_INCLUDES)  $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA 
+LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry \
+          -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA \
+          -lSalomeResourcesManager -lSALOMEBasics -lSalomeIDLKernel
 
 LIBSFORBIN= $(LIBS)
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA
+LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry \
+                -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA \
+                -lSalomeResourcesManager -lSALOMEBasics -lSalomeIDLKernel
 
 @CONCLUDE@
 
