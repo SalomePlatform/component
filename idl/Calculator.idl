@@ -26,11 +26,12 @@
 
 #include "SALOME_Component.idl"
 #include "MED.idl"
+#include "MED_Gen.idl"
 
 
 module SuperVisionTest {
 
-interface Calculator : Engines::Component
+interface Calculator : Engines::Component, SALOME_MED::MED_Gen_Driver
 {
 
   SALOME_MED::FIELDDOUBLE PutToStudy(in SALOME_MED::FIELDDOUBLE field1, in long theStudyId);
