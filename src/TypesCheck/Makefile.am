@@ -24,36 +24,47 @@
 #  File   : Makefile.in
 #  Author : , CEA
 #  Module : SuperVisionTest
-#  $Header$
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-
-@COMMENCE@
+# header files 
+salomeinclude_HEADERS = \
+	TypesCheck_Impl.hxx
 
 # Libraries targets
+lib_LTLIBRARIES = libTypesCheckEngine.la
+dist_libTypesCheckEngine_la_SOURCES = \
+	TypesCheck_Impl.cxx 
 
-LIB = libCalculatorEngine.la
-LIB_SRC = CalculatorEngine.cxx
-#LIB_SERVER_IDL = Calculator.idl SALOME_Exception.idl SALOME_Component.idl SALOMEDS.idl SALOMEDS_Attributes.idl MED.idl 
-LIB_SERVER_IDL = Calculator.idl SALOME_Comm.idl SALOME_ContainerManager.idl
-LIB_CLIENT_IDL = SALOME_Exception.idl SALOME_Component.idl SALOMEDS.idl SALOME_GenericObj.idl SALOMEDS_Attributes.idl MED.idl 
-# Executables targets
-BIN = 
-BIN_SRC = 
-BIN_CLIENT_IDL = 
-BIN_SERVER_IDL =
+bin_PROGRAMS = TypesCheck_CheckOfUndefined
+dist_TypesCheck_CheckOfUndefined_SOURCES = \
+	TypesCheck_CheckOfUndefined.cxx
 
-EXPORT_HEADERS =
+libTypesCheckEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(srcdir)/../AddComponent \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
+libTypesCheckEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+        -lSalomeNotification \
+	-lSALOMELocalTrace \
+        -lSalomeResourcesManager \
+	-lSALOMEBasics \
+	-lSalomeIDLKernel
 
-CPPFLAGS+= $(PYTHON_INCLUDES) $(HDF5_INCLUDES) $(MED2_INCLUDES) $(KERNEL_CXXFLAGS) $(MED_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace $(MED_LDFLAGS) -lMEDEngine -lMEDClientcmodule
+TypesCheck_CheckOfUndefined_CPPFLAGS = \
+	$(libTypesCheckEngine_la_CPPFLAGS)
 
-
-MED.hh MEDSK.cc: ${MED_ROOT_DIR}/idl/salome/MED.idl
-	omniidl -bcxx -Wbtp -I${KERNEL_ROOT_DIR}/idl/salome $^
-
-@CONCLUDE@
+TypesCheck_CheckOfUndefined_LDFLAGS  = \
+	./libTypesCheckEngine.la \
+	$(libTypesCheckEngine_la_LDFLAGS)

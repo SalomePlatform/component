@@ -1,5 +1,3 @@
-#  SuperVisionTest UndefinedSymbolComponent : example of component that devides two numbers
-#
 #  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 #  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
 # 
@@ -22,38 +20,27 @@
 #
 #
 #  File   : Makefile.in
-#  Author : , CEA
+#  Author : Patrick GOLDBRONN (CEA)
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
 #  $Header: 
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
 
-@COMMENCE@
-
-EXPORT_HEADERS =  \
-	UndefinedSymbolComponent.hxx 
-
-# Libraries targets
-LIB = libUndefinedSymbolComponentEngine.la
-LIB_SRC = \
-	UndefinedSymbolComponent.cxx 
-
-LIB_SERVER_IDL = SALOME_Component.idl \
-                 UndefinedSymbolComponent.idl
-
-# Executables targets
-BIN = 
-BIN_SRC = 
-BIN_SERVER_IDL =
-
-CPPFLAGS+= $(PYTHON_INCLUDES) $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification
-
-LDFLAGSFORBIN+=  $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
-
-@CONCLUDE@
-
+SUBDIRS = \
+	AddComponent \
+	AdditionComponent \
+	DivComponent \
+	FactorialComponent \
+	MulComponent \
+	SubComponent \
+	SyrComponent \
+	SyrControlComponent \
+	TypesCheck \
+	DataStreamComponent \
+	SIGNALSComponent \
+	UndefinedSymbolComponent \
+	SIGNALSComponent_Swig \
+	TestFunctions \
+	CalculatorComponent

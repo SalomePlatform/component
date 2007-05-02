@@ -1,3 +1,5 @@
+#  SuperVisionTest MulComponent : example of component that multiplies two numbers
+#
 #  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 #  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
 # 
@@ -20,20 +22,35 @@
 #
 #
 #  File   : Makefile.in
-#  Author : Patrick GOLDBRONN (CEA)
+#  Author : , CEA
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
-#  $Header: 
-
-top_srcdir=@top_srcdir@
-top_builddir=..
-srcdir=@srcdir@
-VPATH=.:@srcdir@
 
 
-@COMMENCE@
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-SUBDIRS = AddComponent AdditionComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck DataStreamComponent SIGNALSComponent UndefinedSymbolComponent SIGNALSComponent_Swig TestFunctions CalculatorComponent
+# header files 
+salomeinclude_HEADERS = \
+	MulComponent.hxx 
 
-#SUBDIRS = AddComponent AdditionComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck DataStreamComponent SIGNALSComponent UndefinedSymbolComponent SIGNALSComponent_Swig TestFunctions
+# Libraries targets
+lib_LTLIBRARIES = libMulComponentEngine.la
+dist_libMulComponentEngine_la_SOURCES = \
+	MulComponent.cxx 
 
-@MODULE@
+libMulComponentEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
+
+libMulComponentEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+	-lSalomeNotification

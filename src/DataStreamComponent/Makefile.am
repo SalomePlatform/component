@@ -23,43 +23,52 @@
 #
 #  File   : Makefile.in
 #  Author : Jean Rahuel
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SUPERV
 #  $Header: 
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-
-@COMMENCE@
-
-EXPORT_HEADERS =  \
+# header files 
+salomeinclude_HEADERS = \
 	DataStreamComponent_Impl.hxx
 
 # Libraries targets
-LIB = libDataStreamFactoryEngine.la
-LIB_SRC = \
+lib_LTLIBRARIES = libDataStreamFactoryEngine.la
+dist_libDataStreamFactoryEngine_la_SOURCES = \
 	DataStreamComponent_Impl.cxx 
 
-LIB_SERVER_IDL = SALOME_Component.idl \
-                 DataStreamComponent.idl
-
 # Executables targets
-BIN = DataStreamComponent_CheckOfUndefined
-BIN_SRC = 
-BIN_SERVER_IDL =
+bin_PROGRAMS = DataStreamComponent_CheckOfUndefined
 
-CPPFLAGS+= $(PYTHON_INCLUDES) \
-	$(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry \
-          -lSalomeNotification -lSALOMELocalTrace \
-          -lSalomeResourcesManager -lSALOMEBasics -lSalomeIDLKernel
+dist_DataStreamComponent_CheckOfUndefined_SOURCES = \
+	DataStreamComponent_CheckOfUndefined.cxx
 
-LIBSFORBIN= $(LIBS)
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry \
-                -lSalomeNotification -lSALOMELocalTrace \
-                -lSalomeResourcesManager -lSALOMEBasics -lSalomeIDLKernel
+libDataStreamFactoryEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(srcdir)/../AddComponent \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
 
-@CONCLUDE@
+libDataStreamFactoryEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+        -lSalomeNotification \
+	-lSALOMELocalTrace \
+        -lSalomeResourcesManager \
+	-lSALOMEBasics \
+	-lSalomeIDLKernel
 
+DataStreamComponent_CheckOfUndefined_CPPFLAGS = \
+	$(libDataStreamFactoryEngine_la_CPPFLAGS)
+
+DataStreamComponent_CheckOfUndefined_LDFLAGS = \
+	./libDataStreamFactoryEngine.la \
+	$(libDataStreamFactoryEngine_la_LDFLAGS)
