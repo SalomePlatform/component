@@ -56,6 +56,8 @@ libAddComponentEngine_la_LDFLAGS = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
 	-lSalomeContainer \
+	-lSalomeHDFPersist \
+	-lSalomeBatch \
 	-lSalomeNS \
 	-lOpUtil \
 	-lRegistry \
