@@ -41,6 +41,8 @@ bin_PROGRAMS = TypesCheck_CheckOfUndefined
 dist_TypesCheck_CheckOfUndefined_SOURCES = \
 	TypesCheck_CheckOfUndefined.cxx
 
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
+
 libTypesCheckEngine_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(CORBA_CXXFLAGS) \

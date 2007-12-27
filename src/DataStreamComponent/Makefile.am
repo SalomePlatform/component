@@ -41,6 +41,8 @@ dist_libDataStreamFactoryEngine_la_SOURCES = \
 # Executables targets
 bin_PROGRAMS = DataStreamComponent_CheckOfUndefined
 
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
+
 dist_DataStreamComponent_CheckOfUndefined_SOURCES = \
 	DataStreamComponent_CheckOfUndefined.cxx
 

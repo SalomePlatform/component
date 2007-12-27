@@ -44,6 +44,8 @@ bin_PROGRAMS = AdditionComponent_CheckOfUndefined
 dist_AdditionComponent_CheckOfUndefined_SOURCES = \
 	AdditionComponent_CheckOfUndefined.cxx
 
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
+
 libAdditionComponentEngine_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(CORBA_CXXFLAGS) \
