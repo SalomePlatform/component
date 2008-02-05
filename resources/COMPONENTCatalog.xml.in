@@ -8,6 +8,15 @@
 <path-prefix-list>
 </path-prefix-list>
 
+<type-list>
+  <objref name="AdditionComponent/Adder" />
+  <objref name="SuperVisionTest/Adder" />
+  <objref name="AddComponent" id="IDL:SuperVisionTest/AddComponent:1.0" />
+  <objref name="Syr" id="IDL:SuperVisionTest/Syr:1.0" />
+  <objref name="ListOfSyr" id="IDL:SuperVisionTest/ListOfSyr:1.0" />
+  <objref name="DataStream" id="IDL:DataStreamComponent/DataStream:1.0" />
+</type-list>
+
 <!-- Component list -->
 <component-list>
 	<component>
@@ -201,7 +210,7 @@
 					</inParameter-list>
                        	 		<outParameter-list>
 						<outParameter>
-							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+              <outParameter-type>SuperVisionTest/Adder</outParameter-type>
 							<outParameter-name>Adder</outParameter-name>
 							<outParameter-comment>Adder object</outParameter-comment>
 						</outParameter>
@@ -224,7 +233,7 @@
 							<outParameter-comment>Test</outParameter-comment>
 						</outParameter>
 						<outParameter>
-							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+              <outParameter-type>SuperVisionTest/Adder</outParameter-type>
 							<outParameter-name>Adder</outParameter-name>
 							<outParameter-comment>Adder object</outParameter-comment>
 						</outParameter>
@@ -247,7 +256,7 @@
 							<outParameter-comment>Test</outParameter-comment>
 						</outParameter>
 						<outParameter>
-							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+              <outParameter-type>SuperVisionTest/Adder</outParameter-type>
 							<outParameter-name>Adder</outParameter-name>
 							<outParameter-comment>Adder object</outParameter-comment>
 						</outParameter>
@@ -316,7 +325,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+              <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -355,7 +364,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+              <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -370,7 +379,7 @@
 							<inParameter-comment>Second number</inParameter-comment>
 						</inParameter>
 						<inParameter>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+              <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-name>anOtherAdder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -399,7 +408,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+              <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -423,7 +432,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+              <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -446,7 +455,7 @@
 					<inParameter-list>
 						<inParameter>
 							<inParameter-name>Adder</inParameter-name>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+              <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-comment>Adder Object</inParameter-comment>
                             			</inParameter>
                             			<inParameter>
@@ -485,7 +494,7 @@
 		<component-impltype>1</component-impltype>
 
 		<component-interface-list>
-			<component-interface-name>AddInterface</component-interface-name>
+			<component-interface-name>AddComponent</component-interface-name>
 			<component-interface-comment> + ... </component-interface-comment>
 
 			<component-service-list>
@@ -664,7 +673,7 @@
 					</inParameter-list>
                        	 		<outParameter-list>
 						<outParameter>
-							<outParameter-type>AdditionComponent::Adder</outParameter-type>
+              <outParameter-type>AdditionComponent/Adder</outParameter-type>
 							<outParameter-name>Adder</outParameter-name>
 							<outParameter-comment>Adder object</outParameter-comment>
 						</outParameter>
@@ -687,7 +696,7 @@
 							<outParameter-comment>Test</outParameter-comment>
 						</outParameter>
 						<outParameter>
-							<outParameter-type>AdditionComponent::Adder</outParameter-type>
+              <outParameter-type>AdditionComponent/Adder</outParameter-type>
 							<outParameter-name>Adder</outParameter-name>
 							<outParameter-comment>Adder object</outParameter-comment>
 						</outParameter>
@@ -710,7 +719,7 @@
 							<outParameter-comment>Test</outParameter-comment>
 						</outParameter>
 						<outParameter>
-							<outParameter-type>AdditionComponent::Adder</outParameter-type>
+              <outParameter-type>AdditionComponent/Adder</outParameter-type>
 							<outParameter-name>Adder</outParameter-name>
 							<outParameter-comment>Adder object</outParameter-comment>
 						</outParameter>
@@ -725,17 +734,17 @@
                         		<inParameter-list>
                             			<inParameter>
                                 			<inParameter-name>AddComponent1</inParameter-name>
-                                			<inParameter-type>AddInterface</inParameter-type>
+                                			<inParameter-type>AddComponent</inParameter-type>
                                 			<inParameter-comment>unknown</inParameter-comment>
                             			</inParameter>
                             			<inParameter>
                                 			<inParameter-name>Adder2</inParameter-name>
-                                			<inParameter-type>AddInterface</inParameter-type>
+                                			<inParameter-type>AddComponent</inParameter-type>
                                 			<inParameter-comment>unknown</inParameter-comment>
                             			</inParameter>
                             			<inParameter>
                                 			<inParameter-name>Adder3</inParameter-name>
-                                			<inParameter-type>AddInterface</inParameter-type>
+                                			<inParameter-type>AddComponent</inParameter-type>
                                 			<inParameter-comment>unknown</inParameter-comment>
                             			</inParameter>
                         		</inParameter-list>
@@ -747,17 +756,17 @@
                             			</outParameter>
                             			<outParameter>
                                 			<outParameter-name>RetAddComponent1</outParameter-name>
-                                			<outParameter-type>AddInterface</outParameter-type>
+                                			<outParameter-type>AddComponent</outParameter-type>
                                 			<outParameter-comment>unknown</outParameter-comment>
                             			</outParameter>
                             			<outParameter>
                                 			<outParameter-name>RetAdder2</outParameter-name>
-                                			<outParameter-type>AddInterface</outParameter-type>
+                                			<outParameter-type>AddComponent</outParameter-type>
                                 			<outParameter-comment>unknown</outParameter-comment>
                             			</outParameter>
                             			<outParameter>
                                 			<outParameter-name>RetAdder3</outParameter-name>
-                                			<outParameter-type>AddInterface</outParameter-type>
+                                			<outParameter-type>AddComponent</outParameter-type>
                                 			<outParameter-comment>unknown</outParameter-comment>
                             			</outParameter>
                         		</outParameter-list>
@@ -779,7 +788,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>AddComponent::Adder</inParameter-type>
+              <inParameter-type>AddComponent/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -818,7 +827,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>AddComponent::Adder</inParameter-type>
+              <inParameter-type>AddComponent/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -833,7 +842,7 @@
 							<inParameter-comment>Second number</inParameter-comment>
 						</inParameter>
 						<inParameter>
-							<inParameter-type>AddComponent::Adder</inParameter-type>
+              <inParameter-type>AddComponent/Adder</inParameter-type>
 							<inParameter-name>anOtherAdder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -862,7 +871,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>AddComponent::Adder</inParameter-type>
+              <inParameter-type>AddComponent/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -886,7 +895,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>AddComponent::Adder</inParameter-type>
+              <inParameter-type>AddComponent/Adder</inParameter-type>
 							<inParameter-name>Adder</inParameter-name>
 							<inParameter-comment>Adder Object</inParameter-comment>
 						</inParameter>
@@ -909,7 +918,7 @@
 				<inParameter-list>
 					<inParameter>
 						<inParameter-name>Adder</inParameter-name>
-						<inParameter-type>AddComponent::Adder</inParameter-type>
+            <inParameter-type>AddComponent/Adder</inParameter-type>
 						<inParameter-comment>Adder Object</inParameter-comment>
                             		</inParameter>
                             		<inParameter>
@@ -926,7 +935,7 @@
                         	<outParameter-list>
                             		<outParameter>
                                 		<outParameter-name>return</outParameter-name>
-                                		<outParameter-type>AddInterface</outParameter-type>
+                                		<outParameter-type>AddComponent</outParameter-type>
                                 		<outParameter-comment>unknown</outParameter-comment>
                             		</outParameter>
                         	</outParameter-list>
@@ -1989,14 +1998,14 @@
 					<service-by-default>0</service-by-default>
 					<inParameter-list>
 						 <inParameter>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+               <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-name>InObjRef</inParameter-name>
 							<inParameter-comment></inParameter-comment>
 						 </inParameter>
 					</inParameter-list>
 					<outParameter-list>
 						 <outParameter>
-							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+               <outParameter-type>SuperVisionTest/Adder</outParameter-type>
 							<outParameter-name>OutObjRef</outParameter-name>
 							<outParameter-comment></outParameter-comment>
 						 </outParameter>
@@ -2047,7 +2056,7 @@
 							<inParameter-comment></inParameter-comment>
 						</inParameter>
 						<inParameter>
-							<inParameter-type>SuperVisionTest::Adder</inParameter-type>
+              <inParameter-type>SuperVisionTest/Adder</inParameter-type>
 							<inParameter-name>InObjRef</inParameter-name>
 							<inParameter-comment></inParameter-comment>
 						</inParameter>
@@ -2089,7 +2098,7 @@
 							<outParameter-comment></outParameter-comment>
 						</outParameter>
 						<outParameter>
-							<outParameter-type>SuperVisionTest::Adder</outParameter-type>
+              <outParameter-type>SuperVisionTest/Adder</outParameter-type>
 							<outParameter-name>OutObjRef</outParameter-name>
 							<outParameter-comment></outParameter-comment>
 						</outParameter>
