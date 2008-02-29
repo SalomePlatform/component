@@ -50,34 +50,37 @@ salomeidl_DATA = $(BASEIDL_FILES)
 lib_LTLIBRARIES = libSalomeIDLCOMPONENT.la
 
 # Sources built from idl files
-nodist_libSalomeIDLCOMPONENT_la_SOURCES = \
+BASEIDL_SOURCES =\
 	AddComponentSK.cc \
-	AddComponentDynSK.cc \
 	AdditionComponentSK.cc \
-	AdditionComponentDynSK.cc \
 	DivComponentSK.cc \
-	DivComponentDynSK.cc \
 	FactorialComponentSK.cc \
-	FactorialComponentDynSK.cc \
 	MulComponentSK.cc \
-	MulComponentDynSK.cc \
 	SubComponentSK.cc \
-	SubComponentDynSK.cc \
 	SyrComponentSK.cc \
-	SyrComponentDynSK.cc \
 	SyrControlComponentSK.cc \
-	SyrControlComponentDynSK.cc \
 	TypesCheckSK.cc \
-	TypesCheckDynSK.cc \
 	DataStreamComponentSK.cc \
-	DataStreamComponentDynSK.cc \
 	SIGNALSComponentSK.cc \
-	SIGNALSComponentDynSK.cc \
 	UndefinedSymbolComponentSK.cc \
+	CalculatorSK.cc
+DYNIDL_SOURCES = \
+	AddComponentDynSK.cc \
+	AdditionComponentDynSK.cc \
+	DivComponentDynSK.cc \
+	FactorialComponentDynSK.cc \
+	MulComponentDynSK.cc \
+	SubComponentDynSK.cc \
+	SyrComponentDynSK.cc \
+	SyrControlComponentDynSK.cc \
+	TypesCheckDynSK.cc \
+	DataStreamComponentDynSK.cc \
+	SIGNALSComponentDynSK.cc \
 	UndefinedSymbolComponentDynSK.cc \
-	CalculatorSK.cc \
 	CalculatorDynSK.cc
 
+nodist_libSalomeIDLCOMPONENT_la_SOURCES = ${BASEIDL_SOURCES} ${DYNIDL_SOURCES}
+${DYNIDL_SOURCES}: ${BASEIDL_SOURCES}
 
 # header files must be exported: other modules have to use this library
 nodist_salomeinclude_HEADERS= $(BASEIDL_FILES:%.idl=%.hh)

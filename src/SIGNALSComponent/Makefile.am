@@ -43,6 +43,8 @@ dist_SIGNALSComponent_CheckOfUndefined_SOURCES = \
 	SIGNALSComponent_CheckOfUndefined.cxx \
 	HandleServerSideSignals.cxx
 
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
+
 libSIGNALSComponentEngine_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(CORBA_CXXFLAGS) \

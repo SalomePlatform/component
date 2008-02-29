@@ -41,6 +41,8 @@ bin_PROGRAMS = SyrComponent_CheckOfUndefined
 dist_SyrComponent_CheckOfUndefined_SOURCES = \
 	SyrComponent_CheckOfUndefined.cxx
 
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
+
 libSyrComponentEngine_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(CORBA_CXXFLAGS) \

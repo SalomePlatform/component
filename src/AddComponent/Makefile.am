@@ -45,6 +45,8 @@ dist_AddComponent_CheckOfUndefined_SOURCES = \
 	AddComponent_CheckOfUndefined.cxx \
 	HandleServerSideSignals.cxx
 
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
+
 libAddComponentEngine_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(CORBA_CXXFLAGS) \
@@ -56,6 +58,8 @@ libAddComponentEngine_la_LDFLAGS = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
 	-lSalomeContainer \
+	-lSalomeHDFPersist \
+	-lSalomeBatch \
 	-lSalomeNS \
 	-lOpUtil \
 	-lRegistry \
