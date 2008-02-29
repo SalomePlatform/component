@@ -270,55 +270,55 @@ AC_SUBST_FILE(CORBA)
 corba=make_$ORB
 CORBA=adm_local/unix/$corba
 
-echo
-echo ---------------------------------------------
-echo testing QT
-echo ---------------------------------------------
-echo
+dnl echo
+dnl echo ---------------------------------------------
+dnl echo testing QT
+dnl echo ---------------------------------------------
+dnl echo
 
-CHECK_QT
+dnl CHECK_QT
 
-if test "X$WITHIHM" = "Xyes"; then
-	echo
-	echo ---------------------------------------------
-	echo Testing sip
-	echo ---------------------------------------------
-	echo
+dnl if test "X$WITHIHM" = "Xyes"; then
+dnl 	echo
+dnl 	echo ---------------------------------------------
+dnl 	echo Testing sip
+dnl 	echo ---------------------------------------------
+dnl 	echo
 
-	CHECK_SIP
+dnl 	CHECK_SIP
 
-	echo
-	echo ---------------------------------------------
-	echo testing openGL
-	echo ---------------------------------------------
-	echo
+dnl 	echo
+dnl 	echo ---------------------------------------------
+dnl 	echo testing openGL
+dnl 	echo ---------------------------------------------
+dnl 	echo
 
-	CHECK_OPENGL
+dnl 	CHECK_OPENGL
 
-	echo
-	echo ---------------------------------------------
-	echo testing VTK
-	echo ---------------------------------------------
-	echo
+dnl 	echo
+dnl 	echo ---------------------------------------------
+dnl 	echo testing VTK
+dnl 	echo ---------------------------------------------
+dnl 	echo
 
-	CHECK_VTK
+dnl 	CHECK_VTK
 
-	echo
-	echo ---------------------------------------------
-	echo Testing pyqt
-	echo ---------------------------------------------
-	echo
+dnl 	echo
+dnl 	echo ---------------------------------------------
+dnl 	echo Testing pyqt
+dnl 	echo ---------------------------------------------
+dnl 	echo
 
-	CHECK_PYQT
+dnl 	CHECK_PYQT
 
-	echo
-	echo ---------------------------------------------
-	echo Testing qwt
-	echo ---------------------------------------------
-	echo
+dnl 	echo
+dnl 	echo ---------------------------------------------
+dnl 	echo Testing qwt
+dnl 	echo ---------------------------------------------
+dnl 	echo
 
-	CHECK_QWT
-fi
+dnl 	CHECK_QWT
+dnl fi
 
 echo
 echo ---------------------------------------------
@@ -398,10 +398,12 @@ echo
 
 echo Configure
 if test "X$WITHIHM" = "Xyes"; then
-variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok vtk_ok hdf5_ok med2_ok omniORB_ok occ_ok sip_ok pyqt_ok qwt_ok"
+dnl variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok vtk_ok hdf5_ok med2_ok omniORB_ok occ_ok sip_ok pyqt_ok qwt_ok"
+variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok"
 fi
 if test "X$WITHIHM" = "Xno"; then
-variables="cc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok hdf5_ok med2_ok omniORB_ok occ_ok "
+dnl variables="cc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok hdf5_ok med2_ok omniORB_ok occ_ok "
+variables="cc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok "
 fi
 
 for var in $variables
