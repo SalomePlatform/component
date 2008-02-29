@@ -270,56 +270,6 @@ AC_SUBST_FILE(CORBA)
 corba=make_$ORB
 CORBA=adm_local/unix/$corba
 
-dnl echo
-dnl echo ---------------------------------------------
-dnl echo testing QT
-dnl echo ---------------------------------------------
-dnl echo
-
-dnl CHECK_QT
-
-dnl if test "X$WITHIHM" = "Xyes"; then
-dnl 	echo
-dnl 	echo ---------------------------------------------
-dnl 	echo Testing sip
-dnl 	echo ---------------------------------------------
-dnl 	echo
-
-dnl 	CHECK_SIP
-
-dnl 	echo
-dnl 	echo ---------------------------------------------
-dnl 	echo testing openGL
-dnl 	echo ---------------------------------------------
-dnl 	echo
-
-dnl 	CHECK_OPENGL
-
-dnl 	echo
-dnl 	echo ---------------------------------------------
-dnl 	echo testing VTK
-dnl 	echo ---------------------------------------------
-dnl 	echo
-
-dnl 	CHECK_VTK
-
-dnl 	echo
-dnl 	echo ---------------------------------------------
-dnl 	echo Testing pyqt
-dnl 	echo ---------------------------------------------
-dnl 	echo
-
-dnl 	CHECK_PYQT
-
-dnl 	echo
-dnl 	echo ---------------------------------------------
-dnl 	echo Testing qwt
-dnl 	echo ---------------------------------------------
-dnl 	echo
-
-dnl 	CHECK_QWT
-dnl fi
-
 echo
 echo ---------------------------------------------
 echo testing HDF5
@@ -398,11 +348,9 @@ echo
 
 echo Configure
 if test "X$WITHIHM" = "Xyes"; then
-dnl variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok vtk_ok hdf5_ok med2_ok omniORB_ok occ_ok sip_ok pyqt_ok qwt_ok"
 variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok"
 fi
 if test "X$WITHIHM" = "Xno"; then
-dnl variables="cc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok hdf5_ok med2_ok omniORB_ok occ_ok "
 variables="cc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok "
 fi
 
