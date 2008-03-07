@@ -29,6 +29,26 @@
 #include "SIGNALSComponent_Impl.hxx"
 %}
 
+/*
+  managing C++ exception in the Python API
+*/
+%exception
+{
+  class PyAllowThreadsGuard {
+   public:
+    // Py_BEGIN_ALLOW_THREADS
+    PyAllowThreadsGuard() { _save = PyEval_SaveThread(); }
+    // Py_END_ALLOW_THREADS
+    ~PyAllowThreadsGuard() { PyEval_RestoreThread(_save); }
+   private:
+    PyThreadState *_save;
+  };
+
+  PyAllowThreadsGuard guard;
+
+  $action
+}
+
 class SIGNALSComponent_Impl {
 public:
   SIGNALSComponent_Impl(){};

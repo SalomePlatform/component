@@ -23,42 +23,57 @@
 #
 #  File   : Makefile.in
 #  Author : , CEA
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
-#  $Header$
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-
-@COMMENCE@
-
-EXPORT_HEADERS =  \
+# header files 
+salomeinclude_HEADERS = \
 	AdditionComponent_Impl.hxx \
         Addition_Adder_Impl.hxx
 
 # Libraries targets
-LIB = libAdditionComponentEngine.la
-LIB_SRC = \
+lib_LTLIBRARIES = libAdditionComponentEngine.la
+dist_libAdditionComponentEngine_la_SOURCES = \
 	AdditionComponent_Impl.cxx  \
 	Addition_Adder_Impl.cxx 
 
-LIB_SERVER_IDL = SALOME_ContainerManager.idl \
-                 SALOME_Component.idl \
-                 AddComponent.idl \
-                 AdditionComponent.idl
-
 # Executables targets
-BIN = AdditionComponent_CheckOfUndefined
-BIN_SRC = 
-BIN_SERVER_IDL = SALOME_Exception.idl
+bin_PROGRAMS = AdditionComponent_CheckOfUndefined
+dist_AdditionComponent_CheckOfUndefined_SOURCES = \
+	AdditionComponent_CheckOfUndefined.cxx
 
-CPPFLAGS+= $(PYTHON_INCLUDES)  $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA 
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
 
-LIBSFORBIN= $(LIBS)
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace -lSalomeNS -lSalomeLifeCycleCORBA
+libAdditionComponentEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(srcdir)/../AddComponent \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
 
-@CONCLUDE@
+libAdditionComponentEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeHDFPersist \
+	-lSalomeBatch \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+        -lSalomeNotification \
+	-lSALOMELocalTrace \
+	-lSalomeLifeCycleCORBA \
+        -lSalomeResourcesManager \
+	-lSALOMEBasics \
+	-lSalomeIDLKernel
 
+AdditionComponent_CheckOfUndefined_CPPFLAGS = \
+	$(libAdditionComponentEngine_la_CPPFLAGS)
+
+AdditionComponent_CheckOfUndefined_LDFLAGS = \
+	./libAdditionComponentEngine.la \
+	$(libAdditionComponentEngine_laLDFLAGS)

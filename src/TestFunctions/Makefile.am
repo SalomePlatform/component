@@ -23,42 +23,57 @@
 #
 #  File   : Makefile.in
 #  Author : , CEA
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
-#  $Header$
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
-
-
-@COMMENCE@
-
-EXPORT_HEADERS = 
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
 # Libraries targets
-LIB = libDynInvoke.la
-LIB_SRC = DynInvoke.cxx
+lib_LTLIBRARIES = libDynInvoke.la
+dist_libDynInvoke_la_SOURCES = \
+	DynInvoke.cxx
 
-LIB_CLIENT_IDL = SALOME_Component.idl SALOME_Exception.idl
-
-# Executables targets
-BIN = TestFunctions \
+bin_PROGRAMS = \
+	TestFunctions \
 	TestFunctionsMemory \
 	TestFunctionsMemory1 \
 	TestFunctionsMemory2 \
 	TestFunctionsMemory3 \
 	TestFunctionsMemory4
-BIN_SRC = 
-BIN_CLIENT_IDL = SALOME_Component.idl \
-                 SALOME_ContainerManager.idl \
-                 AddComponent.idl
 
-CPPFLAGS+= $(PYTHON_INCLUDES)  $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeNS -lOpUtil 
+libDynInvoke_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(srcdir)/../AddComponent \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
 
-LIBSFORBIN= $(LIBS)
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeLifeCycleCORBA -lSalomeNS -lOpUtil 
+libDynInvoke_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+	-lSalomeNotification \
+	-lSALOMELocalTrace \
+	-lSalomeLifeCycleCORBA \
+        -lSalomeResourcesManager \
+	-lSALOMEBasics \
+	-lSalomeIDLKernel
 
-@CONCLUDE@
+TestFunctions_SOURCES = TestFunctions.cxx
+TestFunctionsMemory_SOURCES = TestFunctionsMemory.cxx
+TestFunctionsMemory1_SOURCES = TestFunctionsMemory1.cxx
+TestFunctionsMemory2_SOURCES = TestFunctionsMemory2.cxx
+TestFunctionsMemory3_SOURCES = TestFunctionsMemory3.cxx
+TestFunctionsMemory4_SOURCES = TestFunctionsMemory4.cxx
 
+AM_CPPFLAGS = \
+	$(libDynInvoke_la_CPPFLAGS)
+
+LDADD = \
+	./libDynInvoke.la \
+	$(libDynInvoke_la_LDFLAGS)

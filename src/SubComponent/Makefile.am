@@ -1,3 +1,5 @@
+#  SuperVisionTest SubComponent : example of component that sunstracts one number from another
+#
 #  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 #  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
 # 
@@ -20,20 +22,35 @@
 #
 #
 #  File   : Makefile.in
-#  Author : Patrick GOLDBRONN (CEA)
+#  Author : , CEA
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
 #  $Header: 
 
-top_srcdir=@top_srcdir@
-top_builddir=..
-srcdir=@srcdir@
-VPATH=.:@srcdir@
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
+# header files 
+salomeinclude_HEADERS = \
+	SubComponent.hxx 
 
-@COMMENCE@
+# Libraries targets
+lib_LTLIBRARIES = libSubComponentEngine.la
+dist_libSubComponentEngine_la_SOURCES = \
+	SubComponent.cxx 
 
-SUBDIRS = AddComponent AdditionComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck DataStreamComponent SIGNALSComponent UndefinedSymbolComponent SIGNALSComponent_Swig TestFunctions CalculatorComponent
+libSubComponentEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
 
-#SUBDIRS = AddComponent AdditionComponent DivComponent FactorialComponent MulComponent SubComponent SyrComponent SyrControlComponent TypesCheck DataStreamComponent SIGNALSComponent UndefinedSymbolComponent SIGNALSComponent_Swig TestFunctions
-
-@MODULE@
+libSubComponentEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+	-lSalomeNotification

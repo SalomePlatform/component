@@ -1,4 +1,4 @@
-#  SuperVisionTest MulComponent : example of component that multiplies two numbers
+#  SuperVisionTest UndefinedSymbolComponent : example of component that devides two numbers
 #
 #  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 #  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
@@ -23,37 +23,34 @@
 #
 #  File   : Makefile.in
 #  Author : , CEA
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
 #  $Header: 
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-
-@COMMENCE@
-
-EXPORT_HEADERS =  \
-	MulComponent.hxx 
+# header files 
+salomeinclude_HEADERS = \
+	UndefinedSymbolComponent.hxx 
 
 # Libraries targets
-LIB = libMulComponentEngine.la
-LIB_SRC = \
-	MulComponent.cxx 
+lib_LTLIBRARIES = libUndefinedSymbolComponentEngine.la
+dist_libUndefinedSymbolComponentEngine_la_SOURCES = \
+	UndefinedSymbolComponent.cxx 
 
-LIB_SERVER_IDL = SALOME_Component.idl \
-                 MulComponent.idl
+libUndefinedSymbolComponentEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
 
-# Executables targets
-BIN = 
-BIN_SRC = 
-BIN_SERVER_IDL =
-
-CPPFLAGS+= $(PYTHON_INCLUDES) $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification
-
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
-
-@CONCLUDE@
-
+libUndefinedSymbolComponentEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+	-lSalomeNotification

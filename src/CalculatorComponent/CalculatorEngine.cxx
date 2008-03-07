@@ -106,6 +106,7 @@ CalculatorEngine::CalculatorEngine()
 
 CalculatorEngine::~CalculatorEngine()
 {
+  delete _NS;
 }
 
 static omni_mutex aPutToStudyMutex;
@@ -178,9 +179,13 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   SCRUTE(FirstField);
   SCRUTE(SecondField);
 
+  CORBA::String_var field1_name        = FirstField -> getName();
+  CORBA::String_var field2_name        = SecondField -> getName();
+  CORBA::String_var field_description = FirstField -> getDescription();
+
   string message = string("\n             CalculatorEngine::Add : ") +
-                   string("\n                               first field name  --> ") + FirstField -> getName() +
-                   string("\n                               second field name --> ") + SecondField -> getName();
+                   string("\n                               first field name  --> ") + string(field1_name.in()) +
+                   string("\n                               second field name --> ") + string(field2_name.in());
 
   sendMessage(NOTIF_TRACE, message.c_str());
 
@@ -198,13 +203,15 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   string * component_unit = new string[nb_comp1];
 
   for (int i=0 ; i<nb_comp1 ; i++) {
-    component_name[i].assign(FirstField -> getComponentName(i+1));
-    component_unit[i].assign(FirstField -> getComponentUnit(i+1));
+    CORBA::String_var name = FirstField -> getComponentName(i+1);
+    CORBA::String_var unit = FirstField -> getComponentUnit(i+1);
+    component_name[i].assign(name.in());
+    component_unit[i].assign(unit.in());
 
     if (same_support) {
-      if (
-	  (component_name[i] != SecondField -> getComponentName(i+1)) ||
-	  (component_unit[i] != SecondField -> getComponentUnit(i+1)))
+      CORBA::String_var name2 = SecondField -> getComponentName(i+1);
+      CORBA::String_var unit2 = SecondField -> getComponentUnit(i+1);
+      if ( (component_name[i] != name2.in()) || (component_unit[i] != unit2.in()))
 	same_support = false;
     }
   }
@@ -215,15 +222,15 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   int len_value1 = 0;
   int len_value2 = 0;
-  SALOME_MED::SUPPORT_ptr support1 = FirstField -> getSupport();
-  SALOME_MED::SUPPORT_ptr support2 = SecondField -> getSupport();
+  SALOME_MED::SUPPORT_var support1 = FirstField -> getSupport();
+  SALOME_MED::SUPPORT_var support2 = SecondField -> getSupport();
 
   SCRUTE(support1);
 
   SCRUTE(support2);
 
-  SALOME_MED::MESH_ptr mesh1 = support1 -> getMesh();
-  SALOME_MED::MESH_ptr mesh2 = support2 -> getMesh();
+  SALOME_MED::MESH_var mesh1 = support1 -> getMesh();
+  SALOME_MED::MESH_var mesh2 = support2 -> getMesh();
 
   SCRUTE(mesh1);
   SCRUTE(mesh2);
@@ -231,14 +238,14 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   if (same_support && support1 != support2) same_support = false;
 
   if (support1 -> isOnAllElements())
-    len_value1 = support1 -> getMesh() -> getNumberOfElements(support1 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value1 = mesh1-> getNumberOfElements(support1 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
     len_value1 = support1 -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
   SCRUTE(len_value1);
 
   if (support2 -> isOnAllElements())
-    len_value2 = support2 -> getMesh() -> getNumberOfElements(support2 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value2 = mesh2-> getNumberOfElements(support2 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
     len_value2 = support2 -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
@@ -282,9 +289,19 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   fieldloc -> allocValue(nb_comp1,len_value1);
   fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Add-");
-  fieldloc  -> setDescription( FirstField -> getDescription() );
+  fieldloc  -> setDescription( field_description.in() );
   fieldloc -> setComponentsNames(component_name);
   fieldloc -> setMEDComponentsUnits(component_unit);
+
+  delete [] new_value;
+  delete first_value;
+  if (same_support) 
+    delete second_value;
+  delete [] component_name;
+  delete [] component_unit;
+  mesh1->Destroy();
+  mesh2->Destroy();
+  support2->Destroy();
 
   // Control
   int until_index = ( 20 > len_value1)? len_value1 : 20;
@@ -299,7 +316,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   SUPPORT *support1Clt=new SUPPORTClient(support1);
   fieldloc->setSupport(support1Clt);
-  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc) ;
+  support1Clt->removeReference();
+
+  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc,true) ;
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
 
   //sleep(4);
@@ -329,8 +348,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   SCRUTE(x1);
 
   // Name and description of field
-  string field_name        = OldField -> getName();
-  string field_description = OldField -> getDescription();
+  CORBA::String_var field_name        = OldField -> getName();
+  CORBA::String_var field_description = OldField -> getDescription();
 
   // Number of components
   int nb_comp  = OldField -> getNumberOfComponents();
@@ -338,8 +357,10 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   string * component_unit = new string[nb_comp];
 
   for (int i=0 ; i<nb_comp ; i++) {
-    component_name[i] = OldField -> getComponentName(i+1);
-    component_unit[i] = OldField -> getComponentUnit(i+1);
+    CORBA::String_var name = OldField -> getComponentName(i+1);
+    component_name[i] = name.in();
+    CORBA::String_var unit = OldField -> getComponentUnit(i+1);
+    component_unit[i] = unit.in();
   }
 
   MESSAGE("CalculatorEngine::Mul Number of entities in the Support of the field");
@@ -347,16 +368,16 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   // Number of entities in the Support of the field
   int len_value = 0;
 
-  SALOME_MED::SUPPORT_ptr support = OldField -> getSupport();
+  SALOME_MED::SUPPORT_var support = OldField -> getSupport();
 
   SCRUTE(support);
 
-  SALOME_MED::MESH_ptr mesh = support -> getMesh();
+  SALOME_MED::MESH_var mesh = support -> getMesh();
 
   SCRUTE(mesh);
 
   if (support -> isOnAllElements())
-    len_value = support -> getMesh() -> getNumberOfElements(support -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value = mesh-> getNumberOfElements(support -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
     len_value = support -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
@@ -379,10 +400,15 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   fieldloc -> allocValue(nb_comp,len_value);
   fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Mul-");
-  fieldloc  -> setDescription(field_description);
+  fieldloc  -> setDescription(field_description.in());
   fieldloc -> setComponentsNames(component_name);
   fieldloc -> setMEDComponentsUnits(component_unit);
 
+  delete old_value;
+  delete [] new_value;
+  delete [] component_name;
+  delete [] component_unit;
+  mesh->Destroy();
 
   // Creation of the new CORBA field
 
@@ -390,7 +416,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   SUPPORT *supportClt=new SUPPORTClient(support);
   fieldloc->setSupport(supportClt);
-  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc) ;
+  supportClt->removeReference();
+  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc,true) ;
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
 
   //sleep(4);
@@ -416,10 +443,10 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
   BEGIN_OF("CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)");
 
   // Name and description of field
-  string field_name        = FirstField -> getName();
-  string field_description = FirstField -> getDescription();
+  CORBA::String_var field_name        = FirstField -> getName();
+  CORBA::String_var field_description = FirstField -> getDescription();
 
-  SALOME_MED::SUPPORT_ptr FirstSupport = FirstField -> getSupport();
+  SALOME_MED::SUPPORT_var FirstSupport = FirstField -> getSupport();
 
   // Number of components
   int nb_comp  = FirstField -> getNumberOfComponents();
@@ -429,8 +456,10 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
   string * component_unit = new string[nb_comp];
 
   for (int i = 0 ; i<nb_comp ; i++) {
-    component_name[i] = FirstField -> getComponentName(i+1);
-    component_unit[i] = FirstField -> getComponentUnit(i+1);
+    CORBA::String_var name = FirstField -> getComponentName(i+1);
+    component_name[i] = name.in();
+    CORBA::String_var unit = FirstField -> getComponentUnit(i+1);
+    component_unit[i] = unit.in();
   }
 
   MESSAGE("CalculatorEngine::Constant Number of entities in the Support of the field");
@@ -440,12 +469,12 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   SCRUTE(FirstSupport);
 
-  SALOME_MED::MESH_ptr mesh = FirstSupport -> getMesh();
+  SALOME_MED::MESH_var mesh = FirstSupport -> getMesh();
 
   SCRUTE(mesh);
 
   if ( FirstSupport -> isOnAllElements() )
-    len_value = FirstSupport -> getMesh() -> getNumberOfElements(FirstSupport -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value = mesh -> getNumberOfElements(FirstSupport -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
     len_value = FirstSupport -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
@@ -465,9 +494,14 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
   fieldloc -> allocValue(nb_comp,len_value);
   fieldloc  -> setValue(new_value);
   fieldloc  -> setName("-new_Const_Field-");
-  fieldloc  -> setDescription(field_description);
+  fieldloc  -> setDescription(field_description.in());
   fieldloc -> setComponentsNames(component_name);
   fieldloc -> setMEDComponentsUnits(component_unit);
+
+  delete [] new_value;
+  delete [] component_name;
+  delete [] component_unit;
+  mesh->Destroy();
 
   // Control
   int until_index = ( 20 > len_value)? len_value : 20 ;
@@ -479,7 +513,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   SUPPORT *supportClt=new SUPPORTClient(FirstSupport);
   fieldloc->setSupport(supportClt);
-  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc) ;
+  supportClt->removeReference();
+  TFieldDouble_i * NewField = new TFieldDouble_i(fieldloc,true) ;
 
   SALOME_MED::FIELDDOUBLE_ptr myFieldIOR = NewField->_this() ;
   

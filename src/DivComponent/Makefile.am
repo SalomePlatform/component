@@ -1,4 +1,4 @@
-#  SuperVisionTest SIGNALSComponent : example of component that devides two numbers
+#  SuperVisionTest DivComponent : example of component that devides two numbers
 #
 #  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 #  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
@@ -23,38 +23,34 @@
 #
 #  File   : Makefile.in
 #  Author : , CEA
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
 #  $Header: 
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-
-@COMMENCE@
-
+# header files 
+salomeinclude_HEADERS = \
+	DivComponent.hxx 
 
 # Libraries targets
-LIB = libSIGNALSComponent_Swigcmodule.la 
+lib_LTLIBRARIES = libDivComponentEngine.la
+dist_libDivComponentEngine_la_SOURCES = \
+	DivComponent.cxx 
 
-SWIG_DEF = libSIGNALSComponent_Swig.i
-EXPORT_PYSCRIPTS = libSIGNALSComponent_Swig.py
+libDivComponentEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
 
-LIB_SERVER_IDL = SALOME_Component.idl \
-              SIGNALSComponent.idl \
-              UndefinedSymbolComponent.idl
-
-
-# Executables targets
-BIN = 
-BIN_SRC = 
-BIN_SERVER_IDL =
-
-CPPFLAGS+= $(PYTHON_INCLUDES) $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSIGNALSComponentEngine
-
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
-
-@CONCLUDE@
-
+libDivComponentEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+	-lSalomeNotification

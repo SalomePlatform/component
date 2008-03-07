@@ -24,38 +24,49 @@
 #  File   : Makefile.in
 #  Author : , CEA
 #  Module : SuperVisionTest
-#  $Header$
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-
-@COMMENCE@
-
-EXPORT_HEADERS =  \
+# header files 
+salomeinclude_HEADERS = \
 	TypesCheck_Impl.hxx
 
 # Libraries targets
-LIB = libTypesCheckEngine.la
-LIB_SRC = \
+lib_LTLIBRARIES = libTypesCheckEngine.la
+dist_libTypesCheckEngine_la_SOURCES = \
 	TypesCheck_Impl.cxx 
 
-LIB_SERVER_IDL = SALOME_Component.idl \
-		 TypesCheck.idl \
-		 AddComponent.idl
+bin_PROGRAMS = TypesCheck_CheckOfUndefined
+dist_TypesCheck_CheckOfUndefined_SOURCES = \
+	TypesCheck_CheckOfUndefined.cxx
 
-# Executables targets
-BIN = TypesCheck_CheckOfUndefined
-BIN_SRC = 
-BIN_SERVER_IDL =
+${bin_PROGRAMS}: ${lib_LTLIBRARIES}
 
-CPPFLAGS+= $(PYTHON_INCLUDES) $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
+libTypesCheckEngine_la_CPPFLAGS = \
+	$(PYTHON_INCLUDES) \
+	$(CORBA_CXXFLAGS) \
+	$(CORBA_INCLUDES) \
+	$(KERNEL_CXXFLAGS) \
+	-I$(srcdir)/../AddComponent \
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)/salome_adm/unix
+libTypesCheckEngine_la_LDFLAGS  = \
+	../../idl/libSalomeIDLCOMPONENT.la \
+	$(KERNEL_LDFLAGS) \
+	-lSalomeContainer \
+	-lSalomeNS \
+	-lOpUtil \
+	-lRegistry \
+        -lSalomeNotification \
+	-lSALOMELocalTrace \
+        -lSalomeResourcesManager \
+	-lSALOMEBasics \
+	-lSalomeIDLKernel
 
-LIBSFORBIN= $(LIBS)
-LDFLAGSFORBIN+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification -lSALOMELocalTrace
+TypesCheck_CheckOfUndefined_CPPFLAGS = \
+	$(libTypesCheckEngine_la_CPPFLAGS)
 
-@CONCLUDE@
-
+TypesCheck_CheckOfUndefined_LDFLAGS  = \
+	./libTypesCheckEngine.la \
+	$(libTypesCheckEngine_la_LDFLAGS)

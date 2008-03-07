@@ -1,4 +1,4 @@
-#  SuperVisionTest DivComponent : example of component that devides two numbers
+#  SuperVisionTest FactorialComponent : example of component that calculates factorial
 #
 #  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
 #  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
@@ -22,36 +22,11 @@
 #
 #
 #  File   : Makefile.in
-#  Author : , CEA
+#  Author : Fausto MALVAGI - Marc TAJCHMAN
+#  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
-#  $Header: 
 
-top_srcdir=@top_srcdir@
-top_builddir=../..
-srcdir=@srcdir@
-VPATH=.:@srcdir@:@top_srcdir@/idl
+include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-
-@COMMENCE@
-
-EXPORT_HEADERS =  \
-	DivComponent.hxx 
-
-# Libraries targets
-LIB = libDivComponentEngine.la
-LIB_SRC = \
-	DivComponent.cxx 
-
-LIB_SERVER_IDL = SALOME_Component.idl \
-                 DivComponent.idl
-
-# Executables targets
-BIN = 
-BIN_SRC = 
-BIN_SERVER_IDL =
-
-CPPFLAGS+= $(PYTHON_INCLUDES) $(KERNEL_CXXFLAGS)
-LDFLAGS+= $(KERNEL_LDFLAGS) -lSalomeContainer -lSalomeNS -lOpUtil -lRegistry -lSalomeNotification
-
-@CONCLUDE@
-
+dist_salomescript_DATA = \
+	FactorialComponent.py
