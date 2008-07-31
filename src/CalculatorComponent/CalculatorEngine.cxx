@@ -323,11 +323,10 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   //sleep(4);
 
-  END_OF("CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)");
+  END_OF();
 
   endService("CalculatorEngine::Add");
   return myFieldIOR;
-
 }
 
 
@@ -422,7 +421,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   //sleep(4);
 
-  END_OF("CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)");
+  END_OF();
 
   endService("CalculatorEngine::Mul");
   return myFieldIOR;
@@ -522,10 +521,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   endService("CalculatorEngine::Const");
   
-  END_OF("CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)");
+  END_OF();
   
   return myFieldIOR;
-  
 }
 
 //================================================================================
@@ -536,8 +534,11 @@ static omni_mutex aWriteMEDfileMutex;
 void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const char *filename)
 {
   omni_mutex_lock aLock(aWriteMEDfileMutex);
+  
+  const char * LOC = "CalculatorEngine::writeMEDfile ";
 
   beginService("CalculatorEngine::writeMEDfile");
+  BEGIN_OF(LOC);
   MESSAGE("fichier d'impression du champ resultat:"<<filename);
 
   // get support of the field
@@ -555,8 +556,6 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   mesh -> write(index_m,"");
 
   //write the field
-  
-  const char * LOC = "CalculatorEngine::writeMEDfile ";
   
   MESSAGE("fichier :"<<filename);
 
@@ -712,16 +711,15 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
 				     )
 			   );
     }
-  END_OF( LOC );
-  
+  END_OF();
+
   SCRUTE( err );
-  if (err < 0 ) return ;
-  
-  med_2_1::MEDfermer(_medIdt) ;
-  
+  if (err < 0 ) return;
+
+  med_2_1::MEDfermer(_medIdt);
+
   endService("CalculatorEngine::writeMEDfile");
-  return ;
-  
+  return;
 }
 
 extern "C"
@@ -743,5 +741,3 @@ extern "C"
     return myCalculator->getId() ;
   }
 }
-
-
