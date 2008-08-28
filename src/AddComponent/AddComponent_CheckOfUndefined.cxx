@@ -88,8 +88,8 @@ int main(int argc, char* argv[])
 
   if (!isSupervContainer)
     {
-      int _argc = 1;
-      char* _argv[] = {""};
+      //int _argc = 1;
+      //char* _argv[] = {""};
       KERNEL_PYTHON::init_python(argc,argv);
     }
   else
@@ -119,8 +119,8 @@ int main(int argc, char* argv[])
       system(aCommand.str());
 #endif
       
-      Engines_Container_i * myContainer 
-	= new Engines_Container_i(orb, root_poa, containerName , argc , argv );
+      /*Engines_Container_i * myContainer 
+	= */new Engines_Container_i(orb, root_poa, containerName , argc , argv );
       
       pman->activate();
       

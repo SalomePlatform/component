@@ -323,7 +323,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   //sleep(4);
 
-  END_OF("CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)");
+  END_OF();
 
   endService("CalculatorEngine::Add");
   return myFieldIOR;
@@ -422,7 +422,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   //sleep(4);
 
-  END_OF("CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)");
+  END_OF();
 
   endService("CalculatorEngine::Mul");
   return myFieldIOR;
@@ -522,7 +522,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   endService("CalculatorEngine::Const");
   
-  END_OF("CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)");
+  END_OF();
   
   return myFieldIOR;
   
@@ -538,6 +538,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   omni_mutex_lock aLock(aWriteMEDfileMutex);
 
   beginService("CalculatorEngine::writeMEDfile");
+  BEGIN_OF("CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const char *filename)");
   MESSAGE("fichier d'impression du champ resultat:"<<filename);
 
   // get support of the field
@@ -712,7 +713,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
 				     )
 			   );
     }
-  END_OF( LOC );
+  END_OF();
   
   SCRUTE( err );
   if (err < 0 ) return ;
