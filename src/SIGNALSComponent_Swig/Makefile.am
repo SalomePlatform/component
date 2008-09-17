@@ -46,7 +46,7 @@ include $(top_srcdir)/adm_local/unix/make_common_starter.am
 #                          +              |
 #                          dependant libs |
 #
-# The file libSALOME_Swigcmodule.py will be installed in
+# The file libSIGNALSComponent_Swig.py will be installed in
 # <prefix>/lib/python<version>/site-package/salome.
 # The library will be installed in the same place.
 #
@@ -54,25 +54,20 @@ include $(top_srcdir)/adm_local/unix/make_common_starter.am
 # this option puts it to dist
 #BUILT_SOURCES = swig_wrap.cpp
 
-SWIG_FLAGS    = \
-	@SWIG_FLAGS@ \
-	-I$(srcdir)
-
+SWIG_FLAGS    = @SWIG_FLAGS@ -I$(srcdir)
 SWIG_SOURCES  = libSIGNALSComponent_Swig.i
 
 # Libraries targets
-lib_LTLIBRARIES = libSIGNALSComponent_Swigcmodule.la
-
+lib_LTLIBRARIES = _libSIGNALSComponent_Swig.la
+_libSIGNALSComponent_Swig_la_SOURCES = $(SWIG_SOURCES)
+nodist__libSIGNALSComponent_Swig_la_SOURCES = swig_wrap.cpp
 nodist_pkgpython_DATA = libSIGNALSComponent_Swig.py
-libSMESH_Swig.py: swig_wrap.cpp
 
-libSIGNALSComponent_Swigcmodule_la_SOURCES = \
-	$(BUILT_SOURCES) \
-	$(SWIG_SOURCES)
+EXTRA_DIST += $(SWIG_SOURCES)
 
-nodist_libSIGNALSComponent_Swigcmodule_la_SOURCES = swig_wrap.cpp
+libSIGNALSComponent_Swig.py: swig_wrap.cpp
 
-libSIGNALSComponent_Swigcmodule_la_CPPFLAGS = \
+_libSIGNALSComponent_Swig_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(CORBA_CXXFLAGS) \
 	$(CORBA_INCLUDES) \
@@ -81,7 +76,8 @@ libSIGNALSComponent_Swigcmodule_la_CPPFLAGS = \
 	-I$(top_builddir)/idl \
 	-I$(top_builddir)/salome_adm/unix
 
-libSIGNALSComponent_Swigcmodule_la_LDFLAGS  = \
+_libSIGNALSComponent_Swig_la_LDFLAGS = -module
+_libSIGNALSComponent_Swig_la_LIBADD  = \
 	../SIGNALSComponent/libSIGNALSComponentEngine.la \
 	$(KERNEL_LDFLAGS) \
 	-lSalomeContainer \
@@ -93,10 +89,4 @@ libSIGNALSComponent_Swigcmodule_la_LDFLAGS  = \
 swig_wrap.cpp : $(SWIG_SOURCES)
 	$(SWIG) $(SWIG_FLAGS) -o $@ $<
 
-CLEANFILES = \
-	swig_wrap.cpp
-
-install-exec-hook: $(libdir)/_libSIGNALSComponent_Swig.so
-
-$(libdir)/_libSIGNALSComponent_Swig.so:
-	( cd $(libdir); ln -sf libSIGNALSComponent_Swigcmodule.so _libSIGNALSComponent_Swig.so; )
+CLEANFILES = swig_wrap.cpp libSIGNALSComponent_Swig.py

@@ -58,5 +58,4 @@ libCalculatorEngine_la_LDFLAGS  = \
 	-lSalomeNotification \
 	-lSALOMELocalTrace \
 	$(MED_LDFLAGS) \
-	-lMEDEngine \
-	-lMEDClientcmodule
+	-lMEDEngine
