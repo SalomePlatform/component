@@ -35,7 +35,7 @@ include $(top_srcdir)/adm_local/unix/make_common_starter.am
 lib_LTLIBRARIES = libCalculatorEngine.la
 
 dist_libCalculatorEngine_la_SOURCES = \
-	CalculatorEngine.cxx
+	CalculatorEngine.hxx CalculatorEngine.cxx
 
 libCalculatorEngine_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \

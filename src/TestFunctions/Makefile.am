@@ -31,7 +31,7 @@ include $(top_srcdir)/adm_local/unix/make_common_starter.am
 # Libraries targets
 lib_LTLIBRARIES = libDynInvoke.la
 dist_libDynInvoke_la_SOURCES = \
-	DynInvoke.cxx
+	DynInvoke.hxx DynInvoke.cxx
 
 bin_PROGRAMS = \
 	TestFunctions \
@@ -77,3 +77,5 @@ AM_CPPFLAGS = \
 LDADD = \
 	./libDynInvoke.la \
 	$(libDynInvoke_la_LDFLAGS)
+
+dist_salomescript_SCRIPTS = TestFunctions.py

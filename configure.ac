@@ -15,7 +15,7 @@
 # Created from configure.in.base
 #
 
-AC_INIT([Salome2 Project COMPONENT module], [5.0.0], [webmaster.salome@opencascade.com], [salome])
+AC_INIT([Salome2 Project COMPONENT module], [5.0.0], [webmaster.salome@opencascade.com], [SalomeCOMPONENT])
 AC_CONFIG_AUX_DIR(salome_adm/unix/config_files)
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
@@ -137,14 +137,6 @@ echo ---------------------------------------------
 echo
 
 ENABLE_PTHREADS
-
-dnl
-dnl ---------------------------------------------
-dnl testing WITHIHM
-dnl ---------------------------------------------
-dnl
-
-CHECK_WITHIHM
 
 dnl
 dnl ---------------------------------------------
@@ -310,6 +302,10 @@ echo
 
 CHECK_HTML_GENERATORS
 
+COMPONENT_WITH_GUI=no
+
+AM_CONDITIONAL(COMPONENT_ENABLE_GUI, [test "${COMPONENT_WITH_GUI}" = "yes"])
+
 if test "${COMPONENT_WITH_GUI}" = "yes"; then
     echo
     echo ---------------------------------------------
@@ -347,10 +343,10 @@ echo ---------------------------------------------
 echo
 
 echo Configure
-if test "X$WITHIHM" = "Xyes"; then
+if test "${COMPONENT_WITH_GUI}" = "yes"; then
 variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok"
 fi
-if test "X$WITHIHM" = "Xno"; then
+if test "${COMPONENT_WITH_GUI}" = "no"; then
 variables="cc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok "
 fi
 
