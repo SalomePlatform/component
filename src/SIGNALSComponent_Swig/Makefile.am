@@ -61,7 +61,7 @@ SWIG_SOURCES  = libSIGNALSComponent_Swig.i
 lib_LTLIBRARIES = _libSIGNALSComponent_Swig.la
 _libSIGNALSComponent_Swig_la_SOURCES = $(SWIG_SOURCES)
 nodist__libSIGNALSComponent_Swig_la_SOURCES = swig_wrap.cpp
-nodist_pkgpython_DATA = libSIGNALSComponent_Swig.py
+nodist_salomescript_DATA = libSIGNALSComponent_Swig.py
 
 EXTRA_DIST += $(SWIG_SOURCES)
 
