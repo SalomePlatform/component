@@ -174,7 +174,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   
   sendMessage(NOTIF_TRACE, "CalculatorEngine::Add is Computing");
   
-  BEGIN_OF("CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)");
+  const char* LOC = "CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)";
+  BEGIN_OF(LOC);
 
   SCRUTE(FirstField);
   SCRUTE(SecondField);
@@ -323,7 +324,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   //sleep(4);
 
-  END_OF();
+  END_OF(LOC);
 
   endService("CalculatorEngine::Add");
   return myFieldIOR;
@@ -341,7 +342,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   omni_mutex_lock aLock(aMulMutex);
 
   beginService("CalculatorEngine::Mul");
-  BEGIN_OF("CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)");
+  const char* LOC = "CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)";
+  BEGIN_OF(LOC);
 
   SCRUTE(OldField);
   SCRUTE(x1);
@@ -421,7 +423,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   //sleep(4);
 
-  END_OF();
+  END_OF(LOC);
 
   endService("CalculatorEngine::Mul");
   return myFieldIOR;
@@ -439,7 +441,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
   omni_mutex_lock aLock(aConstantMutex);
 
   beginService("CalculatorEngine::Const");
-  BEGIN_OF("CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)");
+  const char* LOC = "CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)";
+  BEGIN_OF(LOC);
 
   // Name and description of field
   CORBA::String_var field_name        = FirstField -> getName();
@@ -521,7 +524,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   endService("CalculatorEngine::Const");
   
-  END_OF();
+  END_OF(LOC);
   
   return myFieldIOR;
 }
@@ -711,7 +714,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
 				     )
 			   );
     }
-  END_OF();
+  END_OF(LOC);
 
   SCRUTE( err );
   if (err < 0 ) return;
