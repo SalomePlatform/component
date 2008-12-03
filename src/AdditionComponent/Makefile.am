@@ -67,6 +67,7 @@ libAdditionComponentEngine_la_LDFLAGS  = \
 	-lSALOMELocalTrace \
 	-lSalomeLifeCycleCORBA \
         -lSalomeResourcesManager \
+        -lResourcesManager \
 	-lSALOMEBasics \
 	-lSalomeIDLKernel
 
