@@ -71,5 +71,5 @@ SyrComponent_CheckOfUndefined_LDFLAGS = \
 	./libSyrComponentEngine.la \
 	$(libSyrComponentEngine_la_LDFLAGS)
 
-EXPORT_SHAREDPYSCRIPTS =\
+sharedpkgpython_PYTHON =\
 	COMPONENT_shared_modules.py
