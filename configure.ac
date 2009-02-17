@@ -1,21 +1,35 @@
+#  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
+#
+#  Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
+#  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+#
+#  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
 #  PLEASE DO NOT MODIFY configure.in FILE
-#
 #  ALL CHANGES WILL BE DISCARDED BY THE NEXT
 #  build_configure COMMAND
-#
 #  CHANGES MUST BE MADE IN configure.in.base FILE
-#
-#
 # Author : Marc Tajchman (CEA)
 # Date : 28/06/2001
 # Modified by : Patrick GOLDBRONN (CEA)
 # Modified by : Marc Tajchman (CEA)
-#
 # Created from configure.in.base
 #
-
-AC_INIT([Salome2 Project COMPONENT module], [4.1.1], [webmaster.salome@opencascade.com], [salome])
+AC_INIT([Salome2 Project COMPONENT module], [5.1.0], [webmaster.salome@opencascade.com], [SalomeCOMPONENT])
 AC_CONFIG_AUX_DIR(salome_adm/unix/config_files)
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
@@ -137,14 +151,6 @@ echo ---------------------------------------------
 echo
 
 ENABLE_PTHREADS
-
-dnl
-dnl ---------------------------------------------
-dnl testing WITHIHM
-dnl ---------------------------------------------
-dnl
-
-CHECK_WITHIHM
 
 dnl
 dnl ---------------------------------------------
@@ -272,56 +278,6 @@ CORBA=adm_local/unix/$corba
 
 echo
 echo ---------------------------------------------
-echo testing QT
-echo ---------------------------------------------
-echo
-
-CHECK_QT
-
-if test "X$WITHIHM" = "Xyes"; then
-	echo
-	echo ---------------------------------------------
-	echo Testing sip
-	echo ---------------------------------------------
-	echo
-
-	CHECK_SIP
-
-	echo
-	echo ---------------------------------------------
-	echo testing openGL
-	echo ---------------------------------------------
-	echo
-
-	CHECK_OPENGL
-
-	echo
-	echo ---------------------------------------------
-	echo testing VTK
-	echo ---------------------------------------------
-	echo
-
-	CHECK_VTK
-
-	echo
-	echo ---------------------------------------------
-	echo Testing pyqt
-	echo ---------------------------------------------
-	echo
-
-	CHECK_PYQT
-
-	echo
-	echo ---------------------------------------------
-	echo Testing qwt
-	echo ---------------------------------------------
-	echo
-
-	CHECK_QWT
-fi
-
-echo
-echo ---------------------------------------------
 echo testing HDF5
 echo ---------------------------------------------
 echo
@@ -360,6 +316,10 @@ echo
 
 CHECK_HTML_GENERATORS
 
+COMPONENT_WITH_GUI=no
+
+AM_CONDITIONAL(COMPONENT_ENABLE_GUI, [test "${COMPONENT_WITH_GUI}" = "yes"])
+
 if test "${COMPONENT_WITH_GUI}" = "yes"; then
     echo
     echo ---------------------------------------------
@@ -397,11 +357,11 @@ echo ---------------------------------------------
 echo
 
 echo Configure
-if test "X$WITHIHM" = "Xyes"; then
-variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok vtk_ok hdf5_ok med2_ok omniORB_ok occ_ok sip_ok pyqt_ok qwt_ok"
+if test "${COMPONENT_WITH_GUI}" = "yes"; then
+variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok"
 fi
-if test "X$WITHIHM" = "Xno"; then
-variables="cc_ok python_ok swig_ok threads_ok OpenGL_ok qt_ok hdf5_ok med2_ok omniORB_ok occ_ok "
+if test "${COMPONENT_WITH_GUI}" = "no"; then
+variables="cc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok "
 fi
 
 for var in $variables

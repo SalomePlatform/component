@@ -1,3 +1,4 @@
+#!/bin/sh
 #  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
 #
 #  Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
@@ -19,37 +20,16 @@
 #
 #  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
-#  SuperVisionTest UndefinedSymbolComponent : example of component that devides two numbers
-#  File   : Makefile.in
-#  Author : , CEA
-#  Modified by : Alexander BORODIN (OCN) - autotools usage
-#  Module : SuperVisionTest
-#  $Header: 
-#
-include $(top_srcdir)/adm_local/unix/make_common_starter.am
+rm -rf autom4te.cache aclocal.m4 configure make_config
+find . -name "*~" -print -exec rm {} \;
+find . -name "*.pyc" -print -exec rm {} \;
+#exit
+# ==================== ON SORT AVANT
 
-# header files 
-salomeinclude_HEADERS = \
-	UndefinedSymbolComponent.hxx 
-
-# Libraries targets
-lib_LTLIBRARIES = libUndefinedSymbolComponentEngine.la
-dist_libUndefinedSymbolComponentEngine_la_SOURCES = \
-	UndefinedSymbolComponent.cxx 
-
-libUndefinedSymbolComponentEngine_la_CPPFLAGS = \
-	$(PYTHON_INCLUDES) \
-	$(CORBA_CXXFLAGS) \
-	$(CORBA_INCLUDES) \
-	$(KERNEL_CXXFLAGS) \
-	-I$(top_builddir)/idl \
-	-I$(top_builddir)/salome_adm/unix
-
-libUndefinedSymbolComponentEngine_la_LDFLAGS  = \
-	../../idl/libSalomeIDLCOMPONENT.la \
-	$(KERNEL_LDFLAGS) \
-	-lSalomeContainer \
-	-lSalomeNS \
-	-lOpUtil \
-	-lRegistry \
-	-lSalomeNotification
+find bin -name Makefile.in | xargs rm -f
+find doc -name Makefile.in | xargs rm -f
+find idl -name Makefile.in | xargs rm -f
+find resources -name Makefile.in | xargs rm -f
+find salome_adm -name Makefile.in | xargs rm -f
+find src -name Makefile.in | xargs rm -f
+rm -f Makefile.in

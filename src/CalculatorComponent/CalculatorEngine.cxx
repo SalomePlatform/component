@@ -1,29 +1,29 @@
-//  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
-//  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
-// 
-//  This library is free software; you can redistribute it and/or 
-//  modify it under the terms of the GNU Lesser General Public 
-//  License as published by the Free Software Foundation; either 
-//  version 2.1 of the License. 
-// 
-//  This library is distributed in the hope that it will be useful, 
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of 
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-//  Lesser General Public License for more details. 
-// 
-//  You should have received a copy of the GNU Lesser General Public 
-//  License along with this library; if not, write to the Free Software 
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA 
-// 
-// See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
+//  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
 //
+//  Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
+//  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS
 //
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Lesser General Public
+//  License as published by the Free Software Foundation; either
+//  version 2.1 of the License.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Lesser General Public License for more details.
+//
+//  You should have received a copy of the GNU Lesser General Public
+//  License along with this library; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+//
+//  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 //
 //  File   : CalculatorEngine.cxx
 //  Author : Laurent DADA, CEA
 //  Module : CalculatorComponent
 //  $Header$
-
+//
 #include <unistd.h>
 
 #include <iostream>
@@ -174,7 +174,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   
   sendMessage(NOTIF_TRACE, "CalculatorEngine::Add is Computing");
   
-  BEGIN_OF("CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)");
+  const char* LOC = "CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)";
+  BEGIN_OF(LOC);
 
   SCRUTE(FirstField);
   SCRUTE(SecondField);
@@ -323,11 +324,10 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   //sleep(4);
 
-  END_OF("CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr FirstField,SALOME_MED::FIELDDOUBLE_ptr SecondField)");
+  END_OF(LOC);
 
   endService("CalculatorEngine::Add");
   return myFieldIOR;
-
 }
 
 
@@ -342,7 +342,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   omni_mutex_lock aLock(aMulMutex);
 
   beginService("CalculatorEngine::Mul");
-  BEGIN_OF("CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)");
+  const char* LOC = "CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)";
+  BEGIN_OF(LOC);
 
   SCRUTE(OldField);
   SCRUTE(x1);
@@ -422,7 +423,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   //sleep(4);
 
-  END_OF("CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr OldField,CORBA::Double x1)");
+  END_OF(LOC);
 
   endService("CalculatorEngine::Mul");
   return myFieldIOR;
@@ -440,7 +441,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
   omni_mutex_lock aLock(aConstantMutex);
 
   beginService("CalculatorEngine::Const");
-  BEGIN_OF("CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)");
+  const char* LOC = "CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)";
+  BEGIN_OF(LOC);
 
   // Name and description of field
   CORBA::String_var field_name        = FirstField -> getName();
@@ -522,10 +524,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   endService("CalculatorEngine::Const");
   
-  END_OF("CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_ptr FirstField,CORBA::Double x1)");
+  END_OF(LOC);
   
   return myFieldIOR;
-  
 }
 
 //================================================================================
@@ -536,8 +537,11 @@ static omni_mutex aWriteMEDfileMutex;
 void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const char *filename)
 {
   omni_mutex_lock aLock(aWriteMEDfileMutex);
+  
+  const char * LOC = "CalculatorEngine::writeMEDfile ";
 
   beginService("CalculatorEngine::writeMEDfile");
+  BEGIN_OF(LOC);
   MESSAGE("fichier d'impression du champ resultat:"<<filename);
 
   // get support of the field
@@ -555,8 +559,6 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   mesh -> write(index_m,"");
 
   //write the field
-  
-  const char * LOC = "CalculatorEngine::writeMEDfile ";
   
   MESSAGE("fichier :"<<filename);
 
@@ -712,16 +714,15 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
 				     )
 			   );
     }
-  END_OF( LOC );
-  
+  END_OF(LOC);
+
   SCRUTE( err );
-  if (err < 0 ) return ;
-  
-  med_2_1::MEDfermer(_medIdt) ;
-  
+  if (err < 0 ) return;
+
+  med_2_1::MEDfermer(_medIdt);
+
   endService("CalculatorEngine::writeMEDfile");
-  return ;
-  
+  return;
 }
 
 extern "C"
@@ -743,5 +744,3 @@ extern "C"
     return myCalculator->getId() ;
   }
 }
-
-

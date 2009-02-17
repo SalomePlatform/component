@@ -1,32 +1,31 @@
+#  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
+#
+#  Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
+#  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+#
+#  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
+#
 #  SuperVisionTest SIGNALSComponent : example of component that devides two numbers
-#
-#  Copyright (C) 2003  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
-#  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS 
-# 
-#  This library is free software; you can redistribute it and/or 
-#  modify it under the terms of the GNU Lesser General Public 
-#  License as published by the Free Software Foundation; either 
-#  version 2.1 of the License. 
-# 
-#  This library is distributed in the hope that it will be useful, 
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of 
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-#  Lesser General Public License for more details. 
-# 
-#  You should have received a copy of the GNU Lesser General Public 
-#  License along with this library; if not, write to the Free Software 
-#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA 
-# 
-# See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
-#
-#
-#
 #  File   : Makefile.in
 #  Author : , CEA
 #  Modified by : Alexander BORODIN (OCN) - autotools usage
 #  Module : SuperVisionTest
 #  $Header: 
-
+#
 include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
 # ===============================================================
@@ -46,7 +45,7 @@ include $(top_srcdir)/adm_local/unix/make_common_starter.am
 #                          +              |
 #                          dependant libs |
 #
-# The file libSALOME_Swigcmodule.py will be installed in
+# The file libSIGNALSComponent_Swig.py will be installed in
 # <prefix>/lib/python<version>/site-package/salome.
 # The library will be installed in the same place.
 #
@@ -54,25 +53,20 @@ include $(top_srcdir)/adm_local/unix/make_common_starter.am
 # this option puts it to dist
 #BUILT_SOURCES = swig_wrap.cpp
 
-SWIG_FLAGS    = \
-	@SWIG_FLAGS@ \
-	-I$(srcdir)
-
+SWIG_FLAGS    = @SWIG_FLAGS@ -I$(srcdir)
 SWIG_SOURCES  = libSIGNALSComponent_Swig.i
 
 # Libraries targets
-lib_LTLIBRARIES = libSIGNALSComponent_Swigcmodule.la
+lib_LTLIBRARIES = _libSIGNALSComponent_Swig.la
+_libSIGNALSComponent_Swig_la_SOURCES = $(SWIG_SOURCES)
+nodist__libSIGNALSComponent_Swig_la_SOURCES = swig_wrap.cpp
+nodist_salomescript_DATA = libSIGNALSComponent_Swig.py
 
-nodist_pkgpython_DATA = libSIGNALSComponent_Swig.py
-libSMESH_Swig.py: swig_wrap.cpp
+EXTRA_DIST += $(SWIG_SOURCES)
 
-libSIGNALSComponent_Swigcmodule_la_SOURCES = \
-	$(BUILT_SOURCES) \
-	$(SWIG_SOURCES)
+libSIGNALSComponent_Swig.py: swig_wrap.cpp
 
-nodist_libSIGNALSComponent_Swigcmodule_la_SOURCES = swig_wrap.cpp
-
-libSIGNALSComponent_Swigcmodule_la_CPPFLAGS = \
+_libSIGNALSComponent_Swig_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(CORBA_CXXFLAGS) \
 	$(CORBA_INCLUDES) \
@@ -81,7 +75,8 @@ libSIGNALSComponent_Swigcmodule_la_CPPFLAGS = \
 	-I$(top_builddir)/idl \
 	-I$(top_builddir)/salome_adm/unix
 
-libSIGNALSComponent_Swigcmodule_la_LDFLAGS  = \
+_libSIGNALSComponent_Swig_la_LDFLAGS = -module
+_libSIGNALSComponent_Swig_la_LIBADD  = \
 	../SIGNALSComponent/libSIGNALSComponentEngine.la \
 	$(KERNEL_LDFLAGS) \
 	-lSalomeContainer \
@@ -93,10 +88,4 @@ libSIGNALSComponent_Swigcmodule_la_LDFLAGS  = \
 swig_wrap.cpp : $(SWIG_SOURCES)
 	$(SWIG) $(SWIG_FLAGS) -o $@ $<
 
-CLEANFILES = \
-	swig_wrap.cpp
-
-install-exec-hook: $(libdir)/_libSIGNALSComponent_Swig.so
-
-$(libdir)/_libSIGNALSComponent_Swig.so:
-	( cd $(libdir); ln -sf libSIGNALSComponent_Swigcmodule.so _libSIGNALSComponent_Swig.so; )
+CLEANFILES = swig_wrap.cpp libSIGNALSComponent_Swig.py
