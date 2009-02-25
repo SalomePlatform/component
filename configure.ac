@@ -316,32 +316,6 @@ echo
 
 CHECK_HTML_GENERATORS
 
-COMPONENT_WITH_GUI=no
-
-AM_CONDITIONAL(COMPONENT_ENABLE_GUI, [test "${COMPONENT_WITH_GUI}" = "yes"])
-
-if test "${COMPONENT_WITH_GUI}" = "yes"; then
-    echo
-    echo ---------------------------------------------
-    echo Testing GUI
-    echo ---------------------------------------------
-    echo
-
-    CHECK_SALOME_GUI
-
-    echo
-    echo ---------------------------------------------
-    echo Testing full GUI
-    echo ---------------------------------------------
-    echo
-
-    CHECK_CORBA_IN_GUI
-    if test "x${CORBA_IN_GUI}" != "xyes"; then
-      echo "failed : For configure COMPONENT module necessary full GUI !"
-      exit
-    fi
-fi
-
 echo
 echo ---------------------------------------------
 echo Testing Kernel
@@ -357,12 +331,7 @@ echo ---------------------------------------------
 echo
 
 echo Configure
-if test "${COMPONENT_WITH_GUI}" = "yes"; then
 variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok"
-fi
-if test "${COMPONENT_WITH_GUI}" = "no"; then
-variables="cc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok "
-fi
 
 for var in $variables
 do
