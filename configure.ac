@@ -33,7 +33,7 @@ AC_INIT([Salome2 Project COMPONENT module], [5.1.1], [webmaster.salome@opencasca
 AC_CONFIG_AUX_DIR(salome_adm/unix/config_files)
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([-Wno-portability])
 
 XVERSION=`echo $VERSION | awk -F. '{printf("0x%02x%02x%02x",$1,$2,$3)}'`
 AC_SUBST(XVERSION)
@@ -377,31 +377,31 @@ AC_OUTPUT_COMMANDS([ \
 # autoscan, the Makefile list is generated in the output file configure.scan.
 # This could be helpfull to update de configuration.
 AC_OUTPUT([ \
-  ./salome_adm/unix/SALOMEconfig.h \
-  ./adm_local/Makefile \
-  ./adm_local/unix/Makefile \
-  ./adm_local/unix/config_files/Makefile \
-  ./bin/VERSION \
-  ./bin/Makefile \
-  ./COMPONENT_version.h \
-  ./src/Makefile \
-  ./src/AddComponent/Makefile \
-  ./src/AdditionComponent/Makefile \
-  ./src/CalculatorComponent/Makefile \
-  ./src/DataStreamComponent/Makefile \
-  ./src/DivComponent/Makefile \
-  ./src/FactorialComponent/Makefile \
-  ./src/MulComponent/Makefile \
-  ./src/SIGNALSComponent/Makefile \
-  ./src/SIGNALSComponent_Swig/Makefile \
-  ./src/SubComponent/Makefile \
-  ./src/SyrComponent/Makefile \
-  ./src/SyrControlComponent/Makefile \
-  ./src/TestFunctions/Makefile \
-  ./src/TypesCheck/Makefile \
-  ./src/UndefinedSymbolComponent/Makefile \
-  ./resources/Makefile \
-  ./resources/COMPONENTCatalog.xml \
-  ./idl/Makefile \
+  salome_adm/unix/SALOMEconfig.h \
+  adm_local/Makefile \
+  adm_local/unix/Makefile \
+  adm_local/unix/config_files/Makefile \
+  bin/VERSION \
+  bin/Makefile \
+  COMPONENT_version.h \
+  src/Makefile \
+  src/AddComponent/Makefile \
+  src/AdditionComponent/Makefile \
+  src/CalculatorComponent/Makefile \
+  src/DataStreamComponent/Makefile \
+  src/DivComponent/Makefile \
+  src/FactorialComponent/Makefile \
+  src/MulComponent/Makefile \
+  src/SIGNALSComponent/Makefile \
+  src/SIGNALSComponent_Swig/Makefile \
+  src/SubComponent/Makefile \
+  src/SyrComponent/Makefile \
+  src/SyrControlComponent/Makefile \
+  src/TestFunctions/Makefile \
+  src/TypesCheck/Makefile \
+  src/UndefinedSymbolComponent/Makefile \
+  resources/Makefile \
+  resources/COMPONENTCatalog.xml \
+  idl/Makefile \
   Makefile \
 ])
