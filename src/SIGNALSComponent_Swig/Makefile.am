@@ -72,8 +72,7 @@ _libSIGNALSComponent_Swig_la_CPPFLAGS = \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
 	-I$(srcdir)/../SIGNALSComponent \
-	-I$(top_builddir)/idl \
-	-I$(top_builddir)/salome_adm/unix
+	-I$(top_builddir)/idl
 
 _libSIGNALSComponent_Swig_la_LDFLAGS = -module
 _libSIGNALSComponent_Swig_la_LIBADD  = \

@@ -41,8 +41,7 @@ libMulComponentEngine_la_CPPFLAGS = \
 	$(CORBA_CXXFLAGS) \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
-	-I$(top_builddir)/idl \
-	-I$(top_builddir)/salome_adm/unix
+	-I$(top_builddir)/idl
 
 libMulComponentEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \

@@ -49,8 +49,7 @@ libSyrComponentEngine_la_CPPFLAGS = \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
 	-I$(srcdir)/../AddComponent \
-	-I$(top_builddir)/idl \
-	-I$(top_builddir)/salome_adm/unix
+	-I$(top_builddir)/idl
 libSyrComponentEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \

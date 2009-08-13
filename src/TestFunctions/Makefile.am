@@ -46,8 +46,7 @@ libDynInvoke_la_CPPFLAGS = \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
 	-I$(srcdir)/../AddComponent \
-	-I$(top_builddir)/idl \
-	-I$(top_builddir)/salome_adm/unix
+	-I$(top_builddir)/idl
 
 libDynInvoke_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
@@ -70,7 +69,7 @@ TestFunctionsMemory2_SOURCES = TestFunctionsMemory2.cxx
 TestFunctionsMemory3_SOURCES = TestFunctionsMemory3.cxx
 TestFunctionsMemory4_SOURCES = TestFunctionsMemory4.cxx
 
-AM_CPPFLAGS = \
+AM_CPPFLAGS += \
 	$(libDynInvoke_la_CPPFLAGS)
 
 LDADD = \
