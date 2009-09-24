@@ -58,7 +58,6 @@ libAdditionComponentEngine_la_LDFLAGS  = \
 	$(KERNEL_LDFLAGS) \
 	-lSalomeContainer \
 	-lSalomeHDFPersist \
-	-lSalomeBatch \
 	-lSalomeNS \
 	-lOpUtil \
 	-lRegistry \
