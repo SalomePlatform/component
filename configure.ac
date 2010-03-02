@@ -169,48 +169,6 @@ dnl
 
 CHECK_SOCKETS
 
-dnl
-dnl ---------------------------------------------
-dnl testing OpenPBS
-dnl ---------------------------------------------
-dnl
-
-echo
-echo ---------------------------------------------
-echo testing OpenPBS
-echo ---------------------------------------------
-echo
-
-openpbs_ok=no
-CHECK_OPENPBS
-dnl openpbs_ok is set to yes by CHECK_OPENPBS
-
-dnl
-dnl ---------------------------------------------
-dnl testing LSF
-dnl ---------------------------------------------
-dnl
-
-echo
-echo ---------------------------------------------
-echo testing LSF
-echo ---------------------------------------------
-echo
-
-lsf_ok=no
-CHECK_LSF
-dnl lsf_ok is set to yes by CHECK_LSF
-
-dnl
-dnl ---------------------------------------------
-dnl testing Batch
-dnl ---------------------------------------------
-dnl
-
-WITH_BATCH=no
-test x$openpbs_ok = xyes || test x$lsf_ok = xyes && WITH_BATCH=yes
-AC_SUBST(WITH_BATCH)
-
 echo
 echo ---------------------------------------------
 echo testing LEX \& YACC
@@ -341,7 +299,7 @@ do
 done
 
 echo "---Optional:"
-variables="mpi_ok cppunit_ok openpbs_ok lsf_ok doxygen_ok graphviz_ok"
+variables="mpi_ok cppunit_ok doxygen_ok graphviz_ok"
  
 for var in $variables
 do
