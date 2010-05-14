@@ -1,7 +1,4 @@
-#  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
-#
-#  Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
-#  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS
+#  Copyright (C) 2007-2010  CEA/DEN, EDF R&D, OPEN CASCADE
 #
 #  This library is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU Lesser General Public
@@ -19,6 +16,7 @@
 #
 #  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
+
 #  PLEASE DO NOT MODIFY configure.in FILE
 #  ALL CHANGES WILL BE DISCARDED BY THE NEXT
 #  build_configure COMMAND
@@ -29,7 +27,7 @@
 # Modified by : Marc Tajchman (CEA)
 # Created from configure.in.base
 #
-AC_INIT([Salome2 Project COMPONENT module], [5.1.3], [webmaster.salome@opencascade.com], [SalomeCOMPONENT])
+AC_INIT([Salome2 Project COMPONENT module], [5.1.4], [webmaster.salome@opencascade.com], [SalomeCOMPONENT])
 AC_CONFIG_AUX_DIR(adm_local/unix/config_files)
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
@@ -169,48 +167,6 @@ dnl
 
 CHECK_SOCKETS
 
-dnl
-dnl ---------------------------------------------
-dnl testing OpenPBS
-dnl ---------------------------------------------
-dnl
-
-echo
-echo ---------------------------------------------
-echo testing OpenPBS
-echo ---------------------------------------------
-echo
-
-openpbs_ok=no
-CHECK_OPENPBS
-dnl openpbs_ok is set to yes by CHECK_OPENPBS
-
-dnl
-dnl ---------------------------------------------
-dnl testing LSF
-dnl ---------------------------------------------
-dnl
-
-echo
-echo ---------------------------------------------
-echo testing LSF
-echo ---------------------------------------------
-echo
-
-lsf_ok=no
-CHECK_LSF
-dnl lsf_ok is set to yes by CHECK_LSF
-
-dnl
-dnl ---------------------------------------------
-dnl testing Batch
-dnl ---------------------------------------------
-dnl
-
-WITH_BATCH=no
-test x$openpbs_ok = xyes || test x$lsf_ok = xyes && WITH_BATCH=yes
-AC_SUBST(WITH_BATCH)
-
 echo
 echo ---------------------------------------------
 echo testing LEX \& YACC
@@ -341,7 +297,7 @@ do
 done
 
 echo "---Optional:"
-variables="mpi_ok cppunit_ok openpbs_ok lsf_ok doxygen_ok graphviz_ok"
+variables="mpi_ok cppunit_ok doxygen_ok graphviz_ok"
  
 for var in $variables
 do
