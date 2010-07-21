@@ -256,8 +256,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   SCRUTE(len_value2);
 
   // Values of new field
-  SALOME_MED::double_array * first_value = FirstField -> getValue(SALOME_MED::MED_FULL_INTERLACE);
-  SALOME_MED::double_array * second_value;
+  SALOME_TYPES::ListOfDouble * first_value = FirstField -> getValue(SALOME_MED::MED_FULL_INTERLACE);
+  SALOME_TYPES::ListOfDouble * second_value;
   if (same_support) {
     second_value = SecondField -> getValue(SALOME_MED::MED_FULL_INTERLACE);
     tmp << "\n             CalculatorEngine::Add : " ;
@@ -386,7 +386,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   SCRUTE(len_value);
 
   // Values of new field
-  SALOME_MED::double_array * old_value = OldField -> getValue(SALOME_MED::MED_FULL_INTERLACE);
+  SALOME_TYPES::ListOfDouble * old_value = OldField -> getValue(SALOME_MED::MED_FULL_INTERLACE);
 
   int totalLength = nb_comp*len_value;
   double * new_value = new double[totalLength];
@@ -685,7 +685,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
       MESSAGE( " " << field->getOrderNumber() );
       MESSAGE( "MEDchampEcr :" << myMesh->getName() );
 
-      SALOME_MED::double_array * value = field->getValue( SALOME_MED::MED_FULL_INTERLACE ) ;
+      SALOME_TYPES::ListOfDouble * value = field->getValue( SALOME_MED::MED_FULL_INTERLACE ) ;
       double *locvalue = new double[NumberOfElements];
       for (int k = 0; k < NumberOfElements; k++) 
 	locvalue[k] = (*value) [k];
