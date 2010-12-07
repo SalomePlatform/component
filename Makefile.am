@@ -31,7 +31,7 @@ ACLOCAL_AMFLAGS = -I adm_local/unix/config_files \
 
 SUBDIRS = idl adm_local resources src bin 
 
-DISTCLEANFILES = a.out aclocal.m4 configure local-install.sh
+DISTCLEANFILES = a.out aclocal.m4 configure local-install.sh hack_libtool
 
 salomeinclude_DATA = COMPONENT_version.h
 
