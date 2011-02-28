@@ -30,7 +30,7 @@
 
 module SuperVisionTest {
 
-  interface SyrControlComponent : Engines::Component {
+  interface SyrControlComponent : Engines::EngineComponent {
 
     void L_OneEven( in long ValOne , in long ValEven ,
                     out long Finished , out long Incr ,

@@ -56,15 +56,15 @@ class Adder_Impl :  public POA_AdditionComponent::Adder ,
     virtual CORBA::Double AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
 
     virtual CORBA::Double AddAndCompare( CORBA::Double x , CORBA::Double y ,
-                                  AdditionComponent::Adder_ptr anOtherAdder ,
-                                  CORBA::Double & z ) ;
+                                         AdditionComponent::Adder_ptr anOtherAdder ,
+                                         CORBA::Double & z ) ;
 
     virtual void SetLastResult( CORBA::Double z ) ;
 
     virtual void LastResult( CORBA::Double & z ) ;
 
-    virtual Engines::Component_ptr LccAdditionInterface( char * aContainer ,
-                                                         char * aComponentName ) ;
+    virtual Engines::EngineComponent_ptr LccAdditionInterface( char * aContainer ,
+                                                               char * aComponentName ) ;
 
   private:
 

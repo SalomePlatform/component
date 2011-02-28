@@ -30,7 +30,7 @@
 
 module SuperVisionTest {
 
-  interface MulComponent : Engines::Component {
+  interface MulComponent : Engines::EngineComponent {
   void Mul( in double x , in double y , out double z ) ;
   } ;
 };

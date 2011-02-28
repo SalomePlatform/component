@@ -36,7 +36,7 @@ module SuperVisionTest {
 
   interface Syr ;
 
-  interface SyrComponent : Engines::Component {
+  interface SyrComponent : Engines::EngineComponent {
 
     long C_ISEVEN( in long anInteger ) ;
     long C_ISONE( in long anOddInteger ) ;
@@ -56,7 +56,7 @@ module SuperVisionTest {
 
   };
 
-  interface ListOfSyr : Engines::Component {
+  interface ListOfSyr : Engines::EngineComponent {
     SuperVisionTest::SeqOfSyr GetSeqOfSyr() ;
     void SetSeqOfSyr( in SuperVisionTest::SeqOfSyr aSeqOfSyr ) ;
   };

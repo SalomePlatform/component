@@ -32,7 +32,7 @@ module DataStreamComponent {
 
   interface DataStream ;
 
-  interface DataStreamFactory : Engines::Component {
+  interface DataStreamFactory : Engines::EngineComponent {
 
     // DataStreamPorts Setxy istream(INTEGER, in, T), ostream(INTEGER, out, T)
     void Setxy( in long x , in long y ) ;
@@ -54,7 +54,7 @@ module DataStreamComponent {
 
   };
 
-  interface DataStream : Engines::Component {
+  interface DataStream : Engines::EngineComponent {
 
     // DataStreamPorts StreamSetxy istream(INTEGER, in, T), ostream(INTEGER, out, T)
     void StreamSetxy( in long x , in long y ) ;

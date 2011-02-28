@@ -30,7 +30,7 @@
 
 module SuperVisionTest {
 
-  interface DivComponent : Engines::Component {
+  interface DivComponent : Engines::EngineComponent {
   void Div( in double x , in double y , out double z ) ;
   };
 };

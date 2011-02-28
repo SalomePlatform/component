@@ -45,7 +45,7 @@
 using namespace std;
 using namespace CORBA ;
 
-void DynInvoke( Engines::Component_ptr objComponent ,
+void DynInvoke( Engines::EngineComponent_ptr objComponent ,
 		const char *method , 
 		ServicesAnyData * inParams , int nInParams ,
 		ServicesAnyData * outParams , int nOutParams ) {
@@ -215,4 +215,3 @@ void DynInvoke( Engines::Component_ptr objComponent ,
   return;
 
 }
-

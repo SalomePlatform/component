@@ -38,7 +38,7 @@ struct ServicesAnyData {
 // dynamic call for function with list of in parameters, followed 
 // by out parameters with no return value
 
-void DynInvoke(Engines::Component_ptr obj,
+void DynInvoke(Engines::EngineComponent_ptr obj,
 	       const char *method, 
 	       ServicesAnyData * inParams, int nInParams,
 	       ServicesAnyData * outParams, int nOutParams);

@@ -19,10 +19,9 @@
 //
 //  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 //
-
 //  File   : AdditionComponent.idl
 //  Author : Jean Rahuel
-//
+
 #ifndef _ADDITIONCOMPONENT_IDL
 #define _ADDITIONCOMPONENT_IDL
 
@@ -32,7 +31,7 @@ module AdditionComponent {
 
   interface Adder ;
 
-  interface AdditionInterface : Engines::Component {
+  interface AdditionInterface : Engines::EngineComponent {
     double Add( in double x , in double y , out double z ) ;
     double AddWithoutSleep( in double x , in double y , out double z ) ;
     void Setx( in double x ) ;
@@ -53,15 +52,15 @@ module AdditionComponent {
                              out AdditionInterface RetAdder3 ) ;
   };
 
-  interface Adder : Engines::Component {
+  interface Adder : Engines::EngineComponent {
     double Add( in double x , in double y , out double z ) ;
     double AddWithoutSleep( in double x , in double y , out double z ) ;
     double AddAndCompare( in double x , in double y , in Adder anOtherAdder,
                           out double z ) ;
     void SetLastResult( in double z ) ;
     void LastResult( out double z ) ;
-    Engines::Component LccAdditionInterface( in string aContainer ,
-                                        in string aComponentName ) ;
+    Engines::EngineComponent LccAdditionInterface( in string aContainer ,
+                                                   in string aComponentName ) ;
   };
 
 } ;

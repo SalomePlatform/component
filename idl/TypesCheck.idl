@@ -34,7 +34,7 @@
 
 module SuperVisionTest {
 
-  interface TypesCheck : Engines::Component {
+  interface TypesCheck : Engines::EngineComponent {
 
     void StringCheck( in string InString , out string OutString ) ;
 
@@ -59,4 +59,3 @@ module SuperVisionTest {
 } ;
 
 #endif
-

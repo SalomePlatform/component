@@ -30,7 +30,7 @@
 
 module SuperVisionTest {
 
-  interface UndefinedSymbolComponent : Engines::Component {
+  interface UndefinedSymbolComponent : Engines::EngineComponent {
   long UndefinedSymbol() ;
   };
 };

@@ -49,8 +49,8 @@ int main(int argc, char **argv) {
   SALOME_NamingService _NS(orb) ;
   SALOME_LifeCycleCORBA _LCC(&_NS) ;
 
-  Engines::Component_var AddComponent = _LCC.FindOrLoad_Component( "FactoryServer" ,
-                                                                   "AddComponent");
+  Engines::EngineComponent_var AddComponent = _LCC.FindOrLoad_Component( "FactoryServer" ,
+                                                                         "AddComponent");
   SuperVisionTest::AddComponent_var AddInterface ;
   AddInterface = SuperVisionTest::AddComponent::_narrow( AddComponent );
 
@@ -156,4 +156,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-

@@ -30,7 +30,7 @@
 
 module SuperVisionTest {
 
-  interface SIGNALSComponent : Engines::Component {
+  interface SIGNALSComponent : Engines::EngineComponent {
     long SIGSEGVfunc() ;
     long SIGFPEfunc( in long a , in long b ) ;
     void WaitKill() ;

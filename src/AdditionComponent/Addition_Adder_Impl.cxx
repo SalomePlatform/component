@@ -162,11 +162,11 @@ void Adder_Impl::LastResult( CORBA::Double & z ) {
   return ;
 }
 
-Engines::Component_ptr Adder_Impl::LccAdditionInterface( char * aContainer ,
-                                                         char * aComponentName ) {
+Engines::EngineComponent_ptr Adder_Impl::LccAdditionInterface( char * aContainer ,
+                                                               char * aComponentName ) {
   beginService( "Adder_Impl::LccAddComponent" );
-  Engines::Component_ptr objComponent ;
-  objComponent = Engines::Component::_nil() ;
+  Engines::EngineComponent_ptr objComponent ;
+  objComponent = Engines::EngineComponent::_nil() ;
 
   ORB_INIT &init = *SINGLETON_<ORB_INIT>::Instance() ;
   ASSERT(SINGLETON_<ORB_INIT>::IsAlreadyExisting());
@@ -181,4 +181,3 @@ Engines::Component_ptr Adder_Impl::LccAdditionInterface( char * aContainer ,
   endService( "Adder_Impl::LccAddComponent"  );
   return objComponent ;
 }
-

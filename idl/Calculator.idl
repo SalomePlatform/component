@@ -19,10 +19,9 @@
 //
 //  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 //
-
 //  File   : Calculator.idl
 //  Author : Laurent DADA CEA
-//
+
 #ifndef CALCULATOR_IDL
 #define CALCULATOR_IDL
 
@@ -32,7 +31,7 @@
 
 module SuperVisionTest {
 
-interface Calculator : Engines::Component
+interface Calculator : Engines::EngineComponent
 {
 
   SALOME_MED::FIELDDOUBLE PutToStudy(in SALOME_MED::FIELDDOUBLE field1, in long theStudyId);
