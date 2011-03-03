@@ -65,4 +65,5 @@ TypesCheck_CheckOfUndefined_CPPFLAGS = \
 
 TypesCheck_CheckOfUndefined_LDFLAGS  = \
 	./libTypesCheckEngine.la \
-	$(libTypesCheckEngine_la_LDFLAGS)
+	$(libTypesCheckEngine_la_LDFLAGS) \
+	$(CORBA_LIBS)

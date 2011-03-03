@@ -63,4 +63,6 @@ SIGNALSComponent_CheckOfUndefined_CPPFLAGS = \
 
 SIGNALSComponent_CheckOfUndefined_LDFLAGS  = \
 	./libSIGNALSComponentEngine.la \
-	$(libSIGNALSComponentEngine_la_LDFLAGS)
+	$(libSIGNALSComponentEngine_la_LDFLAGS) \
+	$(CORBA_LIBS) \
+	$(KERNEL_LDFLAGS) -lSALOMELocalTrace

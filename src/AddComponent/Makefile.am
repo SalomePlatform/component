@@ -70,4 +70,6 @@ AddComponent_CheckOfUndefined_CPPFLAGS = \
 
 AddComponent_CheckOfUndefined_LDFLAGS  = \
 	./libAddComponentEngine.la \
-	$(libAddComponentEngine_la_LDFLAGS)
+	$(libAddComponentEngine_la_LDFLAGS) \
+	$(CORBA_LIBS)
+

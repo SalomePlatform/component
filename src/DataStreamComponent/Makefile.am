@@ -69,4 +69,5 @@ DataStreamComponent_CheckOfUndefined_CPPFLAGS = \
 
 DataStreamComponent_CheckOfUndefined_LDFLAGS = \
 	./libDataStreamFactoryEngine.la \
-	$(libDataStreamFactoryEngine_la_LDFLAGS)
+	$(libDataStreamFactoryEngine_la_LDFLAGS) \
+	$(CORBA_LIBS)
