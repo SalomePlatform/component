@@ -301,9 +301,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
     delete second_value;
   delete [] component_name;
   delete [] component_unit;
-  mesh1->Destroy();
-  mesh2->Destroy();
-  support2->Destroy();
+  mesh1->UnRegister();
+  mesh2->UnRegister();
+  support2->UnRegister();
 
   // Control
   int until_index = ( 20 > len_value1)? len_value1 : 20;
@@ -410,7 +410,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   delete [] new_value;
   delete [] component_name;
   delete [] component_unit;
-  mesh->Destroy();
+  mesh->UnRegister();
 
   // Creation of the new CORBA field
 
@@ -504,7 +504,7 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
   delete [] new_value;
   delete [] component_name;
   delete [] component_unit;
-  mesh->Destroy();
+  mesh->UnRegister();
 
   // Control
   int until_index = ( 20 > len_value)? len_value : 20 ;
