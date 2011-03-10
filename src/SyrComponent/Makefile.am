@@ -51,6 +51,7 @@ libSyrComponentEngine_la_CPPFLAGS = \
 libSyrComponentEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
 	-lOpUtil \

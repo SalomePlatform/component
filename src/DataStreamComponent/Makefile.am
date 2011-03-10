@@ -54,6 +54,7 @@ libDataStreamFactoryEngine_la_CPPFLAGS = \
 libDataStreamFactoryEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
 	-lOpUtil \

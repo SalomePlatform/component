@@ -76,6 +76,7 @@ _libSIGNALSComponent_Swig_la_LDFLAGS = -module
 _libSIGNALSComponent_Swig_la_LIBADD  = \
 	../SIGNALSComponent/libSIGNALSComponentEngine.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
 	-lOpUtil \

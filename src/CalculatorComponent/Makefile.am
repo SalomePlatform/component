@@ -46,6 +46,7 @@ libCalculatorEngine_la_CPPFLAGS = \
 libCalculatorEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
 	-lOpUtil \

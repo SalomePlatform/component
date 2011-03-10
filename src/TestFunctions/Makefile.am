@@ -49,6 +49,7 @@ libDynInvoke_la_CPPFLAGS = \
 libDynInvoke_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
 	-lOpUtil \

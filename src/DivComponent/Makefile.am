@@ -45,6 +45,7 @@ libDivComponentEngine_la_CPPFLAGS = \
 libDivComponentEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
 	-lOpUtil \

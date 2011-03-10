@@ -53,6 +53,7 @@ libAddComponentEngine_la_CPPFLAGS = \
 libAddComponentEngine_la_LDFLAGS = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeHDFPersist \
 	-lSalomeNS \

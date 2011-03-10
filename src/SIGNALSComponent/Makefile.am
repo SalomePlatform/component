@@ -52,6 +52,7 @@ libSIGNALSComponentEngine_la_CPPFLAGS = \
 libSIGNALSComponentEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \
+	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
 	-lOpUtil \
