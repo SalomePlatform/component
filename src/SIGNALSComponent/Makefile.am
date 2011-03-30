@@ -66,4 +66,5 @@ SIGNALSComponent_CheckOfUndefined_LDFLAGS  = \
 	./libSIGNALSComponentEngine.la \
 	$(libSIGNALSComponentEngine_la_LDFLAGS) \
 	$(CORBA_LIBS) \
+	$(PYTHON_LIBS) \
 	$(KERNEL_LDFLAGS) -lSALOMELocalTrace
