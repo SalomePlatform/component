@@ -47,7 +47,7 @@ using namespace MEDMEM;
 using namespace std;
 
 #ifndef MED_TAILLE_PNOM
-#define MED_TAILLE_PNOM MED_TAILLE_PNOM21
+#define MED_TAILLE_PNOM MED_SNAME_SIZE
 #endif
 
 typedef FIELD<double,MEDMEM::FullInterlace> TFieldDouble;
@@ -231,8 +231,8 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
 
   SCRUTE(support2);
 
-  SALOME_MED::MESH_var mesh1 = support1 -> getMesh();
-  SALOME_MED::MESH_var mesh2 = support2 -> getMesh();
+  SALOME_MED::GMESH_var mesh1 = support1 -> getMesh();
+  SALOME_MED::GMESH_var mesh2 = support2 -> getMesh();
 
   SCRUTE(mesh1);
   SCRUTE(mesh2);
@@ -240,16 +240,16 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   if (same_support && support1 != support2) same_support = false;
 
   if (support1 -> isOnAllElements())
-    len_value1 = mesh1-> getNumberOfElements(support1 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value1 = mesh1-> getNumberOfElements(support1 -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
   else
-    len_value1 = support1 -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
+    len_value1 = support1 -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
 
   SCRUTE(len_value1);
 
   if (support2 -> isOnAllElements())
-    len_value2 = mesh2-> getNumberOfElements(support2 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value2 = mesh2-> getNumberOfElements(support2 -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
   else
-    len_value2 = support2 -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
+    len_value2 = support2 -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
 
   if (same_support && len_value1 != len_value2) same_support = false;
 
@@ -374,14 +374,14 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
 
   SCRUTE(support);
 
-  SALOME_MED::MESH_var mesh = support -> getMesh();
+  SALOME_MED::GMESH_var mesh = support -> getMesh();
 
   SCRUTE(mesh);
 
   if (support -> isOnAllElements())
-    len_value = mesh-> getNumberOfElements(support -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value = mesh-> getNumberOfElements(support -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
   else
-    len_value = support -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
+    len_value = support -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
 
   SCRUTE(len_value);
 
@@ -472,14 +472,14 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
 
   SCRUTE(FirstSupport);
 
-  SALOME_MED::MESH_var mesh = FirstSupport -> getMesh();
+  SALOME_MED::GMESH_var mesh = FirstSupport -> getMesh();
 
   SCRUTE(mesh);
 
   if ( FirstSupport -> isOnAllElements() )
-    len_value = mesh -> getNumberOfElements(FirstSupport -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
+    len_value = mesh -> getNumberOfElements(FirstSupport -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
   else
-    len_value = FirstSupport -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
+    len_value = FirstSupport -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
 
   // Values of new field
   int totalLength = nb_comp*len_value;
@@ -551,7 +551,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   
   // get mesh from this support
   
-  SALOME_MED::MESH_ptr mesh = support -> getMesh();
+  SALOME_MED::GMESH_ptr mesh = support -> getMesh();
   
   // write the mesh
   
@@ -563,7 +563,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   
   MESSAGE("fichier :"<<filename);
 
-  med_2_1::med_idt _medIdt = med_2_1::MEDouvrir(const_cast <char *> (filename) , med_2_1::MED_ECRI);
+  med_2_3::med_idt _medIdt = med_2_3::MEDfileOpen(const_cast <char *> (filename) , med_2_3::MED_ACC_RDWR);
   SCRUTE(_medIdt);
 
   if (_medIdt<0) return;
@@ -584,40 +584,46 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   
   // already existing ?
   
-  char * champName = new char[MED_TAILLE_NOM+1] ;
-  char * compName,  * compUnit  ;
+  char * champName  = new char[MED_NAME_SIZE+1] ;
+  char * meshName   = new char[MED_NAME_SIZE+1] ;
+  char * compDtunit = new char[MED_SNAME_SIZE+1];
+  char * compName,  * compUnit;
   bool Find = false ;
 
-  int n = med_2_1::MEDnChamp(_medIdt,0);
-  int nbComp ;
-
-  med_2_1::med_type_champ type ;
+  int n = med_2_3::MEDnField(_medIdt);
+  
+  med_2_3::med_int nbComp ;
+  med_2_3::med_field_type type ;
+  med_2_3::med_bool _local;
 
   for (int i = 1;  i <= n;  i++) 
-    {
-      nbComp = med_2_1::MEDnChamp(_medIdt,i);
-      compName = new char[MED_TAILLE_PNOM*nbComp+1];
-      compUnit = new char[MED_TAILLE_PNOM*nbComp+1];
-
-      err = med_2_1::MEDchampInfo(_medIdt,i,champName,&type,compName,compUnit,nbComp);
-      if (err == 0)
-	if (strcmp(champName, field->getName())==0) { // Found !
-	  Find = true ;
-	  break ;
-	}
-
-      delete[] compName ;
-      delete[] compUnit ;
-
+  {
+    nbComp = med_2_3::MEDnField(_medIdt);
+    compName   = new char[MED_TAILLE_PNOM*nbComp+1];
+    compUnit   = new char[MED_TAILLE_PNOM*nbComp+1];
+    
+    err = med_2_3::MEDfieldInfo(_medIdt,i,champName,meshName,&_local,&type,compName,compUnit,compDtunit,&nbComp);
+    if (err == 0) {
+      if (strcmp(champName, field->getName())==0) { // Found !
+        Find = true ;
+        break ;
+      }
     }
-  if (Find) {
+    delete[] compName ;
+    delete[] compUnit ;
+  }
+  
+  
+  if (Find)
+  {
     // the same ?
     if (nbComp != component_count)
       throw MEDEXCEPTION ( LOCALIZED (STRING(LOC)
-				     <<": Field exist in file, but number of component are different : " \
-				     <<nbComp<<" in file and "<<component_count<<" in CORBA object."
-				     )
-			 );
+                          <<": Field exist in file, but number of component are different : " \
+                          <<nbComp<<" in file and "<<component_count<<" in CORBA object."
+                          )
+                          );
+                          
     // component name and unit
     MESSAGE(LOC<<" Component name in file : "<<compName);
     MESSAGE(LOC<<" Component name in CORBA object : "<<component_name);
@@ -625,31 +631,33 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
     MESSAGE(LOC<<" Component unit in CORBA object : "<<component_unit);
     delete[] compName ;
     delete[] compUnit ;
-    
-  } else { 
+
+  }
+  else
+  {
     // Verify the field doesn't exist
-    
     string dataGroupName =  "/CHA/"+ string(field->getName());
-
-    MESSAGE(LOC << "|" << dataGroupName << "|" );
-
-    med_2_1::med_idt gid =  H5Gopen(_medIdt, dataGroupName.c_str() );
     
-    if ( gid < 0 ) {
+    MESSAGE(LOC << "|" << dataGroupName << "|" );
+    
+    med_2_3::med_idt gid =  H5Gopen(_medIdt, dataGroupName.c_str() );
+    
+    if ( gid < 0 )
+    {
       // create field :
-      err=med_2_1::MEDchampCr(_medIdt, 
-			     const_cast <char*> (field->getName()),
-			     med_2_1::MED_REEL64,
-			     const_cast <char*> ( component_name.c_str() ),
-			     const_cast <char*> ( component_unit.c_str() ),
-			     component_count);
+      err=med_2_3::MEDfieldCr(_medIdt,
+                              const_cast <char*> (field->getName()),
+                              med_2_3::MED_FLOAT64,
+                              component_count,
+                              const_cast <char*> ( component_name.c_str() ),
+                              const_cast <char*> ( component_unit.c_str() ),
+                              compDtunit,
+                              meshName);
       if ( err < 0 )
-	throw MEDEXCEPTION( LOCALIZED (STRING(LOC) 
-				       << ": Error MEDchampCr : "<<err
-				       )
-			   );
+        throw MEDEXCEPTION( LOCALIZED (STRING(LOC) << ": Error MEDfieldCr : "<<err ));
     }
-        else H5Gclose(gid);
+    else
+      H5Gclose(gid);
   }
   
   SALOME_MED::SUPPORT_ptr mySupport = field -> getSupport();
@@ -657,11 +665,10 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   
   if (! mySupport->isOnAllElements())
     throw MEDEXCEPTION ( LOCALIZED (STRING(LOC) 
-				   <<": Field must be on all entity"
-				    )
-			);
-  
-  SALOME_MED::MESH_ptr myMesh = mySupport -> getMesh();
+                        <<": Field must be on all entity"
+                        )
+                        );
+  SALOME_MED::MESH_ptr myMesh = mySupport -> getMesh()->convertInMESH();
   SCRUTE(mesh);
 
   SALOME_MED::medGeometryElement_array* Types = mySupport->getTypes() ;
@@ -669,58 +676,57 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
   int NumberOfType = Types->length() ;
 
   for ( int i = 0; i < NumberOfType; i++ ) 
-    {
-      int NumberOfElements   = mySupport->getNumberOfElements ( (*Types)[i] ) ;
-      //Temporarily commented to avoid compilation errors:int NumberOfGaussPoint = mySupport->getNumberOfGaussPoint ( (*Types)[i] ) ;
-      int NumberOfGaussPoint = 1; //Temporary line instead of the above one
+  {
+    int NumberOfElements   = mySupport->getNumberOfElements ( (*Types)[i] ) ;
+    //Temporarily commented to avoid compilation errors:int NumberOfGaussPoint = mySupport->getNumberOfGaussPoint ( (*Types)[i] ) ;
+    int NumberOfGaussPoint = 1; //Temporary line instead of the above one
 
-      MESSAGE( " " << field->getName() );
-      MESSAGE( " " << NumberOfElements );
-      //!!!tmp commented:MESSAGE( " " << NumberOfGaussPoint );
-      MESSAGE( "Attention! NumberOfGaussPoint is invalid: " << NumberOfGaussPoint ); //tmp line!!!
-      MESSAGE( " " << (int) (convertIdlEntToMedEnt(mySupport->getEntity())) );
-      MESSAGE( " " << (int)(convertIdlEltToMedElt((*Types)[i])) );
-      MESSAGE( " " << field->getIterationNumber() );
-      MESSAGE( " " << field->getTime() );
-      MESSAGE( " " << field->getOrderNumber() );
-      MESSAGE( "MEDchampEcr :" << myMesh->getName() );
+    MESSAGE( " " << field->getName() );
+    MESSAGE( " " << NumberOfElements );
+    //!!!tmp commented:MESSAGE( " " << NumberOfGaussPoint );
+    MESSAGE( "Attention! NumberOfGaussPoint is invalid: " << NumberOfGaussPoint ); //tmp line!!!
+    MESSAGE( " " << (int) (convertIdlEntToMedEnt(mySupport->getEntity())) );
+    MESSAGE( " " << (int)(convertIdlEltToMedElt((*Types)[i])) );
+    MESSAGE( " " << field->getIterationNumber() );
+    MESSAGE( " " << field->getTime() );
+    MESSAGE( " " << field->getOrderNumber() );
+    MESSAGE( "MEDchampEcr :" << myMesh->getName() );
 
-      SALOME_TYPES::ListOfDouble * value = field->getValue( SALOME_MED::MED_FULL_INTERLACE ) ;
-      double *locvalue = new double[NumberOfElements];
-      for (int k = 0; k < NumberOfElements; k++) 
-	locvalue[k] = (*value) [k];
+    SALOME_TYPES::ListOfDouble * value = field->getValue( SALOME_MED::MED_FULL_INTERLACE ) ;
+    double *locvalue = new double[NumberOfElements];
+    for (int k = 0; k < NumberOfElements; k++) 
+      locvalue[k] = (*value) [k];
+    
+    err=med_2_3::MEDfieldValueWithProfileWr(_medIdt,
+                                            const_cast <char*> (field->getName()),
+                                            MED_NO_DT,
+                                            MED_NO_IT,
+                                            field->getTime(),
+                                            (med_2_3::med_entity_type)convertIdlEntToMedEnt(mySupport->getEntity()),
+                                            (med_2_3::med_geometry_type)(convertIdlEltToMedElt((*Types)[i])),
+                                            med_2_3::MED_COMPACT_PFLMODE,
+                                            MED_ALLENTITIES_PROFILE,
+                                            " ",
+                                            med_2_3::MED_FULL_INTERLACE,
+                                            SALOME_MED::MEDMEM_ALL_ELEMENTS,
+                                            1,
+                                            (unsigned char*)locvalue
+                                            );
 
-      err=med_2_1::MEDchampEcr(_medIdt, 
-			      const_cast <char*> (myMesh->getName()) , 
-			      const_cast <char*> (field->getName()),
-			      (unsigned char*)locvalue, 
-			      med_2_1::MED_FULL_INTERLACE,
-			      NumberOfElements,
-			      NumberOfGaussPoint,
-			      MED_ALL, 
-			      MED_NOPFL, 
-			      med_2_1::MED_REMP,  
-			      (med_2_1::med_entite_maillage)convertIdlEntToMedEnt(mySupport->getEntity()),
-			      (med_2_1::med_geometrie_element)(convertIdlEltToMedElt((*Types)[i])),
-			      field->getIterationNumber(),
-			      "        ",
-			      field->getTime(),
-			      field->getOrderNumber()
-			      );
-      delete locvalue;
-      
-      if (err < MED_VALID )
-	throw MEDEXCEPTION(LOCALIZED( STRING(LOC)
-				     <<": Error in writing Field "<< field->getName() <<", type "<<(*Types)[i]
-				     )
-			   );
-    }
+    delete locvalue;
+    
+    if (err < MED_VALID )
+      throw MEDEXCEPTION(LOCALIZED( STRING(LOC)
+      <<": Error in writing Field "<< field->getName() <<", type "<<(*Types)[i]
+      )
+      );
+  }
   END_OF(LOC);
 
   SCRUTE( err );
   if (err < 0 ) return;
 
-  med_2_1::MEDfermer(_medIdt);
+  med_2_3::MEDfileClose(_medIdt);
 
   endService("CalculatorEngine::writeMEDfile");
   return;
