@@ -39,8 +39,6 @@
 #include "MEDMEM_Exception.hxx"
 #include "MEDMEM_Unit.hxx"
 
-#include "med.hxx"
-
 #include "utilities.h"
 
 using namespace MEDMEM;
