@@ -238,16 +238,16 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Add(SALOME_MED::FIELDDOUBLE_ptr Fi
   if (same_support && support1 != support2) same_support = false;
 
   if (support1 -> isOnAllElements())
-    len_value1 = mesh1-> getNumberOfElements(support1 -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value1 = mesh1-> getNumberOfElements(support1 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
-    len_value1 = support1 -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value1 = support1 -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
   SCRUTE(len_value1);
 
   if (support2 -> isOnAllElements())
-    len_value2 = mesh2-> getNumberOfElements(support2 -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value2 = mesh2-> getNumberOfElements(support2 -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
-    len_value2 = support2 -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value2 = support2 -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
   if (same_support && len_value1 != len_value2) same_support = false;
 
@@ -377,9 +377,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Mul(SALOME_MED::FIELDDOUBLE_ptr Ol
   SCRUTE(mesh);
 
   if (support -> isOnAllElements())
-    len_value = mesh-> getNumberOfElements(support -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value = mesh-> getNumberOfElements(support -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
-    len_value = support -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value = support -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
   SCRUTE(len_value);
 
@@ -475,9 +475,9 @@ SALOME_MED::FIELDDOUBLE_ptr CalculatorEngine::Constant(SALOME_MED::FIELDDOUBLE_p
   SCRUTE(mesh);
 
   if ( FirstSupport -> isOnAllElements() )
-    len_value = mesh -> getNumberOfElements(FirstSupport -> getEntity(),SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value = mesh -> getNumberOfElements(FirstSupport -> getEntity(),SALOME_MED::MED_ALL_ELEMENTS);
   else
-    len_value = FirstSupport -> getNumberOfElements(SALOME_MED::MEDMEM_ALL_ELEMENTS);
+    len_value = FirstSupport -> getNumberOfElements(SALOME_MED::MED_ALL_ELEMENTS);
 
   // Values of new field
   int totalLength = nb_comp*len_value;
@@ -706,7 +706,7 @@ void CalculatorEngine::writeMEDfile(SALOME_MED::FIELDDOUBLE_ptr field, const cha
                                             MED_ALLENTITIES_PROFILE,
                                             " ",
                                             med_2_3::MED_FULL_INTERLACE,
-                                            SALOME_MED::MEDMEM_ALL_ELEMENTS,
+                                            SALOME_MED::MED_ALL_ELEMENTS,
                                             1,
                                             (unsigned char*)locvalue
                                             );
