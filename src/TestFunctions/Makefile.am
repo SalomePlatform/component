@@ -75,7 +75,7 @@ LDADD = \
 	./libDynInvoke.la \
 	$(libDynInvoke_la_LDFLAGS)
 
-LDFLAGS += \
+AM_LDFLAGS = \
 	$(CORBA_LIBS)
 
 dist_salomescript_SCRIPTS = TestFunctions.py
