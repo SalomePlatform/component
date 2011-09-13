@@ -25,6 +25,7 @@
   <section name="COMPONENT">
     <!-- Major module parameters -->
     <parameter name="name" value="Component"/>
+    <parameter name="COMPONENT_VERSION" value="@VERSION@"/>
   </section>
   <section name="resources">
     <!-- Module resources -->

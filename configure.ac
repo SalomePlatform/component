@@ -375,6 +375,7 @@ AC_OUTPUT([ \
   src/UndefinedSymbolComponent/Makefile \
   resources/Makefile \
   resources/COMPONENTCatalog.xml \
+  resources/SalomeApp.xml \
   idl/Makefile \
   Makefile \
 ])
