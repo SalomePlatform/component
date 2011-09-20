@@ -25,8 +25,5 @@
 #
 include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-dist_salomeres_DATA = \
-	$(top_builddir)/resources/SalomeApp.xml
-
 # VSR: little trick to avoid putting if COMPONENTCatalog.xml to the distribution archive
-nodist_salomeres_SCRIPTS = COMPONENTCatalog.xml
+nodist_salomeres_SCRIPTS = COMPONENTCatalog.xml SalomeApp.xml
