@@ -36,7 +36,7 @@ dist_libCalculatorEngine_la_SOURCES = \
 libCalculatorEngine_la_CPPFLAGS = \
 	$(PYTHON_INCLUDES) \
 	$(HDF5_INCLUDES) \
-	$(MED2_INCLUDES) \
+	$(MED3_INCLUDES) \
 	$(CORBA_CXXFLAGS) \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
