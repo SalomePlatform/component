@@ -129,7 +129,12 @@ install-exec-local: $(BASEIDL_FILES:%=$(top_srcdir)/idl/%)
 
 # uninstall-local removes too much, but it works in distcheck
 uninstall-local:
-	rm -rf $(DESTDIR)$(salomepythondir)/*
+	@for ff in `find $(DESTDIR)$(salomepythondir) -mindepth 1 -maxdepth 1` dummy ; do \
+	  case $${ff} in \
+	    dummy | $(DESTDIR)$(salomepythondir)/shared_modules ) ;; \
+	    * ) echo "removing $${ff}" && rm -rf $${ff} ;; \
+	  esac ; \
+	done
 
 mostlyclean-local:
 	-rm -f *.hh *.cc .depidl
