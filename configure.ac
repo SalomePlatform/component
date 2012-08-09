@@ -1,24 +1,22 @@
-#  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
+# Copyright (C) 2007-2012  CEA/DEN, EDF R&D, OPEN CASCADE
 #
-#  Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
-#  CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License.
 #
-#  This library is free software; you can redistribute it and/or
-#  modify it under the terms of the GNU Lesser General Public
-#  License as published by the Free Software Foundation; either
-#  version 2.1 of the License.
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
 #
-#  This library is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-#  Lesser General Public License for more details.
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 #
-#  You should have received a copy of the GNU Lesser General Public
-#  License along with this library; if not, write to the Free Software
-#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+# See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
-#  See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
-#
+
 #  PLEASE DO NOT MODIFY configure.in FILE
 #  ALL CHANGES WILL BE DISCARDED BY THE NEXT
 #  build_configure COMMAND
@@ -29,14 +27,16 @@
 # Modified by : Marc Tajchman (CEA)
 # Created from configure.in.base
 #
-AC_INIT([Salome2 Project COMPONENT module], [5.1.0], [webmaster.salome@opencascade.com], [SalomeCOMPONENT])
-AC_CONFIG_AUX_DIR(salome_adm/unix/config_files)
+AC_INIT([Salome2 Project COMPONENT module], [6.5.0], [webmaster.salome@opencascade.com], [SalomeCOMPONENT])
+AC_CONFIG_AUX_DIR(adm_local/unix/config_files)
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([-Wno-portability])
 
 XVERSION=`echo $VERSION | awk -F. '{printf("0x%02x%02x%02x",$1,$2,$3)}'`
 AC_SUBST(XVERSION)
+VERSION_DEV=1
+AC_SUBST(VERSION_DEV)
 
 # set up MODULE_NAME variable for dynamic construction of directories (resources, etc.)
 MODULE_NAME=component
@@ -81,6 +81,7 @@ echo
 
 AC_PROG_MAKE_SET
 AC_PROG_INSTALL
+AC_LOCAL_INSTALL
 dnl 
 dnl libtool macro check for CC, LD, NM, LN_S, RANLIB, STRIP + pour les librairies dynamiques !
 
@@ -102,7 +103,7 @@ dnl Fix up the INSTALL macro if it s a relative path. We want the
 dnl full-path to the binary instead.
 case "$INSTALL" in
    *install-sh*)
-      INSTALL="${KERNEL_ROOT_DIR}/salome_adm/unix/config_files/install-sh -c"
+      INSTALL="${KERNEL_ROOT_DIR}/adm_local/unix/config_files/install-sh -c"
       ;;
 esac
 
@@ -158,6 +159,12 @@ dnl testing MPI
 dnl ---------------------------------------------
 dnl
 
+echo
+echo ---------------------------------------------
+echo testing MPI
+echo ---------------------------------------------
+echo
+
 CHECK_MPI
 
 dnl
@@ -167,48 +174,6 @@ dnl ---------------------------------------------
 dnl
 
 CHECK_SOCKETS
-
-dnl
-dnl ---------------------------------------------
-dnl testing OpenPBS
-dnl ---------------------------------------------
-dnl
-
-echo
-echo ---------------------------------------------
-echo testing OpenPBS
-echo ---------------------------------------------
-echo
-
-openpbs_ok=no
-CHECK_OPENPBS
-dnl openpbs_ok is set to yes by CHECK_OPENPBS
-
-dnl
-dnl ---------------------------------------------
-dnl testing LSF
-dnl ---------------------------------------------
-dnl
-
-echo
-echo ---------------------------------------------
-echo testing LSF
-echo ---------------------------------------------
-echo
-
-lsf_ok=no
-CHECK_LSF
-dnl lsf_ok is set to yes by CHECK_LSF
-
-dnl
-dnl ---------------------------------------------
-dnl testing Batch
-dnl ---------------------------------------------
-dnl
-
-WITH_BATCH=no
-test x$openpbs_ok = xyes || test x$lsf_ok = xyes && WITH_BATCH=yes
-AC_SUBST(WITH_BATCH)
 
 echo
 echo ---------------------------------------------
@@ -294,11 +259,11 @@ CHECK_MED
 
 echo
 echo ---------------------------------------------
-echo testing MED2
+echo testing MED3
 echo ---------------------------------------------
 echo
 
-CHECK_MED2
+CHECK_MED3
 
 echo
 echo ---------------------------------------------
@@ -316,32 +281,6 @@ echo
 
 CHECK_HTML_GENERATORS
 
-COMPONENT_WITH_GUI=no
-
-AM_CONDITIONAL(COMPONENT_ENABLE_GUI, [test "${COMPONENT_WITH_GUI}" = "yes"])
-
-if test "${COMPONENT_WITH_GUI}" = "yes"; then
-    echo
-    echo ---------------------------------------------
-    echo Testing GUI
-    echo ---------------------------------------------
-    echo
-
-    CHECK_SALOME_GUI
-
-    echo
-    echo ---------------------------------------------
-    echo Testing full GUI
-    echo ---------------------------------------------
-    echo
-
-    CHECK_CORBA_IN_GUI
-    if test "x${CORBA_IN_GUI}" != "xyes"; then
-      echo "failed : For configure COMPONENT module necessary full GUI !"
-      exit
-    fi
-fi
-
 echo
 echo ---------------------------------------------
 echo Testing Kernel
@@ -357,12 +296,7 @@ echo ---------------------------------------------
 echo
 
 echo Configure
-if test "${COMPONENT_WITH_GUI}" = "yes"; then
-variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok"
-fi
-if test "${COMPONENT_WITH_GUI}" = "no"; then
-variables="cc_ok python_ok swig_ok threads_ok hdf5_ok med2_ok omniORB_ok occ_ok "
-fi
+variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med3_ok omniORB_ok occ_ok"
 
 for var in $variables
 do
@@ -371,7 +305,7 @@ do
 done
 
 echo "---Optional:"
-variables="mpi_ok cppunit_ok openpbs_ok lsf_ok doxygen_ok graphviz_ok"
+variables="mpi_ok cppunit_ok doxygen_ok graphviz_ok"
  
 for var in $variables
 do
@@ -403,36 +337,47 @@ AC_OUTPUT_COMMANDS([ \
       chmod +x ./bin/*; \
 ])
 
+AC_HACK_LIBTOOL
+AC_CONFIG_COMMANDS([hack_libtool],[
+sed -i "s%^CC=\"\(.*\)\"%hack_libtool (){ \n\
+  $(pwd)/hack_libtool \1 \"\$[@]\" \n\
+}\n\
+CC=\"hack_libtool\"%g" libtool
+sed -i "s%\(\s*\)for searchdir in \$newlib_search_path \$lib_search_path \$sys_lib_search_path \$shlib_search_path; do%\1searchdirs=\"\$newlib_search_path \$lib_search_path \$sys_lib_search_path \$shlib_search_path\"\n\1for searchdir in \$searchdirs; do%g" libtool
+sed -i "s%\(\s*\)searchdirs=\"\$newlib_search_path \$lib_search_path \(.*\)\"%\1searchdirs=\"\$newlib_search_path \$lib_search_path\"\n\1sss_beg=\"\"\n\1sss_end=\"\2\"%g" libtool
+sed -i "s%\(\s*\)\(for searchdir in \$searchdirs; do\)%\1for sss in \$searchdirs; do\n\1  if ! test -d \$sss; then continue; fi\n\1  ssss=\$(cd \$sss; pwd)\n\1  if test \"\$ssss\" != \"\" \&\& test -d \$ssss; then\n\1    case \$ssss in\n\1      /usr/lib | /usr/lib64 ) ;;\n\1      * ) sss_beg=\"\$sss_beg \$ssss\" ;;\n\1    esac\n\1  fi\n\1done\n\1searchdirs=\"\$sss_beg \$sss_end\"\n\1\2%g" libtool
+],[])
+
 # This list is initiated using autoscan and must be updated manually
 # when adding a new file <filename>.in to manage. When you execute
 # autoscan, the Makefile list is generated in the output file configure.scan.
 # This could be helpfull to update de configuration.
 AC_OUTPUT([ \
-  ./salome_adm/unix/SALOMEconfig.h \
-  ./adm_local/Makefile \
-  ./adm_local/unix/Makefile \
-  ./adm_local/unix/config_files/Makefile \
-  ./bin/VERSION \
-  ./bin/Makefile \
-  ./COMPONENT_version.h \
-  ./src/Makefile \
-  ./src/AddComponent/Makefile \
-  ./src/AdditionComponent/Makefile \
-  ./src/CalculatorComponent/Makefile \
-  ./src/DataStreamComponent/Makefile \
-  ./src/DivComponent/Makefile \
-  ./src/FactorialComponent/Makefile \
-  ./src/MulComponent/Makefile \
-  ./src/SIGNALSComponent/Makefile \
-  ./src/SIGNALSComponent_Swig/Makefile \
-  ./src/SubComponent/Makefile \
-  ./src/SyrComponent/Makefile \
-  ./src/SyrControlComponent/Makefile \
-  ./src/TestFunctions/Makefile \
-  ./src/TypesCheck/Makefile \
-  ./src/UndefinedSymbolComponent/Makefile \
-  ./resources/Makefile \
-  ./resources/COMPONENTCatalog.xml \
-  ./idl/Makefile \
+  adm_local/Makefile \
+  adm_local/unix/Makefile \
+  adm_local/unix/config_files/Makefile \
+  bin/VERSION \
+  bin/Makefile \
+  COMPONENT_version.h \
+  src/Makefile \
+  src/AddComponent/Makefile \
+  src/AdditionComponent/Makefile \
+  src/CalculatorComponent/Makefile \
+  src/DataStreamComponent/Makefile \
+  src/DivComponent/Makefile \
+  src/FactorialComponent/Makefile \
+  src/MulComponent/Makefile \
+  src/SIGNALSComponent/Makefile \
+  src/SIGNALSComponent_Swig/Makefile \
+  src/SubComponent/Makefile \
+  src/SyrComponent/Makefile \
+  src/SyrControlComponent/Makefile \
+  src/TestFunctions/Makefile \
+  src/TypesCheck/Makefile \
+  src/UndefinedSymbolComponent/Makefile \
+  resources/Makefile \
+  resources/COMPONENTCatalog.xml \
+  resources/SalomeApp.xml \
+  idl/Makefile \
   Makefile \
 ])

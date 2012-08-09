@@ -1,5 +1,5 @@
 <!--
-  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
+  Copyright (C) 2007-2012  CEA/DEN, EDF R&D, OPEN CASCADE
 
   Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
   CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS
@@ -25,9 +25,10 @@
   <section name="COMPONENT">
     <!-- Major module parameters -->
     <parameter name="name" value="Component"/>
+    <parameter name="version" value="@VERSION@"/>
   </section>
   <section name="resources">
     <!-- Module resources -->
-    <parameter name="COMPONENT" value="${COMPONENT_ROOT_DIR}/share/salome/resources/component"/>
+    <parameter name="COMPONENT" value="%COMPONENT_ROOT_DIR%/share/salome/resources/component"/>
   </section>
 </document>

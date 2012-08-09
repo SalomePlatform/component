@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='us-ascii' ?>
 <!--
-  Copyright (C) 2007-2008  CEA/DEN, EDF R&D, OPEN CASCADE
+  Copyright (C) 2007-2012  CEA/DEN, EDF R&D, OPEN CASCADE
 
   Copyright (C) 2003-2007  OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN,
   CEDRAT, EDF R&D, LEG, PRINCIPIA R&D, BUREAU VERITAS
@@ -2157,7 +2157,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>FIELDDOUBLE</inParameter-type>
+              <inParameter-type>SALOME_MED/FIELDDOUBLE</inParameter-type>
 							<inParameter-name>field1</inParameter-name>
 							<inParameter-comment>initial field of double</inParameter-comment>
 						</inParameter>
@@ -2169,7 +2169,7 @@
 					</inParameter-list>
                                         <outParameter-list>
                                                  <outParameter>
-                                                        <outParameter-type>FIELDDOUBLE</outParameter-type>
+                                                   <outParameter-type>SALOME_MED/FIELDDOUBLE</outParameter-type>
                                                         <outParameter-name>return</outParameter-name>
                                                         <outParameter-comment>result</outParameter-comment>
                                                  </outParameter>
@@ -2185,19 +2185,19 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>FIELDDOUBLE</inParameter-type>
+              <inParameter-type>SALOME_MED/FIELDDOUBLE</inParameter-type>
 							<inParameter-name>field1</inParameter-name>
 							<inParameter-comment>first field of double</inParameter-comment>
 						</inParameter>
 						<inParameter>
-							<inParameter-type>FIELDDOUBLE</inParameter-type>
+              <inParameter-type>SALOME_MED/FIELDDOUBLE</inParameter-type>
 							<inParameter-name>field2</inParameter-name>
 							<inParameter-comment>second field of double</inParameter-comment>
 						</inParameter>
 					</inParameter-list>
                                         <outParameter-list>
                                                  <outParameter>
-                                                        <outParameter-type>FIELDDOUBLE</outParameter-type>
+                                                   <outParameter-type>SALOME_MED/FIELDDOUBLE</outParameter-type>
                                                         <outParameter-name>return</outParameter-name>
                                                         <outParameter-comment>result</outParameter-comment>
                                                  </outParameter>
@@ -2213,7 +2213,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>FIELDDOUBLE</inParameter-type>
+              <inParameter-type>SALOME_MED/FIELDDOUBLE</inParameter-type>
 							<inParameter-name>field1</inParameter-name>
 							<inParameter-comment>allows to build the support</inParameter-comment>
 						</inParameter>
@@ -2225,7 +2225,7 @@
 					</inParameter-list>
                                         <outParameter-list>
                                                  <outParameter>
-                                                        <outParameter-type>FIELDDOUBLE</outParameter-type>
+                                                   <outParameter-type>SALOME_MED/FIELDDOUBLE</outParameter-type>
                                                         <outParameter-name>return</outParameter-name>
                                                         <outParameter-comment>result based on first field support</outParameter-comment>
                                                  </outParameter>
@@ -2241,7 +2241,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>FIELDDOUBLE</inParameter-type>
+              <inParameter-type>SALOME_MED/FIELDDOUBLE</inParameter-type>
 							<inParameter-name>field1</inParameter-name>
 							<inParameter-comment>field to put to study</inParameter-comment>
 						</inParameter>
@@ -2253,7 +2253,7 @@
 					</inParameter-list>
                                         <outParameter-list>
                                                  <outParameter>
-                                                        <outParameter-type>FIELDDOUBLE</outParameter-type>
+                                                   <outParameter-type>SALOME_MED/FIELDDOUBLE</outParameter-type>
                                                         <outParameter-name>return</outParameter-name>
                                                         <outParameter-comment>the same field like in input</outParameter-comment>
                                                  </outParameter>
@@ -2269,7 +2269,7 @@
 					<!-- service-connexion -->
 					<inParameter-list>
 						<inParameter>
-							<inParameter-type>FIELDDOUBLE</inParameter-type>
+              <inParameter-type>SALOME_MED/FIELDDOUBLE</inParameter-type>
 							<inParameter-name>field1</inParameter-name>
 							<inParameter-comment>transient Med field</inParameter-comment>
 						</inParameter>
