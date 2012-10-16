@@ -31,7 +31,7 @@
 #include <sstream>
 #include <string>
 
-//#include "utilities.h"
+#include "COMPONENT_version.h"
 #include "SubComponent.hxx"
 
 using namespace std;
@@ -56,6 +56,15 @@ SubComponentEngine::SubComponentEngine()
 
 SubComponentEngine::~SubComponentEngine()
 {
+}
+
+char* SubComponentEngine::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 void SubComponentEngine::Sub( double x , double y , double & z ) {

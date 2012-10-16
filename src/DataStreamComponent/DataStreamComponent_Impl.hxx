@@ -46,6 +46,8 @@ public:
 
   virtual ~DataStreamFactory_Impl();
 
+  virtual char* getVersion();
+
   virtual void Setxy( CORBA::Long x , CORBA::Long y ) ;
 
   virtual void Getxy( CORBA::Long & x , CORBA::Long & y ) ;
@@ -86,6 +88,8 @@ public:
                    const char * nodeName );
 
   virtual ~DataStream_Impl();
+
+  virtual char* getVersion();
 
   virtual void StreamSetxy( CORBA::Long x , CORBA::Long y ) ;
 

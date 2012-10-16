@@ -47,6 +47,8 @@ public:
 
   virtual ~MulComponentEngine();
 
+  virtual char* getVersion();
+
   void Mul( double x , double y , double & z ) ;
 
 private:

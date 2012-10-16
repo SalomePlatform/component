@@ -33,6 +33,7 @@
 
 //#include "utilities.h"
 #include "MulComponent.hxx"
+#include "COMPONENT_version.h"
 
 using namespace std;
 
@@ -56,6 +57,15 @@ MulComponentEngine::MulComponentEngine()
 
 MulComponentEngine::~MulComponentEngine()
 {
+}
+
+char* MulComponentEngine::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 void MulComponentEngine::Mul( double x , double y , double & z ) {

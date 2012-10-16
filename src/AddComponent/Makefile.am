@@ -49,7 +49,9 @@ libAddComponentEngine_la_CPPFLAGS = \
 	$(CORBA_CXXFLAGS) \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
-	-I$(top_builddir)/idl
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)
+
 libAddComponentEngine_la_LDFLAGS = \
 	../../idl/libSalomeIDLCOMPONENT.la \
 	$(KERNEL_LDFLAGS) \

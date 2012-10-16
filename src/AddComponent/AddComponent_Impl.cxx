@@ -39,6 +39,7 @@
 
 #include "AddComponent_Impl.hxx"
 #include "Adder_Impl.hxx"
+#include "COMPONENT_version.h"
 
 using namespace std;
 
@@ -61,6 +62,15 @@ AddComponent_Impl::AddComponent_Impl() {
 }
 
 AddComponent_Impl::~AddComponent_Impl() {
+}
+
+char* AddComponent_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 CORBA::Double AddComponent_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) {

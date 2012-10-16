@@ -48,6 +48,8 @@ public:
 
   virtual ~SyrComponent_Impl();
 
+  virtual char* getVersion();
+
   virtual CORBA::Long C_ISEVEN( CORBA::Long anInteger ) ;
 
   virtual CORBA::Long C_ISONE( CORBA::Long anOddInteger ) ;
@@ -95,6 +97,8 @@ public:
                   const char * nodeName ) ;
   ListOfSyr_Impl() ;
   virtual ~ListOfSyr_Impl();
+
+  virtual char* getVersion();
 
   virtual SuperVisionTest::SeqOfSyr * GetSeqOfSyr() ;
 

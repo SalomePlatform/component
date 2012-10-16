@@ -47,6 +47,8 @@ public:
 
   virtual ~UndefinedSymbolComponentEngine();
 
+  virtual char* getVersion();
+
   CORBA::Long UndefinedSymbol() ;
 
 private:

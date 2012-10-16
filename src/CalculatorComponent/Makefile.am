@@ -41,7 +41,8 @@ libCalculatorEngine_la_CPPFLAGS = \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
 	$(MED_CXXFLAGS) \
-	-I$(top_builddir)/idl
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)
 
 libCalculatorEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \

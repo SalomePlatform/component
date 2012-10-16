@@ -49,6 +49,8 @@ class Adder_Impl :  public POA_AdditionComponent::Adder ,
 
     virtual ~Adder_Impl();
 
+    virtual char* getVersion();
+
     virtual void destroy() ;
 
     virtual CORBA::Double Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
