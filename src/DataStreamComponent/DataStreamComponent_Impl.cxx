@@ -31,6 +31,7 @@
 #include <sstream>
 #include <string>
 
+#include "COMPONENT_version.h"
 #include "DataStreamComponent_Impl.hxx"
 
 using namespace std;
@@ -52,6 +53,15 @@ DataStreamFactory_Impl::DataStreamFactory_Impl() {
 }
 
 DataStreamFactory_Impl::~DataStreamFactory_Impl() {
+}
+
+char* DataStreamFactory_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 void DataStreamFactory_Impl::Setxy( CORBA::Long x , CORBA::Long y ) {
@@ -134,6 +144,15 @@ DataStream_Impl::DataStream_Impl() {
 DataStream_Impl::~DataStream_Impl() {
   beginService( "DataStream_Impl::~DataStream_Impl" );
   endService( "DataStream_Impl::~DataStream_Impl" );
+}
+
+char* DataStream_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 void DataStream_Impl::StreamSetxy( CORBA::Long x , CORBA::Long y ) {

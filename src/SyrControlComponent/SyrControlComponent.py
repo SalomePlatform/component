@@ -141,3 +141,7 @@ class SyrControlComponent( SuperVisionTest__POA.SyrControlComponent, SALOME_Comp
         self.Syr = lcc.FindOrLoadComponent( 'FactoryServer' , 'SyrComponent' )
         print "SyrControlComponent::__init__",dir(self.Syr)
 
+    def getVersion( self ):
+        import salome_version
+        return salome_version.getVersion("COMPONENT", True)
+

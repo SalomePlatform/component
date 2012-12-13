@@ -50,6 +50,8 @@ class TypesCheck_Impl : public POA_SuperVisionTest::TypesCheck ,
 
     virtual ~TypesCheck_Impl();
 
+    virtual char* getVersion();
+
     virtual void StringCheck( const char * InString , _CORBA_String_out OutString ) ;
 
     virtual void BoolCheck( CORBA::Boolean InBool , CORBA::Boolean & OutBool ) ;

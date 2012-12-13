@@ -47,6 +47,8 @@ public:
 
   virtual ~SIGNALSComponent_Impl();
 
+  virtual char* getVersion();
+
   CORBA::Long SIGSEGVfunc() ;
   CORBA::Long SIGFPEfunc( CORBA::Long a , CORBA::Long b ) ;
   void MethodToKill() ;

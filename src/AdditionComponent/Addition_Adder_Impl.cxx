@@ -38,6 +38,7 @@
 #include "SALOME_LifeCycleCORBA.hxx"
 
 #include "Addition_Adder_Impl.hxx"
+#include "COMPONENT_version.h"
 
 using namespace std;
 
@@ -63,6 +64,15 @@ Adder_Impl::Adder_Impl( CORBA::ORB_ptr orb ,
 
 Adder_Impl::Adder_Impl() {
   LastAddition = 0 ;
+}
+
+char* Adder_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 Adder_Impl::~Adder_Impl() {

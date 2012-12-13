@@ -33,6 +33,7 @@
 
 //#include "utilities.h"
 #include "SIGNALSComponent_Impl.hxx"
+#include "COMPONENT_version.h"
 
 using namespace std;
 
@@ -58,6 +59,15 @@ SIGNALSComponent_Impl::SIGNALSComponent_Impl() :
 
 SIGNALSComponent_Impl::~SIGNALSComponent_Impl()
 {
+}
+
+char* SIGNALSComponent_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 CORBA::Long SIGNALSComponent_Impl::SIGSEGVfunc() {

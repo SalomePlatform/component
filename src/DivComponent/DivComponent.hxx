@@ -47,6 +47,8 @@ public:
 
   virtual ~DivComponentEngine();
 
+  virtual char* getVersion();
+
   void Div( double x , double y , double & z ) ;
 
 private:

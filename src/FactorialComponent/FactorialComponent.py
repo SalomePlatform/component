@@ -71,6 +71,10 @@ class FactorialComponent( SuperVisionTest__POA.FactorialComponent, SALOME_Compon
         self.endService( 'FactorialComponent sigma' )
         return s
     
+    def getVersion( self ):
+        import salome_version
+        return salome_version.getVersion("COMPONENT", True)
+
     def __init__(self, orb, poa, this, containerName, instanceName, interfaceName):
         SALOME_ComponentPy_i.__init__(self, orb, poa, this, containerName,
                                       instanceName, interfaceName, 0)

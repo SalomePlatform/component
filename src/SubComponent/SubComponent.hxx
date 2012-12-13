@@ -29,7 +29,6 @@
 #ifndef _SUBCOMPONENTENGINE_HXX_
 #define _SUBCOMPONENTENGINE_HXX_
 
-//#include <iostream.h>
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(SubComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
@@ -46,6 +45,8 @@ public:
                       const char *interfaceName);
 
   virtual ~SubComponentEngine();
+
+  virtual char* getVersion();
 
   void Sub( double x , double y , double & z ) ;
 

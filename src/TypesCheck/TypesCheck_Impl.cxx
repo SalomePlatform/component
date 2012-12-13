@@ -32,6 +32,7 @@
 #include <string>
 
 #include "TypesCheck_Impl.hxx"
+#include "COMPONENT_version.h"
 
 using namespace std;
 
@@ -59,6 +60,15 @@ TypesCheck_Impl::TypesCheck_Impl() {
 TypesCheck_Impl::~TypesCheck_Impl() {
   beginService( "TypesCheck_Impl::~TypesCheck_Impl" );
   endService( "TypesCheck_Impl::~TypesCheck_Impl" );
+}
+
+char* TypesCheck_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 void TypesCheck_Impl::StringCheck( const char * InString , _CORBA_String_out OutString ) {

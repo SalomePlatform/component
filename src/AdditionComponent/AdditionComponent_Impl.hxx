@@ -47,6 +47,8 @@ public:
 
   virtual ~AdditionInterface_Impl();
 
+  virtual char* getVersion();
+
   virtual CORBA::Double Add( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
   virtual CORBA::Double AddWithoutSleep( CORBA::Double x , CORBA::Double y , CORBA::Double & z ) ;
 

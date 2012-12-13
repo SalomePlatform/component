@@ -31,8 +31,7 @@
 #include <sstream>
 #include <string>
 
-//#include "utilities.h"
-
+#include "COMPONENT_version.h"
 #include "SyrComponent_Impl.hxx"
 #include "Adder_Impl.hxx"
 
@@ -58,6 +57,15 @@ SyrComponent_Impl::SyrComponent_Impl() {
 }
 
 SyrComponent_Impl::~SyrComponent_Impl() {
+}
+
+char* SyrComponent_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 CORBA::Long SyrComponent_Impl::C_ISEVEN( CORBA::Long anInteger ) {
@@ -305,6 +313,15 @@ ListOfSyr_Impl::ListOfSyr_Impl() {
 ListOfSyr_Impl::~ListOfSyr_Impl() {
   beginService( "ListOfSyr_Impl::~ListOfSyr_Impl" );
   endService( "ListOfSyr_Impl::~ListOfSyr_Impl" );
+}
+
+char* ListOfSyr_Impl::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 SuperVisionTest::SeqOfSyr * ListOfSyr_Impl::GetSeqOfSyr() {

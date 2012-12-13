@@ -30,6 +30,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "COMPONENT_version.h"
 #include "CalculatorEngine.hxx"
 #include "MEDMEM_Support_i.hxx"
 #include "SUPPORTClient.hxx"
@@ -106,6 +107,15 @@ CalculatorEngine::CalculatorEngine()
 CalculatorEngine::~CalculatorEngine()
 {
   delete _NS;
+}
+
+char* CalculatorEngine::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 static omni_mutex aPutToStudyMutex;

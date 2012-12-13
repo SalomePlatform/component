@@ -40,7 +40,8 @@ libUndefinedSymbolComponentEngine_la_CPPFLAGS = \
 	$(CORBA_CXXFLAGS) \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
-	-I$(top_builddir)/idl
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)
 
 libUndefinedSymbolComponentEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \

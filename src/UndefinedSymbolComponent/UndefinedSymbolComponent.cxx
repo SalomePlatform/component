@@ -33,6 +33,7 @@
 
 //#include "utilities.h"
 #include "UndefinedSymbolComponent.hxx"
+#include "COMPONENT_version.h"
 
 using namespace std;
 
@@ -56,6 +57,15 @@ UndefinedSymbolComponentEngine::UndefinedSymbolComponentEngine() :
 
 UndefinedSymbolComponentEngine::~UndefinedSymbolComponentEngine()
 {
+}
+
+char* UndefinedSymbolComponentEngine::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 extern "C" { long CallUndefined() ; } ;

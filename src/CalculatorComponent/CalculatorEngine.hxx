@@ -55,6 +55,7 @@ public:
 
   virtual ~CalculatorEngine();
 
+  virtual char* getVersion();
 
   SALOME_MED::FIELDDOUBLE_ptr PutToStudy(SALOME_MED::FIELDDOUBLE_ptr theField,
 					 CORBA::Long theStudyId);

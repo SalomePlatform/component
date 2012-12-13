@@ -33,6 +33,7 @@
 
 //#include "utilities.h"
 #include "DivComponent.hxx"
+#include "COMPONENT_version.h"
 
 using namespace std;
 
@@ -56,6 +57,15 @@ DivComponentEngine::DivComponentEngine()
 
 DivComponentEngine::~DivComponentEngine()
 {
+}
+
+char* DivComponentEngine::getVersion()
+{
+#if COMPONENT_DEVELOPMENT
+  return CORBA::string_dup(COMPONENT_VERSION_STR"dev");
+#else
+  return CORBA::string_dup(COMPONENT_VERSION_STR);
+#endif
 }
 
 void DivComponentEngine::Div( double x , double y , double & z ) {

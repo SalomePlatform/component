@@ -40,7 +40,8 @@ libDivComponentEngine_la_CPPFLAGS = \
 	$(CORBA_CXXFLAGS) \
 	$(CORBA_INCLUDES) \
 	$(KERNEL_CXXFLAGS) \
-	-I$(top_builddir)/idl
+	-I$(top_builddir)/idl \
+	-I$(top_builddir)
 
 libDivComponentEngine_la_LDFLAGS  = \
 	../../idl/libSalomeIDLCOMPONENT.la \
