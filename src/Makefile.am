@@ -40,5 +40,4 @@ SUBDIRS = \
 	SIGNALSComponent \
 	UndefinedSymbolComponent \
 	SIGNALSComponent_Swig \
-	TestFunctions \
-	CalculatorComponent
+	TestFunctions
