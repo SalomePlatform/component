@@ -362,7 +362,6 @@ AC_OUTPUT([ \
   src/Makefile \
   src/AddComponent/Makefile \
   src/AdditionComponent/Makefile \
-  src/CalculatorComponent/Makefile \
   src/DataStreamComponent/Makefile \
   src/DivComponent/Makefile \
   src/FactorialComponent/Makefile \
