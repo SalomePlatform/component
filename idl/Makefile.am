@@ -36,8 +36,7 @@ BASEIDL_FILES = \
 	TypesCheck.idl \
 	DataStreamComponent.idl \
 	SIGNALSComponent.idl \
-	UndefinedSymbolComponent.idl \
-	Calculator.idl
+	UndefinedSymbolComponent.idl
 
 BASEIDL_FILES_PY=$(BASEIDL_FILES:%.idl=%_idl.py)
 
@@ -60,8 +59,7 @@ BASEIDL_SOURCES =\
 	TypesCheckSK.cc \
 	DataStreamComponentSK.cc \
 	SIGNALSComponentSK.cc \
-	UndefinedSymbolComponentSK.cc \
-	CalculatorSK.cc
+	UndefinedSymbolComponentSK.cc
 DYNIDL_SOURCES = \
 	AddComponentDynSK.cc \
 	AdditionComponentDynSK.cc \
@@ -74,8 +72,7 @@ DYNIDL_SOURCES = \
 	TypesCheckDynSK.cc \
 	DataStreamComponentDynSK.cc \
 	SIGNALSComponentDynSK.cc \
-	UndefinedSymbolComponentDynSK.cc \
-	CalculatorDynSK.cc
+	UndefinedSymbolComponentDynSK.cc
 
 nodist_libSalomeIDLCOMPONENT_la_SOURCES = ${BASEIDL_SOURCES} ${DYNIDL_SOURCES}
 ${DYNIDL_SOURCES}: ${BASEIDL_SOURCES}
@@ -85,7 +82,6 @@ nodist_salomeinclude_HEADERS = $(BASEIDL_FILES:%.idl=%.hh)
 
 libSalomeIDLCOMPONENT_la_CPPFLAGS = \
 	$(KERNEL_CXXFLAGS) \
-	$(MED_CXXFLAGS) \
 	-I$(top_builddir)/idl \
 	@CORBA_CXXFLAGS@ \
 	@CORBA_INCLUDES@
@@ -93,7 +89,6 @@ libSalomeIDLCOMPONENT_la_CPPFLAGS = \
 libSalomeIDLCOMPONENT_la_LDFLAGS = -no-undefined -version-info=0:0:0
 libSalomeIDLCOMPONENT_la_LIBADD  = \
 	$(KERNEL_LDFLAGS) -lSalomeIDLKernel \
-	$(MED_LDFLAGS) -lSalomeIDLMED \
 	@CORBA_LIBS@
 
 # These variables defines the building process of CORBA files
@@ -102,19 +97,16 @@ OMNIORB_IDLCXXFLAGS = @OMNIORB_IDLCXXFLAGS@
 OMNIORB_IDLPYFLAGS  = \
 	@OMNIORB_IDLPYFLAGS@ \
 	-I$(top_builddir)/idl/salome \
-	-I$(KERNEL_ROOT_DIR)/idl/salome \
-	-I$(MED_ROOT_DIR)/idl/salome
+	-I$(KERNEL_ROOT_DIR)/idl/salome
 
 IDLCXXFLAGS = \
 	-bcxx \
 	@IDLCXXFLAGS@ \
 	-I$(top_builddir)/idl/salome \
-	-I$(KERNEL_ROOT_DIR)/idl/salome \
-	-I$(MED_ROOT_DIR)/idl/salome
+	-I$(KERNEL_ROOT_DIR)/idl/salome
 IDLPYFLAGS  = \
 	@IDLPYFLAGS@ \
-	-I$(KERNEL_ROOT_DIR)/idl/salome \
-	-I$(MED_ROOT_DIR)/idl/salome
+	-I$(KERNEL_ROOT_DIR)/idl/salome
 
 # potential problem on parallel make on the following - multiple outputs
 SUFFIXES = .idl .hh SK.cc
@@ -151,7 +143,7 @@ mostlyclean-local:
 	@for dep in $^ dummy; do \
 	  if [ $$dep != "dummy" ]; then \
 	    echo Building dependencies for $$dep; \
-	    $(CPP) $(C_DEPEND_FLAG) -x c -I$(srcdir) -I$(KERNEL_ROOT_DIR)/idl/salome -I$(MED_ROOT_DIR)/idl/salome $$dep 2>/dev/null | \
+	    $(CPP) $(C_DEPEND_FLAG) -x c -I$(srcdir) -I$(KERNEL_ROOT_DIR)/idl/salome $$dep 2>/dev/null | \
 	    sed 's/\.o/\SK.cc/' >>$@; \
 	  fi; \
 	done ;

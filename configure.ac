@@ -249,21 +249,21 @@ echo
 
 CHECK_HDF5
 
-echo
-echo ---------------------------------------------
-echo testing MED
-echo ---------------------------------------------
-echo
+# echo
+# echo ---------------------------------------------
+# echo testing MED
+# echo ---------------------------------------------
+# echo
 
-CHECK_MED
+# CHECK_MED
 
-echo
-echo ---------------------------------------------
-echo testing MED3
-echo ---------------------------------------------
-echo
+# echo
+# echo ---------------------------------------------
+# echo testing MED3
+# echo ---------------------------------------------
+# echo
 
-CHECK_MED3
+# CHECK_MED3
 
 echo
 echo ---------------------------------------------
@@ -296,7 +296,7 @@ echo ---------------------------------------------
 echo
 
 echo Configure
-variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok med3_ok omniORB_ok occ_ok"
+variables="cc_ok lex_yacc_ok python_ok swig_ok threads_ok hdf5_ok omniORB_ok occ_ok"
 
 for var in $variables
 do

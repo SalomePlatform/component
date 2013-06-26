@@ -46,13 +46,13 @@ fi
 #    exit
 #fi
 
-########################################################################
-# Test if the MED_ROOT_DIR is set correctly
+# ########################################################################
+# # Test if the MED_ROOT_DIR is set correctly
 
-if test ! -d "${MED_ROOT_DIR}"; then
-    echo "failed : MED_ROOT_DIR variable is not correct !"
-    exit
-fi
+# if test ! -d "${MED_ROOT_DIR}"; then
+#     echo "failed : MED_ROOT_DIR variable is not correct !"
+#     exit
+# fi
 
 cd ${CONF_DIR}
 ABS_CONF_DIR=`pwd`
@@ -69,8 +69,7 @@ ABS_CONF_DIR=`pwd`
 echo "======================================================= aclocal"
 
 aclocal -I adm_local/unix/config_files \
-        -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files \
-        -I ${MED_ROOT_DIR}/adm_local/unix/config_files || exit 1
+        -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files || exit 1
 
 # ____________________________________________________________________
 # libtoolize creates some configuration files (ltmain.sh,
