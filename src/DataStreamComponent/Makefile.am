@@ -64,7 +64,9 @@ libDataStreamFactoryEngine_la_LDFLAGS  = \
 	-lSALOMELocalTrace \
         -lSalomeResourcesManager \
 	-lSALOMEBasics \
-	-lSalomeIDLKernel
+	-lSalomeIDLKernel \
+	-lSalomeHDFPersist \
+	-lResourcesManager
 
 DataStreamComponent_CheckOfUndefined_CPPFLAGS = \
 	$(libDataStreamFactoryEngine_la_CPPFLAGS)

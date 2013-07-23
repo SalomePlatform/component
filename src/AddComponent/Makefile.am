@@ -66,7 +66,8 @@ libAddComponentEngine_la_LDFLAGS = \
 	-lSalomeLifeCycleCORBA \
         -lSalomeResourcesManager \
 	-lSALOMEBasics \
-	-lSalomeIDLKernel
+	-lSalomeIDLKernel \
+	-lResourcesManager
 
 AddComponent_CheckOfUndefined_CPPFLAGS = \
 	$(libAddComponentEngine_la_CPPFLAGS)

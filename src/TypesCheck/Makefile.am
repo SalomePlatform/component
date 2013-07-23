@@ -61,7 +61,9 @@ libTypesCheckEngine_la_LDFLAGS  = \
 	-lSALOMELocalTrace \
         -lSalomeResourcesManager \
 	-lSALOMEBasics \
-	-lSalomeIDLKernel
+	-lSalomeIDLKernel \
+	-lSalomeHDFPersist \
+	-lResourcesManager
 
 TypesCheck_CheckOfUndefined_CPPFLAGS = \
 	$(libTypesCheckEngine_la_CPPFLAGS)

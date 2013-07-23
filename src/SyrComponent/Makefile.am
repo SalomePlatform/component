@@ -62,7 +62,9 @@ libSyrComponentEngine_la_LDFLAGS  = \
 	-lSALOMELocalTrace \
         -lSalomeResourcesManager \
 	-lSALOMEBasics \
-	-lSalomeIDLKernel
+	-lSalomeIDLKernel \
+	-lSalomeHDFPersist \
+	-lResourcesManager
 
 SyrComponent_CheckOfUndefined_CPPFLAGS = \
 	$(libSyrComponentEngine_la_CPPFLAGS)

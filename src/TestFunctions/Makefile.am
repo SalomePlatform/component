@@ -59,7 +59,9 @@ libDynInvoke_la_LDFLAGS  = \
 	-lSalomeLifeCycleCORBA \
         -lSalomeResourcesManager \
 	-lSALOMEBasics \
-	-lSalomeIDLKernel
+	-lSalomeIDLKernel \
+	-lSalomeHDFPersist \
+	-lResourcesManager
 
 TestFunctions_SOURCES = TestFunctions.cxx
 TestFunctionsMemory_SOURCES = TestFunctionsMemory.cxx

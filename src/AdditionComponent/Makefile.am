@@ -74,5 +74,5 @@ AdditionComponent_CheckOfUndefined_CPPFLAGS = \
 
 AdditionComponent_CheckOfUndefined_LDFLAGS = \
 	./libAdditionComponentEngine.la \
-	$(libAdditionComponentEngine_laLDFLAGS) \
+	$(libAdditionComponentEngine_la_LDFLAGS) \
 	$(CORBA_LIBS)

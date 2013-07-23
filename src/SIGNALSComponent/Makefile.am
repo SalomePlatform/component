@@ -56,9 +56,13 @@ libSIGNALSComponentEngine_la_LDFLAGS  = \
 	-lSalomeGenericObj \
 	-lSalomeContainer \
 	-lSalomeNS \
+	-lSALOMEBasics \
 	-lOpUtil \
 	-lRegistry \
-	-lSalomeNotification
+	-lSalomeNotification \
+	-lSalomeHDFPersist \
+	-lSalomeIDLKernel \
+	-lResourcesManager
 
 SIGNALSComponent_CheckOfUndefined_CPPFLAGS = \
 	$(libSIGNALSComponentEngine_la_CPPFLAGS)
