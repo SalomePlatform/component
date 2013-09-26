@@ -21,7 +21,7 @@
 //
 
 #include <stdexcept>
-#include <CORBA.h>
+#include <omniORB4/CORBA.h>
 #include "utilities.h"
 
 // CCRT porting

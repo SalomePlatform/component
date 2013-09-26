@@ -25,7 +25,7 @@
   <section name="COMPONENT">
     <!-- Major module parameters -->
     <parameter name="name" value="Component"/>
-    <parameter name="version" value="@VERSION@"/>
+    <parameter name="version" value="@SALOMECOMPONENT_VERSION@"/>
   </section>
   <section name="resources">
     <!-- Module resources -->

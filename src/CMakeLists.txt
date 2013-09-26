@@ -1,5 +1,4 @@
-#!/bin/sh
-# Copyright (C) 2007-2013  CEA/DEN, EDF R&D, OPEN CASCADE
+# Copyright (C) 2012-2013  CEA/DEN, EDF R&D, OPEN CASCADE
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,8 +17,30 @@
 # See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
 
-rm -rf autom4te.cache aclocal.m4 configure make_config
-find . -name "*~" -print -exec rm {} \;
-find . -name "*.pyc" -print -exec rm {} \;
-find . -name Makefile.in | xargs rm -f
-( cd adm_local/unix/config_files && rm -f config.* depcomp install-sh l*.m4 ltmain.sh missing py-compile )
+##
+# Common packages
+##
+SET(SUBDIRS_COMMON
+  AddComponent
+  AdditionComponent
+  DivComponent
+  FactorialComponent
+  MulComponent
+  SubComponent
+  SyrComponent
+  SyrControlComponent
+  TypesCheck
+  DataStreamComponent
+  SIGNALSComponent
+  UndefinedSymbolComponent
+  SIGNALSComponent_Swig
+  TestFunctions
+)
+
+SET(SUBDIRS
+  ${SUBDIRS_COMMON}
+)
+
+FOREACH(dir ${SUBDIRS})
+ ADD_SUBDIRECTORY(${dir})
+ENDFOREACH(dir ${SUBDIRS})

@@ -16,14 +16,16 @@
 #
 # See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 #
-
-# -* Makefile *- 
-# Author : Patrick GOLDBRONN (CEA)
-# Date : 28/06/2001
-#  Modified by : Alexander BORODIN (OCN) - autotools usage
-# $Header$
 #
-include $(top_srcdir)/adm_local/unix/make_common_starter.am
 
-# VSR: little trick to avoid putting if COMPONENTCatalog.xml to the distribution archive
-nodist_salomeres_SCRIPTS = COMPONENTCatalog.xml SalomeApp.xml
+IF(NOT SalomeCOMPONENT_FIND_QUIETLY)
+  MESSAGE(STATUS "Looking for Salome COMPONENT ...")
+ENDIF()
+
+SET(CMAKE_PREFIX_PATH "${COMPONENT_ROOT_DIR}")
+
+SALOME_FIND_PACKAGE(SalomeCOMPONENT SalomeCOMPONENT CONFIG)
+
+IF(NOT SalomeCOMPONENT_FIND_QUIETLY)
+  MESSAGE(STATUS "Found Salome COMPONENT: ${COMPONENT_ROOT_DIR}")
+ENDIF()
