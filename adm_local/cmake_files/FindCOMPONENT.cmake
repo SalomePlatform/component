@@ -18,17 +18,18 @@
 #
 #
 
-SET(COMPONENT_CXXFLAGS -I${COMPONENT_ROOT_DIR}/include/salome)
+SET(COMPONENT_CXXFLAGS -I${COMPONENT_ROOT_DIR}/include/salome) # to be removed
+SET(COMPONENT_INCLUDE_DIRS ${COMPONENT_ROOT_DIR}/include/salome)
 
-FIND_LIBRARY(AddComponentEngine AddComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(AdditionComponentEngine AdditionComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(DataStreamFactoryEngine DataStreamFactoryEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(DivComponentEngine DivComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(MulComponentEngine MulComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(SIGNALSComponentEngine SIGNALSComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(SubComponentEngine SubComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(SyrComponentEngine SyrComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(DynInvoke DynInvoke ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(TypesCheckEngine TypesCheckEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(UndefinedSymbolComponentEngine UndefinedSymbolComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
-FIND_LIBRARY(SalomeIDLCOMPONENT SalomeIDLCOMPONENT ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_AddComponentEngine AddComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_AdditionComponentEngine AdditionComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_DataStreamFactoryEngine DataStreamFactoryEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_DivComponentEngine DivComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_MulComponentEngine MulComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_SIGNALSComponentEngine SIGNALSComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_SubComponentEngine SubComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_SyrComponentEngine SyrComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_DynInvoke DynInvoke ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_TypesCheckEngine TypesCheckEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_UndefinedSymbolComponentEngine UndefinedSymbolComponentEngine ${COMPONENT_ROOT_DIR}/lib/salome)
+FIND_LIBRARY(COMPONENT_SalomeIDLCOMPONENT SalomeIDLCOMPONENT ${COMPONENT_ROOT_DIR}/lib/salome)
