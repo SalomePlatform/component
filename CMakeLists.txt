@@ -41,6 +41,8 @@ IF(EXISTS ${KERNEL_ROOT_DIR})
   LIST(APPEND CMAKE_MODULE_PATH "${KERNEL_ROOT_DIR}/salome_adm/cmake_files")
   INCLUDE(SalomeMacros)
   FIND_PACKAGE(SalomeKERNEL REQUIRED)
+  ADD_DEFINITIONS(${KERNEL_DEFINITIONS})
+  INCLUDE_DIRECTORIES(${KERNEL_INCLUDE_DIRS})
 ELSE(EXISTS ${KERNEL_ROOT_DIR})
   MESSAGE(FATAL_ERROR "We absolutely need a Salome KERNEL, please define KERNEL_ROOT_DIR")
 ENDIF(EXISTS ${KERNEL_ROOT_DIR})
@@ -60,13 +62,12 @@ LIST(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/adm_local/cmake_files")
 # User options
 # (some options have already been defined in KERNEL) 
 # ============
-#OPTION(SALOME_BUILD_TESTS "Build SALOME tests" ${SALOME_BUILD_TESTS}) For use in the future
-#OPTION(SALOME_BUILD_DOC "Generate SALOME COMPONENT documentation" ${SALOME_BUILD_DOC}) For use in the future
-  
-##
-## COMPONENT specifics
-##
+# OPTION(SALOME_BUILD_DOC "Generate SALOME COMPONENT documentation" ON) #for use in the future
+# OPTION(SALOME_BUILD_TESTS "Build SALOME tests" ON) #for use in the future
 
+##
+## From KERNEL:
+##
 # Python
 FIND_PACKAGE(SalomePython REQUIRED)
 # SWIG
