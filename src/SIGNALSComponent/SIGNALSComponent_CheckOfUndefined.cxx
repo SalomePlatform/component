@@ -30,7 +30,7 @@
 #include <string>
 #include <stdio.h>
 
-#ifndef WNT
+#ifndef WIN32
 #include <unistd.h>
 #else
 #include <process.h>
@@ -53,8 +53,10 @@
 //CCRT
 #include <sstream>
 #include <time.h>
+#ifndef WIN32
 #include <sys/time.h>
 #include <sys/stat.h>
+#endif
 //end-CCRT
 
 #include "Container_init_python.hxx"

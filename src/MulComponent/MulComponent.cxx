@@ -26,7 +26,9 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -76,9 +78,13 @@ void MulComponentEngine::Mul( double x , double y , double & z ) {
   sendMessage(NOTIF_STEP, "Mul is Computing");
 //  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   S = 5 ;
+ #ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   MESSAGE( "MulComponentEngine::Mul( " <<  x << " , " << y << " , " << z
        << " ) after " << S << " seconds" )
   endService( " MulComponentEngine::Mul"  );

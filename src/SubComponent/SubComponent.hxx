@@ -29,13 +29,23 @@
 #ifndef _SUBCOMPONENTENGINE_HXX_
 #define _SUBCOMPONENTENGINE_HXX_
 
+#ifdef WIN32
+# if defined SUBCOMPONENTENGINE_EXPORTS || defined SubComponentEngine_EXPORTS
+#  define SUBCOMPONENTENGINE_EXPORT __declspec( dllexport )
+# else
+#  define SUBCOMPONENTENGINE_EXPORT __declspec( dllimport )
+# endif
+#else
+# define SUBCOMPONENTENGINE_EXPORT
+#endif
+
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(SubComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class SubComponentEngine :  public POA_SuperVisionTest::SubComponent ,
-                            public Engines_Component_i {
+class SUBCOMPONENTENGINE_EXPORT SubComponentEngine :  public POA_SuperVisionTest::SubComponent ,
+                                                      public Engines_Component_i {
 public:
   SubComponentEngine() ;
   SubComponentEngine( CORBA::ORB_ptr orb,
@@ -57,6 +67,7 @@ private:
 };
 
 extern "C"
+  SUBCOMPONENTENGINE_EXPORT
   PortableServer::ObjectId * SubComponentEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 

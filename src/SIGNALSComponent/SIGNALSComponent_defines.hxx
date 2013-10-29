@@ -20,37 +20,21 @@
 // See http://www.salome-platform.org/ or email : webmaster.salome@opencascade.com
 //
 
-//  SUPERV GraphExecutor : contains classes that permit execution of graphs and particularly the execution automaton
-//  File   : DataFlowExecutor_DynInvoke.hxx
-//  Module : SUPERV
+//  File   : SIGNALSComponent_defines.hxx
+//  Author : Roman NIKOLAEV, OPEN CASCADE
+//  $Header$
 //
-#ifndef _DYNINVOKE_
-#define _DYNINVOKE_
+#ifndef _SIGNALSCOMPONENT_DEFINES_HXX_
+#define _SIGNALSCOMPONENT_DEFINES_HXX_
 
 #ifdef WIN32
-# if defined DYNINVOKE_EXPORTS || defined DynInvoke_EXPORTS
-#  define DYNINVOKE_EXPORT __declspec( dllexport )
+# if defined SIGNALSCOMPONENTENGINE_EXPORTS || defined SIGNALSComponentEngine_EXPORTS
+#  define SIGNALSCOMPONENTENGINE_EXPORT __declspec( dllexport )
 # else
-#  define DYNINVOKE_EXPORT __declspec( dllimport )
+#  define SIGNALSCOMPONENTENGINE_EXPORT __declspec( dllimport )
 # endif
 #else
-# define DYNINVOKE_EXPORT
+# define SIGNALSCOMPONENTENGINE_EXPORT
 #endif
 
-struct ServicesAnyData {
-
-  std::string Name;
-  CORBA::Any Value;
-
-};
-
-
-// dynamic call for function with list of in parameters, followed 
-// by out parameters with no return value
-
-void DYNINVOKE_EXPORT DynInvoke(Engines::EngineComponent_ptr obj,
-	                     const char *method, 
-	                     ServicesAnyData * inParams, int nInParams,
-	                     ServicesAnyData * outParams, int nOutParams);
-
-#endif
+#endif //_SIGNALSCOMPONENT_DEFINES_HXX_

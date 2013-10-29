@@ -26,7 +26,11 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#else
+#include <process.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -74,9 +78,13 @@ CORBA::Long SyrComponent_Impl::C_ISEVEN( CORBA::Long anInteger ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_ISEVEN is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   RetVal = ( anInteger & 1 ) == 0 ;
   endService( " SyrComponent_Impl::C_ISEVEN"  );
   return RetVal ;
@@ -88,9 +96,13 @@ CORBA::Long SyrComponent_Impl::C_ISONE( CORBA::Long anOddInteger ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_ISONE is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   RetVal = ( anOddInteger == 1 ) ;
   endService( " SyrComponent_Impl::C_ISONE"  );
   return RetVal ;
@@ -101,10 +113,13 @@ CORBA::Long SyrComponent_Impl::C_M3( CORBA::Long anOddInteger ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_M3 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
-  endService( " SyrComponent_Impl::C_M3"  );
+#else
+  Sleep(S*1000);
+#endif  endService( " SyrComponent_Impl::C_M3"  );
   if ( C_ISEVEN( anOddInteger ) )
     return 0 ;
   return ( 3*anOddInteger ) ;
@@ -115,9 +130,13 @@ CORBA::Long SyrComponent_Impl::C_M3P1( CORBA::Long anOddInteger ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_M3P1 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   endService( " SyrComponent_Impl::C_M3P1"  );
   if ( C_ISEVEN( anOddInteger ) )
     return 0 ;
@@ -129,9 +148,13 @@ CORBA::Long SyrComponent_Impl::C_DIV2( CORBA::Long anEvenInteger ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_DIV2 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   endService( " SyrComponent_Impl::C_DIV2"  );
   if ( !C_ISEVEN( anEvenInteger ) )
     return 0 ;
@@ -143,9 +166,13 @@ CORBA::Long SyrComponent_Impl::C_INCR( CORBA::Long aCount ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_INCR is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   endService( " SyrComponent_Impl::C_INCR"  );
   return ( aCount + 1 ) ;
 }
@@ -155,9 +182,13 @@ void SyrComponent_Impl::CPP_SETLONG( CORBA::Long aCount ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::CPP_SETLONG is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   _Count = aCount ;
   endService( " SyrComponent_Impl::CPP_SETLONG"  );
   return ;
@@ -168,9 +199,13 @@ CORBA::Long SyrComponent_Impl::CPP_ADDTOLONG( CORBA::Long anIncr ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::CPP_ADDTOLONG is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   endService( " SyrComponent_Impl::CPP_ADDTOLONG"  );
   return ( _Count + anIncr ) ;
 }
@@ -180,9 +215,13 @@ CORBA::Long SyrComponent_Impl::C_MIN( CORBA::Long aMinVal , CORBA::Long anIntege
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_MIN is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   int min = aMinVal ;
   if ( anInteger < min || aMinVal == 0 ) {
     min = anInteger ;
@@ -201,9 +240,13 @@ CORBA::Long SyrComponent_Impl::C_MAX( CORBA::Long aMaxVal , CORBA::Long anIntege
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_MAX is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   int max = aMaxVal ;
   if ( anInteger > max ) {
     max = anInteger ;
@@ -222,9 +265,13 @@ SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_LISTOFSYR() {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_LISTOFSYR is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   ListOfSyr_Impl * aNewListOfSyr = new ListOfSyr_Impl( _orb , _poa, _contId,
                         instanceName() , interfaceName() ,
                         graphName() , nodeName() ) ;
@@ -246,9 +293,13 @@ SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_AVERAGE(
   sendMessage(NOTIF_STEP, "SyrComponent_Impl::C_AVERAGE is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   SuperVisionTest::SeqOfSyr * aSeqOfSyr = aListOfSyr->GetSeqOfSyr() ;
   int len = aSeqOfSyr->length() ;
   aSeqOfSyr->length( len + 1 ) ;
@@ -273,9 +324,13 @@ SuperVisionTest::Syr_ptr SyrComponent_Impl::Init( CORBA::Long anOddInteger ) {
   sendMessage(NOTIF_STEP, "SyrComponent_Impl creates Syr_Impl");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   Syr_Impl * mySyr ;
   mySyr = new Syr_Impl( _orb , _poa, _contId,
                         instanceName() , interfaceName() ,
@@ -343,8 +398,13 @@ extern "C"
       const char *instanceName,
       const char *interfaceName)
   {
+#ifndef WIN32
     MESSAGE("SyrComponentEngine_factory SyrComponentEngine ("
             << instanceName << "," << interfaceName << "," << getpid() << ")");
+#else
+    MESSAGE("SyrComponentEngine_factory SyrComponentEngine ("
+            << instanceName << "," << interfaceName << "," << _getpid() << ")");
+#endif
     SyrComponent_Impl * mySyrComponent 
       = new SyrComponent_Impl(orb, poa, contId, instanceName, interfaceName);
     return mySyrComponent->getId() ;
@@ -387,9 +447,13 @@ CORBA::Long Syr_Impl::Initial() {
   sendMessage(NOTIF_STEP, "Syr_Impl::Initial is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   endService( " Syr_Impl::Initial"  );
   return _InitialInteger ;
 }
@@ -399,9 +463,13 @@ CORBA::Long Syr_Impl::Current() {
   sendMessage(NOTIF_STEP, "Syr_Impl::Current is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   endService( " Syr_Impl::Current"  );
   return _CurrentInteger ;
 }
@@ -412,9 +480,13 @@ CORBA::Long Syr_Impl::IsEven() {
   sendMessage(NOTIF_STEP, "Syr_Impl::IsEven is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   RetVal = ( _CurrentInteger & 1 ) == 0 ;
   MESSAGE( " Syr_Impl::IsEven " << _CurrentInteger << " " << RetVal );
   endService( " Syr_Impl::IsEven"  );
@@ -427,9 +499,13 @@ CORBA::Long Syr_Impl::IsOne() {
   sendMessage(NOTIF_STEP, "Syr_Impl::IsOne is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   RetVal = ( _CurrentInteger == 1 ) ;
   MESSAGE( " Syr_Impl::IsOne " << _CurrentInteger << " " << RetVal );
   endService( " Syr_Impl::IsOne"  );
@@ -441,9 +517,13 @@ CORBA::Long Syr_Impl::Count() {
   sendMessage(NOTIF_STEP, "Syr_Impl::Count is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   MESSAGE( " Syr_Impl::Count " << _Count );
   endService( " Syr_Impl::Count"  );
   return _Count ;
@@ -454,9 +534,13 @@ void Syr_Impl::M3p1() {
   sendMessage(NOTIF_STEP, "Syr_Impl::M3p1 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   if ( IsEven() )
     _CurrentInteger = 0 ;
   else
@@ -470,9 +554,13 @@ void Syr_Impl::Div2() {
   sendMessage(NOTIF_STEP, "Syr_Impl::Div2 is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   if ( !IsEven() )
     _CurrentInteger = 0 ;
   else
@@ -486,9 +574,13 @@ void Syr_Impl::Incr() {
   sendMessage(NOTIF_STEP, "Syr_Impl::Incr is Computing");
 //  int S = 1+(int) (2.0*rand()/(RAND_MAX+1.0));
   int S = 1 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   _Count = _Count + 1 ;
   MESSAGE( " Syr_Impl::Incr " << _Count );
   endService( " Syr_Impl::Incr"  );

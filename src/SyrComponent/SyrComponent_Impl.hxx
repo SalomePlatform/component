@@ -29,14 +29,24 @@
 #ifndef _SYRCOMPONENT_IMPL_HXX_
 #define _SYRCOMPONENT_IMPL_HXX_
 
+#ifdef WIN32
+# if defined SYRCOMPONENTENGINE_EXPORTS || defined SyrComponentEngine_EXPORTS                                                   
+#  define SYRCOMPONENTENGINE_EXPORT __declspec( dllexport )
+# else
+#  define SYRCOMPONENTENGINE_EXPORT __declspec( dllimport )
+# endif
+#else
+# define SYRCOMPONENTENGINE_EXPORT
+#endif
+
 //#include <iostream.h>
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(SyrComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class SyrComponent_Impl :  public POA_SuperVisionTest::SyrComponent ,
-                           public Engines_Component_i {
+class SYRCOMPONENTENGINE_EXPORT SyrComponent_Impl : public POA_SuperVisionTest::SyrComponent,
+                                                      public Engines_Component_i {
 public:
   SyrComponent_Impl() ;
   SyrComponent_Impl( CORBA::ORB_ptr orb ,
@@ -85,8 +95,8 @@ private:
   long _Count ;
 };
 
-class ListOfSyr_Impl :  public POA_SuperVisionTest::ListOfSyr ,
-                        public Engines_Component_i {
+class SYRCOMPONENTENGINE_EXPORT ListOfSyr_Impl :  public POA_SuperVisionTest::ListOfSyr ,
+                                                   public Engines_Component_i {
 public:
   ListOfSyr_Impl( CORBA::ORB_ptr orb ,
 	          PortableServer::POA_ptr poa ,
@@ -110,6 +120,7 @@ private:
 };
 
 extern "C"
+  SYRCOMPONENTENGINE_EXPORT
   PortableServer::ObjectId * SyrComponentEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 
@@ -117,8 +128,8 @@ extern "C"
                                      const char *instanceName ,
                                      const char *interfaceName ) ;
 
-class Syr_Impl :  public POA_SuperVisionTest::Syr ,
-                  public SyrComponent_Impl {
+class SYRCOMPONENTENGINE_EXPORT Syr_Impl :  public POA_SuperVisionTest::SyrComponent ,
+                                             public SyrComponent_Impl {
 public:
   Syr_Impl() ;
   Syr_Impl( CORBA::ORB_ptr orb ,

@@ -66,6 +66,7 @@ SET(AdditionComponentEngine_HEADERS
 SET(AdditionComponentEngine_SOURCES
   Addition_Adder_Impl.cxx 
   AdditionComponent_Impl.cxx
+  AdditionComponent.hxx 
 )
 
 # bin programs

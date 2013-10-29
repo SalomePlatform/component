@@ -29,14 +29,24 @@
 #ifndef _DIVCOMPONENTENGINE_HXX_
 #define _DIVCOMPONENTENGINE_HXX_
 
+#ifdef WIN32
+# if defined DIVCOMPONENTENGINE_EXPORTS || defined DivComponentEngine_EXPORTS
+#  define DIVCOMPONENTENGINE_EXPORT __declspec( dllexport )
+# else
+#  define DIVCOMPONENTENGINE_EXPORT __declspec( dllimport )
+# endif
+#else
+# define DIVCOMPONENTENGINE_EXPORT
+#endif
+
 //#include <iostream.h>
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(DivComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class DivComponentEngine :  public POA_SuperVisionTest::DivComponent ,
-                            public Engines_Component_i {
+class DIVCOMPONENTENGINE_EXPORT DivComponentEngine :  public POA_SuperVisionTest::DivComponent ,
+                                                      public Engines_Component_i {
 public:
   DivComponentEngine() ;
   DivComponentEngine( CORBA::ORB_ptr orb,
@@ -58,6 +68,7 @@ private:
 };
 
 extern "C"
+  DIVCOMPONENTENGINE_EXPORT
   PortableServer::ObjectId * DivComponentEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 

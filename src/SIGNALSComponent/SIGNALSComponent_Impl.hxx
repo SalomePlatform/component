@@ -29,14 +29,14 @@
 #ifndef _SIGNALSCOMPONENT_IMPL_HXX_
 #define _SIGNALSCOMPONENT_IMPL_HXX_
 
-//#include <iostream.h>
+#include "SIGNALSComponent_defines.hxx"
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(SIGNALSComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class SIGNALSComponent_Impl :  public POA_SuperVisionTest::SIGNALSComponent ,
-                               public Engines_Component_i {
+class SIGNALSCOMPONENTENGINE_EXPORT SIGNALSComponent_Impl :  public POA_SuperVisionTest::SIGNALSComponent ,
+                                                             public Engines_Component_i {
 public:
   SIGNALSComponent_Impl() ;
   SIGNALSComponent_Impl( CORBA::ORB_ptr orb,
@@ -61,6 +61,7 @@ private:
 };
 
 extern "C"
+  SIGNALSCOMPONENTENGINE_EXPORT
   PortableServer::ObjectId * SIGNALSComponentEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 

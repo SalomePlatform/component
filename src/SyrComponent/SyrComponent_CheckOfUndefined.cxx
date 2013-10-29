@@ -25,7 +25,9 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <iostream>
 #include <fstream>
 #include <strstream>

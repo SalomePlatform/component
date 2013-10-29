@@ -57,6 +57,7 @@ SET(_link_LIBRARIES
 SET(AddComponentEngine_HEADERS
   AddComponent_Impl.hxx
   Adder_Impl.hxx
+  AddComponent.hxx 
 )
 
 # --- sources ---

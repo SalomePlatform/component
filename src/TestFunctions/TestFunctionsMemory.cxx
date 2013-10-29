@@ -27,7 +27,10 @@
 //
 #include <iostream>
 #include <fstream>
+
+#ifndef WIN32
 #include <unistd.h>
+#endif
 
 #include <SALOMEconfig.h>
 #include CORBA_CLIENT_HEADER(AddComponent)

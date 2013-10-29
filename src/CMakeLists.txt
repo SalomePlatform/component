@@ -32,13 +32,17 @@ SET(SUBDIRS_COMMON
   TypesCheck
   DataStreamComponent
   SIGNALSComponent
-  UndefinedSymbolComponent
   SIGNALSComponent_Swig
   TestFunctions
 )
 
+IF(NOT WIN32)
+  SET(SUBDIRS_UNDEFINED UndefinedSymbolComponent)
+ENDIF(NOT WIN32)
+
 SET(SUBDIRS
   ${SUBDIRS_COMMON}
+  ${SUBDIRS_UNDEFINED}
 )
 
 FOREACH(dir ${SUBDIRS})

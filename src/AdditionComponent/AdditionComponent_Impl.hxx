@@ -29,14 +29,14 @@
 #ifndef _ADDITIONINTERFACE_IMPL_HXX_
 #define _ADDITIONINTERFACE_IMPL_HXX_
 
-//#include <iostream.h>
+#include "AdditionComponent.hxx"
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(AdditionComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class AdditionInterface_Impl :  public POA_AdditionComponent::AdditionInterface ,
-                           public Engines_Component_i {
+class ADDITIONCOMPONENTENGINE_EXPORT AdditionInterface_Impl :  public POA_AdditionComponent::AdditionInterface ,
+                                                               public Engines_Component_i {
 public:
   AdditionInterface_Impl() ;
   AdditionInterface_Impl( CORBA::ORB_ptr orb,
@@ -83,6 +83,7 @@ private:
 };
 
 extern "C"
+  ADDITIONCOMPONENTENGINE_EXPORT
   PortableServer::ObjectId * AdditionInterfaceEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 

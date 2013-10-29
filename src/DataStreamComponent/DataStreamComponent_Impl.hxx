@@ -29,13 +29,23 @@
 #ifndef _DATASTREAMINTERFACE_IMPL_HXX_
 #define _DATASTREAMINTERFACE_IMPL_HXX_
 
+#ifdef WIN32
+# if defined DATASTREAMFACTORYENGINE_EXPORTS || defined DataStreamFactoryEngine_EXPORTS
+#  define DATASTREAMFACTORYENGINE_EXPORT __declspec( dllexport )
+# else
+#  define DATASTREAMFACTORYENGINE_EXPORT __declspec( dllimport )
+# endif
+#else
+# define DATASTREAMFACTORYENGINE_EXPORT
+#endif
+
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(DataStreamComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class DataStreamFactory_Impl :  public POA_DataStreamComponent::DataStreamFactory ,
-                                public Engines_Component_i {
+class DATASTREAMFACTORYENGINE_EXPORT DataStreamFactory_Impl :  public POA_DataStreamComponent::DataStreamFactory ,
+                                                               public Engines_Component_i {
 public:
   DataStreamFactory_Impl() ;
   DataStreamFactory_Impl( CORBA::ORB_ptr orb,
@@ -67,6 +77,7 @@ private:
 };
 
 extern "C"
+  DATASTREAMFACTORYENGINE_EXPORT
   PortableServer::ObjectId * DataStreamFactoryEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 
@@ -75,8 +86,8 @@ extern "C"
                                      const char *interfaceName ) ;
 
 
-class DataStream_Impl :  public POA_DataStreamComponent::DataStream ,
-                         public Engines_Component_i {
+class DATASTREAMFACTORYENGINE_EXPORT DataStream_Impl :  public POA_DataStreamComponent::DataStream ,
+                                                        public Engines_Component_i {
 public:
   DataStream_Impl() ;
   DataStream_Impl( CORBA::ORB_ptr orb ,

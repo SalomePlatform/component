@@ -26,7 +26,9 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -72,11 +74,20 @@ char* SIGNALSComponent_Impl::getVersion()
 
 CORBA::Long SIGNALSComponent_Impl::SIGSEGVfunc() {
   beginService( " SIGNALSComponent_Impl::SIGSEGVfunc" );
+#ifndef WIN32
   cout << pthread_self() << "SIGNALSComponent_Impl::SIGSEGVfunc" << endl ;
+#else
+  cout << pthread_self().p << "SIGNALSComponent_Impl::SIGSEGVfunc" << endl ;
+#endif
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+
+#ifndef WIN32
   while ( S ) {
     S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   long nullptr = *NULLPTR ;
   endService( " SIGNALSComponent_Impl::SIGSEGVfunc"  );
   return nullptr ;
@@ -84,11 +95,19 @@ CORBA::Long SIGNALSComponent_Impl::SIGSEGVfunc() {
 
 CORBA::Long SIGNALSComponent_Impl::SIGFPEfunc( CORBA::Long a , CORBA::Long b ) {
   beginService( " SIGNALSComponent_Impl::SIGFPEfunc" );
+#ifndef WIN32
   cout << pthread_self() << "SIGNALSComponent_Impl::SIGFPEfunc" << endl ;
+#else 
+  cout << pthread_self().p << "SIGNALSComponent_Impl::SIGFPEfunc" << endl ;
+#endif
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+#ifndef WIN32
   while ( S ) {
     S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   long c = a/b ;
   endService( " SIGNALSComponent_Impl::SIGFPEfunc"  );
   return c ;
@@ -97,7 +116,12 @@ CORBA::Long SIGNALSComponent_Impl::SIGFPEfunc( CORBA::Long a , CORBA::Long b ) {
 void SIGNALSComponent_Impl::MethodToKill() {
   beginService( " SIGNALSComponent_Impl::MethodToKill" );
   while ( 1 ) {
-    sleep(1) ;
+#ifndef WIN32
+    sleep(1);
+#else
+    Sleep(1000);
+#endif
+
   }
   endService( " SIGNALSComponent_Impl::MethodToKill"  );
   return ;

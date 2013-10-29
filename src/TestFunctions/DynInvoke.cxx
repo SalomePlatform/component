@@ -27,7 +27,9 @@
 //  $Header:
 //
 #include <iostream>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <iostream>
 #include <fstream>
 #include <sstream>

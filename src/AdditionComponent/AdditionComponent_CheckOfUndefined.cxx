@@ -26,7 +26,9 @@
 //
 #include <iostream>
 #include <fstream>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 
 #include "AdditionComponent_Impl.hxx"
 

@@ -26,7 +26,9 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -95,9 +97,13 @@ CORBA::Double Adder_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA::Double
   sendMessage(NOTIF_STEP, "Adder_Impl::Add is Computing");
 //  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   S = 5 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   MESSAGE( "Adder_Impl::Add( " <<  x << " , " << y << " , " << z
        << " ) returns " << -(x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -122,9 +128,13 @@ CORBA::Double Adder_Impl::AddAndCompare( CORBA::Double x , CORBA::Double y ,
   sendMessage(NOTIF_STEP, "Adder_Impl::AddAndCompare is Computing");
 //  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   S = 5 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   MESSAGE( "Adder_Impl::AddAndCompare( " <<  x << " , " << y << " , " << z
        << " ) returns " << -(x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -150,9 +160,13 @@ void Adder_Impl::SetLastResult( CORBA::Double z ) {
   int S;
 //  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   S = 5 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   LastAddition = z ;
   endService( " Adder_Impl::SetLastResult"  );
   return ;
@@ -164,9 +178,13 @@ void Adder_Impl::LastResult( CORBA::Double & z ) {
   int S;
 //  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   S = 5 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   z = LastAddition ;
   endService( " Adder_Impl::LastResult"  );
   return ;

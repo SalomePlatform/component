@@ -29,14 +29,15 @@
 #ifndef _ADDINTERFACE_IMPL_HXX_
 #define _ADDINTERFACE_IMPL_HXX_
 
-//#include <iostream.h>
+
+#include "AddComponent.hxx"
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(AddComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class AddComponent_Impl :  public POA_SuperVisionTest::AddComponent ,
-                           public Engines_Component_i {
+class ADDCOMPONENTENGINE_EXPORT AddComponent_Impl :  public POA_SuperVisionTest::AddComponent ,
+                                                     public Engines_Component_i {
 public:
   AddComponent_Impl() ;
   AddComponent_Impl( CORBA::ORB_ptr orb,
@@ -83,6 +84,7 @@ private:
 };
 
 extern "C"
+  ADDCOMPONENTENGINE_EXPORT
   PortableServer::ObjectId * AddComponentEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 

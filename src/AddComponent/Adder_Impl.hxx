@@ -29,14 +29,15 @@
 #ifndef _ADDER_IMPL_HXX_
 #define _ADDER_IMPL_HXX_
 
+#include "AddComponent.hxx"
 #include <iostream>
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(AddComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class Adder_Impl :  public POA_SuperVisionTest::Adder ,
-                    public Engines_Component_i {
+class ADDCOMPONENTENGINE_EXPORT Adder_Impl :  public POA_SuperVisionTest::Adder ,
+                                              public Engines_Component_i {
   public:
     Adder_Impl() ;
     Adder_Impl( CORBA::ORB_ptr orb ,

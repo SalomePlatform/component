@@ -29,6 +29,16 @@
 #ifndef _TYPESCHECK_IMPL_HXX_
 #define _TYPESCHECK_IMPL_HXX_
 
+#ifdef WIN32
+# if defined TYPESCHECKENGINE_EXPORTS || defined TypesCheckEngine_EXPORTS
+#  define TYPESCHECKENGINE_EXPORT __declspec( dllexport )
+# else
+#  define TYPESCHECKENGINE_EXPORT __declspec( dllimport )
+# endif
+#else
+# define TYPESCHECKENGINE_EXPORT
+#endif
+
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(AddComponent)
 #include CORBA_SERVER_HEADER(TypesCheck)
@@ -37,8 +47,8 @@
 
 #include "AddComponent_Impl.hxx"
 
-class TypesCheck_Impl : public POA_SuperVisionTest::TypesCheck ,
-                        public Engines_Component_i {
+class TYPESCHECKENGINE_EXPORT TypesCheck_Impl : public POA_SuperVisionTest::TypesCheck ,
+                                                public Engines_Component_i {
   public:
     TypesCheck_Impl() ;
     TypesCheck_Impl( CORBA::ORB_ptr orb ,
@@ -78,6 +88,7 @@ class TypesCheck_Impl : public POA_SuperVisionTest::TypesCheck ,
 };
 
 extern "C"
+  TYPESCHECKENGINE_EXPORT
   PortableServer::ObjectId * TypesCheckEngine_factory ( CORBA::ORB_ptr orb ,
                                                         PortableServer::POA_ptr poa , 
                                                         PortableServer::ObjectId * contId ,

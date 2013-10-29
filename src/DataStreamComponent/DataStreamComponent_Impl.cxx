@@ -26,7 +26,11 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#else
+#include <process.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -111,8 +115,13 @@ extern "C"
       const char *instanceName,
       const char *interfaceName)
   {
+#ifndef WIN32
     MESSAGE("DataStreamFactoryEngine_factory DataStreamFactoryEngine ("
             << instanceName << "," << interfaceName << "," << getpid() << ")");
+#else
+    MESSAGE("DataStreamFactoryEngine_factory DataStreamFactoryEngine ("
+            << instanceName << "," << interfaceName << "," << _getpid() << ")");
+#endif
     DataStreamFactory_Impl * myDataStreamFactory 
       = new DataStreamFactory_Impl(orb, poa, contId, instanceName, interfaceName);
     return myDataStreamFactory->getId() ;

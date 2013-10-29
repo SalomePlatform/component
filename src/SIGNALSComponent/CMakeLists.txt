@@ -52,6 +52,7 @@ SET(_link_LIBRARIES
 # header files / no moc processing
 SET(SIGNALSComponentEngine_HEADERS
   SIGNALSComponent_Impl.hxx 
+  SIGNALSComponent_defines.hxx
 )
 
 # --- sources ---

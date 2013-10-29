@@ -139,8 +139,15 @@ SET(_${PROJECT_NAME}_exposed_targets
   AddComponentEngine AdditionComponentEngine DivComponentEngine
   MulComponentEngine SubComponentEngine SyrComponentEngine DynInvoke
   TypesCheckEngine DataStreamFactoryEngine SIGNALSComponentEngine
-  UndefinedSymbolComponentEngine SalomeIDLCOMPONENT
+  SalomeIDLCOMPONENT
 )
+
+IF(NOT WIN32)
+  LIST(APPEND _${PROJECT_NAME}_exposed_targets 
+   UndefinedSymbolComponentEngine)
+ENDIF(NOT WIN32)
+
+ 
 
 # Add all targets to the build-tree export set
 EXPORT(TARGETS ${_${PROJECT_NAME}_exposed_targets}

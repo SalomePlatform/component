@@ -29,14 +29,24 @@
 #ifndef _MULCOMPONENTENGINE_HXX_
 #define _MULCOMPONENTENGINE_HXX_
 
+#ifdef WIN32
+# if defined MULCOMPONENTENGINE_EXPORTS || defined MulComponentEngine_EXPORTS
+#  define MULCOMPONENTENGINE_EXPORT __declspec( dllexport )
+# else
+#  define MULCOMPONENTENGINE_EXPORT __declspec( dllimport )
+# endif
+#else
+# define MULCOMPONENTENGINE_EXPORT
+#endif
+
 //#include <iostream.h>
 #include <SALOMEconfig.h>
 #include CORBA_SERVER_HEADER(MulComponent)
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
-class MulComponentEngine :  public POA_SuperVisionTest::MulComponent ,
-                            public Engines_Component_i {
+class MULCOMPONENTENGINE_EXPORT MulComponentEngine :  public POA_SuperVisionTest::MulComponent ,
+                                                      public Engines_Component_i {
 public:
   MulComponentEngine() ;
   MulComponentEngine( CORBA::ORB_ptr orb,
@@ -58,6 +68,7 @@ private:
 };
 
 extern "C"
+  MULCOMPONENTENGINE_EXPORT
   PortableServer::ObjectId * MulComponentEngine_factory
                                    ( CORBA::ORB_ptr orb ,
                                      PortableServer::POA_ptr poa , 

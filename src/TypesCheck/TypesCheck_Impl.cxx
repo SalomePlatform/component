@@ -26,7 +26,11 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#else
+#include <process.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -148,8 +152,14 @@ extern "C"
                                                        PortableServer::ObjectId * contId ,
                                                        const char *instanceName ,
                                                        const char *interfaceName ) {
+#ifndef WIN32
     MESSAGE("TypesCheckEngine_factory TypesCheckEngine ("
-            << instanceName << "," << interfaceName << "," << getpid() << ")");
+            << instanceName << "," << interfaceName << "," << getpid()<< ")");
+#else
+    MESSAGE("TypesCheckEngine_factory TypesCheckEngine ("
+            << instanceName << "," << interfaceName << "," << _getpid()<< ")");
+#endif
+            
     TypesCheck_Impl * myTypesCheck  = new TypesCheck_Impl(orb, poa, contId, instanceName, interfaceName);
     return myTypesCheck->getId() ;
   }

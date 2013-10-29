@@ -26,7 +26,11 @@
 //  Module : SuperVisionTest
 //
 #include <stdio.h>
+#ifndef WIN32
 #include <unistd.h>
+#else
+#include <process.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -81,9 +85,13 @@ CORBA::Double AddComponent_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA:
   sendMessage(NOTIF_STEP, "AddComponent_Impl::Add is Computing");
 //  S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
   S = 5 ;
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   MESSAGE( "AddComponent_Impl::Add( " <<  x << " , " << y << " , " << z
        << " ) returns " << (x - y) << " after " << S << " seconds" )
   LastAddition = z ;
@@ -115,25 +123,37 @@ CORBA::Long AddComponent_Impl::Sigma( CORBA::Long n ) {
 
 void AddComponent_Impl::Setx( CORBA::Double x ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   xx = x ;
 }
 
 void AddComponent_Impl::Sety( CORBA::Double y ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   yy = y ;
 }
 
 CORBA::Double AddComponent_Impl::Addxy() {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   double zz = xx + yy ;
   LastAddition = zz ;
   return zz;
@@ -141,9 +161,13 @@ CORBA::Double AddComponent_Impl::Addxy() {
 
 CORBA::Double AddComponent_Impl::AddyTox( CORBA::Double y ) {
   int S = 1+(int) (15.0*rand()/(RAND_MAX+1.0));
+#ifndef WIN32
   while ( S ) {
-    S = sleep(S);
+    S = sleep( S ) ;
   }
+#else
+  Sleep(S*1000);
+#endif
   double zz = xx + y ;
   LastAddition = zz ;
   return zz;
@@ -249,8 +273,13 @@ extern "C"
       const char *instanceName,
       const char *interfaceName)
   {
+#ifndef WIN32
     MESSAGE("AddComponentEngine_factory AddComponentEngine ("
             << instanceName << "," << interfaceName << "," << getpid() << ")");
+#else 
+    MESSAGE("AddComponentEngine_factory AddComponentEngine ("
+            << instanceName << "," << interfaceName << "," << _getpid() << ")");
+#endif
     AddComponent_Impl * myAddComponent 
       = new AddComponent_Impl(orb, poa, contId, instanceName, interfaceName);
     return myAddComponent->getId() ;
