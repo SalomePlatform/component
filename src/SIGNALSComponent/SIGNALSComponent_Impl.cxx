@@ -88,9 +88,9 @@ CORBA::Long SIGNALSComponent_Impl::SIGSEGVfunc() {
 #else
   Sleep(S*1000);
 #endif
-  long nullptr = *NULLPTR ;
+  long _nullptr = *NULLPTR ;
   endService( " SIGNALSComponent_Impl::SIGSEGVfunc"  );
-  return nullptr ;
+  return _nullptr ;
 }
 
 CORBA::Long SIGNALSComponent_Impl::SIGFPEfunc( CORBA::Long a , CORBA::Long b ) {
