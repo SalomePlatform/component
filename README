@@ -93,12 +93,6 @@ Learn more about available options by typing
 
    % cmake --help
 
-=============
-Documentation
-=============
-
-The directory doc contains additional documentation file of SALOME COMPONENT module.
-
 ===============
 Troubleshooting
 ===============
