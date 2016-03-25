@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2015  CEA/DEN, EDF R&D, OPEN CASCADE
+# Copyright (C) 2013-2016  CEA/DEN, EDF R&D, OPEN CASCADE
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,6 @@ INCLUDE(UseOmniORB)  # Provided by KERNEL
 INCLUDE_DIRECTORIES(
   ${OMNIORB_INCLUDE_DIR}
   ${KERNEL_INCLUDE_DIRS}
-  ${MED_INCLUDE_DIRS}
   ${PROJECT_BINARY_DIR}/idl
 )
 
@@ -43,12 +42,10 @@ SET(SalomeIDLCOMPONENT_IDLSOURCES
 
 SET(_idl_include_dirs
   ${KERNEL_ROOT_DIR}/idl/salome
-  ${MED_ROOT_DIR}/idl/salome
 )
 
 SET(_idl_link_flags
   ${KERNEL_SalomeIDLKernel}
-  ${MED_SalomeIDLMED}
 )
 
 OMNIORB_ADD_MODULE(SalomeIDLCOMPONENT "${SalomeIDLCOMPONENT_IDLSOURCES}" "${_idl_include_dirs}" "${_idl_link_flags}")
