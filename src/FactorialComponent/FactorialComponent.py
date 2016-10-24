@@ -77,6 +77,6 @@ class FactorialComponent( SuperVisionTest__POA.FactorialComponent, SALOME_Compon
 
     def __init__(self, orb, poa, this, containerName, instanceName, interfaceName):
         SALOME_ComponentPy_i.__init__(self, orb, poa, this, containerName,
-                                      instanceName, interfaceName, 0)
+                                      instanceName, interfaceName, False)
         print "FactorialComponent::__init__"
 

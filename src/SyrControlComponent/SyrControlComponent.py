@@ -137,7 +137,7 @@ class SyrControlComponent( SuperVisionTest__POA.SyrControlComponent, SALOME_Comp
 
     def __init__(self, orb, poa, this, containerName, instanceName, interfaceName):
         SALOME_ComponentPy_i.__init__(self, orb, poa, this, containerName,
-                                      instanceName, interfaceName, 1)
+                                      instanceName, interfaceName, True)
         self.Syr = lcc.FindOrLoadComponent( 'FactoryServer' , 'SyrComponent' )
         print "SyrControlComponent::__init__",dir(self.Syr)
 
