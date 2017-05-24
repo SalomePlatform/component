@@ -96,7 +96,7 @@ class SyrControlComponent( SuperVisionTest__POA.SyrControlComponent, SALOME_Comp
             if iN < max :
                 N = iN + 1
                 OutLoop = 1
-        print 'SyrControlComponent LOOPN InLoop iN OutLoop N',InLoop,iN,OutLoop,N
+        print('SyrControlComponent LOOPN InLoop iN OutLoop N',InLoop,iN,OutLoop,N)
         self.endService( 'SyrControlComponent LOOPN' )
         return OutLoop,N,0
 
@@ -106,7 +106,7 @@ class SyrControlComponent( SuperVisionTest__POA.SyrControlComponent, SALOME_Comp
             OutLoop = 1
         else :
             OutLoop = 0
-        print 'SyrControlComponent WHILENOTONE OutLoop N',OutLoop,N
+        print('SyrControlComponent WHILENOTONE OutLoop N',OutLoop,N)
         return OutLoop
 
     def IFNOTEVEN( self , N ) :
@@ -114,7 +114,7 @@ class SyrControlComponent( SuperVisionTest__POA.SyrControlComponent, SALOME_Comp
         Odd = 0
         if Even == 0 :
             Odd = 1
-        print 'SyrControlComponent IFNOTEVEN Odd Even N',Odd,Even,N
+        print('SyrControlComponent IFNOTEVEN Odd Even N',Odd,Even,N)
         return Odd,Even
 
     def LOOPi( self , InLoop , ii ):
@@ -127,19 +127,19 @@ class SyrControlComponent( SuperVisionTest__POA.SyrControlComponent, SALOME_Comp
             if ii+1 < 2 :
                 i = ii + 1
                 OutLoop = 1
-        print 'SyrControlComponent LOOPi InLoop ii OutLoop i',InLoop,ii,OutLoop,i
+        print('SyrControlComponent LOOPi InLoop ii OutLoop i',InLoop,ii,OutLoop,i)
         return OutLoop,i
 
     def WHILEEVEN( self , N ) :
         OutLoop = self.Syr.C_ISEVEN( N )
-        print 'SyrControlComponent WHILEEVEN OutLoop N',OutLoop,N
+        print('SyrControlComponent WHILEEVEN OutLoop N',OutLoop,N)
         return OutLoop 
 
     def __init__(self, orb, poa, this, containerName, instanceName, interfaceName):
         SALOME_ComponentPy_i.__init__(self, orb, poa, this, containerName,
                                       instanceName, interfaceName, True)
         self.Syr = lcc.FindOrLoadComponent( 'FactoryServer' , 'SyrComponent' )
-        print "SyrControlComponent::__init__",dir(self.Syr)
+        print("SyrControlComponent::__init__",dir(self.Syr))
 
     def getVersion( self ):
         import salome_version

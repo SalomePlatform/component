@@ -66,6 +66,14 @@ using namespace std;
 
 extern "C" void HandleServerSideSignals(CORBA::ORB_ptr theORB);
 
+#if PY_VERSION_HEX < 0x03050000
+static wchar_t*
+Py_DecodeLocale(const char *arg, size_t *size)
+{
+        return _Py_char2wchar(arg, size);
+}
+#endif
+
 int main(int argc, char* argv[])
 {
 #ifdef HAVE_MPI2
@@ -96,8 +104,12 @@ int main(int argc, char* argv[])
     }
   else
     {
+      wchar_t **changed_argv = new wchar_t*[argc];
+      for (int i = 0; i < argc; i++) {
+	changed_argv[i] = Py_DecodeLocale(argv[i], NULL);
+      }
       Py_Initialize() ;
-      PySys_SetArgv( argc , argv ) ;
+      PySys_SetArgv( argc , changed_argv ) ;
     }
     
   char *containerName = "";
