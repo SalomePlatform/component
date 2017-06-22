@@ -40,25 +40,25 @@ class FactorialComponent( SuperVisionTest__POA.FactorialComponent, SALOME_Compon
 
     def eval(self, val):
         self.beginService( 'FactorialComponent eval' )
-        print "eval :",val
+        print("eval :",val)
         if (val < 0):
-            raise ArgumentError("factorial must be positive, not " + `val`)
+            raise ArgumentError("factorial must be positive, not " + repr(val))
         if (val < 2):
-            print "eval return",val
+            print("eval return",val)
             self.sendMessage( NOTIF_STEP , "Done" )
             self.endService( 'FactorialComponent eval' )
             return val
         else:
             val1 = self.eval(val-1)
             self.sendMessage( NOTIF_TRACE , "One More Time" )
-            print "eval return",val," * ",val1
+            print("eval return",val," * ",val1)
             return val * val1
     
     def sigma(self, val):
         self.beginService( 'FactorialComponent sigma' )
-        print "sigma :",val
+        print("sigma :",val)
         if (val < 0):
-            raise ArgumentError("sigma must be positive, not " + `val`)
+            raise ArgumentError("sigma must be positive, not " + repr(val))
         i = 0
         while i < 10000 :
             n = 1
@@ -67,7 +67,7 @@ class FactorialComponent( SuperVisionTest__POA.FactorialComponent, SALOME_Compon
                 s = s + n
                 n = n + 1
             i = i + 1
-        print "sigma returns",s
+        print("sigma returns",s)
         self.endService( 'FactorialComponent sigma' )
         return s
     
@@ -78,5 +78,5 @@ class FactorialComponent( SuperVisionTest__POA.FactorialComponent, SALOME_Compon
     def __init__(self, orb, poa, this, containerName, instanceName, interfaceName):
         SALOME_ComponentPy_i.__init__(self, orb, poa, this, containerName,
                                       instanceName, interfaceName, False)
-        print "FactorialComponent::__init__"
+        print("FactorialComponent::__init__")
 
