@@ -28,7 +28,7 @@
 # see salome_shared_modules.py
 # (avoids incomplete import at run time)
 
-print "============== import SuperVisionTest ======================="
+print("============== import SuperVisionTest =======================")
 
 import SuperVisionTest
 
