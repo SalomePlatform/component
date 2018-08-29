@@ -190,8 +190,8 @@ void Adder_Impl::LastResult( CORBA::Double & z ) {
   return ;
 }
 
-Engines::EngineComponent_ptr Adder_Impl::LccAdditionInterface( char * aContainer ,
-                                                               char * aComponentName ) {
+Engines::EngineComponent_ptr Adder_Impl::LccAdditionInterface( const char * aContainer ,
+                                                               const char * aComponentName ) {
   beginService( "Adder_Impl::LccAddComponent" );
   Engines::EngineComponent_ptr objComponent ;
   objComponent = Engines::EngineComponent::_nil() ;

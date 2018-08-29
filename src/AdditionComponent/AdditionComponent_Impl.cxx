@@ -42,7 +42,7 @@
 #include "SALOME_LifeCycleCORBA.hxx"
 
 #include "AdditionComponent_Impl.hxx"
-#include "Adder_Impl.hxx"
+#include "Addition_Adder_Impl.hxx"
 #include "COMPONENT_version.h"
 
 using namespace std;

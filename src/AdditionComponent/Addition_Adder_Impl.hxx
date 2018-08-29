@@ -66,8 +66,8 @@ class ADDITIONCOMPONENTENGINE_EXPORT Adder_Impl :  public POA_AdditionComponent:
 
     virtual void LastResult( CORBA::Double & z ) ;
 
-    virtual Engines::EngineComponent_ptr LccAdditionInterface( char * aContainer ,
-                                                               char * aComponentName ) ;
+    virtual Engines::EngineComponent_ptr LccAdditionInterface( const char * aContainer ,
+                                                               const char * aComponentName ) ;
 
   private:
 
