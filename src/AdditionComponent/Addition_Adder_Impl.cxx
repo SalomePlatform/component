@@ -34,8 +34,7 @@
 #include <string>
 
 #include "utilities.h"
-#include "Utils_ORB_INIT.hxx"
-#include "Utils_SINGLETON.hxx"
+#include "OpUtil.hxx"
 #include "SALOME_NamingService.hxx"
 #include "SALOME_LifeCycleCORBA.hxx"
 
@@ -196,9 +195,7 @@ Engines::EngineComponent_ptr Adder_Impl::LccAdditionInterface( const char * aCon
   Engines::EngineComponent_ptr objComponent ;
   objComponent = Engines::EngineComponent::_nil() ;
 
-  ORB_INIT &init = *SINGLETON_<ORB_INIT>::Instance() ;
-  ASSERT(SINGLETON_<ORB_INIT>::IsAlreadyExisting());
-  CORBA::ORB_var orb = init(0 , 0 ) ;
+  CORBA::ORB_var orb = KERNEL::GetRefToORB();
   SALOME_NamingService *_NS ;
   _NS = new SALOME_NamingService();
   _NS->init_orb( CORBA::ORB::_duplicate(orb) ) ;

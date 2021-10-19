@@ -36,8 +36,7 @@
 #include <string>
 
 #include "utilities.h"
-#include "Utils_ORB_INIT.hxx"
-#include "Utils_SINGLETON.hxx"
+#include "OpUtil.hxx"
 #include "SALOME_NamingService.hxx"
 #include "SALOME_LifeCycleCORBA.hxx"
 
@@ -237,9 +236,7 @@ CORBA::Boolean AdditionInterface_Impl::AdditionObjRefs( AdditionComponent::Addit
   bool RetVal = true ;
   beginService( "AdditionInterface_Impl::AdditionObjRefs" );
   cout << "beginService AdditionInterface_Impl::AdditionObjRefs" << endl ;
-  ORB_INIT &init = *SINGLETON_<ORB_INIT>::Instance() ;
-  ASSERT(SINGLETON_<ORB_INIT>::IsAlreadyExisting());
-  CORBA::ORB_var orb = init(0 , 0 ) ;
+  CORBA::ORB_var orb = KERNEL::GetRefToORB();
   char * IOR = orb->object_to_string( AdditionInterface1 );
   cout << "AdditionInterface_Impl::AdditionObjRefs AdditionInterface1 " << AdditionInterface1 << " IOR "
        << IOR << " nil " << CORBA::is_nil( AdditionInterface1 ) << endl ;
