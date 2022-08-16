@@ -42,8 +42,8 @@ SubComponentEngine::SubComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
 				    PortableServer::ObjectId * contId, 
 				    const char *instanceName,
-                                    const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true)
+                                    const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry)
 {
 //  MESSAGE("SubComponentEngine::SubComponentEngine activate object instanceName("
 //          << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -100,8 +100,17 @@ extern "C"
   {
     MESSAGE("SubComponentEngine_factory SubComponentEngine ("
             << instanceName << "," << interfaceName << ")");
-    SubComponentEngine * mySubComponent 
-      = new SubComponentEngine(orb, poa, contId, instanceName, interfaceName);
+    SubComponentEngine * mySubComponent = nullptr;
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);
+    if(cont->is_SSL_mode())
+    {
+      mySubComponent = new SubComponentEngine_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      mySubComponent = new SubComponentEngine_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return mySubComponent->getId() ;
   }
 }

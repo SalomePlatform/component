@@ -54,7 +54,7 @@ public:
 		     PortableServer::ObjectId * contId , 
 		     const char *instanceName ,
                      const char *interfaceName ,
-                     const bool kactivate = true ) ;
+                     const bool kactivate, bool withRegistry ) ;
 
   virtual ~SyrComponent_Impl();
 
@@ -93,6 +93,26 @@ public:
 private:
 
   long _Count ;
+};
+
+class SYRCOMPONENTENGINE_EXPORT SyrComponent_Impl_No_SSL : public SyrComponent_Impl
+{
+public:
+  SyrComponent_Impl_No_SSL() { }
+  SyrComponent_Impl_No_SSL( CORBA::ORB_ptr orb ,
+		     PortableServer::POA_ptr poa ,
+		     PortableServer::ObjectId * contId , 
+		     const char *instanceName , const char *interfaceName , const bool kactivate = true ):SyrComponent_Impl(orb,poa,contId,instanceName,interfaceName,kactivate,true) { }
+};
+
+class SYRCOMPONENTENGINE_EXPORT SyrComponent_Impl_SSL : public SyrComponent_Impl
+{
+public:
+  SyrComponent_Impl_SSL() { }
+  SyrComponent_Impl_SSL( CORBA::ORB_ptr orb ,
+		     PortableServer::POA_ptr poa ,
+		     PortableServer::ObjectId * contId , 
+		     const char *instanceName , const char *interfaceName , const bool kactivate = true ):SyrComponent_Impl(orb,poa,contId,instanceName,interfaceName,kactivate,false) { }
 };
 
 class SYRCOMPONENTENGINE_EXPORT ListOfSyr_Impl :  public POA_SuperVisionTest::ListOfSyr ,
@@ -139,7 +159,7 @@ public:
             const char *interfaceName , 
             const char * graphName ,
             const char * nodeName ,
-            const CORBA::Long anOddInteger );
+            const CORBA::Long anOddInteger, bool withRegistry);
 
   virtual ~Syr_Impl();
 
@@ -165,6 +185,32 @@ private:
   long _CurrentInteger ;
   long _Count ;
 
+};
+
+class SYRCOMPONENTENGINE_EXPORT Syr_Impl_SSL :  public Syr_Impl
+{
+public:
+  Syr_Impl_SSL(CORBA::ORB_ptr orb ,
+	    PortableServer::POA_ptr poa ,
+	    PortableServer::ObjectId * contId , 
+	    const char *instanceName ,
+            const char *interfaceName , 
+            const char * graphName ,
+            const char * nodeName ,
+            const CORBA::Long anOddInteger) : Syr_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,anOddInteger,false) { }
+};
+
+class SYRCOMPONENTENGINE_EXPORT Syr_Impl_No_SSL :  public Syr_Impl
+{
+public:
+  Syr_Impl_No_SSL(CORBA::ORB_ptr orb ,
+	    PortableServer::POA_ptr poa ,
+	    PortableServer::ObjectId * contId , 
+	    const char *instanceName ,
+            const char *interfaceName , 
+            const char * graphName ,
+            const char * nodeName ,
+            const CORBA::Long anOddInteger) : Syr_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,anOddInteger,true) { }
 };
 
 #endif

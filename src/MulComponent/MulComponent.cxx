@@ -43,8 +43,8 @@ MulComponentEngine::MulComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
 				    PortableServer::ObjectId * contId, 
 				    const char *instanceName,
-                                    const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true)
+                                    const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry)
 {
 //  MESSAGE("MulComponentEngine::MulComponentEngine activate object instanceName("
 //          << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -101,8 +101,17 @@ extern "C"
   {
     MESSAGE("MulComponentEngine_factory MulComponentEngine ("
             << instanceName << "," << interfaceName << ")");
-    MulComponentEngine * myMulComponent 
-      = new MulComponentEngine(orb, poa, contId, instanceName, interfaceName);
+    MulComponentEngine * myMulComponent = nullptr;
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);
+    if(cont->is_SSL_mode())
+    {
+      myMulComponent = new MulComponentEngine_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      myMulComponent = new MulComponentEngine_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return myMulComponent->getId() ;
   }
 }

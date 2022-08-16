@@ -52,7 +52,7 @@ public:
 		      PortableServer::POA_ptr poa,
 		      PortableServer::ObjectId * contId, 
 		      const char *instanceName,
-                      const char *interfaceName);
+                      const char *interfaceName, bool withRegistry);
 
   virtual ~SubComponentEngine();
 
@@ -64,6 +64,26 @@ private:
 
   int _nexec ;
 
+};
+
+class SUBCOMPONENTENGINE_EXPORT SubComponentEngine_SSL :  public SubComponentEngine
+{
+public:
+  SubComponentEngine_SSL(CORBA::ORB_ptr orb,
+		      PortableServer::POA_ptr poa,
+		      PortableServer::ObjectId * contId, 
+		      const char *instanceName,
+                      const char *interfaceName):SubComponentEngine(orb,poa,contId,instanceName,interfaceName,false) { }
+};
+
+class SUBCOMPONENTENGINE_EXPORT SubComponentEngine_No_SSL :  public SubComponentEngine
+{
+public:
+  SubComponentEngine_No_SSL(CORBA::ORB_ptr orb,
+		      PortableServer::POA_ptr poa,
+		      PortableServer::ObjectId * contId, 
+		      const char *instanceName,
+                      const char *interfaceName):SubComponentEngine(orb,poa,contId,instanceName,interfaceName,true) { }
 };
 
 extern "C"

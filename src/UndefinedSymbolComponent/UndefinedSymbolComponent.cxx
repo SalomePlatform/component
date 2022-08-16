@@ -41,8 +41,8 @@ UndefinedSymbolComponentEngine::UndefinedSymbolComponentEngine( CORBA::ORB_ptr o
 				    PortableServer::POA_ptr poa,
 				    PortableServer::ObjectId * contId, 
 				    const char *instanceName,
-                                    const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true)
+                                    const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry)
 {
 //  MESSAGE("UndefinedSymbolComponentEngine::UndefinedSymbolComponentEngine activate object instanceName("
 //          << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -92,8 +92,17 @@ extern "C"
   {
     MESSAGE("UndefinedSymbolComponentEngine_factory UndefinedSymbolComponentEngine ("
             << instanceName << "," << interfaceName << ")");
-    UndefinedSymbolComponentEngine * myUndefinedSymbolComponent 
-      = new UndefinedSymbolComponentEngine(orb, poa, contId, instanceName, interfaceName);
+    UndefinedSymbolComponentEngine * myUndefinedSymbolComponent = nullptr;
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);    
+    if(cont->is_SSL_mode())
+     {
+       myUndefinedSymbolComponent = new UndefinedSymbolComponentEngine_SSL(orb, poa, contId, instanceName, interfaceName);
+     }
+    else
+    {
+      myUndefinedSymbolComponent = new UndefinedSymbolComponentEngine_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return myUndefinedSymbolComponent->getId() ;
   }
 }

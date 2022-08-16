@@ -56,7 +56,7 @@ class TYPESCHECKENGINE_EXPORT TypesCheck_Impl : public POA_SuperVisionTest::Type
 		     PortableServer::ObjectId * contId , 
 		     const char *instanceName ,
                      const char *interfaceName ,
-                     const bool kactivate = true ) ;
+                     const bool kactivate, bool withRegistry ) ;
 
     virtual ~TypesCheck_Impl();
 
@@ -85,6 +85,26 @@ class TYPESCHECKENGINE_EXPORT TypesCheck_Impl : public POA_SuperVisionTest::Type
   private:
 
 
+};
+
+class TYPESCHECKENGINE_EXPORT TypesCheck_Impl_SSL : public TypesCheck_Impl {
+  public:
+    TypesCheck_Impl_SSL( CORBA::ORB_ptr orb ,
+		     PortableServer::POA_ptr poa ,
+		     PortableServer::ObjectId * contId , 
+		     const char *instanceName ,
+                     const char *interfaceName ,
+                     const bool kactivate = true):TypesCheck_Impl(orb,poa,contId,instanceName,interfaceName,kactivate,false) { }
+};
+
+class TYPESCHECKENGINE_EXPORT TypesCheck_Impl_No_SSL : public TypesCheck_Impl {
+  public:
+    TypesCheck_Impl_No_SSL( CORBA::ORB_ptr orb ,
+		     PortableServer::POA_ptr poa ,
+		     PortableServer::ObjectId * contId , 
+		     const char *instanceName ,
+                     const char *interfaceName ,
+                     const bool kactivate = true):TypesCheck_Impl(orb,poa,contId,instanceName,interfaceName,kactivate,true) { }
 };
 
 extern "C"

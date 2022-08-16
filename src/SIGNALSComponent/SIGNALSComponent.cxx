@@ -42,8 +42,8 @@ SIGNALSComponentEngine::SIGNALSComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
 				    PortableServer::ObjectId * contId, 
 				    const char *instanceName,
-                                    const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true)
+                                    const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry)
 {
   MESSAGE("SIGNALSComponentEngine::SIGNALSComponentEngine activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -95,8 +95,17 @@ extern "C"
   {
     MESSAGE("SIGNALSComponentEngine_factory SIGNALSComponentEngine ("
             << instanceName << "," << interfaceName << ")");
-    SIGNALSComponentEngine * mySIGNALSComponent 
-      = new SIGNALSComponentEngine(orb, poa, contId, instanceName, interfaceName);
+    SIGNALSComponentEngine * mySIGNALSComponent = nullptr;
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);    
+    if(cont->is_SSL_mode())
+    {
+      mySIGNALSComponent = new SIGNALSComponentEngine_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      mySIGNALSComponent = new SIGNALSComponentEngine_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return mySIGNALSComponent->getId() ;
   }
 }

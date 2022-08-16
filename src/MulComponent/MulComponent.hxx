@@ -53,7 +53,7 @@ public:
 		      PortableServer::POA_ptr poa,
 		      PortableServer::ObjectId * contId, 
 		      const char *instanceName,
-                      const char *interfaceName);
+                      const char *interfaceName, bool withRegistry);
 
   virtual ~MulComponentEngine();
 
@@ -65,6 +65,26 @@ private:
 
   int _nexec ;
 
+};
+
+class MULCOMPONENTENGINE_EXPORT MulComponentEngine_SSL :  public MulComponentEngine
+{
+public:
+  MulComponentEngine_SSL(CORBA::ORB_ptr orb,
+		      PortableServer::POA_ptr poa,
+		      PortableServer::ObjectId * contId, 
+		      const char *instanceName,
+                      const char *interfaceName):MulComponentEngine(orb,poa,contId,instanceName,interfaceName,false) { }
+};
+
+class MULCOMPONENTENGINE_EXPORT MulComponentEngine_No_SSL :  public MulComponentEngine
+{
+public:
+  MulComponentEngine_No_SSL(CORBA::ORB_ptr orb,
+		      PortableServer::POA_ptr poa,
+		      PortableServer::ObjectId * contId, 
+		      const char *instanceName,
+                      const char *interfaceName):MulComponentEngine(orb,poa,contId,instanceName,interfaceName,true) { }
 };
 
 extern "C"

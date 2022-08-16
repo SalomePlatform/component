@@ -46,8 +46,8 @@ SyrComponent_Impl::SyrComponent_Impl( CORBA::ORB_ptr orb ,
 				      PortableServer::ObjectId * contId , 
 				      const char *instanceName ,
                                       const char *interfaceName ,
-                                      const bool kactivate ) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+                                      const bool kactivate , bool withRegistry ) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,true/*notif is true here for message*/,withRegistry) {
   MESSAGE("SyrComponent_Impl::SyrComponent_Impl this " << hex << this << dec
           << "activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -331,10 +331,19 @@ SuperVisionTest::Syr_ptr SyrComponent_Impl::Init( CORBA::Long anOddInteger ) {
 #else
   Sleep(S*1000);
 #endif
-  Syr_Impl * mySyr ;
-  mySyr = new Syr_Impl( _orb , _poa, _contId,
+  Syr_Impl * mySyr = nullptr;
+  if ( this->isSSLMode() )
+  {
+    mySyr = new Syr_Impl_SSL( _orb , _poa, _contId,
                         instanceName() , interfaceName() ,
                         graphName() , nodeName() , anOddInteger ) ;
+  }
+  else
+  {
+    mySyr = new Syr_Impl_No_SSL( _orb , _poa, _contId,
+                        instanceName() , interfaceName() ,
+                        graphName() , nodeName() , anOddInteger ) ;
+  }
   SuperVisionTest::Syr_var iobject = (SuperVisionTest::Syr_var ) NULL ;
   PortableServer::ObjectId * id = mySyr->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -405,8 +414,17 @@ extern "C"
     MESSAGE("SyrComponentEngine_factory SyrComponentEngine ("
             << instanceName << "," << interfaceName << "," << _getpid() << ")");
 #endif
-    SyrComponent_Impl * mySyrComponent 
-      = new SyrComponent_Impl(orb, poa, contId, instanceName, interfaceName);
+    SyrComponent_Impl * mySyrComponent = nullptr;
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);
+    if(cont->is_SSL_mode())
+    {
+      mySyrComponent = new SyrComponent_Impl_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      mySyrComponent = new SyrComponent_Impl_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return mySyrComponent->getId() ;
   }
 }
@@ -418,8 +436,8 @@ Syr_Impl::Syr_Impl( CORBA::ORB_ptr orb ,
                     const char * interfaceName , 
 		    const char * graphName ,
                     const char * nodeName ,
-                    const CORBA::Long anOddInteger ) :
-  SyrComponent_Impl(orb, poa, contId, instanceName, interfaceName,false) {
+                    const CORBA::Long anOddInteger, bool withRegistry) :
+  SyrComponent_Impl(orb, poa, contId, instanceName, interfaceName,false,withRegistry) {
   Names( graphName , nodeName ) ;
   MESSAGE("Syr_Impl::Syr_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "

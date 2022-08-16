@@ -43,8 +43,8 @@ DivComponentEngine::DivComponentEngine( CORBA::ORB_ptr orb,
 				    PortableServer::POA_ptr poa,
 				    PortableServer::ObjectId * contId, 
 				    const char *instanceName,
-                                    const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true)
+                                    const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry)
 {
 //  MESSAGE("DivComponentEngine::DivComponentEngine activate object instanceName("
 //          << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -102,8 +102,17 @@ extern "C"
   {
     MESSAGE("DivComponentEngine_factory DivComponentEngine ("
             << instanceName << "," << interfaceName << ")");
-    DivComponentEngine * myDivComponent 
-      = new DivComponentEngine(orb, poa, contId, instanceName, interfaceName);
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);
+    DivComponentEngine * myDivComponent = nullptr;
+    if(cont->is_SSL_mode())
+    {
+      myDivComponent = new DivComponentEngine_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      myDivComponent = new DivComponentEngine_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return myDivComponent->getId() ;
   }
 }

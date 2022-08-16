@@ -44,7 +44,7 @@ public:
 		     PortableServer::POA_ptr poa,
 		     PortableServer::ObjectId * contId, 
 		     const char *instanceName,
-                     const char *interfaceName);
+                     const char *interfaceName, bool withRegistry);
 
   virtual ~AddComponent_Impl();
 
@@ -81,6 +81,26 @@ private:
   double yy ;
   double LastAddition ;
 
+};
+
+class ADDCOMPONENTENGINE_EXPORT AddComponent_Impl_SSL : public AddComponent_Impl
+{
+public:
+  AddComponent_Impl_SSL( CORBA::ORB_ptr orb,
+		     PortableServer::POA_ptr poa,
+		     PortableServer::ObjectId * contId, 
+		     const char *instanceName,
+         const char *interfaceName):AddComponent_Impl(orb,poa,contId,instanceName,interfaceName,false) { }
+};
+
+class ADDCOMPONENTENGINE_EXPORT AddComponent_Impl_No_SSL : public AddComponent_Impl
+{
+public:
+  AddComponent_Impl_No_SSL( CORBA::ORB_ptr orb,
+		     PortableServer::POA_ptr poa,
+		     PortableServer::ObjectId * contId, 
+		     const char *instanceName,
+         const char *interfaceName):AddComponent_Impl(orb,poa,contId,instanceName,interfaceName,true) { }
 };
 
 extern "C"

@@ -45,8 +45,8 @@ TypesCheck_Impl::TypesCheck_Impl( CORBA::ORB_ptr orb ,
 				  PortableServer::ObjectId * contId , 
 				  const char *instanceName ,
                                   const char *interfaceName ,
-                                  const bool kactivate ) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+                                  const bool kactivate, bool withRegistry ) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   MESSAGE("TypesCheck_Impl::TypesCheck_Impl this " << hex << this << dec
           << "activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -159,8 +159,17 @@ extern "C"
     MESSAGE("TypesCheckEngine_factory TypesCheckEngine ("
             << instanceName << "," << interfaceName << "," << _getpid()<< ")");
 #endif
-            
-    TypesCheck_Impl * myTypesCheck  = new TypesCheck_Impl(orb, poa, contId, instanceName, interfaceName);
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);    
+    TypesCheck_Impl * myTypesCheck  = nullptr;
+    if(cont->is_SSL_mode())
+    {
+      myTypesCheck = new TypesCheck_Impl_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      myTypesCheck = new TypesCheck_Impl_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return myTypesCheck->getId() ;
   }
 }

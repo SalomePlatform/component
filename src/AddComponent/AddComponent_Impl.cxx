@@ -50,8 +50,8 @@ AddComponent_Impl::AddComponent_Impl( CORBA::ORB_ptr orb,
 				      PortableServer::POA_ptr poa,
 				      PortableServer::ObjectId * contId, 
 				      const char *instanceName,
-                                      const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+              const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   MESSAGE("AddComponent_Impl::AddComponent_Impl this " << hex << this << dec
           << "activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -277,8 +277,17 @@ extern "C"
     MESSAGE("AddComponentEngine_factory AddComponentEngine ("
             << instanceName << "," << interfaceName << "," << _getpid() << ")");
 #endif
-    AddComponent_Impl * myAddComponent 
-      = new AddComponent_Impl(orb, poa, contId, instanceName, interfaceName);
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);
+    AddComponent_Impl * myAddComponent = nullptr;
+    if(cont->is_SSL_mode())
+    {
+      myAddComponent = new AddComponent_Impl_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      myAddComponent = new AddComponent_Impl_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return myAddComponent->getId() ;
   }
 }

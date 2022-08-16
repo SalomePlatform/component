@@ -44,8 +44,8 @@ DataStreamFactory_Impl::DataStreamFactory_Impl( CORBA::ORB_ptr orb,
 				                PortableServer::POA_ptr poa,
 				                PortableServer::ObjectId * contId, 
 				                const char *instanceName,
-                                                const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+                                                const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   MESSAGE("DataStreamFactory_Impl::DataStreamFactory_Impl this " << hex << this << dec
           << "activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -122,8 +122,17 @@ extern "C"
     MESSAGE("DataStreamFactoryEngine_factory DataStreamFactoryEngine ("
             << instanceName << "," << interfaceName << "," << _getpid() << ")");
 #endif
-    DataStreamFactory_Impl * myDataStreamFactory 
-      = new DataStreamFactory_Impl(orb, poa, contId, instanceName, interfaceName);
+    DataStreamFactory_Impl * myDataStreamFactory = nullptr;
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);    
+    if(cont->is_SSL_mode())
+    {
+      myDataStreamFactory = new DataStreamFactory_Impl_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      myDataStreamFactory = new DataStreamFactory_Impl_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return myDataStreamFactory->getId() ;
   }
 }

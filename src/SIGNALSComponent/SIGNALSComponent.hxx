@@ -43,7 +43,7 @@ public:
 		      PortableServer::POA_ptr poa,
 		      PortableServer::ObjectId * contId, 
 		      const char *instanceName,
-                      const char *interfaceName);
+                      const char *interfaceName, bool withRegistry);
 
   virtual ~SIGNALSComponentEngine();
 
@@ -54,6 +54,26 @@ private:
 
   long * NULLPTR ;
 
+};
+
+class SIGNALSCOMPONENTENGINE_EXPORT SIGNALSComponentEngine_SSL : public SIGNALSComponentEngine
+{
+public:
+  SIGNALSComponentEngine_SSL( CORBA::ORB_ptr orb,
+		      PortableServer::POA_ptr poa,
+		      PortableServer::ObjectId * contId, 
+		      const char *instanceName,
+                      const char *interfaceName):SIGNALSComponentEngine(orb,poa,contId,instanceName,interfaceName,false) { }
+};
+
+class SIGNALSCOMPONENTENGINE_EXPORT SIGNALSComponentEngine_No_SSL : public SIGNALSComponentEngine
+{
+public:
+  SIGNALSComponentEngine_No_SSL( CORBA::ORB_ptr orb,
+		      PortableServer::POA_ptr poa,
+		      PortableServer::ObjectId * contId, 
+		      const char *instanceName,
+                      const char *interfaceName):SIGNALSComponentEngine(orb,poa,contId,instanceName,interfaceName,true) { }
 };
 
 extern "C"
