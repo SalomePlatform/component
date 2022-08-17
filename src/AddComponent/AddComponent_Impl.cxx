@@ -39,6 +39,7 @@
 #include "OpUtil.hxx"
 #include "SALOME_NamingService.hxx"
 #include "SALOME_LifeCycleCORBA.hxx"
+#include "SALOME_Container_i.hxx"
 
 #include "AddComponent_Impl.hxx"
 #include "Adder_Impl.hxx"
@@ -183,9 +184,7 @@ SuperVisionTest::Adder_ptr AddComponent_Impl::Addition() {
   beginService( "AddComponent_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AddComponent_Impl creates Adder_Impl");
   Adder_Impl * myAdder ;
-  myAdder = new Adder_Impl( _orb , _poa, _contId,
-                            instanceName() , interfaceName() ,
-                            graphName() , nodeName() ) ;
+  myAdder = this->BuildNewAdderImplObj();
   SuperVisionTest::Adder_var iobject ;
   PortableServer::ObjectId * id = myAdder->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -195,13 +194,24 @@ SuperVisionTest::Adder_ptr AddComponent_Impl::Addition() {
 //  return SuperVisionTest::Adder::_duplicate(iobject) ;
 }
 
+Adder_Impl *AddComponent_Impl::BuildNewAdderImplObj()
+{
+  Engines::Container_var cont = this->GetContainerRef();
+  if( cont->is_SSL_mode() )
+  {
+    return new Adder_Impl_SSL( _orb , _poa, _contId, instanceName() , interfaceName() , graphName() , nodeName() ) ;
+  }
+  else
+  {
+    return new Adder_Impl_No_SSL( _orb , _poa, _contId, instanceName() , interfaceName() , graphName() , nodeName() ) ;
+  }
+}
+
 CORBA::Boolean AddComponent_Impl::AdditionObjRef1( SuperVisionTest::Adder_out aAdder ) {
   beginService( "AddComponent_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AddComponent_Impl creates Adder_Impl");
-  Adder_Impl * myAdder ;
-  myAdder = new Adder_Impl( _orb , _poa, _contId,
-                            instanceName() , interfaceName() ,
-                            graphName() , nodeName() ) ;
+  Adder_Impl * myAdder = nullptr;
+  myAdder = this->BuildNewAdderImplObj();
   SuperVisionTest::Adder_var iobject ;
   PortableServer::ObjectId * id = myAdder->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -216,9 +226,7 @@ void AddComponent_Impl::AdditionObjRef2( CORBA::Boolean & FuncValue ,
   beginService( "AddComponent_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AddComponent_Impl creates Adder_Impl");
   Adder_Impl * myAdder ;
-  myAdder = new Adder_Impl( _orb , _poa, _contId,
-                            instanceName() , interfaceName() ,
-                            graphName() , nodeName() ) ;
+  myAdder = this->BuildNewAdderImplObj();
   SuperVisionTest::Adder_var iobject ;
   PortableServer::ObjectId * id = myAdder->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);

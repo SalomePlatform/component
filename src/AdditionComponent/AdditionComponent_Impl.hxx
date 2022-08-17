@@ -35,16 +35,18 @@
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
+class Adder_Impl;
+
 class ADDITIONCOMPONENTENGINE_EXPORT AdditionInterface_Impl :  public POA_AdditionComponent::AdditionInterface ,
                                                                public Engines_Component_i {
-public:
+protected:
   AdditionInterface_Impl() ;
   AdditionInterface_Impl( CORBA::ORB_ptr orb,
 		     PortableServer::POA_ptr poa,
 		     PortableServer::ObjectId * contId, 
 		     const char *instanceName,
-                     const char *interfaceName);
-
+                     const char *interfaceName, bool withRegistry);
+public:
   virtual ~AdditionInterface_Impl();
 
   virtual char* getVersion();
@@ -73,6 +75,9 @@ public:
                                           AdditionComponent::AdditionInterface_out RetAdditionInterface1 ,
                                           AdditionComponent::AdditionInterface_out RetAdder2 ,
                                           AdditionComponent::AdditionInterface_out RetAdder3 ) ;
+private:
+
+  Adder_Impl *BuildNewAdderImplObj();
 
 private:
 
@@ -80,6 +85,26 @@ private:
   double yy ;
   double LastAddition ;
 
+};
+
+class ADDITIONCOMPONENTENGINE_EXPORT AdditionInterface_Impl_SSL :  public AdditionInterface_Impl
+{
+public:
+  AdditionInterface_Impl_SSL( CORBA::ORB_ptr orb,
+		     PortableServer::POA_ptr poa,
+		     PortableServer::ObjectId * contId, 
+		     const char *instanceName,
+                     const char *interfaceName):AdditionInterface_Impl(orb,poa,contId,instanceName,interfaceName,false) { }
+};
+
+class ADDITIONCOMPONENTENGINE_EXPORT AdditionInterface_Impl_No_SSL :  public AdditionInterface_Impl
+{
+public:
+  AdditionInterface_Impl_No_SSL( CORBA::ORB_ptr orb,
+		     PortableServer::POA_ptr poa,
+		     PortableServer::ObjectId * contId, 
+		     const char *instanceName,
+                     const char *interfaceName):AdditionInterface_Impl(orb,poa,contId,instanceName,interfaceName,true) { }
 };
 
 extern "C"

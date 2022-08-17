@@ -38,7 +38,7 @@
 
 class ADDCOMPONENTENGINE_EXPORT Adder_Impl :  public POA_SuperVisionTest::Adder ,
                                               public Engines_Component_i {
-  public:
+  protected:
     Adder_Impl() ;
     Adder_Impl( CORBA::ORB_ptr orb ,
 	        PortableServer::POA_ptr poa ,
@@ -46,8 +46,8 @@ class ADDCOMPONENTENGINE_EXPORT Adder_Impl :  public POA_SuperVisionTest::Adder 
 	        const char *instanceName ,
                 const char *interfaceName , 
                 const char * graphName ,
-                const char * nodeName );
-
+                const char * nodeName, bool withRegistry );
+  public:
     virtual ~Adder_Impl();
 
     virtual char* getVersion();
@@ -73,6 +73,30 @@ class ADDCOMPONENTENGINE_EXPORT Adder_Impl :  public POA_SuperVisionTest::Adder 
 
     double LastAddition ;
 
+};
+
+class ADDCOMPONENTENGINE_EXPORT Adder_Impl_SSL : public Adder_Impl
+{
+public:
+  Adder_Impl_SSL( CORBA::ORB_ptr orb ,
+	        PortableServer::POA_ptr poa ,
+	        PortableServer::ObjectId * contId , 
+	        const char *instanceName ,
+                const char *interfaceName , 
+                const char * graphName ,
+                const char * nodeName):Adder_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,false) { }
+};
+
+class ADDCOMPONENTENGINE_EXPORT Adder_Impl_No_SSL : public Adder_Impl
+{
+public:
+  Adder_Impl_No_SSL( CORBA::ORB_ptr orb ,
+	        PortableServer::POA_ptr poa ,
+	        PortableServer::ObjectId * contId , 
+	        const char *instanceName ,
+                const char *interfaceName , 
+                const char * graphName ,
+                const char * nodeName):Adder_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,true) { }
 };
 
 #endif

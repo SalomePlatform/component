@@ -39,6 +39,7 @@
 #include "OpUtil.hxx"
 #include "SALOME_NamingService.hxx"
 #include "SALOME_LifeCycleCORBA.hxx"
+#include "SALOME_Container_i.hxx"
 
 #include "AdditionComponent_Impl.hxx"
 #include "Addition_Adder_Impl.hxx"
@@ -50,8 +51,8 @@ AdditionInterface_Impl::AdditionInterface_Impl( CORBA::ORB_ptr orb,
 				      PortableServer::POA_ptr poa,
 				      PortableServer::ObjectId * contId, 
 				      const char *instanceName,
-                                      const char *interfaceName) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+                                      const char *interfaceName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   MESSAGE("AdditionInterface_Impl::AdditionInterface_Impl this " << hex << this << dec
           << "activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ")" )
@@ -182,9 +183,7 @@ AdditionComponent::Adder_ptr AdditionInterface_Impl::Addition() {
   beginService( "AdditionInterface_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AdditionInterface_Impl creates Adder_Impl");
   Adder_Impl * myAdder ;
-  myAdder = new Adder_Impl( _orb , _poa, _contId,
-                            instanceName() , interfaceName() ,
-                            graphName() , nodeName() ) ;
+  myAdder = this->BuildNewAdderImplObj() ;
   AdditionComponent::Adder_var iobject ;
   PortableServer::ObjectId * id = myAdder->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -194,13 +193,24 @@ AdditionComponent::Adder_ptr AdditionInterface_Impl::Addition() {
 //  return AdditionComponent::Adder::_duplicate(iobject) ;
 }
 
+Adder_Impl *AdditionInterface_Impl::BuildNewAdderImplObj()
+{
+  Engines::Container_var cont = this->GetContainerRef();
+  if( cont->is_SSL_mode() )
+  {
+    return new Adder_Impl_SSL( _orb , _poa, _contId, instanceName() , interfaceName() , graphName() , nodeName() ) ;
+  }
+  else
+  {
+    return new Adder_Impl_No_SSL( _orb , _poa, _contId, instanceName() , interfaceName() , graphName() , nodeName() ) ;
+  }
+}
+
 bool AdditionInterface_Impl::AdditionObjRef1( AdditionComponent::Adder_out aAdder ) {
   beginService( "AdditionInterface_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AdditionInterface_Impl creates Adder_Impl");
-  Adder_Impl * myAdder ;
-  myAdder = new Adder_Impl( _orb , _poa, _contId,
-                            instanceName() , interfaceName() ,
-                            graphName() , nodeName() ) ;
+  Adder_Impl * myAdder = nullptr;
+  myAdder = this->BuildNewAdderImplObj() ;
   AdditionComponent::Adder_var iobject ;
   PortableServer::ObjectId * id = myAdder->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -215,9 +225,7 @@ void AdditionInterface_Impl::AdditionObjRef2( CORBA::Boolean & FuncValue ,
   beginService( "AdditionInterface_Impl::Addition" );
   sendMessage(NOTIF_STEP, "AdditionInterface_Impl creates Adder_Impl");
   Adder_Impl * myAdder ;
-  myAdder = new Adder_Impl( _orb , _poa, _contId,
-                            instanceName() , interfaceName() ,
-                            graphName() , nodeName() ) ;
+  myAdder = this->BuildNewAdderImplObj() ;
   AdditionComponent::Adder_var iobject ;
   PortableServer::ObjectId * id = myAdder->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -276,8 +284,17 @@ extern "C"
     MESSAGE("AdditionComponentEngine_factory AdditionInterfaceEngine ("
             << instanceName << "," << interfaceName << "," << _getpid() << ")");
 #endif
-    AdditionInterface_Impl * myAdditionInterface 
-      = new AdditionInterface_Impl(orb, poa, contId, instanceName, interfaceName);
+    AdditionInterface_Impl * myAdditionInterface = nullptr;
+    CORBA::Object_var o = poa->id_to_reference(*contId);
+    Engines::Container_var cont = Engines::Container::_narrow(o);
+    if(cont->is_SSL_mode())
+    {
+      myAdditionInterface = new AdditionInterface_Impl_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
+    else
+    {
+      myAdditionInterface = new AdditionInterface_Impl_No_SSL(orb, poa, contId, instanceName, interfaceName);
+    }
     return myAdditionInterface->getId() ;
   }
 }

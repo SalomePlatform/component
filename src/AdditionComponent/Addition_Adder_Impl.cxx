@@ -49,8 +49,8 @@ Adder_Impl::Adder_Impl( CORBA::ORB_ptr orb ,
 			const char * instanceName ,
                         const char * interfaceName , 
 			const char * graphName ,
-                        const char * nodeName ) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+                        const char * nodeName, bool withRegistry ) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   Names( graphName , nodeName ) ;
   MESSAGE("Adder_Impl::Adder_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "

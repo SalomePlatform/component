@@ -36,16 +36,18 @@
 #include CORBA_SERVER_HEADER(SALOME_Component)
 #include "SALOME_Component_i.hxx"
 
+class Adder_Impl;
+
 class ADDCOMPONENTENGINE_EXPORT AddComponent_Impl :  public POA_SuperVisionTest::AddComponent ,
                                                      public Engines_Component_i {
-public:
+protected:
   AddComponent_Impl() ;
   AddComponent_Impl( CORBA::ORB_ptr orb,
 		     PortableServer::POA_ptr poa,
 		     PortableServer::ObjectId * contId, 
 		     const char *instanceName,
                      const char *interfaceName, bool withRegistry);
-
+public:
   virtual ~AddComponent_Impl();
 
   virtual char* getVersion();
@@ -74,6 +76,9 @@ public:
                                           SuperVisionTest::AddComponent_out RetAddComponent1 ,
                                           SuperVisionTest::AddComponent_out RetAdder2 ,
                                           SuperVisionTest::AddComponent_out RetAdder3 ) ;
+private:
+
+  Adder_Impl *BuildNewAdderImplObj();
 
 private:
 
