@@ -272,9 +272,20 @@ SuperVisionTest::ListOfSyr_ptr SyrComponent_Impl::C_LISTOFSYR() {
 #else
   Sleep(S*1000);
 #endif
-  ListOfSyr_Impl * aNewListOfSyr = new ListOfSyr_Impl( _orb , _poa, _contId,
+  ListOfSyr_Impl * aNewListOfSyr = nullptr;
+  Engines::Container_var cont = this->GetContainerRef();
+  if( cont->is_SSL_mode() )
+  {
+    aNewListOfSyr = new ListOfSyr_Impl_SSL( _orb , _poa, _contId,
                         instanceName() , interfaceName() ,
                         graphName() , nodeName() ) ;
+  }
+  else
+  {
+    aNewListOfSyr = new ListOfSyr_Impl_No_SSL( _orb , _poa, _contId,
+                        instanceName() , interfaceName() ,
+                        graphName() , nodeName() ) ;
+  }
   SuperVisionTest::ListOfSyr_var iobject = (SuperVisionTest::ListOfSyr_var ) NULL ;
   PortableServer::ObjectId * id = aNewListOfSyr->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -358,8 +369,8 @@ ListOfSyr_Impl::ListOfSyr_Impl( CORBA::ORB_ptr orb ,
 		    const char * instanceName ,
                     const char * interfaceName , 
 		    const char * graphName ,
-                    const char * nodeName ) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+                    const char * nodeName, bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   Names( graphName , nodeName ) ;
   MESSAGE("ListOfSyr_Impl::ListOfSyr_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "

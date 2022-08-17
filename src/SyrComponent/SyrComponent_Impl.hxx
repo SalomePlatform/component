@@ -117,15 +117,16 @@ public:
 
 class SYRCOMPONENTENGINE_EXPORT ListOfSyr_Impl :  public POA_SuperVisionTest::ListOfSyr ,
                                                    public Engines_Component_i {
-public:
+protected:
   ListOfSyr_Impl( CORBA::ORB_ptr orb ,
 	          PortableServer::POA_ptr poa ,
 	          PortableServer::ObjectId * contId , 
 	          const char *instanceName ,
                   const char *interfaceName , 
                   const char * graphName ,
-                  const char * nodeName ) ;
+                  const char * nodeName, bool withRegistry ) ;
   ListOfSyr_Impl() ;
+public:
   virtual ~ListOfSyr_Impl();
 
   virtual char* getVersion();
@@ -137,6 +138,30 @@ public:
 private:
   SuperVisionTest::SeqOfSyr _SeqOfSyr ;
 
+};
+
+class SYRCOMPONENTENGINE_EXPORT ListOfSyr_Impl_SSL : public ListOfSyr_Impl
+{
+public:
+  ListOfSyr_Impl_SSL( CORBA::ORB_ptr orb ,
+	          PortableServer::POA_ptr poa ,
+	          PortableServer::ObjectId * contId , 
+	          const char *instanceName ,
+                  const char *interfaceName , 
+                  const char * graphName ,
+                  const char * nodeName):ListOfSyr_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,false) { }
+};
+
+class SYRCOMPONENTENGINE_EXPORT ListOfSyr_Impl_No_SSL : public ListOfSyr_Impl
+{
+public:
+  ListOfSyr_Impl_No_SSL( CORBA::ORB_ptr orb ,
+	          PortableServer::POA_ptr poa ,
+	          PortableServer::ObjectId * contId , 
+	          const char *instanceName ,
+                  const char *interfaceName , 
+                  const char * graphName ,
+                  const char * nodeName):ListOfSyr_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,true) { }
 };
 
 extern "C"
