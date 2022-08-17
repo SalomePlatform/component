@@ -108,7 +108,7 @@ extern "C"
 
 class DATASTREAMFACTORYENGINE_EXPORT DataStream_Impl :  public POA_DataStreamComponent::DataStream ,
                                                         public Engines_Component_i {
-public:
+protected:
   DataStream_Impl() ;
   DataStream_Impl( CORBA::ORB_ptr orb ,
 	           PortableServer::POA_ptr poa ,
@@ -116,7 +116,7 @@ public:
 	           const char *instanceName ,
                    const char *interfaceName , 
                    const char * graphName ,
-                   const char * nodeName );
+                   const char * nodeName, bool withRegistry );
 
   virtual ~DataStream_Impl();
 
@@ -136,6 +136,28 @@ private:
   long _x ;
   long _y ;
 
+};
+
+class DATASTREAMFACTORYENGINE_EXPORT DataStream_Impl_SSL :  public DataStream_Impl {
+public:
+  DataStream_Impl_SSL( CORBA::ORB_ptr orb ,
+	           PortableServer::POA_ptr poa ,
+	           PortableServer::ObjectId * contId , 
+	           const char *instanceName ,
+                   const char *interfaceName , 
+                   const char * graphName ,
+                   const char * nodeName):DataStream_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,false) { }
+};
+
+class DATASTREAMFACTORYENGINE_EXPORT DataStream_Impl_No_SSL :  public DataStream_Impl {
+public:
+  DataStream_Impl_No_SSL( CORBA::ORB_ptr orb ,
+	           PortableServer::POA_ptr poa ,
+	           PortableServer::ObjectId * contId , 
+	           const char *instanceName ,
+                   const char *interfaceName , 
+                   const char * graphName ,
+                   const char * nodeName):DataStream_Impl(orb,poa,contId,instanceName,interfaceName,graphName,nodeName,true) { }
 };
 
 #endif

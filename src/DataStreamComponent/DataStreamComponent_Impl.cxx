@@ -94,10 +94,20 @@ void DataStreamFactory_Impl::Div( CORBA::Long x , CORBA::Long y , CORBA::Long & 
 DataStreamComponent::DataStream_ptr DataStreamFactory_Impl::NewDataStream() {
   beginService( "DataStreamFactory_Impl::NewDataStream" );
   sendMessage(NOTIF_STEP, "DataStreamFactory_Impl creates DataStream_Impl");
-  DataStream_Impl * myDataStream ;
-  myDataStream = new DataStream_Impl( _orb , _poa, _contId,
+  DataStream_Impl * myDataStream = nullptr;
+  Engines::Container_var cont = this->GetContainerRef();
+  if( cont->is_SSL_mode() )
+  {
+    myDataStream = new DataStream_Impl_SSL( _orb , _poa, _contId,
                                       instanceName() , interfaceName() ,
                                       graphName() , nodeName() ) ;
+  }
+  else
+  {
+    myDataStream = new DataStream_Impl_No_SSL( _orb , _poa, _contId,
+                                      instanceName() , interfaceName() ,
+                                      graphName() , nodeName() ) ;
+  }
   DataStreamComponent::DataStream_var iobject ;
   PortableServer::ObjectId * id = myDataStream->getId() ;
   CORBA::Object_var obj = _poa->id_to_reference(*id);
@@ -143,8 +153,8 @@ DataStream_Impl::DataStream_Impl( CORBA::ORB_ptr orb ,
 		          	  const char * instanceName ,
                                   const char * interfaceName , 
 		          	  const char * graphName ,
-                                  const char * nodeName ) :
-  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,true) {
+                                  const char * nodeName , bool withRegistry) :
+  Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   Names( graphName , nodeName ) ;
   MESSAGE("DataStream_Impl::DataStream_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "
