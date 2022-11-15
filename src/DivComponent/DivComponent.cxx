@@ -87,7 +87,7 @@ void DivComponentEngine::Div( double x , double y , double & z ) {
 #endif
   sendMessage(NOTIF_TRACE, "Div is Much More Difficult Operation");
   MESSAGE("DivComponentEngine::Div( " <<  x << " , " << y << " , " << z
-       << " ) after " << S << " seconds" )
+       << " ) after " << S << " seconds" );
   endService( " DivComponentEngine::Div"  );
 }
 

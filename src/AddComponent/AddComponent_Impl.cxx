@@ -55,7 +55,7 @@ AddComponent_Impl::AddComponent_Impl( CORBA::ORB_ptr orb,
   Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   MESSAGE("AddComponent_Impl::AddComponent_Impl this " << hex << this << dec
           << "activate object instanceName("
-          << instanceName << ") interfaceName(" << interfaceName << ")" )
+          << instanceName << ") interfaceName(" << interfaceName << ")" );
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
   LastAddition = 0 ;
@@ -93,7 +93,7 @@ CORBA::Double AddComponent_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA:
   Sleep(S*1000);
 #endif
   MESSAGE( "AddComponent_Impl::Add( " <<  x << " , " << y << " , " << z
-       << " ) returns " << (x - y) << " after " << S << " seconds" )
+       << " ) returns " << (x - y) << " after " << S << " seconds" );
   LastAddition = z ;
   endService( " AddComponent_Impl::Add"  );
   return (x - y) ;

@@ -85,7 +85,7 @@ void SubComponentEngine::Sub( double x , double y , double & z ) {
   Sleep(S*1000);
 #endif
   MESSAGE( "SubComponentEngine::Sub( " <<  x << " , " << y << " , " << z
-       << " ) after " << S << " seconds" )
+       << " ) after " << S << " seconds" );
   endService( " SubComponentEngine::Sub"  );
 }
 

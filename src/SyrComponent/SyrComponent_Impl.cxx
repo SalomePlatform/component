@@ -50,7 +50,7 @@ SyrComponent_Impl::SyrComponent_Impl( CORBA::ORB_ptr orb ,
   Engines_Component_i(orb, poa, contId, instanceName, interfaceName,true/*notif is true here for message*/,withRegistry) {
   MESSAGE("SyrComponent_Impl::SyrComponent_Impl this " << hex << this << dec
           << "activate object instanceName("
-          << instanceName << ") interfaceName(" << interfaceName << ")" )
+          << instanceName << ") interfaceName(" << interfaceName << ")" );
   if ( kactivate ) {
     _thisObj = this ;
     _id = _poa->activate_object(_thisObj);
@@ -374,7 +374,7 @@ ListOfSyr_Impl::ListOfSyr_Impl( CORBA::ORB_ptr orb ,
   Names( graphName , nodeName ) ;
   MESSAGE("ListOfSyr_Impl::ListOfSyr_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "
-          << hex << (void *) this << dec )
+          << hex << (void *) this << dec );
   beginService( "ListOfSyr_Impl::ListOfSyr_Impl" );
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
@@ -452,7 +452,7 @@ Syr_Impl::Syr_Impl( CORBA::ORB_ptr orb ,
   Names( graphName , nodeName ) ;
   MESSAGE("Syr_Impl::Syr_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "
-          << hex << (void *) this << dec )
+          << hex << (void *) this << dec );
   beginService( "Syr_Impl::Syr_Impl" );
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);

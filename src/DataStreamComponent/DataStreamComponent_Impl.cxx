@@ -48,7 +48,7 @@ DataStreamFactory_Impl::DataStreamFactory_Impl( CORBA::ORB_ptr orb,
   Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   MESSAGE("DataStreamFactory_Impl::DataStreamFactory_Impl this " << hex << this << dec
           << "activate object instanceName("
-          << instanceName << ") interfaceName(" << interfaceName << ")" )
+          << instanceName << ") interfaceName(" << interfaceName << ")" );
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
 }
@@ -158,7 +158,7 @@ DataStream_Impl::DataStream_Impl( CORBA::ORB_ptr orb ,
   Names( graphName , nodeName ) ;
   MESSAGE("DataStream_Impl::DataStream_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "
-          << hex << (void *) this << dec )
+          << hex << (void *) this << dec );
   beginService( "DataStream_Impl::DataStream_Impl" );
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);

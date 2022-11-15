@@ -54,7 +54,7 @@ Adder_Impl::Adder_Impl( CORBA::ORB_ptr orb ,
   Names( graphName , nodeName ) ;
   MESSAGE("Adder_Impl::Adder_Impl activate object instanceName("
           << instanceName << ") interfaceName(" << interfaceName << ") --> "
-          << hex << (void *) this << dec )
+          << hex << (void *) this << dec );
   beginService( "Adder_Impl::Adder_Impl" );
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
@@ -104,7 +104,7 @@ CORBA::Double Adder_Impl::Add( CORBA::Double x , CORBA::Double y , CORBA::Double
   Sleep(S*1000);
 #endif
   MESSAGE( "Adder_Impl::Add( " <<  x << " , " << y << " , " << z
-       << " ) returns " << -(x - y) << " after " << S << " seconds" )
+       << " ) returns " << -(x - y) << " after " << S << " seconds" );
   LastAddition = z ;
   endService( " Adder_Impl::Add"  );
   return -(x - y) ;
@@ -135,7 +135,7 @@ CORBA::Double Adder_Impl::AddAndCompare( CORBA::Double x , CORBA::Double y ,
   Sleep(S*1000);
 #endif
   MESSAGE( "Adder_Impl::AddAndCompare( " <<  x << " , " << y << " , " << z
-       << " ) returns " << -(x - y) << " after " << S << " seconds" )
+       << " ) returns " << -(x - y) << " after " << S << " seconds" );
   LastAddition = z ;
   double ValFunc ;
   sendMessage(NOTIF_TRACE, "Adder_Impl::AddAndCompare will call anOtherAdder->LastValue()");

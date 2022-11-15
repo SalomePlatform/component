@@ -49,7 +49,7 @@ TypesCheck_Impl::TypesCheck_Impl( CORBA::ORB_ptr orb ,
   Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry) {
   MESSAGE("TypesCheck_Impl::TypesCheck_Impl this " << hex << this << dec
           << "activate object instanceName("
-          << instanceName << ") interfaceName(" << interfaceName << ")" )
+          << instanceName << ") interfaceName(" << interfaceName << ")" );
   if ( kactivate ) {
     _thisObj = this ;
     _id = _poa->activate_object(_thisObj);

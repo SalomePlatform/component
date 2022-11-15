@@ -47,7 +47,7 @@ SIGNALSComponent_Impl::SIGNALSComponent_Impl( CORBA::ORB_ptr orb,
   Engines_Component_i(orb, poa, contId, instanceName, interfaceName,1,withRegistry)
 {
   MESSAGE("SIGNALSComponent_Impl::SIGNALSComponent_Impl activate object instanceName("
-          << instanceName << ") interfaceName(" << interfaceName << ")" )
+          << instanceName << ") interfaceName(" << interfaceName << ")" );
   _thisObj = this ;
   _id = _poa->activate_object(_thisObj);
   NULLPTR = NULL ;
